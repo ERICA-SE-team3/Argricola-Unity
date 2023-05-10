@@ -11,6 +11,8 @@ public class CameraManager: MonoBehaviour
     Vector3 position_camera_player4 = new Vector3(-4000, 0, -1);
     public GameObject MainCamera;
 
+    Vector3 position_camera_testboard = new Vector3(20000, 0, -1);
+
 
     public void Show_Player1()
     {
@@ -39,6 +41,12 @@ public class CameraManager: MonoBehaviour
     public void Show_Mainboard()
     {
         MainCamera.transform.position = position_camera_mainboard;
+        Debug.Log(MainCamera.transform.position);
+    }
+
+    public void Show_testboard()
+    {
+        MainCamera.transform.position = position_camera_testboard;
         Debug.Log(MainCamera.transform.position);
     }
 }
