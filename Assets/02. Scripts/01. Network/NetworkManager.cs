@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class NetworkManager : MonoBehaviour
 {
     
-
     public static NetworkManager instance;
     public string url = "ws://172.17.75.214:8080/ws";
     public string msgDesination = "/pub/hello";
@@ -30,6 +29,7 @@ public class NetworkManager : MonoBehaviour
     void Start()
     {
         SetWebSocket(url);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
