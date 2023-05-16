@@ -50,3 +50,4 @@ public class CameraManager: MonoBehaviour
         Debug.Log(MainCamera.transform.position);
     }
 }
+
