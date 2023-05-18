@@ -2,90 +2,109 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class DummyPlayersData
+{
+    public PlayerData[] players = new PlayerData[4];
 
+    public DummyPlayersData()
+    {
+        this.Init();
+    }
+
+    void Init()
+    { 
+        //dummy players initialize
+        for (int i = 0; i < 4; i++)
+        {
+            this.players[i] = new PlayerData();
+            this.players[i].Init();
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            this.players[i].pig = 3; this.players[i].cow = 3; this.players[i].sheep = 3;
+            this.players[i].wheat = 3; this.players[i].vegetable = 3;
+            this.players[i].wood = 3; this.players[i].rock = 3; this.players[i].reed = 3; this.players[i].dirt = 3;
+            this.players[i].food = 3; this.players[i].begging = 3;
+            this.players[i].family = 3; this.players[i].fence = 3; this.players[i].shed = 3; this.players[i].room = 3;
+        }
+    }
+
+}
 
 public class ResourceManager : MonoBehaviour
 {
-    public MessageData messagedata;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        //player 1 initialize
-        this.messagedata.player.Init();
-    }
+    public DummyPlayersData dummy = new DummyPlayersData();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    //우리는 이 함수만 사용합니다,
     public void addResource( int Playernumber, string Resourcename, int count )
     {
         switch (Resourcename)
         {
 
             case "pig":
-                for(int i=0; i<count; i++) { this.pigIncrement(); }
+                for(int i=0; i<count; i++) { pigIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { this.cowIncrement(); }
+                for (int i = 0; i < count; i++) { cowIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { this.sheepIncrement(); }
+                for (int i = 0; i < count; i++) { sheepIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { this.wheatIncrement(); }
+                for (int i = 0; i < count; i++) { wheatIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { this.vegetableIncrement(); }
+                for (int i = 0; i < count; i++) { vegetableIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { this.woodIncrement(); }
+                for (int i = 0; i < count; i++) { woodIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "rock":
-                for (int i = 0; i < count; i++) { this.rockIncrement(); }
+                for (int i = 0; i < count; i++) { rockIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { this.reedIncrement(); }
+                for (int i = 0; i < count; i++) { reedIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "dirt":
-                for (int i = 0; i < count; i++) { this.dirtIncrement(); }
+                for (int i = 0; i < count; i++) { dirtIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { this.foodIncrement(); }
+                for (int i = 0; i < count; i++) { foodIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { this.beggingIncrement(); }
+                for (int i = 0; i < count; i++) { beggingIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { this.familyIncrement(); }
+                for (int i = 0; i < count; i++) { familyIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { this.fenceIncrement(); }
+                for (int i = 0; i < count; i++) { fenceIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { this.shedIncrement(); }
+                for (int i = 0; i < count; i++) { shedIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { this.roomIncrement(); }
+                for (int i = 0; i < count; i++) { roomIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
         }
+
+
     }
 
     public void minusResource(int Playernumber, string Resourcename, int count)
@@ -94,218 +113,244 @@ public class ResourceManager : MonoBehaviour
         {
 
             case "pig":
-                for (int i = 0; i < count; i++) { this.pigDecrement(); }
+                for (int i = 0; i < count; i++) { pigDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { this.cowDecrement(); }
+                for (int i = 0; i < count; i++) { cowDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { this.sheepDecrement(); }
+                for (int i = 0; i < count; i++) { sheepDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { this.wheatDecrement(); }
+                for (int i = 0; i < count; i++) { wheatDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { this.vegetableDecrement(); }
+                for (int i = 0; i < count; i++) { vegetableDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { this.woodDecrement(); }
+                for (int i = 0; i < count; i++) { woodDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "rock":
-                for (int i = 0; i < count; i++) { this.rockDecrement(); }
+                for (int i = 0; i < count; i++) { rockDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { this.reedDecrement(); }
+                for (int i = 0; i < count; i++) { reedDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "dirt":
-                for (int i = 0; i < count; i++) { this.dirtDecrement(); }
+                for (int i = 0; i < count; i++) { dirtDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { this.foodDecrement(); }
+                for (int i = 0; i < count; i++) { foodDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { this.beggingDecrement(); }
+                for (int i = 0; i < count; i++) { beggingDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { this.familyDecrement(); }
+                for (int i = 0; i < count; i++) { familyDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { this.fenceDecrement(); }
+                for (int i = 0; i < count; i++) { fenceDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { this.shedDecrement(); }
+                for (int i = 0; i < count; i++) { shedDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { this.roomDecrement(); }
+                for (int i = 0; i < count; i++) { roomDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
         }
     }
 
-
-    //increment functions
-    void pigIncrement()
+    public void PrintResourceOfPlayer()
     {
-        this.messagedata.player.pig = this.messagedata.player.pig + 1;
+        for(int i=0; i<4; i++)
+        {
+            Debug.Log("\nPlayer number: + " + i +
+                "\npig: " + dummy.players[i].pig +
+                "\ncow: " + dummy.players[i].cow +
+                "\nsheep: " + dummy.players[i].sheep +
+                "\nwheat: " + dummy.players[i].wheat +
+                "\nvegetable: " + dummy.players[i].vegetable +
+                "\nwood: " + dummy.players[i].wood +
+                "\nrock: " + dummy.players[i].rock +
+                "\nreed: " + dummy.players[i].reed +
+                "\ndirt: " + dummy.players[i].dirt +
+                "\nfood: " + dummy.players[i].food +
+                "\nbegging: " + dummy.players[i].begging +
+                "\nfamily: " + dummy.players[i].family +
+                "\nfence: " + dummy.players[i].fence +
+                "\nshed: " + dummy.players[i].shed +
+               "\nroom: " + dummy.players[i].room);
+            
+            
+        }
     }
 
-    void cowIncrement()
+
+        //increment functions
+        //don't touch this code.
+    void pigIncrement( int Playernumber )
     {
-        this.messagedata.player.cow = this.messagedata.player.cow + 1;
+        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig + 1;
     }
 
-    void sheepIncrement()
+    void cowIncrement( int Playernumber )
     {
-        this.messagedata.player.sheep = this.messagedata.player.sheep + 1;
+        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow + 1;
     }
 
-    void wheatIncrement()
+    void sheepIncrement( int Playernumber )
     {
-        this.messagedata.player.wheat = this.messagedata.player.wheat + 1;
+        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep + 1;
     }
 
-    void vegetableIncrement()
+    void wheatIncrement( int Playernumber )
     {
-        this.messagedata.player.vegetable = this.messagedata.player.vegetable + 1;
+        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat + 1;
     }
 
-    void woodIncrement()
+    void vegetableIncrement( int Playernumber )
     {
-        this.messagedata.player.wood = this.messagedata.player.wood + 1;
+        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable + 1;
     }
 
-    void rockIncrement()
+    void woodIncrement( int Playernumber )
     {
-        this.messagedata.player.rock = this.messagedata.player.rock + 1;
+        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood + 1;
     }
 
-    void reedIncrement()
+    void rockIncrement( int Playernumber )
     {
-        this.messagedata.player.reed = this.messagedata.player.reed + 1;
+        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock + 1;
     }
 
-    void dirtIncrement()
+    void reedIncrement( int Playernumber )
     {
-        this.messagedata.player.dirt = this.messagedata.player.dirt + 1;
+        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed + 1;
     }
 
-    void foodIncrement()
+    void dirtIncrement( int Playernumber )
     {
-        this.messagedata.player.food = this.messagedata.player.food + 1;
+        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt + 1;
     }
 
-    void beggingIncrement()
+    void foodIncrement( int Playernumber )
     {
-        this.messagedata.player.begging = this.messagedata.player.begging + 1;
+        dummy.players[Playernumber].food = dummy.players[Playernumber].food + 1;
     }
 
-    void familyIncrement()
+    void beggingIncrement( int Playernumber )
     {
-        this.messagedata.player.family = this.messagedata.player.family + 1;
+        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging + 1;
     }
 
-    void fenceIncrement()
+    void familyIncrement( int Playernumber )
     {
-        this.messagedata.player.fence = this.messagedata.player.fence + 1;
+        dummy.players[Playernumber].family = dummy.players[Playernumber].family + 1;
     }
 
-    void shedIncrement()
+    void fenceIncrement( int Playernumber )
     {
-        this.messagedata.player.shed = this.messagedata.player.shed + 1;
+        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence + 1;
     }
 
-    void roomIncrement()
+    void shedIncrement( int Playernumber )
     {
-        this.messagedata.player.room = this.messagedata.player.room + 1;
+        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed + 1;
+    }
+
+    void roomIncrement( int Playernumber )
+    {
+        dummy.players[Playernumber].room = dummy.players[Playernumber].room + 1;
     }
 
 
     //Decrement functions
-    void pigDecrement()
+    void pigDecrement( int Playernumber )
     {
-        this.messagedata.player.pig = this.messagedata.player.pig - 1;
+        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig - 1;
     }
 
-    void cowDecrement()
+    void cowDecrement( int Playernumber )
     {
-        this.messagedata.player.cow = this.messagedata.player.cow - 1;
+        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow - 1;
     }
 
-    void sheepDecrement()
+    void sheepDecrement( int Playernumber )
     {
-        this.messagedata.player.sheep = this.messagedata.player.sheep - 1;
+        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep - 1;
     }
 
-    void wheatDecrement()
+    void wheatDecrement( int Playernumber )
     {
-        this.messagedata.player.wheat = this.messagedata.player.wheat - 1;
+        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat - 1;
     }
 
-    void vegetableDecrement()
+    void vegetableDecrement( int Playernumber )
     {
-        this.messagedata.player.vegetable = this.messagedata.player.vegetable - 1;
+        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable - 1;
     }
 
-    void woodDecrement()
+    void woodDecrement( int Playernumber )
     {
-        this.messagedata.player.wood = this.messagedata.player.wood - 1;
+        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood - 1;
     }
 
-    void rockDecrement()
+    void rockDecrement( int Playernumber )
     {
-        this.messagedata.player.rock = this.messagedata.player.rock - 1;
+        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock - 1;
     }
 
-    void reedDecrement()
+    void reedDecrement( int Playernumber )
     {
-        this.messagedata.player.reed = this.messagedata.player.reed - 1;
+        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed - 1;
     }
 
-    void dirtDecrement()
+    void dirtDecrement( int Playernumber )
     {
-        this.messagedata.player.dirt = this.messagedata.player.dirt - 1;
+        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt - 1;
     }
 
-    void foodDecrement()
+    void foodDecrement( int Playernumber )
     {
-        this.messagedata.player.food = this.messagedata.player.food - 1;
+        dummy.players[Playernumber].food = dummy.players[Playernumber].food - 1;
     }
 
-    void beggingDecrement()
+    void beggingDecrement( int Playernumber )
     {
-        this.messagedata.player.begging = this.messagedata.player.begging - 1;
+        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging - 1;
     }
 
-    void familyDecrement()
+    void familyDecrement( int Playernumber )
     {
-        this.messagedata.player.family = this.messagedata.player.family - 1;
+        dummy.players[Playernumber].family = dummy.players[Playernumber].family - 1;
     }
 
-    void fenceDecrement()
+    void fenceDecrement( int Playernumber )
     {
-        this.messagedata.player.fence = this.messagedata.player.fence - 1;
+        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence - 1;
     }
 
-    void shedDecrement()
+    void shedDecrement( int Playernumber )
     {
-        this.messagedata.player.shed = this.messagedata.player.shed - 1;
+        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed - 1;
     }
 
-    void roomDecrement()
+    void roomDecrement( int Playernumber )
     {
-        this.messagedata.player.room = this.messagedata.player.room - 1;
+        dummy.players[Playernumber].room = dummy.players[Playernumber].room - 1;
     }
 }
