@@ -12,19 +12,21 @@ public class mainActDayLaborer : MonoBehaviour
     - 사용자의 턴일 때, 무조건 음식 2개를 얻어야함
     */
 
+    private ResourceManager resourceManager;
+
     private bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     // 사용자가 '날품팔이'행동을 클릭했을 때
-    private void OnClick()
+    private void onClick()
     {
         if (isPlayerTurn) // 사용자의 턴인지 확인
         {
-            ReturnWoodsFromDayLaborer();  // 있다면 음식 얻기 함수 호출
+            getFoodsFromDayLaborer();  // 있다면 음식 얻기 함수 호출
         }
     }
 
-    private void ReturnWoodsFromDayLaborer()  
+    private void getFoodsFromDayLaborer()  
     {
-        addResource(0, "wood", 2);   //resourceManager.cs의 addResource() 함수 호출
+        resourceManager.addResource(0, "food", 2);   //resourceManager.cs의 addResource() 함수 호출
     }
 }

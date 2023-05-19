@@ -13,25 +13,29 @@ public class mainActTrevelingTheater : MonoBehaviour
     - 사용자의 턴일 때, 쌓여있는 음식의 개수만큼 얻어야함 -> addResource() 호출
     */
 
+    private ResourceManager resourceManager;
+
     public int food = 3;    // 쌓여있는 음식이 3개라고 가정
     private bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     // 사용자가 '유랑극단'행동을 클릭했을 때
-    private void OnClick()
+    private void onClick()
     {
-        if (isPlayerTurn && HasFoods()) // 사용자의 턴인지, 음식이 있는지 확인
+        if (isPlayerTurn && hasFoods()) // 사용자의 턴인지, 음식이 있는지 확인
         {
-            ReturnWoodsFromTrevelingTheater();  // 있다면 음식 얻기 함수 호출
+            getFoodsFromTrevelingTheater();  // 있다면 음식 얻기 함수 호출
         }
     }
 
-    private bool HasFoods(){    // 음식이 있는지 확인
-        if (wood > 0)
+    private bool hasFoods(){    // 음식이 있는지 확인
+        if (food > 0)
             return true;
+        else
+            return false;
     }
 
-    private void ReturnWoodsFromTrevelingTheater()  
+    private void getFoodsFromTrevelingTheater()  
     {
-        addResource(0, "wood", wood);   //resourceManager.cs의 addResource() 함수 호출
+       resourceManager.addResource(0, "food", food);   //resourceManager.cs의 addResource() 함수 호출
     }
 }
