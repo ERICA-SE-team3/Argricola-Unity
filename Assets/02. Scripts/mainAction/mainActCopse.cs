@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Bush : MonoBehaviour
+public class mainActCopse : MonoBehaviour
 {
     /*
     To do
@@ -19,18 +19,18 @@ public class Bush : MonoBehaviour
     // 사용자가 '덤불'행동을 클릭했을 때
     private void OnClick()
     {
-        if (isPlayerTurn && HasTrees()) // 사용자의 턴인지, 나무가 있는지 확인
+        if (isPlayerTurn && HasWoods()) // 사용자의 턴인지, 나무가 있는지 확인
         {
-            ReturnTreesFromBush();  // 있다면 니무 얻기 함수 호출
+            ReturnWoodsFromCopse();  // 있다면 니무 얻기 함수 호출
         }
     }
 
-    private bool HasTrees(){    // 나무가 있는지 확인
+    private bool HasWoods(){    // 나무가 있는지 확인
         if (wood > 0)
             return true;
     }
 
-    private void ReturnTreesFromBush()  
+    private void ReturnWoodsFromCopse()  
     {
         addResource(0, "wood", wood);   //resourceManager.cs의 addResource() 함수 호출
     }
