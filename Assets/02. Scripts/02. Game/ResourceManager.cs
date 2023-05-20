@@ -29,13 +29,11 @@ public class DummyPlayersData
             this.players[i].family = 3; this.players[i].fence = 3; this.players[i].shed = 3; this.players[i].room = 3;
         }
     }
-
 }
 
 public class ResourceManager : MonoBehaviour
 {
     public DummyPlayersData dummy = new DummyPlayersData();
-
 
     //우리는 이 함수만 사용합니다,
     public void addResource( int Playernumber, string Resourcename, int count )
