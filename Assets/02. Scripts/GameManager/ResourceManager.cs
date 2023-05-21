@@ -2,40 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyPlayersData
-{
-    public PlayerData[] players = new PlayerData[4];
-
-    public DummyPlayersData()
-    {
-        this.Init();
-    }
-
-    void Init()
-    { 
-        //dummy players initialize
-        for (int i = 0; i < 4; i++)
-        {
-            this.players[i] = new PlayerData();
-            this.players[i].Init();
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            this.players[i].pig = 3; this.players[i].cow = 3; this.players[i].sheep = 3;
-            this.players[i].wheat = 3; this.players[i].vegetable = 3;
-            this.players[i].wood = 3; this.players[i].rock = 3; this.players[i].reed = 3; this.players[i].dirt = 3;
-            this.players[i].food = 3; this.players[i].begging = 3;
-            this.players[i].family = 3; this.players[i].fence = 3; this.players[i].shed = 3; this.players[i].room = 3;
-        }
-    }
-
-}
-
 public class ResourceManager : MonoBehaviour
 {
-    public DummyPlayersData dummy = new DummyPlayersData();
+    DummyPlayers dummy;
+    public static ResourceManager instance;
 
+    public void Awake()
+    {
+        dummy = new DummyPlayers();
+        ResourceManager.instance = this;
+    }
 
     //우리는 이 함수만 사용합니다,
     public void addResource( int Playernumber, string Resourcename, int count )
@@ -103,8 +79,6 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { roomIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
         }
-
-
     }
 
     public void minusResource(int Playernumber, string Resourcename, int count)
@@ -178,7 +152,7 @@ public class ResourceManager : MonoBehaviour
     {
         for(int i=0; i<4; i++)
         {
-            Debug.Log("\nPlayer number: + " + i +
+            Debug.Log("\nPlayer number: " + i +
                 "\npig: " + dummy.players[i].pig +
                 "\ncow: " + dummy.players[i].cow +
                 "\nsheep: " + dummy.players[i].sheep +
@@ -199,9 +173,78 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    //자원들 get 함수
+    public int getResourceOfPlayer( int Playernumber, string Resourcename )
+    {
+        int result = 0;
+        switch (Resourcename)
+        {
 
-        //increment functions
-        //don't touch this code.
+            case "pig":
+                result = dummy.players[Playernumber].pig;
+                break;
+
+            case "cow":
+                result = dummy.players[Playernumber].cow;
+                break;
+
+            case "sheep":
+                result = dummy.players[Playernumber].sheep;
+                break;
+
+            case "wheat":
+                result = dummy.players[Playernumber].wheat;
+                break;
+
+            case "vegetable":
+                result = dummy.players[Playernumber].vegetable;
+                break;
+
+            case "wood":
+                result = dummy.players[Playernumber].wood;
+                break;
+
+            case "rock":
+                result = dummy.players[Playernumber].rock;
+                break;
+
+            case "reed":
+                result = dummy.players[Playernumber].reed;
+                break;
+
+            case "dirt":
+                result = dummy.players[Playernumber].dirt;
+                break;
+
+            case "food":
+                result = dummy.players[Playernumber].food;
+                break;
+
+            case "begging":
+                result = dummy.players[Playernumber].begging;
+                break;
+
+            case "family":
+                result = dummy.players[Playernumber].family;
+                break;
+
+            case "fence":
+                result = dummy.players[Playernumber].fence;
+                break;
+
+            case "shed":
+                result = dummy.players[Playernumber].shed;
+                break;
+
+            case "room":
+                result = dummy.players[Playernumber].room;
+                break;
+        }
+        return result;
+    }
+
+    //increment functions
+    //don't touch this code.
     void pigIncrement( int Playernumber )
     {
         dummy.players[Playernumber].pig = dummy.players[Playernumber].pig + 1;
@@ -354,3 +397,4 @@ public class ResourceManager : MonoBehaviour
         dummy.players[Playernumber].room = dummy.players[Playernumber].room - 1;
     }
 }
+
