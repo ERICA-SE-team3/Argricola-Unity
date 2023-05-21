@@ -10,4 +10,9 @@ public class buttonOpenAndClose : MonoBehaviour
     {
         handplayer1.SetActive(false);
     }
+
+    public void openHandPlayer1()
+    {
+        handplayer1.SetActive(true);
+    }
 }

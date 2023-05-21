@@ -33,7 +33,12 @@ public class DummyPlayersData
 
 public class ResourceManager : MonoBehaviour
 {
-    public DummyPlayersData dummy = new DummyPlayersData();
+    public DummyPlayersData dummy;
+
+    public void Awake()
+    {
+        dummy = new DummyPlayersData();
+    }
 
     //우리는 이 함수만 사용합니다,
     public void addResource( int Playernumber, string Resourcename, int count )
@@ -352,3 +357,4 @@ public class ResourceManager : MonoBehaviour
         dummy.players[Playernumber].room = dummy.players[Playernumber].room - 1;
     }
 }
+
