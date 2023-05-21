@@ -14,12 +14,16 @@ public class mainActCopse : MonoBehaviour
     */
 
     private ResourceManager resourceManager;
+    
+    private void Awake() {  // start 보다 더  우선순위를 가져, 호출 시  바로 실행되는 함수
+        resourceManager = FindObjectOfType<ResourceManager>();
+    }
 
     public int wood = 3;    // 쌓여있는 나무가 3개라고 가정
     private bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     // 사용자가 '덤불'행동을 클릭했을 때
-    private void onClick()
+    public void onClickCopse()
     {
         if (isPlayerTurn && hasWoods()) // 사용자의 턴인지, 나무가 있는지 확인
         {
