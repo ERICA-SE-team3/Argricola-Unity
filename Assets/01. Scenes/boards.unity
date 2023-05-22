@@ -2873,8 +2873,9 @@ GameObject:
   - component: {fileID: 669072074}
   - component: {fileID: 669072073}
   - component: {fileID: 669072075}
+  - component: {fileID: 669072076}
   m_Layer: 5
-  m_Name: act1
+  m_Name: mainActCopse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2981,7 +2982,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 669072073}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669072076}
+        m_TargetAssemblyTypeName: MainActCopse, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &669072076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669072071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fc33c380b4d4342830c431f6c43386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  wood: 0
+  isPlayerTurn: 1
 --- !u!1 &682423304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,8 +3538,9 @@ GameObject:
   - component: {fileID: 869731881}
   - component: {fileID: 869731880}
   - component: {fileID: 869731882}
+  - component: {fileID: 869731883}
   m_Layer: 5
-  m_Name: act12
+  m_Name: mainActDayLaborer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3618,7 +3647,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 869731880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 869731883}
+        m_TargetAssemblyTypeName: MainActDayLaborer, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &869731883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869731878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c1e0ee854744e998f4eb5c838a4ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  isPlayerTurn: 1
 --- !u!1 &897166216
 GameObject:
   m_ObjectHideFlags: 0
@@ -7898,8 +7953,9 @@ GameObject:
   - component: {fileID: 1384011547}
   - component: {fileID: 1384011546}
   - component: {fileID: 1384011548}
+  - component: {fileID: 1384011549}
   m_Layer: 5
-  m_Name: act6
+  m_Name: mainActTrevelingTheater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8006,7 +8062,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1384011546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1384011549}
+        m_TargetAssemblyTypeName: MainActTrevelingTheater, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1384011549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384011544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25f8ba10379b41118b40eb30834912f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  food: 0
+  isPlayerTurn: 1
 --- !u!1 &1396737648
 GameObject:
   m_ObjectHideFlags: 0
@@ -8019,8 +8102,9 @@ GameObject:
   - component: {fileID: 1396737651}
   - component: {fileID: 1396737650}
   - component: {fileID: 1396737652}
+  - component: {fileID: 1396737653}
   m_Layer: 5
-  m_Name: act16
+  m_Name: mainActFishing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8127,7 +8211,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1396737650}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1396737653}
+        m_TargetAssemblyTypeName: MainActFishing, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1396737653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396737648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c508158858a44e39fc8ce5dcfff6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  food: 0
+  isPlayerTurn: 1
 --- !u!1 &1422285767
 GameObject:
   m_ObjectHideFlags: 0
@@ -8140,8 +8251,9 @@ GameObject:
   - component: {fileID: 1422285770}
   - component: {fileID: 1422285769}
   - component: {fileID: 1422285771}
+  - component: {fileID: 1422285772}
   m_Layer: 5
-  m_Name: act2
+  m_Name: mainActGrove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8248,7 +8360,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1422285769}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1422285772}
+        m_TargetAssemblyTypeName: MainActGrove, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1422285772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422285767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd9f16aca5ba4e989a175ca2e248303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  wood: 0
+  isPlayerTurn: 1
 --- !u!1 &1439863180
 GameObject:
   m_ObjectHideFlags: 0
@@ -8934,8 +9073,9 @@ GameObject:
   - component: {fileID: 1685284833}
   - component: {fileID: 1685284832}
   - component: {fileID: 1685284834}
+  - component: {fileID: 1685284835}
   m_Layer: 5
-  m_Name: act13
+  m_Name: mainActForest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9042,7 +9182,34 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1685284832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1685284835}
+        m_TargetAssemblyTypeName: MainActForest, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1685284835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685284830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7c769e6e32748a5951a802937127c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  wood: 0
+  isPlayerTurn: 1
 --- !u!1 &1749828427
 GameObject:
   m_ObjectHideFlags: 0
