@@ -133,8 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 21773189}
   - component: {fileID: 21773188}
-  - component: {fileID: 21773191}
-  - component: {fileID: 21773190}
   m_Layer: 0
   m_Name: ResourceManager
   m_TagString: GameController
@@ -169,30 +167,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &21773190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21773187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3923bdafc2f0cd4f81ddc6b96feadfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &21773191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21773187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bda11a23582234396778ddc38b677b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &31499405
 GameObject:
   m_ObjectHideFlags: 0
