@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainActFishing : MonoBehaviour
+public class MainActFishing : ButtonParents
 {
     /*
     To do
@@ -16,23 +16,24 @@ public class MainActFishing : MonoBehaviour
     public int playerIndex = 0;
 
     // player 의 food 개수 가져오기
-    public int food = ResourceManager.instance.getResourceOfPlayer(playerIndex, "food");
+    public int food;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
     // 음식이 있는지 확인
-    private bool hasFoods(){
-        if (wood > 0)
+    private bool HasFoods(){
+        food = ResourceManager.instance.getResourceOfPlayer(playerIndex, "food");
+        if (food > 0)
             return true;
         else
             return false;
     }
 
     // 사용자가 행동을 클릭했을 때
-    public void onClick()
+    public override void OnClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
-        if (isPlayerTurn && hasFoods()) 
+        if (isPlayerTurn && HasFoods()) 
         {
             // 있다면 음식 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "food", food);

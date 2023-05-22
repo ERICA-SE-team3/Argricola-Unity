@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainActForest : MonoBehaviour
+public class MainActForest : ButtonParents
 {
     /*
     To do
@@ -16,12 +16,13 @@ public class MainActForest : MonoBehaviour
     public int playerIndex = 0;
 
     // player 의 wood 개수 가져오기
-    public int wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
+    public int wood;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
     // 나무가 있는지 확인
-    private bool hasWoods(){
+    private bool HasWoods(){
+        wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
         if (wood > 0)
             return true;
         else
@@ -29,10 +30,10 @@ public class MainActForest : MonoBehaviour
     }
 
     // 사용자가 행동을 클릭했을 때
-    public void onClick()
+    public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
-        if (isPlayerTurn && hasWoods()) 
+        if (isPlayerTurn && HasWoods()) 
         {
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "wood", wood);

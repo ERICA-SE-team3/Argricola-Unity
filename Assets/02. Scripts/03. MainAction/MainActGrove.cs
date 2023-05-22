@@ -16,12 +16,13 @@ public class MainActGrove : MonoBehaviour
     public int playerIndex = 0;
 
     // player 의 wood 개수 가져오기
-    public int wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
+    public int wood;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
     // 나무가 있는지 확인
     private bool hasWoods(){
+        wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
         if (wood > 0)
             return true;
         else

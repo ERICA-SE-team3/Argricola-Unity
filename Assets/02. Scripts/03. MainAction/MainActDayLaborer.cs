@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainActDayLaborer : MonoBehaviour
+public class MainActDayLaborer : ButtonParents
 {
     /*
     To do
@@ -16,7 +16,7 @@ public class MainActDayLaborer : MonoBehaviour
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     // 사용자가 행동을 클릭했을 때
-    private void onClick()
+    public override void OnClick()
     {
         if (isPlayerTurn) // 사용자의 턴인지 확인
         {
