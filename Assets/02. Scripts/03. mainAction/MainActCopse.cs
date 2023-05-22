@@ -20,7 +20,7 @@ public class MainActCopse : ButtonParents
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     // 나무가 있는지 확인
-    private bool hasWoods(){
+    private bool HasWoods(){
         wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
         if (wood > 0)
             return true;
@@ -32,7 +32,7 @@ public class MainActCopse : ButtonParents
     public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
-        if (isPlayerTurn && hasWoods()) 
+        if (isPlayerTurn && HasWoods()) 
         {
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "wood", wood);

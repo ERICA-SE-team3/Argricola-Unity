@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainActTrevelingTheater : ButtonParents
+public class MainActTrevelingTheater : MonoBehaviour
 {
     /*
     To do
@@ -16,21 +16,20 @@ public class MainActTrevelingTheater : ButtonParents
     public int playerIndex = 0;
 
     // player 의 food 개수 가져오기
-    public int food;
+    public int food = ResourceManager.instance.getResourceOfPlayer(playerIndex, "food");
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
     // 음식이 있는지 확인
     private bool hasFoods(){
-        food = ResourceManager.instance.getResourceOfPlayer(playerIndex,"food");
-        if (food > 0)
+        if (wood > 0)
             return true;
         else
             return false;
     }
 
     // 사용자가 행동을 클릭했을 때
-    public override void OnClick()
+    public void onClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
         if (isPlayerTurn && hasFoods()) 
