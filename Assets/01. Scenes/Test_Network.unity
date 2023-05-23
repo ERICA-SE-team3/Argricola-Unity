@@ -471,6 +471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315848f305f1641868c253b9a0ea375d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: ws://15.165.71.224:8080/ws
+  msgDesination: /pub/hello
 --- !u!4 &1168646768
 Transform:
   m_ObjectHideFlags: 0
