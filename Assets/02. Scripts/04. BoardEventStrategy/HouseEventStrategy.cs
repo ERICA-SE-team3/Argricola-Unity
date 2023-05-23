@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class HouseEventStrategy : BoardEventStrategy
 {
-    Block block;
-
     public override void OnHoverEnter(Block block) {
         PlayerBoard board = block.board;
         if(isHouseAvailable(block)) 
@@ -28,7 +26,7 @@ public class HouseEventStrategy : BoardEventStrategy
 
         if(!board.selectedBlocks.Contains(block))
             block.ShowTransparent();
-        // block.ChangeEmpty();
+
     }
 
     public override void OnClick(Block block) 

@@ -2577,7 +2577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2076034503}
         m_TargetAssemblyTypeName: PlayerBoard, Assembly-CSharp
-        m_MethodName: _TestSetHouse
+        m_MethodName: StartInstallFarm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3309,6 +3309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBoard
       objectReference: {fileID: 0}
+    - target: {fileID: 2952987442040855741, guid: d75aad167458d4a46af3f879dffb9792, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 1288293887}
     - target: {fileID: 2952987442040855742, guid: d75aad167458d4a46af3f879dffb9792, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
