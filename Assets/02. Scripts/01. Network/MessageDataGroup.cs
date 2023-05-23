@@ -51,7 +51,7 @@ public class BlockData
     public int col;
     public BlockType type;
     public bool hasShed;
-    public int[] fence;
+    public bool[] fence;
     public int cow;
     public int pig;
     public int sheep;
@@ -63,7 +63,7 @@ public class BlockData
 [System.Serializable]
 public enum BlockType
 {
-    EMTPY,
+    EMPTY,
     FENCE,
     HOUSE,
     FARM
@@ -73,7 +73,8 @@ public enum BlockType
 public enum SeedType
 {
     WHEAT,
-    VEGETABLE
+    VEGETABLE,
+    NONE,
 }
 
 [System.Serializable]
