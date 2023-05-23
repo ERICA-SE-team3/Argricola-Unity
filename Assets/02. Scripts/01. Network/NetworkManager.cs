@@ -9,7 +9,9 @@ public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
     public string url = "ws://172.17.75.214:8080/ws";
-    public string msgDesination = "/pub/hello";
+    public string readyMsgDest = "/pub/hello";
+    public string playMsgDest = "/pub/play";
+
     WebSocket ws;
     StompMessageSerializer serializer = new StompMessageSerializer();
     String clientId = "1";
@@ -64,6 +66,7 @@ public class NetworkManager : MonoBehaviour
         {
             Debug.Log(e.Data);
             SubscribeStomp();
+            _SendReadyMessage();
         }
         else if (msg.Command == StompFrame.MESSAGE)
         {
@@ -139,7 +142,17 @@ public class NetworkManager : MonoBehaviour
         Debug.Log(body_json);
 
         var pub = new StompMessage(StompFrame.SEND,body_json);
-        pub["destination"] = msgDesination;
+        pub["destination"] = playMsgDest;
+        ws.Send(serializer.Serialize(pub));
+    }
+
+    void _SendReadyMessage()
+    {
+        StompMessageBody body = new StompMessageBody();
+        body.sender = clientId;
+
+        var pub = new StompMessage(StompFrame.SEND);
+        pub["destination"] = readyMsgDest;
         ws.Send(serializer.Serialize(pub));
     }
 }
