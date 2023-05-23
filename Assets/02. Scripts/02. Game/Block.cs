@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    PlayerBoard board;
+    public PlayerBoard board;
     GameObject currentBackground, backgroundParent;
 
     public int row, col;
@@ -77,10 +79,50 @@ public class Block : MonoBehaviour
     {
         currentBackground?.SetActive(false);
         string houseName = GetHouseBackgroundName(board.houseType);
-        Debug.Log(backgroundParent);
         currentBackground = backgroundParent.transform.Find(houseName).gameObject;
         currentBackground.SetActive(true);
         type = BlockType.HOUSE;
+        return true;
+    }
+
+    public bool ChangeEmpty()
+    {
+        currentBackground?.SetActive(false);
+        currentBackground = backgroundParent.transform.Find("Empty").gameObject;
+        currentBackground.SetActive(true);
+        type = BlockType.EMPTY;
+        return true;
+    }
+
+    public bool ShowGreen()
+    {
+        RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+
+        Color color = new Color(0,0.5f,0);
+        color.a = 0.725f;
+        empty.color = color; 
+
+        return true;
+    }
+
+    public bool ShowRed()
+    {
+        backgroundParent.transform.Find("Empty").gameObject.SetActive(true);
+        RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+    
+        Color color = new Color(0.5f,0,0);
+        color.a = 0.725f;
+        empty.color = color;
+
+        return true;
+    }
+
+    public bool ShowTransparent()
+    {
+        backgroundParent.transform.Find("Empty").gameObject.SetActive(false);
+        RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+        // hex : #FFFFFFF00
+        empty.color = new Color(255,255,255,0);
         return true;
     }
 
@@ -166,6 +208,24 @@ public class Block : MonoBehaviour
     public void _TestSetFarm()
     {
         ChangeFarm();
+    }
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+    {
+        board.OnHoverEnter(this);
+    }
+
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerCurrentRaycast.gameObject.transform.IsChildOf(transform))
+            return;
+
+        board.OnHoverExit(this);
+    }
+
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        board.OnClick(this);
     }
 
 }
