@@ -3,6 +3,7 @@ using UnityEngine;
 using WebSocketSharp;
 using StompHelper;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -110,28 +111,32 @@ public class NetworkManager : MonoBehaviour
     public void SendMessage()
     {
         MessageData message = new MessageData();
+        
+        message.actionPlayerId = 1;
+        message.actionType = ActionType.BUSH;
         message.player = new PlayerMessageData();
-        string data_json = JsonUtility.ToJson(message);
+        message.playerBoard = new PlayerBoardMessageData();
 
-       _SendMessage(data_json);
+       _SendMessage(message);
     }
 
     public void SendMessage(MessageData data)
     {
-        string data_json = JsonUtility.ToJson(data);
-
-        _SendMessage(data_json);
+        _SendMessage(data);
     }
 
-    void _SendMessage(string data_json)
+    void _SendMessage(MessageData msgData)
     {
-        Debug.Log(data_json);
         StompMessageBody body = new StompMessageBody();
         body.channelId = clientId;
-        body.data = data_json;
+        body.data = JsonUtility.ToJson(msgData);
         body.sender = clientId;
         body.type = StompFrame.SEND;
         string body_json = JsonUtility.ToJson(body);
+        // Debug.Log(body_json);
+
+        // body_json = Regex.Unescape(body_json);
+        Debug.Log(body_json);
 
         var pub = new StompMessage(StompFrame.SEND,body_json);
         pub["destination"] = msgDesination;
