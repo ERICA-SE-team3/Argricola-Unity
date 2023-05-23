@@ -967,7 +967,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2076034503}
         m_TargetAssemblyTypeName: PlayerBoard, Assembly-CSharp
-        m_MethodName: _TestSetShed
+        m_MethodName: StartInstallFence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
