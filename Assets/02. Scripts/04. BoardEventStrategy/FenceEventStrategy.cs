@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class FenceEventStrategy : BoardEventStrategy
 {
-    public override void HoverEnter(PointerEventData eventData) { }
+    public override void OnHoverEnter(Block block) { }
 
-    public override void HoverExit(PointerEventData eventData) { }
+    public override void OnHoverExit(Block block) { }
 
-    public override void OnClick(PointerEventData eventData) { }
+    public override void OnClick(Block block) { }
 }

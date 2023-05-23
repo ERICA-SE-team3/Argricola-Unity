@@ -12,10 +12,12 @@ public class PlayerBoard : MonoBehaviour
     public int house1x, house1y;
     public int house2x, house2y;
 
-    public GameObject blockPrefab;
+    public GameObject blockPrefab, confirmButton;
     public Player player;
     public Block[,] blocks;
     public HouseType houseType;
+
+    public List<Block> selectedBlocks;
 
     BoardEventStrategy startegy;
 
@@ -27,6 +29,8 @@ public class PlayerBoard : MonoBehaviour
     BoardEventStrategy moveAnimalStrategy;
 
     private void Start() {
+        selectedBlocks = new List<Block>();
+
         houseStargety = new HouseEventStrategy();
         farmStargety = new FarmEventStrategy();
         fenceStargety = new FenceEventStrategy();
@@ -49,6 +53,7 @@ public class PlayerBoard : MonoBehaviour
             {
                 GameObject tmp = Instantiate(blockPrefab);
                 tmp.transform.SetParent(transform);
+                tmp.transform.localScale = Vector3.one;
                 Block tmpBlock = tmp.GetComponent<Block>();
                 tmpBlock.Init(this, i, j, BlockType.EMPTY);
                 blocks[i,j] = tmpBlock;
@@ -90,11 +95,6 @@ public class PlayerBoard : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-    public static void IsHouseAvailable(int row, int col)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public bool isShedAvilable(Block block)
     {
         throw new System.NotImplementedException();
@@ -103,7 +103,33 @@ public class PlayerBoard : MonoBehaviour
     public void StartInstallHouse()
     {
         startegy = houseStargety;
-        SetBlockEvents();
+        Button button = confirmButton.GetComponent<Button>();
+        button.onClick.AddListener(_EndInstallHouse);
+    }
+
+    void _EndInstallHouse()
+    {
+        if(isHouseInstallAvailable())
+        {
+            foreach(Block block in selectedBlocks)
+            {
+                block.ShowTransparent();
+                block.ChangeHouse();
+            }
+            selectedBlocks.Clear();
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
+    }
+
+    /// <summary> <summary>
+    /// 플레이어 자원 등을 검사해서 유효성 검사하는 함수
+    /// </summary>
+    bool isHouseInstallAvailable()
+    {
+        return true;
     }
 
 
@@ -115,7 +141,6 @@ public class PlayerBoard : MonoBehaviour
     public void StartInstallFarm()
     {
         startegy = farmStargety;
-        SetBlockEvents();
     }
 
     public void EndInstallFarm()
@@ -126,7 +151,6 @@ public class PlayerBoard : MonoBehaviour
     public void StartInstallFence()
     {
         startegy = fenceStargety;
-        SetBlockEvents();
     }
 
     public void EndInstallFence()
@@ -137,7 +161,6 @@ public class PlayerBoard : MonoBehaviour
     public void StartInstallShed()
     {
         startegy = shedStartegy;
-        SetBlockEvents();
     }
 
     public void EndInstallShed()
@@ -151,7 +174,6 @@ public class PlayerBoard : MonoBehaviour
     public void StartSowing()
     {
         startegy = sowingStrategy;
-        SetBlockEvents();
     }
 
     /// <summary>
@@ -168,7 +190,6 @@ public class PlayerBoard : MonoBehaviour
     public void StartAnimalMoving()
     {
         startegy = moveAnimalStrategy;
-        SetBlockEvents();
     }
 
     /// <summary>
@@ -178,48 +199,6 @@ public class PlayerBoard : MonoBehaviour
     {
 
     }
-
-    void SetBlockEvents()
-    {
-         for(int i = 0; i < blocks.GetLength(0); i++)
-        {
-            for(int j = 0; j < blocks.GetLength(1); j++)
-            {
-                EventTrigger trigger = blocks[i,j].transform.GetComponent<EventTrigger>();
-
-                EventTrigger.Entry hoverEnterEntry = new EventTrigger.Entry();
-                hoverEnterEntry.eventID = EventTriggerType.PointerEnter;
-                hoverEnterEntry.callback.AddListener( (eventData) => { HoverEnter((PointerEventData)eventData); } );
-                trigger.triggers.Add(hoverEnterEntry);
-
-                EventTrigger.Entry hoverExitEntry = new EventTrigger.Entry();
-                hoverExitEntry.eventID = EventTriggerType.PointerExit;
-                hoverExitEntry.callback.AddListener( (eventData) => { HoverExit((PointerEventData)eventData); } );
-                trigger.triggers.Add(hoverExitEntry);
-
-                EventTrigger.Entry ClickEntry = new EventTrigger.Entry();
-                ClickEntry.eventID = EventTriggerType.PointerDown;
-                ClickEntry.callback.AddListener( (eventData) => { OnClick((PointerEventData)eventData); } );
-                trigger.triggers.Add(ClickEntry);
-            }
-        }
-    }
-
-    void HoverEnter(PointerEventData eventData)
-    {
-        startegy.HoverEnter(eventData);
-    }
-
-    void HoverExit(PointerEventData eventData)
-    {
-        startegy.HoverExit(eventData);
-    }
-
-    void OnClick(PointerEventData eventData)
-    {
-        startegy.OnClick(eventData);
-    }
-
 
     public void _TestSetFence()
     {
@@ -240,4 +219,20 @@ public class PlayerBoard : MonoBehaviour
     {
         blocks[2,4]._TestSetFarm();
     }
+
+    public void OnHoverEnter(Block block)
+    {
+        startegy.OnHoverEnter(block);
+    }
+
+    public void OnHoverExit(Block block)
+    {
+        startegy.OnHoverExit(block);
+    }
+
+    public void OnClick(Block block)
+    {
+        startegy.OnClick(block);
+    }
+
 }
