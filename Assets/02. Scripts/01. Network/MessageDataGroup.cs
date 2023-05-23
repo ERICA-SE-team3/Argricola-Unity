@@ -8,7 +8,7 @@ public class PlayerMessageData
     public bool isFirstPlayer = false;
     public int pig,cow,sheep;
     public int wheat,vegetable;
-    public int wood,rock,reed,dirt;
+    public int wood,rock,reed,clay;
     public int food,begging;
     public int family,fence,shed,room;
     public int houseGrade;
@@ -30,7 +30,7 @@ public class PlayerMessageData
         this.isFirstPlayer = false;
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
-        this.wood = 0; this.rock = 0; this.reed = 0; this.dirt = 0;
+        this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
         this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
         this.card_owns = new List<int>();
@@ -75,6 +75,15 @@ public enum SeedType
     WHEAT,
     VEGETABLE,
     NONE,
+}
+
+[System.Serializable]
+public enum HouseType
+{
+    WOOD,
+    CLAY,
+    STONE,
+    NONE
 }
 
 [System.Serializable]
