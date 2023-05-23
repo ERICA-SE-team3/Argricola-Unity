@@ -18,27 +18,48 @@ public class PlayerBoard : MonoBehaviour
     public HouseType houseType;
 
     public List<Block> selectedBlocks;
+    public List<SowingBlockNode> selectedSowingBlocks; 
 
-    BoardEventStrategy startegy;
+    BoardEventStrategy strategy;
 
-    BoardEventStrategy houseStargety;
-    BoardEventStrategy farmStargety;
-    BoardEventStrategy fenceStargety;
-    BoardEventStrategy shedStartegy;
+    BoardEventStrategy houseStrategy;
+    BoardEventStrategy farmStrategy;
+    BoardEventStrategy fenceStrategy;
+    BoardEventStrategy shedStrategy;
     BoardEventStrategy sowingStrategy;
     BoardEventStrategy moveAnimalStrategy;
+
+    public PlayerBoardMessageData GetBoardMessageData()
+    {
+        PlayerBoardMessageData boardMessageData = new PlayerBoardMessageData();
+
+        boardMessageData.blockDatas = new BlockData[blocks.GetLength(0) 
+                                                    * blocks.GetLength(1)];
+        int index = 0;
+        for(int row = 0; row < blocks.GetLength(0); row++)
+        {
+            for(int col = 0; col < blocks.GetLength(1); col++)
+            {
+                boardMessageData.blockDatas[index] = blocks[row,col].GetBlockData();
+                index++;
+            }
+        }
+        return boardMessageData;
+    }
+
+    // -------------------------------------------------------------------------
 
     private void Start() {
         selectedBlocks = new List<Block>();
 
-        houseStargety = new HouseEventStrategy();
-        farmStargety = new FarmEventStrategy();
-        fenceStargety = new FenceEventStrategy();
-        shedStartegy = new ShedEventStrategy();
+        houseStrategy = new HouseEventStrategy();
+        farmStrategy = new FarmEventStrategy();
+        fenceStrategy = new FenceEventStrategy();
+        shedStrategy = new ShedEventStrategy();
         sowingStrategy = new SowingEventStrategy();
         moveAnimalStrategy = new MoveAnimalEventStrategy();
 
-        startegy = new BoardEventStrategy();
+        strategy = new BoardEventStrategy();
 
         InitBoard(player);
         SetFirstHouse();
@@ -59,39 +80,22 @@ public class PlayerBoard : MonoBehaviour
                 blocks[i,j] = tmpBlock;
             }
         }
-
         houseType = HouseType.WOOD;
     }
-
+    
     void SetFirstHouse()
     {
         blocks[house1x, house1y].ChangeHouse();
         blocks[house2x, house2y].ChangeHouse();
     }
 
-    public PlayerBoardMessageData GetBoardMessageData()
-    {
-        PlayerBoardMessageData boardMessageData = new PlayerBoardMessageData();
-
-        boardMessageData.blockDatas = new BlockData[blocks.GetLength(0) 
-                                                    * blocks.GetLength(1)];
-        int index = 0;
-        for(int row = 0; row < blocks.GetLength(0); row++)
-        {
-            for(int col = 0; col < blocks.GetLength(1); col++)
-            {
-                boardMessageData.blockDatas[index] = blocks[row,col].GetBlockData();
-                index++;
-            }
-        }
-        return boardMessageData;
-    }
+    //-------------------------------------------------------------------------- 
 
     public void StartInstallHouse()
     {
         if(isHouseInstallStartAvailable())
         {
-            startegy = houseStargety;
+            strategy = houseStrategy;
             Button button = confirmButton.GetComponent<Button>();
             button.onClick.AddListener(EndInstallHouse);
         }
@@ -154,7 +158,7 @@ public class PlayerBoard : MonoBehaviour
     {
         if(isFarmInstallStartAvailable())
         {
-            startegy = farmStargety;
+            strategy = farmStrategy;
             Button button = confirmButton.GetComponent<Button>();
             button.onClick.AddListener(EndInstallFarm);
         }
@@ -198,32 +202,114 @@ public class PlayerBoard : MonoBehaviour
         return true;
     }
 
+    // -------------------------------------------------------------------------
+    
     public void StartInstallFence()
     {
-        startegy = fenceStargety;
+        if(IsInstallFenceStartAvailable())
+        {
+            strategy = fenceStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.AddListener(EndInstallFence);
+        }
+        else
+        {
+            Debug.LogError("울타리 설치 행동을 시작할 수 없습니다.");
+        }
     }
 
     public void EndInstallFence()
     {
-
+        if(IsInstallFenceEndAvailable())
+        {
+            Debug.LogError("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
+            throw new System.NotImplementedException();
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
     }
+
+    bool IsInstallFenceStartAvailable()
+    {
+        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+
+    bool IsInstallFenceEndAvailable()
+    {
+        Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+    
+    // -------------------------------------------------------------------------
 
     public void StartInstallShed()
     {
-        startegy = shedStartegy;
+        if(IsInstallShedStartAvailable())
+        {
+            strategy = shedStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.AddListener(EndInstallShed);
+        }
+        else
+        {
+            Debug.LogError("헛간 설치 행동을 시작할 수 없습니다.");
+        }
     }
 
     public void EndInstallShed()
     {
-
+        if(IsInstallShedEndAvailable())
+        {
+            foreach(Block block in selectedBlocks)
+            {
+                block.SetShed();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
     }
+
+    bool IsInstallShedStartAvailable()
+    {
+        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+
+    bool IsInstallShedEndAvailable()
+    {
+        Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+
+    // -------------------------------------------------------------------------
+
+    public class SowingBlockNode
+    {
+        public Block block;
+        public SeedType type;
+    }
+
 
     /// <summary>
     /// 씨 뿌리기 시작
     /// </summary>
     public void StartSowing()
     {
-        startegy = sowingStrategy;
+        if(IsSowingStartAvailable())
+        {
+            strategy = sowingStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.AddListener(EndSowing);
+        }
+        else
+        {
+            Debug.LogError("씨 뿌리기 행동을 시작할 수 없습니다.");
+        }
     }
 
     /// <summary>
@@ -231,58 +317,98 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     public void EndSowing()
     {
-
+        if(IsSowingEndAvailable())
+        {
+            foreach(SowingBlockNode node in selectedSowingBlocks)
+            {
+                node.block.SetSeed(node.type);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("씨 뿌릴 수 없습니다. 다시 선택해주세요.");
+        }
     }
+
+    bool IsSowingStartAvailable()
+    {
+        Debug.LogError("씨뿌리기 시작 전 가능한지 검사하는 함수 " + 
+                        " - 아직 구현 안됨");
+        return true;
+    }
+
+    bool IsSowingEndAvailable()
+    {
+        Debug.LogError("씨뿌리기 완료 할 수 있는지 검사하는 함수" + 
+                        "- 아직 구현 안됨");
+        return true;
+    }
+
+    // -------------------------------------------------------------------------
 
     /// <summary>
     /// 동물 옮기기 시작
     /// </summary>
-    public void StartAnimalMoving()
+    public void StartMoveAnimal()
     {
-        startegy = moveAnimalStrategy;
+        if(IsMoveAnimalStartAvailable())
+        {
+            strategy = moveAnimalStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.AddListener(EndMoveAnimal);
+        }
+        else
+        {
+            Debug.LogError("동물 옮기기 행동을 시작할 수 없습니다.");
+        }
     }
 
     /// <summary>
     /// 동물 옮기기 마무리
     /// </summary>
-    public void EndAnimalMoving()
+    public void EndMoveAnimal()
     {
-
+        if(IsMoveAnimalEndAvailable())
+        {
+            throw new System.NotImplementedException();
+        }
+        else
+        {
+            Debug.LogWarning("동물 옮길 수 없습니다. 다시 선택해주세요.");
+        }
     }
 
-    public void _TestSetFence()
+    bool IsMoveAnimalStartAvailable()
     {
-        blocks[2,4]._TestSetFence();
+        Debug.LogError("씨뿌리기 시작 전 가능한지 검사하는 함수 " + 
+                        " - 아직 구현 안됨");
+        return true;
     }
 
-    public void _TestSetShed()
+    bool IsMoveAnimalEndAvailable()
     {
-        blocks[2,4]._TestSetShed();
+        Debug.LogError("씨뿌리기 완료 할 수 있는지 검사하는 함수" + 
+                        "- 아직 구현 안됨");
+        return true;
     }
 
-    public void _TestSetHouse()
-    {
-        blocks[2,4]._TestSetHouse();
-    }
 
-    public void _TestSetFarm()
-    {
-        blocks[2,4]._TestSetFarm();
-    }
+    // -------------------------------------------------------------------------
 
-    public void OnHoverEnter(Block block)
-    {
-        startegy.OnHoverEnter(block);
-    }
+    public void _TestSetFence() { blocks[2,4]._TestSetFence(); }
 
-    public void OnHoverExit(Block block)
-    {
-        startegy.OnHoverExit(block);
-    }
+    public void _TestSetShed() { blocks[2,4]._TestSetShed(); }
 
-    public void OnClick(Block block)
-    {
-        startegy.OnClick(block);
-    }
+    public void _TestSetHouse() { blocks[2,4]._TestSetHouse(); }
+
+    public void _TestSetFarm() { blocks[2,4]._TestSetFarm(); }
+
+    // -------------------------------------------------------------------------
+
+    public void OnHoverEnter(Block block) { strategy.OnHoverEnter(block); }
+
+    public void OnHoverExit(Block block) { strategy.OnHoverExit(block); }
+
+    public void OnClick(Block block) { strategy.OnClick(block); }
 
 }
