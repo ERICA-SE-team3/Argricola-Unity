@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class BoardEventStrategy
 {
-    public virtual void HoverEnter(PointerEventData eventData) { }
+    public virtual void OnHoverEnter(Block block) { }
 
-    public virtual void HoverExit(PointerEventData eventData) { }
+    public virtual void OnHoverExit(Block block) { }
 
-    public virtual void OnClick(PointerEventData eventData) { }
+    public virtual void OnClick(Block block) { }
 }
