@@ -3,10 +3,10 @@ using UnityEngine;
 using WebSocketSharp;
 using StompHelper;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class NetworkManager : MonoBehaviour
 {
-    
     public static NetworkManager instance;
     public string url = "ws://172.17.75.214:8080/ws";
     public string msgDesination = "/pub/hello";
@@ -14,7 +14,7 @@ public class NetworkManager : MonoBehaviour
     StompMessageSerializer serializer = new StompMessageSerializer();
     String clientId = "1";
     
-    private void Awake() {
+    public void Awake() {
         if(instance == null)
         {
             instance = this;
@@ -26,19 +26,19 @@ public class NetworkManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         SetWebSocket(url);
         DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         
     }
 
-    void SetWebSocket(string url)
+    public void SetWebSocket(string url)
     {
         ws = new WebSocket(url);
 
@@ -111,27 +111,32 @@ public class NetworkManager : MonoBehaviour
     public void SendMessage()
     {
         MessageData message = new MessageData();
-        message.player = new PlayerData();
-        string data_json = JsonUtility.ToJson(message);
+        
+        message.actionPlayerId = 1;
+        message.actionType = ActionType.BUSH;
+        message.player = new PlayerMessageData();
+        message.playerBoard = new PlayerBoardMessageData();
 
-       _SendMessage(data_json);
+       _SendMessage(message);
     }
 
     public void SendMessage(MessageData data)
     {
-        string data_json = JsonUtility.ToJson(data);
-
-        _SendMessage(data_json);
+        _SendMessage(data);
     }
 
-    void _SendMessage(string data_json)
+    void _SendMessage(MessageData msgData)
     {
         StompMessageBody body = new StompMessageBody();
         body.channelId = clientId;
-        body.data = data_json;
+        body.data = JsonUtility.ToJson(msgData);
         body.sender = clientId;
         body.type = StompFrame.SEND;
         string body_json = JsonUtility.ToJson(body);
+        // Debug.Log(body_json);
+
+        // body_json = Regex.Unescape(body_json);
+        Debug.Log(body_json);
 
         var pub = new StompMessage(StompFrame.SEND,body_json);
         pub["destination"] = msgDesination;
@@ -142,46 +147,9 @@ public class NetworkManager : MonoBehaviour
 [System.Serializable]
 public class MessageData
 {
-    public PlayerData player; 
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    public bool isFirstPlayer = false;
-    public int pig,cow,sheep;
-    public int wheat,vegetable;
-    public int wood,rock,reed,dirt;
-    public int food,begging;
-    public int family,fence,shed,room;
-    public List<int> card_owns;
-    public List<int> card_hands;
-    public int Jobs {
-        get         { return CountJobs(); }
-        private set { ; }
-    }
-
-    int CountJobs()
-    {
-        // Count Job cars at card_owns
-        return 0;
-    }
-
-    public void Init()
-    {
-        this.isFirstPlayer = false;
-        this.pig = 0; this.cow = 0; this.sheep = 0;
-        this.wheat = 0; this.vegetable = 0;
-        this.wood = 0; this.rock = 0; this.reed = 0; this.dirt = 0;
-        this.food = 3; this.begging = 0;
-        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
-        this.card_owns = new List<int>();
-        this.card_hands = new List<int>();
-    }
-}
-
-[System.Serializable]
-public class BoardData
-{
+    public int actionPlayerId;
+    public ActionType actionType;
     
+    public PlayerMessageData player; 
+    public PlayerBoardMessageData playerBoard;
 }
