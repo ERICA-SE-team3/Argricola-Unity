@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player[] players = new Player[4];
+    public PlayerBoard[] playerboards = new PlayerBoard[4];
+    public int[] stackOfBoards = new int[11];
     MessageData message = new MessageData();
     public int currentPlayerId;
 
@@ -15,16 +17,22 @@ public class GameManager : MonoBehaviour
         GameManager.instance = this;
 
         //Initialize Player
-        this.Init();
+        this.DummyInit();
+
+        //Dummy stackData
+        for(int i=0; i<11; i++)
+        {
+            stackOfBoards[i] = 2;
+        }
     }
 
     //Update to NetworkManager
-    public void Update( ActionType actiontype )
+    public void sendmsg( ActionType actiontype )
     {
         this.message.actionPlayerId = this.currentPlayerId;
         this.message.actionType = ActionType.BUSH;
-        this.message.player = this.players[currentPlayerId].PlayerToPlayerMessageData();
-        this.message.playerBoard = new PlayerBoardMessageData(); //임시
+        this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
+        this.message.playerBoard = this.playerboards[currentPlayerId].GetBoardMessageData();
         
         //NetworkManager를 통해 DB와 소통
         NetworkManager.instance.SendMessage(message);

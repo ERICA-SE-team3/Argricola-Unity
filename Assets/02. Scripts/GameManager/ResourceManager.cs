@@ -49,8 +49,8 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { reedIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtIncrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
@@ -116,8 +116,8 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { reedDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtDecrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
@@ -159,7 +159,7 @@ public class ResourceManager : MonoBehaviour
                 "\nwood: " + GameManager.instance.players[i].wood +
                 "\nrock: " + GameManager.instance.players[i].rock +
                 "\nreed: " + GameManager.instance.players[i].reed +
-                "\ndirt: " + GameManager.instance.players[i].dirt +
+                "\nclay: " + GameManager.instance.players[i].clay +
                 "\nfood: " + GameManager.instance.players[i].food +
                 "\nbegging: " + GameManager.instance.players[i].begging +
                 "\nfamily: " + GameManager.instance.players[i].family +
@@ -210,8 +210,8 @@ public class ResourceManager : MonoBehaviour
                 result = GameManager.instance.players[Playernumber].reed;
                 break;
 
-            case "dirt":
-                result = GameManager.instance.players[Playernumber].dirt;
+            case "clay":
+                result = GameManager.instance.players[Playernumber].clay;
                 break;
 
             case "food":
@@ -283,9 +283,9 @@ public class ResourceManager : MonoBehaviour
         GameManager.instance.players[Playernumber].reed = GameManager.instance.players[Playernumber].reed + 1;
     }
 
-    void dirtIncrement( int Playernumber )
+    void clayIncrement( int Playernumber )
     {
-        GameManager.instance.players[Playernumber].dirt = GameManager.instance.players[Playernumber].dirt + 1;
+        GameManager.instance.players[Playernumber].clay = GameManager.instance.players[Playernumber].clay + 1;
     }
 
     void foodIncrement( int Playernumber )
@@ -360,9 +360,9 @@ public class ResourceManager : MonoBehaviour
         GameManager.instance.players[Playernumber].reed = GameManager.instance.players[Playernumber].reed - 1;
     }
 
-    void dirtDecrement( int Playernumber )
+    void clayDecrement( int Playernumber )
     {
-        GameManager.instance.players[Playernumber].dirt = GameManager.instance.players[Playernumber].dirt - 1;
+        GameManager.instance.players[Playernumber].clay = GameManager.instance.players[Playernumber].clay - 1;
     }
 
     void foodDecrement( int Playernumber )

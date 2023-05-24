@@ -31,7 +31,7 @@ public class Player
         this.card_hands = new List<int>();
     }
 
-    public PlayerMessageData PlayerToPlayerMessageData()
+    public PlayerMessageData GetPlayerMessageData()
     {
         PlayerMessageData msgdata = new PlayerMessageData();
         msgdata.isFirstPlayer = this.isFirstPlayer;
