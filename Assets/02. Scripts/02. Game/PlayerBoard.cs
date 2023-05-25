@@ -295,6 +295,11 @@ public class PlayerBoard : MonoBehaviour
     }
 
 
+    public void StartSowing(GrainUtilizationRoundAct action)
+    {
+        StartSowing();
+    }
+
     /// <summary>
     /// 씨 뿌리기 시작
     /// </summary>
@@ -323,6 +328,8 @@ public class PlayerBoard : MonoBehaviour
             {
                 node.block.SetSeed(node.type);
             }
+
+            action.EndSowingCallback();
         }
         else
         {
