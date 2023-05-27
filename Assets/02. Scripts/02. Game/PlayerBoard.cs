@@ -294,6 +294,12 @@ public class PlayerBoard : MonoBehaviour
         public SeedType type;
     }
 
+    // PR 리뷰 수정사항 : Startsowing 매개변수화 및 EndSowingCallback 주석처리
+
+    // public void StartSowing(GrainUtilizationRoundAct action)
+    // {
+    //     StartSowing();
+    // }
 
     /// <summary>
     /// 씨 뿌리기 시작
@@ -323,6 +329,8 @@ public class PlayerBoard : MonoBehaviour
             {
                 node.block.SetSeed(node.type);
             }
+
+            // action.EndSowingCallback();
         }
         else
         {
