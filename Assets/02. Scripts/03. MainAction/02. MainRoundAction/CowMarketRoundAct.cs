@@ -16,7 +16,8 @@ public class CowMarketRoundAct : ButtonParents
     public override void OnClick()
     {
         ResourceManager.instance.addResource(playerIndex, "cow", cow);
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        StartCow();  // player보드에 소를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+        // PR 리뷰 수정사항 : 정해지지 않은 함수명 주석처리
+        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+        // StartCow();  // player보드에 소를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
     }
 }

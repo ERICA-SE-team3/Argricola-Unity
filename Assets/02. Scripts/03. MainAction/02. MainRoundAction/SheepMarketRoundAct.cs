@@ -16,7 +16,7 @@ public class SheepMarketRoundAct : ButtonParents
     public override void OnClick()
     {
         ResourceManager.instance.addResource(playerIndex, "sheep", sheep);
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        StartSheep();   // player보드에 양을 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+        // StartSheep();   // player보드에 양을 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
     }
 }

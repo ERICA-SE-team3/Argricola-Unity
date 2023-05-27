@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UrgentWishChildrenRoundAct : MonoBehaviour
+public class UrgentWishChildrenRoundAct : ButtonParents
 {
   /* 급한가족늘리기 행동 ( 방이 없어도 가족 늘리기 )
     1. 해당 행동 Onclick

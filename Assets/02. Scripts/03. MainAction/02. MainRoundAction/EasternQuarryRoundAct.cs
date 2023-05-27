@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EasternQuarryRoundAct : MonoBehaviour
+public class EasternQuarryRoundAct : ButtonParents
 {
   /* 동부채석장 행동
     1. 해당 행동 Onclick

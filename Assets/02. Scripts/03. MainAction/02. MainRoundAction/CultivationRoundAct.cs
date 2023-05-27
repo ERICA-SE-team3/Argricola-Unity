@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CultivationRoundAct : MonoBehaviour
+public class CultivationRoundAct : ButtonParents
 {
     /* 밭 농사 행동 (밭 하나 일구기 그리고/또는 씨뿌리기)
     1. 해당 행동 OnClick
@@ -15,11 +15,12 @@ public class CultivationRoundAct : MonoBehaviour
 
     public override void OnClick()
     {
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        StartInstallFarm();
+        // PR 리뷰 수정사항 : 정해지지 않은 함수명 주석처리
+        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+        // StartInstallFarm();
         if(shouldSowing == true)
         {
-            StartSowing();
+            // StartSowing();
         }
     }
 }

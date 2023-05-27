@@ -16,7 +16,7 @@ public class FencingRoundAct : ButtonParents
     public int playerIndex = 0;
     public bool isPlayerTurn = true;
 
-    public int useWood = 6; //울타리 치기 행동에 사용한 나무가 6개라고 가정
+    public int useWood;
 
     // 나무가 있는지 확인
     private bool HasWoods(){
@@ -29,12 +29,14 @@ public class FencingRoundAct : ButtonParents
 
     public override void OnClick()
         {
-          PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+          // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
           if (isPlayerTurn && HasWoods())
           {
             // StartInstallFence() 호출할 때 유저가 가지고있는 나무의 개수를 넘겨주거나, 함수 내부적으로 가져와야 할듯
             // 왜냐면 울타리 설치한 만큼만 minusResource() 해야해서
-            StartInstallFence()
+
+            // StartInstallFence()
+            useWood = 6;  //울타리 치기 행동에 사용한 나무가 6개라고 가정
             ResourceManager.instance.minusResource(playerIndex, "wood", wood - useWood);
             ResourceManager.instance.addResource(playerIndex, "fence", useWood);
           }

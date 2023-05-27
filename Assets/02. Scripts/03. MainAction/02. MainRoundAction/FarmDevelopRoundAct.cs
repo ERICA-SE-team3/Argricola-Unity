@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmDevelopRoundAct : MonoBehaviour
+public class FarmDevelopRoundAct : ButtonParents
 {
   /* 농장개조 행동 (농장 개조 이후 울타리치기 )
     1. 해당 행동 Onclick
@@ -12,17 +12,20 @@ public class FarmDevelopRoundAct : MonoBehaviour
   */
     public int playerIndex = 0;
     public bool isPlayerTurn = true;
+    public int wood;
+    public int useWood;
 
     public override void OnClick()
         {
-          PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-          StartInstallHouse();
-          SelectUser();
+          // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+          // StartInstallHouse();
+          // SelectUser();
           if (isPlayerTurn && HasWoods())
           {
-            // StartInstallFence() 호출할 때 유저가 가지고있는 나무의 개수를 넘겨주거나, 함수 내부적으로 가져와야 할듯
-            // 왜냐면 울타리 설치한 만큼만 minusResource() 해야해서
-            StartInstallFence()
+            // StartInstallFence() 호출할 때 유저가 가지고있는 나무의 개수를 넘겨주거나, 함수 내부적으로 가져와야 할듯, 왜냐면 울타리 설치한 만큼만 minusResource() 해야해서
+            
+            // StartInstallFence()
+            useWood = 4;  // fence 설치할 때 사용한 나무의 개수를 4개라고 가정
             ResourceManager.instance.minusResource(playerIndex, "wood", wood - useWood);
             ResourceManager.instance.addResource(playerIndex, "fence", useWood);
           }          

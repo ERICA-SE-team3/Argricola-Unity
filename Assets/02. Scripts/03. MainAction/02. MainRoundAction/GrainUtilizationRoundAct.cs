@@ -16,17 +16,17 @@ public class GrainUtilizationRoundAct : ButtonParents
     */
     public GameObject playerBoard;
 
-    ActionType type = ActionType.GrainUtilizationRoundAct;
+    // ActionType type = ActionType.GrainUtilizationRoundAct;
     
     public override void OnClick(){
         bool shouldSowing = true; // 씨뿌리기 할건지? (일단 true)
 
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         if (shouldSowing == true) {
-            StartSowing(this);
+            // StartSowing(this);
         }
         else {
-            StartBaking();
+            // StartBaking();
         }
 
     }
@@ -35,7 +35,7 @@ public class GrainUtilizationRoundAct : ButtonParents
     {   // 씨뿌리기 끝나고 빵구울건지 그냥 끝낼건지
         bool shouldBaking = true; 
         if(shouldBaking == true) {
-            StartBaking();
+            // StartBaking();
         }
     }
 }

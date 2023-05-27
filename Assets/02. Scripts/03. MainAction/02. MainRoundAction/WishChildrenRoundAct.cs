@@ -23,7 +23,7 @@ public class WishChildrenRoundAct : ButtonParents
           if (countFamily < countRoom)
           {
             // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
-            ActCardSub(playerIndex, "쇠스랑"); // 임의로 함수명 만듦
+            // ActCardSub(playerIndex, "쇠스랑"); // 임의로 함수명 만듦
             ResourceManager.instance.addResource(playerIndex, "family", 1);
           }
         }

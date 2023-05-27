@@ -16,7 +16,8 @@ public class PigMarketRoundAct : ButtonParents
     public override void OnClick()
     {
         ResourceManager.instance.addResource(playerIndex, "pig", pig);
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        StartPig();  // player보드에 돼지를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+        
+        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+        // StartPig();  // player보드에 돼지를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
     }
 }

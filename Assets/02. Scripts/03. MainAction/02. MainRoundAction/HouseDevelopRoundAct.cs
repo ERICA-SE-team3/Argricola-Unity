@@ -17,8 +17,8 @@ public class HouseDevelopRoundAct : ButtonParents
 
     public override void OnClick()
         {
-          PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-          StartInstallHouse();
+          // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+          // StartInstallHouse();
           SelectUser();
         }
 
@@ -26,11 +26,13 @@ public class HouseDevelopRoundAct : ButtonParents
     {
       if (userSelect == "주요설비")
       {
-        ActCardMain(playerIndex, "화로"); // 임의로 만든 주요설비 얻기 함수 호출하기
+        // ActCardMain(playerIndex, "화로"); // 임의로 만든 주요설비 얻기 함수 호출하기
+        return "주요설비";
       }
       else
       {
-        ActCardSub(playerIndex, "쇠스랑");
+        // ActCardSub(playerIndex, "쇠스랑");
+        return "보조설비";
       }
     }
 
