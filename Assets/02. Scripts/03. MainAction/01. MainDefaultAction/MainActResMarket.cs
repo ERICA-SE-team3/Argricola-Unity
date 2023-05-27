@@ -8,7 +8,7 @@ public class MainActResMarket : ButtonParents
     public override void OnClick()
     {
         ResourceManager.instance.addResource(playerIndex, "reed", 1);
-        ResourceManager.instance.addResource(playerIndex, "stone", 1);
+        ResourceManager.instance.addResource(playerIndex, "rock", 1);
         ResourceManager.instance.addResource(playerIndex, "food", 1);
     }
 }
