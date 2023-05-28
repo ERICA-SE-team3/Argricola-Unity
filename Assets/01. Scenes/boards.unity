@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 31499407}
   - component: {fileID: 31499409}
   m_Layer: 5
-  m_Name: round11
+  m_Name: CowMarketRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 33682113}
   - component: {fileID: 33682115}
   m_Layer: 5
-  m_Name: round1
+  m_Name: GrainUtilizationRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 100894185}
   - component: {fileID: 100894187}
   m_Layer: 5
-  m_Name: round4
+  m_Name: ImprovementsRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1253,7 +1253,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 224171081}
-        m_TargetAssemblyTypeName: GrainSeed, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainActGrainSeed, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 224171076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af24ca498d6c59d4b8c97ed610078c68, type: 3}
+  m_Script: {fileID: 11500000, guid: f867482c5a7cf4e65b55d1a9aae565fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -1808,7 +1808,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 343959006}
-        m_TargetAssemblyTypeName: ReedField, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainActReedField, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 343959001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d95dae878a0530408113744924e7b37, type: 3}
+  m_Script: {fileID: 11500000, guid: 7abf094704c63416c8a11ba3a262f714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -1955,7 +1955,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 429521409}
-        m_TargetAssemblyTypeName: DirtPit, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainActDirtPit, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 429521404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 149609e219698564ba3bc572b2131bdc, type: 3}
+  m_Script: {fileID: 11500000, guid: a5b851dd9789c44ab92dcada8ea95506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -2223,7 +2223,7 @@ GameObject:
   - component: {fileID: 495463528}
   - component: {fileID: 495463530}
   m_Layer: 5
-  m_Name: round14
+  m_Name: FarmDevelopRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2485,7 +2485,7 @@ GameObject:
   - component: {fileID: 585247947}
   - component: {fileID: 585247949}
   m_Layer: 5
-  m_Name: round7
+  m_Name: HouseDevelopRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2727,7 +2727,7 @@ GameObject:
   - component: {fileID: 639774798}
   - component: {fileID: 639774800}
   m_Layer: 5
-  m_Name: round8
+  m_Name: PigMarketRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2978,7 +2978,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 669072071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3fc33c380b4d4342830c431f6c43386, type: 3}
+  m_Script: {fileID: 11500000, guid: f545af7bf6f0f4366882b67dc6bc91f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 721728299}
   - component: {fileID: 721728301}
   m_Layer: 5
-  m_Name: round13
+  m_Name: CultivationRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3392,7 +3392,7 @@ GameObject:
   - component: {fileID: 840285584}
   - component: {fileID: 840285586}
   m_Layer: 5
-  m_Name: round10
+  m_Name: EasternQuarryRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3643,7 +3643,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 869731878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c1e0ee854744e998f4eb5c838a4ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: ab00bd91923474dac960f1ffa088d6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -3771,7 +3771,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 897166221}
-        m_TargetAssemblyTypeName: ClayPit, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainActClayPit, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -3791,7 +3791,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 897166216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929a45581cc629f439cbb47c2bfdc281, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae3703e066024977ae7e2ee9e77e206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -6802,7 +6802,7 @@ GameObject:
   - component: {fileID: 1032064216}
   - component: {fileID: 1032064218}
   m_Layer: 5
-  m_Name: round6
+  m_Name: WesternQuarryRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7349,7 +7349,7 @@ GameObject:
   - component: {fileID: 1307117760}
   - component: {fileID: 1307117762}
   m_Layer: 5
-  m_Name: round5
+  m_Name: WishChildrenRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7656,7 +7656,7 @@ GameObject:
   - component: {fileID: 1353090893}
   - component: {fileID: 1353090895}
   m_Layer: 5
-  m_Name: round12
+  m_Name: UrgentWishChildrenRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7907,7 +7907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1376936282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2303ede1217d8914688c3694f71dcac3, type: 3}
+  m_Script: {fileID: 11500000, guid: 309a3da9a322e41938c0bdc72dab2ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -8058,7 +8058,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1384011544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25f8ba10379b41118b40eb30834912f, type: 3}
+  m_Script: {fileID: 11500000, guid: 63b2cc8211fd1496db834b5b37adeca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -8207,7 +8207,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396737648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c508158858a44e39fc8ce5dcfff6f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 18d1578df09fb4939bdc961d9397cf3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -8356,7 +8356,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1422285767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd9f16aca5ba4e989a175ca2e248303, type: 3}
+  m_Script: {fileID: 11500000, guid: d552148b56744434ca49524f03fbc3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -8669,7 +8669,7 @@ GameObject:
   - component: {fileID: 1517165918}
   - component: {fileID: 1517165920}
   m_Layer: 5
-  m_Name: round2
+  m_Name: SheepMarketRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9178,7 +9178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1685284830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7c769e6e32748a5951a802937127c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 005b31dd09bca426e907e2ac7501c374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -9295,7 +9295,7 @@ GameObject:
   - component: {fileID: 1813307288}
   - component: {fileID: 1813307290}
   m_Layer: 5
-  m_Name: round9
+  m_Name: VegetableSeedRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9911,7 +9911,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1948255436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963906f38c19eb74489a949a91d303c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d2a7badc49a84747ae05b0ba285facc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
@@ -10043,7 +10043,7 @@ GameObject:
   - component: {fileID: 2103098207}
   - component: {fileID: 2103098209}
   m_Layer: 5
-  m_Name: round3
+  m_Name: FencingRoundAct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
