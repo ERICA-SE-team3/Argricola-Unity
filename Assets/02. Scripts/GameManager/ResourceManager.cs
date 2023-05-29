@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    DummyPlayers dummy;
     public static ResourceManager instance;
 
     public void Awake()
     {
-        dummy = new DummyPlayers();
         ResourceManager.instance = this;
     }
 
@@ -51,8 +49,8 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { reedIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtIncrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayIncrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
@@ -118,8 +116,8 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { reedDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtDecrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayDecrement( Playernumber ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
@@ -153,21 +151,21 @@ public class ResourceManager : MonoBehaviour
         for(int i=0; i<4; i++)
         {
             Debug.Log("\nPlayer number: " + i +
-                "\npig: " + dummy.players[i].pig +
-                "\ncow: " + dummy.players[i].cow +
-                "\nsheep: " + dummy.players[i].sheep +
-                "\nwheat: " + dummy.players[i].wheat +
-                "\nvegetable: " + dummy.players[i].vegetable +
-                "\nwood: " + dummy.players[i].wood +
-                "\nrock: " + dummy.players[i].rock +
-                "\nreed: " + dummy.players[i].reed +
-                "\ndirt: " + dummy.players[i].dirt +
-                "\nfood: " + dummy.players[i].food +
-                "\nbegging: " + dummy.players[i].begging +
-                "\nfamily: " + dummy.players[i].family +
-                "\nfence: " + dummy.players[i].fence +
-                "\nshed: " + dummy.players[i].shed +
-               "\nroom: " + dummy.players[i].room);
+                "\npig: " + GameManager.instance.players[i].pig +
+                "\ncow: " + GameManager.instance.players[i].cow +
+                "\nsheep: " + GameManager.instance.players[i].sheep +
+                "\nwheat: " + GameManager.instance.players[i].wheat +
+                "\nvegetable: " + GameManager.instance.players[i].vegetable +
+                "\nwood: " + GameManager.instance.players[i].wood +
+                "\nrock: " + GameManager.instance.players[i].rock +
+                "\nreed: " + GameManager.instance.players[i].reed +
+                "\nclay: " + GameManager.instance.players[i].clay +
+                "\nfood: " + GameManager.instance.players[i].food +
+                "\nbegging: " + GameManager.instance.players[i].begging +
+                "\nfamily: " + GameManager.instance.players[i].family +
+                "\nfence: " + GameManager.instance.players[i].fence +
+                "\nshed: " + GameManager.instance.players[i].shed +
+               "\nroom: " + GameManager.instance.players[i].room);
             
             
         }
@@ -181,63 +179,63 @@ public class ResourceManager : MonoBehaviour
         {
 
             case "pig":
-                result = dummy.players[Playernumber].pig;
+                result = GameManager.instance.players[Playernumber].pig;
                 break;
 
             case "cow":
-                result = dummy.players[Playernumber].cow;
+                result = GameManager.instance.players[Playernumber].cow;
                 break;
 
             case "sheep":
-                result = dummy.players[Playernumber].sheep;
+                result = GameManager.instance.players[Playernumber].sheep;
                 break;
 
             case "wheat":
-                result = dummy.players[Playernumber].wheat;
+                result = GameManager.instance.players[Playernumber].wheat;
                 break;
 
             case "vegetable":
-                result = dummy.players[Playernumber].vegetable;
+                result = GameManager.instance.players[Playernumber].vegetable;
                 break;
 
             case "wood":
-                result = dummy.players[Playernumber].wood;
+                result = GameManager.instance.players[Playernumber].wood;
                 break;
 
             case "rock":
-                result = dummy.players[Playernumber].rock;
+                result = GameManager.instance.players[Playernumber].rock;
                 break;
 
             case "reed":
-                result = dummy.players[Playernumber].reed;
+                result = GameManager.instance.players[Playernumber].reed;
                 break;
 
-            case "dirt":
-                result = dummy.players[Playernumber].dirt;
+            case "clay":
+                result = GameManager.instance.players[Playernumber].clay;
                 break;
 
             case "food":
-                result = dummy.players[Playernumber].food;
+                result = GameManager.instance.players[Playernumber].food;
                 break;
 
             case "begging":
-                result = dummy.players[Playernumber].begging;
+                result = GameManager.instance.players[Playernumber].begging;
                 break;
 
             case "family":
-                result = dummy.players[Playernumber].family;
+                result = GameManager.instance.players[Playernumber].family;
                 break;
 
             case "fence":
-                result = dummy.players[Playernumber].fence;
+                result = GameManager.instance.players[Playernumber].fence;
                 break;
 
             case "shed":
-                result = dummy.players[Playernumber].shed;
+                result = GameManager.instance.players[Playernumber].shed;
                 break;
 
             case "room":
-                result = dummy.players[Playernumber].room;
+                result = GameManager.instance.players[Playernumber].room;
                 break;
         }
         return result;
@@ -247,154 +245,154 @@ public class ResourceManager : MonoBehaviour
     //don't touch this code.
     void pigIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig + 1;
+        GameManager.instance.players[Playernumber].pig = GameManager.instance.players[Playernumber].pig + 1;
     }
 
     void cowIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow + 1;
+        GameManager.instance.players[Playernumber].cow = GameManager.instance.players[Playernumber].cow + 1;
     }
 
     void sheepIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep + 1;
+        GameManager.instance.players[Playernumber].sheep = GameManager.instance.players[Playernumber].sheep + 1;
     }
 
     void wheatIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat + 1;
+        GameManager.instance.players[Playernumber].wheat = GameManager.instance.players[Playernumber].wheat + 1;
     }
 
     void vegetableIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable + 1;
+        GameManager.instance.players[Playernumber].vegetable = GameManager.instance.players[Playernumber].vegetable + 1;
     }
 
     void woodIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood + 1;
+        GameManager.instance.players[Playernumber].wood = GameManager.instance.players[Playernumber].wood + 1;
     }
 
     void rockIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock + 1;
+        GameManager.instance.players[Playernumber].rock = GameManager.instance.players[Playernumber].rock + 1;
     }
 
     void reedIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed + 1;
+        GameManager.instance.players[Playernumber].reed = GameManager.instance.players[Playernumber].reed + 1;
     }
 
-    void dirtIncrement( int Playernumber )
+    void clayIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt + 1;
+        GameManager.instance.players[Playernumber].clay = GameManager.instance.players[Playernumber].clay + 1;
     }
 
     void foodIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].food = dummy.players[Playernumber].food + 1;
+        GameManager.instance.players[Playernumber].food = GameManager.instance.players[Playernumber].food + 1;
     }
 
     void beggingIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging + 1;
+        GameManager.instance.players[Playernumber].begging = GameManager.instance.players[Playernumber].begging + 1;
     }
 
     void familyIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].family = dummy.players[Playernumber].family + 1;
+        GameManager.instance.players[Playernumber].family = GameManager.instance.players[Playernumber].family + 1;
     }
 
     void fenceIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence + 1;
+        GameManager.instance.players[Playernumber].fence = GameManager.instance.players[Playernumber].fence + 1;
     }
 
     void shedIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed + 1;
+        GameManager.instance.players[Playernumber].shed = GameManager.instance.players[Playernumber].shed + 1;
     }
 
     void roomIncrement( int Playernumber )
     {
-        dummy.players[Playernumber].room = dummy.players[Playernumber].room + 1;
+        GameManager.instance.players[Playernumber].room = GameManager.instance.players[Playernumber].room + 1;
     }
 
 
     //Decrement functions
     void pigDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig - 1;
+        GameManager.instance.players[Playernumber].pig = GameManager.instance.players[Playernumber].pig - 1;
     }
 
     void cowDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow - 1;
+        GameManager.instance.players[Playernumber].cow = GameManager.instance.players[Playernumber].cow - 1;
     }
 
     void sheepDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep - 1;
+        GameManager.instance.players[Playernumber].sheep = GameManager.instance.players[Playernumber].sheep - 1;
     }
 
     void wheatDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat - 1;
+        GameManager.instance.players[Playernumber].wheat = GameManager.instance.players[Playernumber].wheat - 1;
     }
 
     void vegetableDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable - 1;
+        GameManager.instance.players[Playernumber].vegetable = GameManager.instance.players[Playernumber].vegetable - 1;
     }
 
     void woodDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood - 1;
+        GameManager.instance.players[Playernumber].wood = GameManager.instance.players[Playernumber].wood - 1;
     }
 
     void rockDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock - 1;
+        GameManager.instance.players[Playernumber].rock = GameManager.instance.players[Playernumber].rock - 1;
     }
 
     void reedDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed - 1;
+        GameManager.instance.players[Playernumber].reed = GameManager.instance.players[Playernumber].reed - 1;
     }
 
-    void dirtDecrement( int Playernumber )
+    void clayDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt - 1;
+        GameManager.instance.players[Playernumber].clay = GameManager.instance.players[Playernumber].clay - 1;
     }
 
     void foodDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].food = dummy.players[Playernumber].food - 1;
+        GameManager.instance.players[Playernumber].food = GameManager.instance.players[Playernumber].food - 1;
     }
 
     void beggingDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging - 1;
+        GameManager.instance.players[Playernumber].begging = GameManager.instance.players[Playernumber].begging - 1;
     }
 
     void familyDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].family = dummy.players[Playernumber].family - 1;
+        GameManager.instance.players[Playernumber].family = GameManager.instance.players[Playernumber].family - 1;
     }
 
     void fenceDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence - 1;
+        GameManager.instance.players[Playernumber].fence = GameManager.instance.players[Playernumber].fence - 1;
     }
 
     void shedDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed - 1;
+        GameManager.instance.players[Playernumber].shed = GameManager.instance.players[Playernumber].shed - 1;
     }
 
     void roomDecrement( int Playernumber )
     {
-        dummy.players[Playernumber].room = dummy.players[Playernumber].room - 1;
+        GameManager.instance.players[Playernumber].room = GameManager.instance.players[Playernumber].room - 1;
     }
 }
 
