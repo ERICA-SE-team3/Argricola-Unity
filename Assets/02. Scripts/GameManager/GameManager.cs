@@ -9,11 +9,9 @@ public class GameManager : MonoBehaviour
 
     //player들을 담을 ArrayList, players
     public List<Player> players = new List<Player>();
-    public Player player1, player2, player3, player4;
 
     //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
-    public PlayerBoard playerboard1, playerboard2, playerboard3, playerboard4;
 
     //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
@@ -44,7 +42,7 @@ public class GameManager : MonoBehaviour
         easternQuarry,
         cattleMarket
     }
-
+    
     //round를 넘어갈 때 판단 요소
     public enum RoundManage
     {
@@ -58,16 +56,12 @@ public class GameManager : MonoBehaviour
         GameManager.instance = this;
 
         //player start
-        this.player1 = new Player(); this.players.Add(player1);
-        this.player2 = new Player(); this.players.Add(player2);
-        this.player3 = new Player(); this.players.Add(player3);
-        this.player4 = new Player(); this.players.Add(player4);
+        Player player1 = new Player(); Player player2 = new Player(); Player player3 = new Player(); Player player4 = new Player();
+        this.players.Add(player1); this.players.Add(player2); this.players.Add(player3); this.players.Add(player4);
 
         //playerboard start
-        this.playerboard1 = new PlayerBoard(); this.playerBoards.Add(playerboard1);
-        this.playerboard2 = new PlayerBoard(); this.playerBoards.Add(playerboard2);
-        this.playerboard3 = new PlayerBoard(); this.playerBoards.Add(playerboard3);
-        this.playerboard4 = new PlayerBoard(); this.playerBoards.Add(playerboard4);
+        PlayerBoard playerboard1 = new PlayerBoard(); PlayerBoard playerboard2 = new PlayerBoard(); PlayerBoard playerboard3 = new PlayerBoard(); PlayerBoard playerboard4 = new PlayerBoard();
+        this.playerBoards.Add(playerboard1); this.playerBoards.Add(playerboard2); this.playerBoards.Add(playerboard3); this.playerBoards.Add(playerboard4);
 
         //Initialize Player's resources
         this.DummyInit();
