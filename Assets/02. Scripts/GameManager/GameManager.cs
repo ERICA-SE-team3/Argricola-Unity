@@ -56,12 +56,18 @@ public class GameManager : MonoBehaviour
         GameManager.instance = this;
 
         //player start
-        Player player1 = new Player(); Player player2 = new Player(); Player player3 = new Player(); Player player4 = new Player();
-        this.players.Add(player1); this.players.Add(player2); this.players.Add(player3); this.players.Add(player4);
+        for (int i=0; i<4; i++)
+        {
+            Player temp = new Player();
+            this.players.Add(temp);
+        }
 
         //playerboard start
-        PlayerBoard playerboard1 = new PlayerBoard(); PlayerBoard playerboard2 = new PlayerBoard(); PlayerBoard playerboard3 = new PlayerBoard(); PlayerBoard playerboard4 = new PlayerBoard();
-        this.playerBoards.Add(playerboard1); this.playerBoards.Add(playerboard2); this.playerBoards.Add(playerboard3); this.playerBoards.Add(playerboard4);
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerBoard tempB = new PlayerBoard();
+            this.playerBoards.Add(tempB);
+        }
 
         //Initialize Player's resources
         this.DummyInit();
