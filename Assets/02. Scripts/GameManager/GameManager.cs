@@ -42,13 +42,14 @@ public class GameManager : MonoBehaviour
         easternQuarry,
         cattleMarket
     }
+
+    //게임 진행을 위한 flag들
+    //1. 라운드 진행을 나타내는 flag
+    public bool RoundFlag = true;
+    //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
+    public bool endTurnFlag = false;
     
-    //round를 넘어갈 때 판단 요소
-    public enum RoundManage
-    {
-        NextPlayer,
-        RoundFinish
-    }
+
 
     private void Start()
     {
@@ -80,58 +81,70 @@ public class GameManager : MonoBehaviour
 
         //현재 라운드 초기화
         this.currentRound = 1;
+
+        //첫 라운드 준비
+        //stack 증가
+        //라운드 카드 활성화
+        this.preRound();
     }
 
-    private void Update()
+    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        //2.라운드 진행
-
-        //stack 증가
-        this.incrementStack();
-
-        //얻을 수 있는 자원 배치 - 스택 없는 곳은 1개, 다른 곳은 스택에 비례하여 배치 - 메인 보드판 미구현
-        //...
-
-        //2-1. 라운드 카드 활성화 - SetActive
-        //...
-
-        //2-2. 선 플레이어에게 행동 부여 - currentPlayerId 갱신
-        this.foundFirstPlayer();
-
-        //라운드 진행 - 종료 조건이 나올 때까지 반복
-        while ( true )
-        {
-            //2-3. 행동을 부여받은 플레이어는 행동함.
-            //2-4. Onclick()에서 유효성 검사하고, 행동을 한다
-            //2-4-1.stack 자원칸을 행동했다면, stack 수치를 초기화해준다.
-            //2-5. Onclick() 마지막에 NetworkManager와 소통한다. -> DoAct()
-
-            //2-6. (현재플레이어 index + 1 ) % 4 인 플레이어로 넘긴다
-            //2-6-0. 다음 플레이어 인덱스를 계산한다.
-            int index = this.findNextPlayerId(this.currentPlayerId);
-
-            //2-6-1. 현재 가용가능한 가족 수가 0이면 바로 다음으로, 다른 플레이어들의 가족 수도 0이라면, 라운드 종료로 진행한다,
-            //다른 플레이어들의 가족 수도 0이라면, 라운드 종료로 진행한다,
-            int check = this.findNextPlayer();
-            if (check == 0) // 다음 플레이어
-            {
-                continue;
-            }
-            else //라운드 종료
-            {
-                break;
-            }
-        }
         
-        //3. 라운드 종료
-
-        //3-1. 이 라운드가 수확라운드 인지 체크
-        if( this.checkHarvest() )
+        //1. 라운드 진행
+        if ( this.RoundFlag )
         {
-            //수확라운드 진행
+            //1-1. 선 플레이어에게 턴 부여 - currentPlayerId 갱신 - Update로 계속 실행되더라도 턴이 끝나지 않는 한 유지될테니 이렇게 써도 상관 없지 않을까요...?
+            this.foundFirstPlayer();
+            
+            //1-2. 턴을 진행 중이라면
+            if ( !this.endTurnFlag )
+            {   
+                //...기다림 == 아무것도 안함
+            }
+
+            else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
+            {
+                //1-4. 다음 턴을 부여받을 플레이어 찾기
+                //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
+                if ( this.findNextPlayer() )
+                {
+                    //... 그대로 진행
+                }
+
+                //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
+                else
+                {
+                    this.RoundFlag = false;
+                }
+            }
+
+        }
+
+        //2. 라운드 전체가 끝남.
+        else
+        {
+            //2-1. 수확라운드인지 체크 후 수확 실행
+            if (this.checkHarvest())
+            {
+                //수확라운드 진행
+            }
+
+            //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
+            if ( this.checkFinalRound() )
+            {
+                //2-2-1. 다음 라운드 준비 및 진행
+                this.preRound();
+            }
+            else
+            {
+                //2-2-2. 게임 종료
+                //...
+            } 
         }
 
         //다음 라운드로 진행.
+
     }
 
     //--------------------------------------------------------------------------------------------
@@ -189,12 +202,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
         return (playerId + 1) % this.players.Count ;
     }
 
-    int findNextPlayer()
+    //다음 플레이어를 찾는 전체 함수 // 다음턴 : true , 라운드 종료 : false
+    bool findNextPlayer()
     {
         //다음 플레이어 인덱스 계산
         int index = findNextPlayerId(this.currentPlayerId);
@@ -203,20 +218,49 @@ public class GameManager : MonoBehaviour
         //결국 못찾아서 덱스 한바퀴 돌면 라운드 종료 or 찾으면 다음 플레이어
         while ( !( index == this.currentPlayerId ) )
         {
+            //해당 플레이어가 가족 수가 0이다. -> 다음 플레이어 찾아보자
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
             {
                 index = findNextPlayerId(this.currentPlayerId);
             }
+            //해당 플레이어가 가족 수가 0이 아니다 -> 너 turn 해.
             else
             {
                 this.currentPlayerId = index;
-                return (int) RoundManage.NextPlayer;
+                return true;
             }
-
         }
 
-        return (int)RoundManage.RoundFinish;
+        //while을 빠져나옴 -> 방금 턴을 했던 플레이어로 돌아옴.
+        //1. 이 때 그 플레이어의 가족 수가 0이 아니라면 - 라운드 진행
+        if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
+        {
+            this.currentPlayerId = index;
+            return true;
+        }
+        
+        //2. 얘도 0 -> 모든 플레이어의 가족 수가 0 -> 라운드 종료
+        return false;
 
+    }
+
+    void UpdateCurrentRound()
+    {
+        this.currentRound = this.currentRound + 1;
+    }
+
+    //라운드 준비
+    void preRound()
+    {
+        //행동 stack 증가
+        this.incrementStack();
+        //라운드카드 활성화
+        //...
+        //currentRoundUpdate
+        UpdateCurrentRound();
+
+        //RoundFlag를 true로
+        this.RoundFlag = true;
     }
 
     bool checkHarvest()
@@ -226,6 +270,16 @@ public class GameManager : MonoBehaviour
             return true;
         }
         else { return false;  }
+    }
+
+    //마지막 라운드인지 check
+    bool checkFinalRound()
+    {
+        if (this.currentRound == 14)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
