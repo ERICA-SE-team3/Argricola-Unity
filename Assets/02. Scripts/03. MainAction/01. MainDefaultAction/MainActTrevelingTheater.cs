@@ -21,7 +21,7 @@ public class MainActTrevelingTheater : ButtonParents
 
 
     // 음식이 있는지 확인
-    private bool hasFoods(){
+    private bool HasFoods(){
         food = ResourceManager.instance.getResourceOfPlayer(playerIndex,"food");
         if (food > 0)
             return true;
@@ -33,7 +33,7 @@ public class MainActTrevelingTheater : ButtonParents
     public override void OnClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
-        if (isPlayerTurn && hasFoods()) 
+        if (isPlayerTurn && HasFoods()) 
         {
             // 있다면 음식 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "food", food);

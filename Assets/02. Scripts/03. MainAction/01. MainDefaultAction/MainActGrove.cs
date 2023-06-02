@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class MainActGrove : MonoBehaviour
+public class MainActGrove : ButtonParents
 {
     /*
     To do
@@ -21,7 +21,7 @@ public class MainActGrove : MonoBehaviour
 
 
     // 나무가 있는지 확인
-    private bool hasWoods(){
+    private bool HasWoods(){
         wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
         if (wood > 0)
             return true;
@@ -30,10 +30,10 @@ public class MainActGrove : MonoBehaviour
     }
 
     // 사용자가 '수풀'행동을 클릭했을 때
-    public void onClick()
+    public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
-        if (isPlayerTurn && hasWoods()) 
+        if (isPlayerTurn && HasWoods()) 
         {
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "wood", wood);
