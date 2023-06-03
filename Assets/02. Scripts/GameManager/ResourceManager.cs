@@ -378,7 +378,7 @@ public class ResourceManager : MonoBehaviour
 
     void familyDecrement( int playerId )
     {
-        GameManager.instance.players[playerId].family = GameManager.instance.players[playerId].family - 1;
+        GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer = GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer - 1;
     }
 
     void fenceDecrement( int playerId )

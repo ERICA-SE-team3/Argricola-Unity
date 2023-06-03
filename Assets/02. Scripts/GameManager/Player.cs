@@ -42,12 +42,18 @@ public class Player
 
         //card
 
+
         return msgdata;
     }
 
     //---------------------------------------------------------------------------
 
-    private void Start()
+    //private void Start()
+    //{
+    //    this.Init();
+    //}
+
+    public Player()
     {
         this.Init();
     }
@@ -57,7 +63,7 @@ public class Player
         //1. 자원 초기화
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
-        this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
+        this.wood = 1; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
         this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
         this.card_owns = new List<int>();
@@ -66,9 +72,8 @@ public class Player
         //2. 선 플레이어 정보 초기화
         this.isFirstPlayer = false;
 
-        //dummy
-        this.remainFamilyOfCurrentPlayer = 3;
 
+        this.remainFamilyOfCurrentPlayer = 2;
     }
 
     

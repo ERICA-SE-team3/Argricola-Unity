@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buttonOpenAndClose : MonoBehaviour
+public class Hand : MonoBehaviour
 {
     public GameObject handplayer1;
 
