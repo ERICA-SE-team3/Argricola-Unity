@@ -164,9 +164,9 @@ public class NetworkManager : MonoBehaviour
 [System.Serializable]
 public class MessageData
 {
-    public int actionPlayerId;
-    public ActionType actionType;
+    public int actionPlayerId; 
+    public ActionType actionType; 
     
     public PlayerMessageData player; 
-    public PlayerBoardMessageData playerBoard;
+    public PlayerBoardMessageData playerBoard; 
 }
