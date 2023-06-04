@@ -12,6 +12,9 @@ public class PlayerBoard : MonoBehaviour
     public int house1x, house1y;
     public int house2x, house2y;
 
+    static int[] dx = {-1,1,0,0};
+    static int[] dy = {0,0,-1,1};   
+
     public GameObject blockPrefab, confirmButton;
     public Player player;
     public Block[,] blocks;
@@ -118,6 +121,12 @@ public class PlayerBoard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어의 최소 자원 등을 검사해서 유효성 검사하는 함수
+    /// 집 개수도 확인해야함.
+    /// 처음 입장할때 지을 공간이 있는지는 따로 검사해야함.
+    /// </summary>
+    /// <returns></returns>
     bool isHouseInstallStartAvailable()
     {
         Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
@@ -128,7 +137,6 @@ public class PlayerBoard : MonoBehaviour
     /// 플레이어 자원 등을 검사해서 유효성 검사하는 함수
     /// 집 개수도 확인해야함.
     /// 하나도 안짓는지도 확인해야함.
-    /// 처음 입장할때 지을 공간이 있는지는 따로 검사해야함.
     /// </summary>
     bool isHouseInstallEndAvailable()
     {
@@ -201,12 +209,25 @@ public class PlayerBoard : MonoBehaviour
 
     // -------------------------------------------------------------------------
     
+    public bool IsFenceInBoard()
+    {
+        foreach(Block block in blocks)
+        {
+            if(block.type == BlockType.FENCE)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void StartInstallFence()
     {
         if(IsInstallFenceStartAvailable())
         {
             strategy = fenceStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndInstallFence);
         }
         else
@@ -219,8 +240,7 @@ public class PlayerBoard : MonoBehaviour
     {
         if(IsInstallFenceEndAvailable())
         {
-            Debug.LogError("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
-            throw new System.NotImplementedException();
+            InstallFence();
         }
         else
         {
@@ -231,6 +251,9 @@ public class PlayerBoard : MonoBehaviour
     bool IsInstallFenceStartAvailable()
     {
         Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        // 나무 개수 확인
+        // 울타리 지을 수 있는 영역 확인
+        // 등등..
         return true;
     }
 
@@ -238,6 +261,43 @@ public class PlayerBoard : MonoBehaviour
     {
         Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
         return true;
+    }
+
+    void InstallFence()
+    {
+        Debug.LogError("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
+        for (int j=0;j<selectedBlocks.Count;j++)
+        {
+              var block = selectedBlocks[j];
+              bool[] fence = new bool[4];
+              for (int i=0;i<4;i++) {
+                  fence[i] = true;
+              }
+              for (int i=0;i<selectedBlocks.Count;i++) {
+                  if (i!=j) {
+                      var otherBlock = selectedBlocks[i];
+                      int gapRow = otherBlock.row - block.row;
+                      int gapCol = otherBlock.col - block.col;
+                      for (int k=0;k<4;k++) {
+                          if (dx[k] == gapRow && dy[k] == gapCol) {
+                              fence[k] = false;
+                          }
+                      }
+                  }
+              }
+              for (int i=0;i<4;i++) {
+                  if (!fence[i]) continue;
+                  int adjBlockRow = block.row + dx[i];
+                  int adjBlockCol = block.col + dy[i];
+                  if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
+                  if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
+                          fence[i] = false;
+                  }
+              }
+              block.SetFence(fence);
+              block.ChangeFence();
+        }
+        selectedBlocks.Clear();
     }
     
     // -------------------------------------------------------------------------
@@ -248,6 +308,7 @@ public class PlayerBoard : MonoBehaviour
         {
             strategy = shedStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndInstallShed);
         }
         else
@@ -263,7 +324,9 @@ public class PlayerBoard : MonoBehaviour
             foreach(Block block in selectedBlocks)
             {
                 block.SetShed();
+                block.ShowTransparent();
             }
+            selectedBlocks.Clear();
         }
         else
         {
@@ -307,6 +370,7 @@ public class PlayerBoard : MonoBehaviour
         {
             strategy = sowingStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndSowing);
         }
         else
@@ -360,6 +424,7 @@ public class PlayerBoard : MonoBehaviour
         {
             strategy = moveAnimalStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndMoveAnimal);
         }
         else
