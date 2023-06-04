@@ -15,14 +15,14 @@ public class MainActFishing : ButtonParents
 
     public int playerIndex = 0;
 
-    // player 의 food 개수 가져오기
-    public int food;
+    // 누적되어있는 음식의 개수를 3개라 가정
+    public int foods;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
     // 음식이 있는지 확인
     private bool HasFoods(){
-        food = ResourceManager.instance.getResourceOfPlayer(playerIndex, "food");
+        foods = 3;
         if (food > 0)
             return true;
         else
@@ -36,7 +36,13 @@ public class MainActFishing : ButtonParents
         if (isPlayerTurn && HasFoods()) 
         {
             // 있다면 음식 얻기 함수 호출
-            ResourceManager.instance.addResource(playerIndex, "food", food);
+            ResourceManager.instance.addResource( GameManager.instance.currentPlayerId, "food", foods);
+            ResourceManager.instance.minusResource(GameManager.instance.currentPlayerId, "family", 1);
+
+            //turn이 끝났다는 flag 
+            GameManager.instance.endTurnFlag = true;
+
+            Debug.Log( "Player " + GameManager.instance.currentPlayerId + " get " + foods + " food!" );
         }
     }
 }

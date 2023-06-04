@@ -15,16 +15,16 @@ public class MainActCopse : ButtonParents
 
     public int playerIndex = 0; // 사용자 정보 어떻게 받아올지??
 
-    // player 의 wood 개수 가져오기
-    public int wood;
+    // 누적되어있는 나무의 개수를 정의
+    public int woods;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
 
 
     // 나무가 있는지 확인
     private bool HasWoods(){
-        wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
-        if (wood > 0)
+        woods = 3;
+        if (woods > 0)
             return true;
         else
             return false;
@@ -37,13 +37,13 @@ public class MainActCopse : ButtonParents
         if (isPlayerTurn && HasWoods()) 
         {
             // 있다면 니무 얻기 함수 호출
-            ResourceManager.instance.addResource( GameManager.instance.currentPlayerId, "wood", 1);
+            ResourceManager.instance.addResource( GameManager.instance.currentPlayerId, "wood", woods);
             ResourceManager.instance.minusResource(GameManager.instance.currentPlayerId, "family", 1);
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
 
-            Debug.Log( "Player " + GameManager.instance.currentPlayerId + " get 1 wood!" );
+            Debug.Log( "Player " + GameManager.instance.currentPlayerId + " get " + woods + " wood!" );
         }
 
         
