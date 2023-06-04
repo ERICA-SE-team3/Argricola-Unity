@@ -21,13 +21,8 @@ public class PlayerBoard : MonoBehaviour
     public List<SowingBlockNode> selectedSowingBlocks; 
 
     BoardEventStrategy strategy;
+    BoardEventStrategy houseStrategy, farmStrategy, fenceStrategy, shedStrategy, sowingStrategy, moveAnimalStrategy;
 
-    BoardEventStrategy houseStrategy;
-    BoardEventStrategy farmStrategy;
-    BoardEventStrategy fenceStrategy;
-    BoardEventStrategy shedStrategy;
-    BoardEventStrategy sowingStrategy;
-    BoardEventStrategy moveAnimalStrategy;
 
     public PlayerBoardMessageData GetBoardMessageData()
     {
@@ -388,14 +383,14 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsMoveAnimalStartAvailable()
     {
-        Debug.LogError("씨뿌리기 시작 전 가능한지 검사하는 함수 " + 
+        Debug.LogError("동물 옮기기 시작 전 가능한지 검사하는 함수 " + 
                         " - 아직 구현 안됨");
         return true;
     }
 
     bool IsMoveAnimalEndAvailable()
     {
-        Debug.LogError("씨뿌리기 완료 할 수 있는지 검사하는 함수" + 
+        Debug.LogError("동물 옮기기 완료 할 수 있는지 검사하는 함수" + 
                         "- 아직 구현 안됨");
         return true;
     }

@@ -126,6 +126,22 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         return true;
     }
 
+    public void ShowSowing()
+    {
+        // backgroundParent.transform.Find("Empty").gameObject.SetActive(true);
+        // RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+        // // hex : #FFFFFFF00
+        // empty.color = new Color(255,255,255,0.725f);
+    }
+
+    public void ShowConfirm()
+    {
+        // backgroundParent.transform.Find("Empty").gameObject.SetActive(true);
+        // RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+        // // hex : #FFFFFFF00
+        // empty.color = new Color(255,255,255,0.725f);
+    }
+
     string GetHouseBackgroundName(HouseType type)
     {
         switch(type)
