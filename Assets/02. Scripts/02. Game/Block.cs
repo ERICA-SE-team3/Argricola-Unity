@@ -96,6 +96,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public bool ShowGreen()
     {
+        backgroundParent.transform.Find("Empty").gameObject.SetActive(true);
         RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
 
         Color color = new Color(0,0.5f,0);
