@@ -8,7 +8,10 @@ using System.Text.RegularExpressions;
 public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager instance;
+
+    public bool isDebuging = false;
     public string url = "ws://172.17.75.214:8080/ws";
+    public string debugUrl = "ws://172.17.75.214:8080/ws";
     public string readyMsgDest = "/pub/hello";
     public string playMsgDest = "/pub/play";
 
@@ -66,7 +69,6 @@ public class NetworkManager : MonoBehaviour
         {
             Debug.Log(e.Data);
             SubscribeStomp();
-            _SendReadyMessage();
         }
         else if (msg.Command == StompFrame.MESSAGE)
         {
@@ -139,19 +141,21 @@ public class NetworkManager : MonoBehaviour
         // Debug.Log(body_json);
 
         // body_json = Regex.Unescape(body_json);
-        Debug.Log(body_json);
 
         var pub = new StompMessage(StompFrame.SEND,body_json);
         pub["destination"] = playMsgDest;
         ws.Send(serializer.Serialize(pub));
     }
 
-    void _SendReadyMessage()
+    public void _SendReadyMessage()
     {
         StompMessageBody body = new StompMessageBody();
         body.sender = clientId;
+        body.channelId = clientId;
 
-        var pub = new StompMessage(StompFrame.SEND);
+        string body_json = JsonUtility.ToJson(body);
+
+        var pub = new StompMessage(StompFrame.SEND, body_json);
         pub["destination"] = readyMsgDest;
         ws.Send(serializer.Serialize(pub));
     }
@@ -160,9 +164,9 @@ public class NetworkManager : MonoBehaviour
 [System.Serializable]
 public class MessageData
 {
-    public int actionPlayerId;
-    public ActionType actionType;
+    public int actionPlayerId; 
+    public ActionType actionType; 
     
     public PlayerMessageData player; 
-    public PlayerBoardMessageData playerBoard;
+    public PlayerBoardMessageData playerBoard; 
 }

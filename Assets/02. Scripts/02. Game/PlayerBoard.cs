@@ -92,6 +92,7 @@ public class PlayerBoard : MonoBehaviour
         {
             strategy = houseStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndInstallHouse);
         }
         else
@@ -155,6 +156,7 @@ public class PlayerBoard : MonoBehaviour
         {
             strategy = farmStrategy;
             Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(EndInstallFarm);
         }
         else

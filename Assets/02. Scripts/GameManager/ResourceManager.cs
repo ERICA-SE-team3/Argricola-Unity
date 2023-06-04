@@ -4,146 +4,144 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    DummyPlayers dummy;
     public static ResourceManager instance;
 
     public void Awake()
     {
-        dummy = new DummyPlayers();
         ResourceManager.instance = this;
     }
 
     //우리는 이 함수만 사용합니다,
-    public void addResource( int Playernumber, string Resourcename, int count )
+    public void addResource( int playerId, string Resourcename, int count )
     {
         switch (Resourcename)
         {
 
             case "pig":
-                for(int i=0; i<count; i++) { pigIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for(int i=0; i<count; i++) { pigIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { cowIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { cowIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { sheepIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { sheepIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { wheatIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { wheatIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { vegetableIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { vegetableIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { woodIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { woodIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "rock":
-                for (int i = 0; i < count; i++) { rockIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { rockIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { reedIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { reedIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtIncrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { foodIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { foodIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { beggingIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { beggingIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { familyIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { familyIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { fenceIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { fenceIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { shedIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { shedIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { roomIncrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { roomIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
     }
 
-    public void minusResource(int Playernumber, string Resourcename, int count)
+    public void minusResource(int playerId, string Resourcename, int count)
     {
         switch (Resourcename)
         {
 
             case "pig":
-                for (int i = 0; i < count; i++) { pigDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { pigDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { cowDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { cowDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { sheepDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { sheepDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { wheatDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { wheatDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { vegetableDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { vegetableDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { woodDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { woodDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "rock":
-                for (int i = 0; i < count; i++) { rockDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { rockDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { reedDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { reedDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
-            case "dirt":
-                for (int i = 0; i < count; i++) { dirtDecrement( Playernumber ); PrintResourceOfPlayer(); }
+            case "clay":
+                for (int i = 0; i < count; i++) { clayDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { foodDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { foodDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { beggingDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { beggingDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { familyDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { familyDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { fenceDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { fenceDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { shedDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { shedDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { roomDecrement( Playernumber ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { roomDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
     }
@@ -153,248 +151,249 @@ public class ResourceManager : MonoBehaviour
         for(int i=0; i<4; i++)
         {
             Debug.Log("\nPlayer number: " + i +
-                "\npig: " + dummy.players[i].pig +
-                "\ncow: " + dummy.players[i].cow +
-                "\nsheep: " + dummy.players[i].sheep +
-                "\nwheat: " + dummy.players[i].wheat +
-                "\nvegetable: " + dummy.players[i].vegetable +
-                "\nwood: " + dummy.players[i].wood +
-                "\nrock: " + dummy.players[i].rock +
-                "\nreed: " + dummy.players[i].reed +
-                "\ndirt: " + dummy.players[i].dirt +
-                "\nfood: " + dummy.players[i].food +
-                "\nbegging: " + dummy.players[i].begging +
-                "\nfamily: " + dummy.players[i].family +
-                "\nfence: " + dummy.players[i].fence +
-                "\nshed: " + dummy.players[i].shed +
-               "\nroom: " + dummy.players[i].room);
+                "\npig: " + GameManager.instance.players[i].pig +
+                "\ncow: " + GameManager.instance.players[i].cow +
+                "\nsheep: " + GameManager.instance.players[i].sheep +
+                "\nwheat: " + GameManager.instance.players[i].wheat +
+                "\nvegetable: " + GameManager.instance.players[i].vegetable +
+                "\nwood: " + GameManager.instance.players[i].wood +
+                "\nrock: " + GameManager.instance.players[i].rock +
+                "\nreed: " + GameManager.instance.players[i].reed +
+                "\nclay: " + GameManager.instance.players[i].clay +
+                "\nfood: " + GameManager.instance.players[i].food +
+                "\nbegging: " + GameManager.instance.players[i].begging +
+                "\nfamily: " + GameManager.instance.players[i].family +
+                "\nfence: " + GameManager.instance.players[i].fence +
+                "\nshed: " + GameManager.instance.players[i].shed +
+               "\nroom: " + GameManager.instance.players[i].room);
             
             
         }
     }
 
     //자원들 get 함수
-    public int getResourceOfPlayer( int Playernumber, string Resourcename )
+    public int getResourceOfPlayer( int playerId, string Resourcename )
     {
         int result = 0;
         switch (Resourcename)
         {
-
             case "pig":
-                result = dummy.players[Playernumber].pig;
+                result = GameManager.instance.players[playerId].pig;
                 break;
 
             case "cow":
-                result = dummy.players[Playernumber].cow;
+                result = GameManager.instance.players[playerId].cow;
                 break;
 
             case "sheep":
-                result = dummy.players[Playernumber].sheep;
+                result = GameManager.instance.players[playerId].sheep;
                 break;
 
             case "wheat":
-                result = dummy.players[Playernumber].wheat;
+                result = GameManager.instance.players[playerId].wheat;
                 break;
 
             case "vegetable":
-                result = dummy.players[Playernumber].vegetable;
+                result = GameManager.instance.players[playerId].vegetable;
                 break;
 
             case "wood":
-                result = dummy.players[Playernumber].wood;
+                result = GameManager.instance.players[playerId].wood;
                 break;
 
             case "rock":
-                result = dummy.players[Playernumber].rock;
+                result = GameManager.instance.players[playerId].rock;
                 break;
 
             case "reed":
-                result = dummy.players[Playernumber].reed;
+                result = GameManager.instance.players[playerId].reed;
                 break;
 
-            case "dirt":
-                result = dummy.players[Playernumber].dirt;
+            case "clay":
+                result = GameManager.instance.players[playerId].clay;
                 break;
 
             case "food":
-                result = dummy.players[Playernumber].food;
+                result = GameManager.instance.players[playerId].food;
                 break;
 
             case "begging":
-                result = dummy.players[Playernumber].begging;
+                result = GameManager.instance.players[playerId].begging;
                 break;
 
             case "family":
-                result = dummy.players[Playernumber].family;
+                result = GameManager.instance.players[playerId].family;
                 break;
 
             case "fence":
-                result = dummy.players[Playernumber].fence;
+                result = GameManager.instance.players[playerId].fence;
                 break;
 
             case "shed":
-                result = dummy.players[Playernumber].shed;
+                result = GameManager.instance.players[playerId].shed;
                 break;
 
             case "room":
-                result = dummy.players[Playernumber].room;
+                result = GameManager.instance.players[playerId].room;
                 break;
         }
         return result;
     }
 
+
+
     //increment functions
     //don't touch this code.
-    void pigIncrement( int Playernumber )
+    void pigIncrement( int playerId )
     {
-        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig + 1;
+        GameManager.instance.players[playerId].pig = GameManager.instance.players[playerId].pig + 1;
     }
 
-    void cowIncrement( int Playernumber )
+    void cowIncrement( int playerId )
     {
-        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow + 1;
+        GameManager.instance.players[playerId].cow = GameManager.instance.players[playerId].cow + 1;
     }
 
-    void sheepIncrement( int Playernumber )
+    void sheepIncrement( int playerId )
     {
-        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep + 1;
+        GameManager.instance.players[playerId].sheep = GameManager.instance.players[playerId].sheep + 1;
     }
 
-    void wheatIncrement( int Playernumber )
+    void wheatIncrement( int playerId )
     {
-        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat + 1;
+        GameManager.instance.players[playerId].wheat = GameManager.instance.players[playerId].wheat + 1;
     }
 
-    void vegetableIncrement( int Playernumber )
+    void vegetableIncrement( int playerId )
     {
-        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable + 1;
+        GameManager.instance.players[playerId].vegetable = GameManager.instance.players[playerId].vegetable + 1;
     }
 
-    void woodIncrement( int Playernumber )
+    void woodIncrement( int playerId )
     {
-        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood + 1;
+        GameManager.instance.players[playerId].wood = GameManager.instance.players[playerId].wood + 1;
     }
 
-    void rockIncrement( int Playernumber )
+    void rockIncrement( int playerId )
     {
-        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock + 1;
+        GameManager.instance.players[playerId].rock = GameManager.instance.players[playerId].rock + 1;
     }
 
-    void reedIncrement( int Playernumber )
+    void reedIncrement( int playerId )
     {
-        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed + 1;
+        GameManager.instance.players[playerId].reed = GameManager.instance.players[playerId].reed + 1;
     }
 
-    void dirtIncrement( int Playernumber )
+    void clayIncrement( int playerId )
     {
-        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt + 1;
+        GameManager.instance.players[playerId].clay = GameManager.instance.players[playerId].clay + 1;
     }
 
-    void foodIncrement( int Playernumber )
+    void foodIncrement( int playerId )
     {
-        dummy.players[Playernumber].food = dummy.players[Playernumber].food + 1;
+        GameManager.instance.players[playerId].food = GameManager.instance.players[playerId].food + 1;
     }
 
-    void beggingIncrement( int Playernumber )
+    void beggingIncrement( int playerId )
     {
-        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging + 1;
+        GameManager.instance.players[playerId].begging = GameManager.instance.players[playerId].begging + 1;
     }
 
-    void familyIncrement( int Playernumber )
+    void familyIncrement( int playerId )
     {
-        dummy.players[Playernumber].family = dummy.players[Playernumber].family + 1;
+        GameManager.instance.players[playerId].family = GameManager.instance.players[playerId].family + 1;
     }
 
-    void fenceIncrement( int Playernumber )
+    void fenceIncrement( int playerId )
     {
-        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence + 1;
+        GameManager.instance.players[playerId].fence = GameManager.instance.players[playerId].fence + 1;
     }
 
-    void shedIncrement( int Playernumber )
+    void shedIncrement( int playerId )
     {
-        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed + 1;
+        GameManager.instance.players[playerId].shed = GameManager.instance.players[playerId].shed + 1;
     }
 
-    void roomIncrement( int Playernumber )
+    void roomIncrement( int playerId )
     {
-        dummy.players[Playernumber].room = dummy.players[Playernumber].room + 1;
+        GameManager.instance.players[playerId].room = GameManager.instance.players[playerId].room + 1;
     }
 
 
     //Decrement functions
-    void pigDecrement( int Playernumber )
+    void pigDecrement( int playerId )
     {
-        dummy.players[Playernumber].pig = dummy.players[Playernumber].pig - 1;
+        GameManager.instance.players[playerId].pig = GameManager.instance.players[playerId].pig - 1;
     }
 
-    void cowDecrement( int Playernumber )
+    void cowDecrement( int playerId )
     {
-        dummy.players[Playernumber].cow = dummy.players[Playernumber].cow - 1;
+        GameManager.instance.players[playerId].cow = GameManager.instance.players[playerId].cow - 1;
     }
 
-    void sheepDecrement( int Playernumber )
+    void sheepDecrement( int playerId )
     {
-        dummy.players[Playernumber].sheep = dummy.players[Playernumber].sheep - 1;
+        GameManager.instance.players[playerId].sheep = GameManager.instance.players[playerId].sheep - 1;
     }
 
-    void wheatDecrement( int Playernumber )
+    void wheatDecrement( int playerId )
     {
-        dummy.players[Playernumber].wheat = dummy.players[Playernumber].wheat - 1;
+        GameManager.instance.players[playerId].wheat = GameManager.instance.players[playerId].wheat - 1;
     }
 
-    void vegetableDecrement( int Playernumber )
+    void vegetableDecrement( int playerId )
     {
-        dummy.players[Playernumber].vegetable = dummy.players[Playernumber].vegetable - 1;
+        GameManager.instance.players[playerId].vegetable = GameManager.instance.players[playerId].vegetable - 1;
     }
 
-    void woodDecrement( int Playernumber )
+    void woodDecrement( int playerId )
     {
-        dummy.players[Playernumber].wood = dummy.players[Playernumber].wood - 1;
+        GameManager.instance.players[playerId].wood = GameManager.instance.players[playerId].wood - 1;
     }
 
-    void rockDecrement( int Playernumber )
+    void rockDecrement( int playerId )
     {
-        dummy.players[Playernumber].rock = dummy.players[Playernumber].rock - 1;
+        GameManager.instance.players[playerId].rock = GameManager.instance.players[playerId].rock - 1;
     }
 
-    void reedDecrement( int Playernumber )
+    void reedDecrement( int playerId )
     {
-        dummy.players[Playernumber].reed = dummy.players[Playernumber].reed - 1;
+        GameManager.instance.players[playerId].reed = GameManager.instance.players[playerId].reed - 1;
     }
 
-    void dirtDecrement( int Playernumber )
+    void clayDecrement( int playerId )
     {
-        dummy.players[Playernumber].dirt = dummy.players[Playernumber].dirt - 1;
+        GameManager.instance.players[playerId].clay = GameManager.instance.players[playerId].clay - 1;
     }
 
-    void foodDecrement( int Playernumber )
+    void foodDecrement( int playerId )
     {
-        dummy.players[Playernumber].food = dummy.players[Playernumber].food - 1;
+        GameManager.instance.players[playerId].food = GameManager.instance.players[playerId].food - 1;
     }
 
-    void beggingDecrement( int Playernumber )
+    void beggingDecrement( int playerId )
     {
-        dummy.players[Playernumber].begging = dummy.players[Playernumber].begging - 1;
+        GameManager.instance.players[playerId].begging = GameManager.instance.players[playerId].begging - 1;
     }
 
-    void familyDecrement( int Playernumber )
+    void familyDecrement( int playerId )
     {
-        dummy.players[Playernumber].family = dummy.players[Playernumber].family - 1;
+        GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer = GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer - 1;
     }
 
-    void fenceDecrement( int Playernumber )
+    void fenceDecrement( int playerId )
     {
-        dummy.players[Playernumber].fence = dummy.players[Playernumber].fence - 1;
+        GameManager.instance.players[playerId].fence = GameManager.instance.players[playerId].fence - 1;
     }
 
-    void shedDecrement( int Playernumber )
+    void shedDecrement( int playerId )
     {
-        dummy.players[Playernumber].shed = dummy.players[Playernumber].shed - 1;
+        GameManager.instance.players[playerId].shed = GameManager.instance.players[playerId].shed - 1;
     }
 
-    void roomDecrement( int Playernumber )
+    void roomDecrement( int playerId )
     {
-        dummy.players[Playernumber].room = dummy.players[Playernumber].room - 1;
+        GameManager.instance.players[playerId].room = GameManager.instance.players[playerId].room - 1;
     }
 }
 

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CameraManager: MonoBehaviour
 {
-    Vector3 position_camera_mainboard = new Vector3(0, 0, -1);
+    Vector3 position_camera_mainboard = new Vector3(0, 45, -1);
     Vector3 position_camera_player1 = new Vector3(0, 4000, -1);
     Vector3 position_camera_player2 = new Vector3(4000, 0, -1);
     Vector3 position_camera_player3 = new Vector3(0, -4000, -1);
     Vector3 position_camera_player4 = new Vector3(-4000, 0, -1);
+    Vector3 position_Lobby_player = new Vector3(0, 1588, -1);
     public GameObject MainCamera;
-
-    Vector3 position_camera_testboard = new Vector3(20000, 0, -1);
-
 
     public void Show_Player1()
     {
@@ -44,10 +42,11 @@ public class CameraManager: MonoBehaviour
         Debug.Log(MainCamera.transform.position);
     }
 
-    public void Show_testboard()
+    public void Show_Lobby()
     {
-        MainCamera.transform.position = position_camera_testboard;
+        MainCamera.transform.position = position_Lobby_player;
         Debug.Log(MainCamera.transform.position);
     }
+
 }
 
