@@ -21,7 +21,7 @@ public class PlayerBoard : MonoBehaviour
     public HouseType houseType;
 
     public List<Block> selectedBlocks;
-    public List<SowingBlockNode> selectedSowingBlocks; 
+
 
     BoardEventStrategy strategy;
     BoardEventStrategy houseStrategy, farmStrategy, fenceStrategy, shedStrategy, sowingStrategy, moveAnimalStrategy;
@@ -354,12 +354,19 @@ public class PlayerBoard : MonoBehaviour
         public SeedType type;
     }
 
-    // PR 리뷰 수정사항 : Startsowing 매개변수화 및 EndSowingCallback 주석처리
-
-    // public void StartSowing(GrainUtilizationRoundAct action)
-    // {
-    //     StartSowing();
-    // }
+    void SetFarmBlockToSow()
+    {
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(blocks[i,j].type == BlockType.FARM && blocks[i,j].seedType == SeedType.NONE)
+                {
+                    blocks[i,j].ShowSowing();
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// 씨 뿌리기 시작
@@ -368,6 +375,7 @@ public class PlayerBoard : MonoBehaviour
     {
         if(IsSowingStartAvailable())
         {
+            SetFarmBlockToSow();
             strategy = sowingStrategy;
             Button button = confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
@@ -386,9 +394,17 @@ public class PlayerBoard : MonoBehaviour
     {
         if(IsSowingEndAvailable())
         {
-            foreach(SowingBlockNode node in selectedSowingBlocks)
+            for(int i=0;i<row;i++)
             {
-                node.block.SetSeed(node.type);
+                for(int j=0;j<col;j++)
+                {
+                    if(blocks[i,j].sowingType != SeedType.NONE)
+                    {
+                        blocks[i,j].SetSeed(blocks[i,j].sowingType);
+                    }
+
+                    blocks[i,j].CloseSowing();
+                }
             }
 
             // action.EndSowingCallback();

@@ -7,8 +7,6 @@ public class SowingEventStrategy : BoardEventStrategy
 {
     public override void OnHoverEnter(Block block) 
     {
-        PlayerBoard board = block.board;
-
         if( !isSowingAvailable(block) ) { block.ShowRed(); }
     }
 
