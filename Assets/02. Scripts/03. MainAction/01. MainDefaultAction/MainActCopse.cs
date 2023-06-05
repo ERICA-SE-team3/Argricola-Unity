@@ -37,13 +37,13 @@ public class MainActCopse : ButtonParents
         if (isPlayerTurn && HasWoods()) 
         {
             // 있다면 니무 얻기 함수 호출
-            ResourceManager.instance.addResource( GameManager.instance.currentPlayerId, "wood", 1);
-            ResourceManager.instance.minusResource(GameManager.instance.currentPlayerId, "family", 1);
+            ResourceManager.instance.addResource( GameManager.instance.getCurrentPlayerId(), "wood", 1);
+            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
 
-            Debug.Log( "Player " + GameManager.instance.currentPlayerId + " get 1 wood!" );
+            Debug.Log( "Player " + GameManager.instance.getCurrentPlayerId() + " get 1 wood!" );
         }
 
         

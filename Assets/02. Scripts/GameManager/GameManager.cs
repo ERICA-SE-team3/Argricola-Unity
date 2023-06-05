@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     //현재 라운드 - 수확라운드인지 체크하기 위함
     public int currentRound;
 
+    //roundcard list
+    public GameObject roundList;
+
+    public List<GameObject> roundcards = new List<GameObject>();
+
     //소통할 message 형식
     MessageData message = new MessageData();
 
@@ -74,6 +79,15 @@ public class GameManager : MonoBehaviour
         //give first to player1 and food of firstplayer to 2
         this.Init();
         ResourceManager.instance.minusResource(0, "food",  1);
+
+        //라운드 카드 가져오기
+        for(int i=0; i<14; i++)
+        {
+            //라운드 카드 받아오기
+            GameObject tmp = this.roundList.transform.GetChild(i).gameObject;
+            this.roundcards.Add(tmp);
+            this.roundcards[i].SetActive(false);
+        }
 
         //라운드카드들의 스택 초기화
         this.stackOfRoundCard = new int[13];
@@ -166,6 +180,12 @@ public class GameManager : MonoBehaviour
         NetworkManager.instance.SendMessage(message);
     }
 
+    public int getCurrentPlayerId()
+    {
+        return this.currentPlayerId;
+    }
+
+
     //Initialize
     //for game
     void Init()
@@ -205,11 +225,8 @@ public class GameManager : MonoBehaviour
         //다음 플레이어 인덱스 계산
         int index = findNextPlayerId(this.currentPlayerId);
 
-        Debug.Log("33333333333333333333333333333");
-
         //적합한 플레이어를 찾을 떄 까지 반복
         //결국 못찾아서 덱스 한바퀴 돌면 라운드 종료 or 찾으면 다음 플레이어
-        Debug.Log("00000000000000000000");
         for(int i=1; i<4; i++)
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
@@ -223,8 +240,6 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
-        
-        Debug.Log("111111111111111111111111111");
 
         //for문을 빠져나옴 -> 방금 턴을 했던 플레이어로 돌아옴.
         //1. 이 때 그 플레이어의 가족 수가 0이 아니라면 - 라운드 진행
@@ -232,8 +247,6 @@ public class GameManager : MonoBehaviour
         {
             return true;
         }
-
-        Debug.Log("222222222222222222222222222");
 
         //2. 얘도 0 -> 모든 플레이어의 가족 수가 0 -> 라운드 종료
         return false;
@@ -250,8 +263,10 @@ public class GameManager : MonoBehaviour
     {
         //행동 stack 증가
         this.incrementStack();
+
         //라운드카드 활성화
-        //...
+        this.roundcards[this.currentRound].SetActive(true);
+
         //currentRoundUpdate
         this.UpdateCurrentRound();
 

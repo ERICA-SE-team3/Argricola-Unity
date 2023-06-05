@@ -9739,6 +9739,8 @@ MonoBehaviour:
   stackOfRoundCard: 
   currentPlayerId: 0
   currentRound: 0
+  roundList: {fileID: 1200046603}
+  roundcards: []
   RoundFlag: 1
   endTurnFlag: 0
 --- !u!1 &1760505306 stripped
