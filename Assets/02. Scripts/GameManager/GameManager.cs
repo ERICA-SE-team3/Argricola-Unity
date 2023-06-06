@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
     
-    private void Start()
+    public void Start()
     {
 
         Debug.Log("Let's Ready the Game!!!");  

@@ -23,7 +23,7 @@ public class MainActFishing : ButtonParents
     // 음식이 있는지 확인
     private bool HasFoods(){
         foods = 3;
-        if (food > 0)
+        if (foods > 0)
             return true;
         else
             return false;
