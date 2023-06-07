@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player
 {
-    //1. ÀÚ¿ø Á¤º¸
+    //1. ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int pig, cow, sheep;
     public int wheat, vegetable;
     public int wood, rock, reed, clay;
@@ -14,10 +14,10 @@ public class Player
     public List<int> card_owns;
     public List<int> card_hands;
 
-    //2.¼± ÇÃ·¹ÀÌ¾î Á¤º¸
+    //2.ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool isFirstPlayer;
 
-    //ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ ³²Àº °¡Á· ¼ö - dummyÀÓ, Á¦´ë·Î Ãß°¡ÇØ¾ßÇÔ.
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - dummyï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½.
     public int remainFamilyOfCurrentPlayer;
 
     public PlayerMessageData GetPlayerMessageData()
@@ -60,7 +60,7 @@ public class Player
 
     public void Init()
     {
-        //1. ÀÚ¿ø ÃÊ±âÈ­
+        //1. ï¿½Ú¿ï¿½ ï¿½Ê±ï¿½È­
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
         this.wood = 1; this.rock = 0; this.reed = 0; this.clay = 0;
@@ -69,12 +69,14 @@ public class Player
         this.card_owns = new List<int>();
         this.card_hands = new List<int>();
 
-        //2. ¼± ÇÃ·¹ÀÌ¾î Á¤º¸ ÃÊ±âÈ­
+        //2. ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         this.isFirstPlayer = false;
 
 
         this.remainFamilyOfCurrentPlayer = 2;
     }
+
+    
 
     
 }

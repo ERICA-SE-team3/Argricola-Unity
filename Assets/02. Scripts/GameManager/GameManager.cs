@@ -7,25 +7,25 @@ public class GameManager : MonoBehaviour
     //GameManager
     public static GameManager instance;
 
-    //playerµéÀ» ´ãÀ» ArrayList, players
+    //playerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ArrayList, players
     public List<Player> players = new List<Player>();
 
-    //playerÀÇ board
+    //playerï¿½ï¿½ board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
-    //stackÀÌ ÀÖ´Â Roundcard
+    //stackï¿½ï¿½ ï¿½Ö´ï¿½ Roundcard
     public int[] stackOfRoundCard;
 
-    //ÇöÀç Â÷·ÊÀÎ player index
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ player index
     public int currentPlayerId;
 
-    //ÇöÀç ¶ó¿îµå - ¼öÈ®¶ó¿îµåÀÎÁö Ã¼Å©ÇÏ±â À§ÇÔ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½È®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int currentRound;
 
-    //¼ÒÅëÇÒ message Çü½Ä
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ message ï¿½ï¿½ï¿½ï¿½
     MessageData message = new MessageData();
 
-    //½ºÅÃÀÌ ½×ÀÌ´Â ¶ó¿îµåÄ«µåµé
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ï¿½
     public enum stackBehavior
     {
         deombul,
@@ -43,13 +43,13 @@ public class GameManager : MonoBehaviour
         cattleMarket
     }
 
-    //°ÔÀÓ ÁøÇàÀ» À§ÇÑ flagµé
-    //1. ¶ó¿îµå ÁøÇàÀ» ³ªÅ¸³»´Â flag
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ flagï¿½ï¿½
+    //1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ flag
     public bool RoundFlag = true;
-    //2. °¢ ÇÃ·¹ÀÌ¾îÀÇ turn ( °¡Á· ¼ö ÇÏ³ª´ç ÇÑ ÅÏ )ÀÌ ³¡³²À» ³ªÅ¸³»´Â flag
+    //2. ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ turn ( ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ )ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ flag
     public bool endTurnFlag = false;
     
-    private void Start()
+    public void Start()
     {
 
         Debug.Log("Let's Ready the Game!!!");  
@@ -75,43 +75,43 @@ public class GameManager : MonoBehaviour
         this.Init();
         ResourceManager.instance.minusResource(0, "food",  1);
 
-        //¶ó¿îµåÄ«µåµéÀÇ ½ºÅÃ ÃÊ±âÈ­
+        //ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         this.stackOfRoundCard = new int[13];
 
-        //ÇöÀç ¶ó¿îµå ÃÊ±âÈ­
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         this.currentRound = 0;
 
-        //Ã¹ ¶ó¿îµå ÁØºñ
-        //stack Áõ°¡
-        //¶ó¿îµå Ä«µå È°¼ºÈ­
+        //Ã¹ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½
+        //stack ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ È°ï¿½ï¿½È­
         this.preRound();
     }
 
-    private void Update() // 1ÇÁ·¹ÀÓ¸¶´Ù ½ÇÇàµÇ°í ÀÖÀ½À» ÀØÁö ¸»ÀÚ.
+    private void Update() // 1ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
     {
-        //1. ¶ó¿îµå ÁøÇà
+        //1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if ( this.RoundFlag )
         {
             Debug.Log("Current Round is " + this.currentRound);
-            //1-2. ÅÏÀ» ÁøÇà ÁßÀÌ¶ó¸é
+            //1-2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
             if ( !this.endTurnFlag )
             {
-                //...±â´Ù¸² == ¾Æ¹«°Íµµ ¾ÈÇÔ
+                //...ï¿½ï¿½Ù¸ï¿½ == ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½
                 Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
             }
 
-            else //endTurnFlag is true --> 1-3. ÇÃ·¹ÀÌ¾îÀÇ ÅÏÀÌ ³¡³².
+            else //endTurnFlag is true --> 1-3. ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
             {
-                //1-4. ´ÙÀ½ ÅÏÀ» ºÎ¿©¹ÞÀ» ÇÃ·¹ÀÌ¾î Ã£±â
-                //1-4-1. ÅÏÀ» ºÎ¿©¹ÞÀ» ÇÃ·¹ÀÌ¾î°¡ Á¸Àç -> Round ±×´ë·Î ÁøÇà
+                //1-4. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Ã£ï¿½ï¿½
+                //1-4-1. ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ -> Round ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 if ( this.findNextPlayer() )
                 {
-                    //... ±×´ë·Î ÁøÇà
+                    //... ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Debug.Log("Move to Next Turn");
                     this.endTurnFlag = false;
                 }
 
-                //1-4-2. ÅÏÀ» ºÎ¿©¹ÞÀ» ÇÃ·¹ÀÌ¾î°¡ ¾øÀ½ -> Round Á¾·á ½ÃÄö½º·Î ³Ñ¾î°¨
+                //1-4-2. ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ -> Round ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¨
                 else
                 {
                     Debug.Log("Round is Over");
@@ -124,31 +124,31 @@ public class GameManager : MonoBehaviour
 
 
 
-        //2. ¶ó¿îµå ÀüÃ¼°¡ ³¡³².
+        //2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         else
         {
-            //2-1. ¼öÈ®¶ó¿îµåÀÎÁö Ã¼Å© ÈÄ ¼öÈ® ½ÇÇà
+            //2-1. ï¿½ï¿½È®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ ï¿½ï¿½È® ï¿½ï¿½ï¿½ï¿½
             if (this.checkHarvest())
             {
-                Debug.Log("¼öÈ® ¶ó¿îµå ÁøÇàÁß...");
-                //¼öÈ®¶ó¿îµå ÁøÇà
+                Debug.Log("ï¿½ï¿½È® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...");
+                //ï¿½ï¿½È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
 
-            //2-2. ´ÙÀ½ ¶ó¿îµå ÁøÇàÀÌ °¡´ÉÇÑÁö ( ¸¶Áö¸· ¶ó¿îµå ÀÎÁö Ã¼Å© )
+            //2-2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© )
             if ( !this.checkFinalRound() )
             {
-                //2-2-1. ´ÙÀ½ ¶ó¿îµå ÁØºñ ¹× ÁøÇà
+                //2-2-1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 this.preRound();
             }
             else
             {
-                //2-2-2. °ÔÀÓ Á¾·á
+                //2-2-2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 //...
                 Debug.Log("Game is Over!");
             } 
         }
 
-        //´ÙÀ½ ¶ó¿îµå·Î ÁøÇà.
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
     }
 
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
         this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
         this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
         
-        //NetworkManager¸¦ ÅëÇØ DB¿Í ¼ÒÅë
+        //NetworkManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         NetworkManager.instance.SendMessage(message);
     }
 
@@ -193,22 +193,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //ÁÖ¾îÁø playerIdÀÇ ´ÙÀ½ playerId¸¦ Ã£´Â ÇÔ¼ö
+    //ï¿½Ö¾ï¿½ï¿½ï¿½ playerIdï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ playerIdï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½Ô¼ï¿½
     int findNextPlayerId( int playerId )
     {
         return (playerId + 1) % 4 ;
     }
 
-    //´ÙÀ½ ÇÃ·¹ÀÌ¾î¸¦ Ã£´Â ÀüÃ¼ ÇÔ¼ö // ´ÙÀ½ÅÏ : true , ¶ó¿îµå Á¾·á : false
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Ã£ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ô¼ï¿½ // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : true , ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : false
     bool findNextPlayer()
     {
-        //´ÙÀ½ ÇÃ·¹ÀÌ¾î ÀÎµ¦½º °è»ê
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         int index = findNextPlayerId(this.currentPlayerId);
 
         Debug.Log("33333333333333333333333333333");
 
-        //ÀûÇÕÇÑ ÇÃ·¹ÀÌ¾î¸¦ Ã£À» ‹š ±îÁö ¹Ýº¹
-        //°á±¹ ¸øÃ£¾Æ¼­ µ¦½º ÇÑ¹ÙÄû µ¹¸é ¶ó¿îµå Á¾·á or Ã£À¸¸é ´ÙÀ½ ÇÃ·¹ÀÌ¾î
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½
+        //ï¿½á±¹ ï¿½ï¿½Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or Ã£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½
         Debug.Log("00000000000000000000");
         for(int i=1; i<4; i++)
         {
@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
             {
                 index = findNextPlayerId(this.currentPlayerId);
             }
-            //ÇØ´ç ÇÃ·¹ÀÌ¾î°¡ °¡Á· ¼ö°¡ 0ÀÌ ¾Æ´Ï´Ù -> ³Ê turn ÇØ.
+            //ï¿½Ø´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½Æ´Ï´ï¿½ -> ï¿½ï¿½ turn ï¿½ï¿½.
             else
             {
                 this.currentPlayerId = index;
@@ -226,8 +226,8 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("111111111111111111111111111");
 
-        //for¹®À» ºüÁ®³ª¿È -> ¹æ±Ý ÅÏÀ» Çß´ø ÇÃ·¹ÀÌ¾î·Î µ¹¾Æ¿È.
-        //1. ÀÌ ¶§ ±× ÇÃ·¹ÀÌ¾îÀÇ °¡Á· ¼ö°¡ 0ÀÌ ¾Æ´Ï¶ó¸é - ¶ó¿îµå ÁøÇà
+        //forï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½.
+        //1. ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
         {
             return true;
@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("222222222222222222222222222");
 
-        //2. ¾êµµ 0 -> ¸ðµç ÇÃ·¹ÀÌ¾îÀÇ °¡Á· ¼ö°¡ 0 -> ¶ó¿îµå Á¾·á
+        //2. ï¿½êµµ 0 -> ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0 -> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         return false;
 
     }
@@ -245,26 +245,26 @@ public class GameManager : MonoBehaviour
         this.currentRound = this.currentRound + 1;
     }
 
-    //¶ó¿îµå ÁØºñ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½
     void preRound()
     {
-        //Çàµ¿ stack Áõ°¡
+        //ï¿½àµ¿ stack ï¿½ï¿½ï¿½ï¿½
         this.incrementStack();
-        //¶ó¿îµåÄ«µå È°¼ºÈ­
+        //ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ È°ï¿½ï¿½È­
         //...
         //currentRoundUpdate
         this.UpdateCurrentRound();
 
-        //°¢ ÇÃ·¹ÀÌ¾îµé °¡Á· ¼ö ¿ø»óº¹±¸
+        //ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½óº¹±ï¿½
         for(int i=0; i<4; i++)
         {
             this.players[i].remainFamilyOfCurrentPlayer = this.players[i].family;
         }
 
-        //RoundÀÇ Ã¹ ÅÏÀÎ ÇÃ·¹ÀÌ¾î¿¡°Ô ÅÏÀ» ³Ñ±è
+        //Roundï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½
         this.foundFirstPlayer();
 
-        //RoundFlag¸¦ true·Î
+        //RoundFlagï¿½ï¿½ trueï¿½ï¿½
         this.RoundFlag = true;
     }
 
@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
         else { return false;  }
     }
 
-    //¸¶Áö¸· ¶ó¿îµåÀÎÁö check
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ check
     bool checkFinalRound()
     {
         if (this.currentRound == 14)

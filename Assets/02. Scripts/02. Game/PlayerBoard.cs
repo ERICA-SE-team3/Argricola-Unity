@@ -7,10 +7,10 @@ using System;
 
 public class PlayerBoard : MonoBehaviour
 {
-    public int row, col;
+    public int row = 3, col = 5;
 
-    public int house1x, house1y;
-    public int house2x, house2y;
+    public int house1x = 1, house1y = 0;
+    public int house2x = 2, house2y = 0;
 
     static int[] dx = {-1,1,0,0};
     static int[] dy = {0,0,-1,1};   
@@ -47,7 +47,7 @@ public class PlayerBoard : MonoBehaviour
 
     // -------------------------------------------------------------------------
 
-    private void Start() {
+    public void Start() {
         selectedBlocks = new List<Block>();
 
         houseStrategy = new HouseEventStrategy();
@@ -100,11 +100,11 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("집 설치 행동을 시작할 수 없습니다.");
         }
     }
 
-    void EndInstallHouse()
+    public void EndInstallHouse()
     {
         if(isHouseInstallEndAvailable())
         {
@@ -129,7 +129,7 @@ public class PlayerBoard : MonoBehaviour
     /// <returns></returns>
     bool isHouseInstallStartAvailable()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
@@ -140,7 +140,7 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     bool isHouseInstallEndAvailable()
     {
-        Debug.LogError("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
@@ -169,7 +169,7 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("밭 설치 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("밭 설치 행동을 시작할 수 없습니다.");
         }
     }
 
@@ -192,7 +192,7 @@ public class PlayerBoard : MonoBehaviour
 
     bool isFarmInstallStartAvailable()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
@@ -203,7 +203,7 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     bool isFarmInstallEndAvailable()
     {
-        Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
@@ -232,7 +232,7 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("울타리 설치 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("울타리 설치 행동을 시작할 수 없습니다.");
         }
     }
 
@@ -244,13 +244,13 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+            Debug.LogError("설치할 수 없습니다. 다시 선택해주세요.");
         }
     }
 
     bool IsInstallFenceStartAvailable()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         // 나무 개수 확인
         // 울타리 지을 수 있는 영역 확인
         // 등등..
@@ -259,45 +259,88 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsInstallFenceEndAvailable()
     {
-        Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
+        foreach(Block block in selectedBlocks)
+        {
+            if(block.type == BlockType.FARM)
+            {
+                Debug.LogWarning("밭에는 울타리를 설치할 수 없습니다.");
+                return false;
+            }
+            if(block.type == BlockType.HOUSE)
+            {
+                Debug.LogWarning("집에는 울타리를 설치할 수 없습니다.");
+                return false;
+            }
+        }
+        Debug.LogWarning("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
     void InstallFence()
     {
-        Debug.LogError("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
+        Debug.LogWarning("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
         for (int j=0;j<selectedBlocks.Count;j++)
         {
-              var block = selectedBlocks[j];
-              bool[] fence = new bool[4];
-              for (int i=0;i<4;i++) {
-                  fence[i] = true;
-              }
-              for (int i=0;i<selectedBlocks.Count;i++) {
-                  if (i!=j) {
-                      var otherBlock = selectedBlocks[i];
-                      int gapRow = otherBlock.row - block.row;
-                      int gapCol = otherBlock.col - block.col;
-                      for (int k=0;k<4;k++) {
-                          if (dx[k] == gapRow && dy[k] == gapCol) {
-                              fence[k] = false;
-                          }
-                      }
-                  }
-              }
-              for (int i=0;i<4;i++) {
-                  if (!fence[i]) continue;
-                  int adjBlockRow = block.row + dx[i];
-                  int adjBlockCol = block.col + dy[i];
-                  if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
-                  if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
-                          fence[i] = false;
-                  }
-              }
-              block.SetFence(fence);
-              block.ChangeFence();
+            if(selectedBlocks[j].type == BlockType.FENCE)
+            {
+                ReInstallFence(selectedBlocks[j]);
+                selectedBlocks[j].ShowTransparent();
+                continue;
+            }
+
+            var block = selectedBlocks[j];
+            bool[] fence = new bool[4];
+            
+            for (int i=0;i<4;i++) {
+                fence[i] = true;
+            }
+
+            for (int i=0;i<selectedBlocks.Count;i++) {
+                if (i!=j) {
+                    var otherBlock = selectedBlocks[i];
+                    int gapRow = otherBlock.row - block.row;
+                    int gapCol = otherBlock.col - block.col;
+                    for (int k=0;k<4;k++) {
+                        if (dx[k] == gapRow && dy[k] == gapCol) {
+                            fence[k] = false;
+                        }
+                    }
+                }
+            }
+            
+            for (int i=0;i<4;i++) {
+                if (!fence[i]) continue;
+                int adjBlockRow = block.row + dx[i];
+                int adjBlockCol = block.col + dy[i];
+                if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
+                if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
+                        fence[i] = false;
+                }
+            }
+
+            block.SetFence(fence);
+            block.ChangeFence();
         }
         selectedBlocks.Clear();
+    }
+
+    void ReInstallFence(Block block)
+    {
+        int[] adjFenceIndex = {1,0,3,2};
+        bool[] fence = new bool[4];
+        for (int i=0;i<4;i++) {
+            fence[i] = block.fence[i];
+        }
+        for (int i=0;i<4;i++) {
+            int adjBlockRow = block.row + dx[i];
+            int adjBlockCol = block.col + dy[i];
+            if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
+            if (blocks[adjBlockRow,adjBlockCol].fence[adjFenceIndex[i]] == false) {
+                fence[i] = true;
+            }
+        }
+        block.SetFence(fence);
+        block.ChangeFence();
     }
     
     // -------------------------------------------------------------------------
@@ -313,7 +356,7 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("헛간 설치 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("헛간 설치 행동을 시작할 수 없습니다.");
         }
     }
 
@@ -336,13 +379,13 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsInstallShedStartAvailable()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
     bool IsInstallShedEndAvailable()
     {
-        Debug.LogError("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 완료 할 수 있는지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
 
@@ -383,7 +426,7 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("씨 뿌리기 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("씨 뿌리기 행동을 시작할 수 없습니다.");
         }
     }
 
@@ -417,14 +460,14 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsSowingStartAvailable()
     {
-        Debug.LogError("씨뿌리기 시작 전 가능한지 검사하는 함수 " + 
+        Debug.LogWarning("씨뿌리기 시작 전 가능한지 검사하는 함수 " + 
                         " - 아직 구현 안됨");
         return true;
     }
 
     bool IsSowingEndAvailable()
     {
-        Debug.LogError("씨뿌리기 완료 할 수 있는지 검사하는 함수" + 
+        Debug.LogWarning("씨뿌리기 완료 할 수 있는지 검사하는 함수" + 
                         "- 아직 구현 안됨");
         return true;
     }
@@ -445,7 +488,7 @@ public class PlayerBoard : MonoBehaviour
         }
         else
         {
-            Debug.LogError("동물 옮기기 행동을 시작할 수 없습니다.");
+            Debug.LogWarning("동물 옮기기 행동을 시작할 수 없습니다.");
         }
     }
 
@@ -466,14 +509,14 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsMoveAnimalStartAvailable()
     {
-        Debug.LogError("동물 옮기기 시작 전 가능한지 검사하는 함수 " + 
+        Debug.LogWarning("동물 옮기기 시작 전 가능한지 검사하는 함수 " + 
                         " - 아직 구현 안됨");
         return true;
     }
 
     bool IsMoveAnimalEndAvailable()
     {
-        Debug.LogError("동물 옮기기 완료 할 수 있는지 검사하는 함수" + 
+        Debug.LogWarning("동물 옮기기 완료 할 수 있는지 검사하는 함수" + 
                         "- 아직 구현 안됨");
         return true;
     }
