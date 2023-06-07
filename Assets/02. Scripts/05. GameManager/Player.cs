@@ -17,7 +17,7 @@ public class Player
     //2.선 플레이어 정보
     public bool isFirstPlayer;
 
-    //현재 플레이어의 남은 가족 수 - dummy임, 제대로 추가해야함.
+    //현재 플레이어의 남은 가족 수 
     public int remainFamilyOfCurrentPlayer;
 
     public PlayerMessageData GetPlayerMessageData()
@@ -63,7 +63,7 @@ public class Player
         //1. 자원 초기화
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
-        this.wood = 1; this.rock = 0; this.reed = 0; this.clay = 0;
+        this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
         this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
         this.card_owns = new List<int>();
@@ -73,7 +73,7 @@ public class Player
         this.isFirstPlayer = false;
 
 
-        this.remainFamilyOfCurrentPlayer = 2;
+        this.remainFamilyOfCurrentPlayer = this.family;
     }
 
     

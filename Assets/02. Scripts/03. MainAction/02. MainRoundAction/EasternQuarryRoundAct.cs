@@ -4,17 +4,35 @@ using UnityEngine;
 
 public class EasternQuarryRoundAct : ButtonParents
 {
-  /* 동부채석장 행동
-    1. 해당 행동 Onclick
-    2. 누적된 돌의 개수만큼 플레이어 자원개수 증가
-  */
+    /* 동부채석장 행동
+      1. 해당 행동 Onclick
+      2. 누적된 돌의 개수만큼 플레이어 자원개수 증가
+    */
 
     public int playerIndex = 0;
     public bool isPlayerTurn = true;
-    public int stone = 4; //누적된 돌이 4개라 가정
+
+    //stack 정보 가져오기
+    int stack;
 
     public override void OnClick()
-        {
-        ResourceManager.instance.addResource(playerIndex, "stone", stone);
-        }
+    {
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", stack);
+
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
+    }
 }

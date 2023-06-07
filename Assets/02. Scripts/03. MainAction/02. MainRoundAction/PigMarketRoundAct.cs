@@ -12,12 +12,31 @@ public class PigMarketRoundAct : ButtonParents
     */
     
     public int playerIndex = 0;
-    public int pig = 3;   // 3마리가 누적되었다고 가정
+
+    //stack 정보 가져오기
+    int stack;
+
     public override void OnClick()
     {
-        ResourceManager.instance.addResource(playerIndex, "pig", pig);
-        
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "pig", stack );
+
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " pig!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
         // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         // StartPig();  // player보드에 돼지를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
     }
 }

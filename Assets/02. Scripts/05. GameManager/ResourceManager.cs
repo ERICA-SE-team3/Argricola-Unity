@@ -41,7 +41,7 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { woodIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
-            case "rock":
+            case "stone":
                 for (int i = 0; i < count; i++) { rockIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 

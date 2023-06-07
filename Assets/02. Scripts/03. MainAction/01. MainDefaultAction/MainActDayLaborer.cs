@@ -20,13 +20,17 @@ public class MainActDayLaborer : ButtonParents
     {
         if (isPlayerTurn) // 사용자의 턴인지 확인
         {
-            ResourceManager.instance.addResource( GameManager.instance.currentPlayerId, "food", 2);
-            ResourceManager.instance.minusResource(GameManager.instance.currentPlayerId, "family", 1);
+            // 있다면 니무 얻기 함수 호출
+            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 2);
+
+            //확인 message
+            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 2 + " food!");
+
+            //행동을 한 후 가족 수 하나 줄이기
+            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-
-            Debug.Log( "Player " + GameManager.instance.currentPlayerId + " get " + 2 + " food!" );
         }
     }
 }
