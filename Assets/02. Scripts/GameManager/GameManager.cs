@@ -33,19 +33,19 @@ public class GameManager : MonoBehaviour
     //스택이 쌓이는 라운드카드들
     public enum stackBehavior
     {
-        deombul,
-        soopool,
-        jeomto,
-        yoorang,
-        soop,
-        heuk,
-        galdae,
-        fishing,
-        sheepMarket,
-        westernQuarry,
-        pigMarket,
-        easternQuarry,
-        cattleMarket
+        copse, // 덤불
+        grove, //수풀
+        clayPit, //점토채굴장
+        travelingTheater, //유랑극단
+        forest, //숲
+        dirtPit, //흙 채굴장
+        reedField, //갈대밭
+        fishing, //낚시
+        sheepMarket, //양 시장
+        westernQuarry, //서부 채굴장
+        pigMarket, //돼지 시장
+        easternQuarry, //동부 채굴장
+        cattleMarket //소 시장
     }
 
     //게임 진행을 위한 flag들
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         //this.players[2].family = 5;
 
         //라운드 카드 가져오기
-        for(int i=0; i<14; i++)
+        for (int i=0; i<14; i++)
         {
             //라운드 카드 받아오기
             GameObject tmp = this.roundList.transform.GetChild(i).gameObject;
@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         //stack 증가
         //라운드 카드 활성화
         this.preRound();
+
     }
 
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
@@ -199,7 +200,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i=0; i<13; i++)
         {
-            this.stackOfRoundCard[i]++;
+            this.stackOfRoundCard[i] = this.stackOfRoundCard[i]+1;
         }
     }
 
@@ -233,11 +234,11 @@ public class GameManager : MonoBehaviour
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
             {
-                index = findNextPlayerId(this.currentPlayerId);
+                index = findNextPlayerId(index);
             }
             //해당 플레이어가 가족 수가 0이 아니다 -> 너 turn 해.
             else
-            {
+            { 
                 this.currentPlayerId = index;
                 return true;
             }
@@ -247,6 +248,7 @@ public class GameManager : MonoBehaviour
         //1. 이 때 그 플레이어의 가족 수가 0이 아니라면 - 라운드 진행
         if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
         {
+            Debug.Log("Next turn is player " + this.currentPlayerId);
             return true;
         }
 
@@ -304,4 +306,67 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public int getStackBehavior( string action )
+    {
+        int result = 0;
+
+        switch (action)
+        {
+            case "copse":
+                result =  (int)stackBehavior.copse;
+                break;
+
+            case "grove":
+                result =  (int)stackBehavior.grove;
+                break;
+
+            case "travelingTheater":
+                result =  (int)stackBehavior.travelingTheater;
+                break;
+
+            case "clayPit":
+                result =  (int)stackBehavior.clayPit;
+                break;
+
+            case "forest":
+                result =  (int)stackBehavior.forest;
+                break;
+
+            case "dirtPit":
+                result =  (int)stackBehavior.dirtPit;
+                break;
+
+            case "reedField":
+                result =  (int)stackBehavior.reedField;
+                break;
+
+            case "fishing":
+                result =  (int)stackBehavior.fishing;
+                break;
+
+            case "sheepMarket":
+                result =  (int)stackBehavior.sheepMarket;
+                break;
+
+            case "westernQuarry":
+                result =  (int)stackBehavior.westernQuarry;
+                break;
+
+            case "pigMarket":
+                result =  (int)stackBehavior.pigMarket;
+                break;
+
+            case "easternQuarry":
+                result =  (int)stackBehavior.easternQuarry;
+                break;
+
+            case "cattleMarket":
+                result =  (int)stackBehavior.cattleMarket;
+                break;
+
+        }
+
+        return result;
+    }
 }
+

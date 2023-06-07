@@ -11,10 +11,30 @@ public class WesternQuarryRoundAct : ButtonParents
 
     public int playerIndex = 0;
     public bool isPlayerTurn = true;
-    public int stone = 4; //누적된 돌이 4개라 가정
+
+    //stack 정보 가져오기
+    int stack;
+
+
 
     public override void OnClick()
-        {
-        ResourceManager.instance.addResource(playerIndex, "stone", stone);
-        }
+    {
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", stack);
+
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
+    }
 }
