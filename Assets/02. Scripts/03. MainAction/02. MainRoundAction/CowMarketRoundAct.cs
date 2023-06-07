@@ -12,12 +12,32 @@ public class CowMarketRoundAct : ButtonParents
     */
     
     public int playerIndex = 0;
-    public int cow = 3;   // 3마리가 누적되었다고 가정
+
+    //stack 정보 가져오기
+    int stack;
+
     public override void OnClick()
     {
-        ResourceManager.instance.addResource(playerIndex, "cow", cow);
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cattleMarket")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "cow", stack);
+
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " cow!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cattleMarket")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
         // PR 리뷰 수정사항 : 정해지지 않은 함수명 주석처리
         // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         // StartCow();  // player보드에 소를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
     }
 }

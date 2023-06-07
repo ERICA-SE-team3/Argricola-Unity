@@ -22,25 +22,30 @@ public class GameManager : MonoBehaviour
     //���� ���� - ��Ȯ�������� üũ�ϱ� ����
     public int currentRound;
 
+    //roundcard list
+    public GameObject roundList;
+
+    public List<GameObject> roundcards = new List<GameObject>();
+
     //������ message ����
     MessageData message = new MessageData();
 
     //������ ���̴� ����ī���
     public enum stackBehavior
     {
-        deombul,
-        soopool,
-        jeomto,
-        yoorang,
-        soop,
-        heuk,
-        galdae,
-        fishing,
-        sheepMarket,
-        westernQuarry,
-        pigMarket,
-        easternQuarry,
-        cattleMarket
+        copse, // ����
+        grove, //��Ǯ
+        clayPit, //����ä����
+        travelingTheater, //�����ش�
+        forest, //��
+        dirtPit, //�� ä����
+        reedField, //�����
+        fishing, //����
+        sheepMarket, //�� ����
+        westernQuarry, //���� ä����
+        pigMarket, //���� ����
+        easternQuarry, //���� ä����
+        cattleMarket //�� ����
     }
 
     //���� ������ ���� flag��
@@ -75,6 +80,18 @@ public class GameManager : MonoBehaviour
         this.Init();
         ResourceManager.instance.minusResource(0, "food",  1);
 
+        ////for test -> player2's family : 3
+        //this.players[2].family = 5;
+
+        //���� ī�� ��������
+        for (int i=0; i<14; i++)
+        {
+            //���� ī�� �޾ƿ���
+            GameObject tmp = this.roundList.transform.GetChild(i).gameObject;
+            this.roundcards.Add(tmp);
+            this.roundcards[i].SetActive(false);
+        }
+
         //����ī����� ���� �ʱ�ȭ
         this.stackOfRoundCard = new int[13];
 
@@ -85,6 +102,7 @@ public class GameManager : MonoBehaviour
         //stack ����
         //���� ī�� Ȱ��ȭ
         this.preRound();
+
     }
 
     private void Update() // 1�����Ӹ��� ����ǰ� ������ ���� ����.
@@ -119,7 +137,6 @@ public class GameManager : MonoBehaviour
                     this.RoundFlag = false;
                 }
             }
-
         }
 
 
@@ -166,6 +183,12 @@ public class GameManager : MonoBehaviour
         NetworkManager.instance.SendMessage(message);
     }
 
+    public int getCurrentPlayerId()
+    {
+        return this.currentPlayerId;
+    }
+
+
     //Initialize
     //for game
     void Init()
@@ -177,7 +200,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i=0; i<13; i++)
         {
-            this.stackOfRoundCard[i]++;
+            this.stackOfRoundCard[i] = this.stackOfRoundCard[i]+1;
         }
     }
 
@@ -205,35 +228,29 @@ public class GameManager : MonoBehaviour
         //���� �÷��̾� �ε��� ���
         int index = findNextPlayerId(this.currentPlayerId);
 
-        Debug.Log("33333333333333333333333333333");
-
         //������ �÷��̾ ã�� �� ���� �ݺ�
         //�ᱹ ��ã�Ƽ� ���� �ѹ��� ���� ���� ���� or ã���� ���� �÷��̾�
-        Debug.Log("00000000000000000000");
-        for(int i=1; i<4; i++)
+        for(int i=0; i<3; i++)
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
             {
-                index = findNextPlayerId(this.currentPlayerId);
+                index = findNextPlayerId(index);
             }
             //�ش� �÷��̾ ���� ���� 0�� �ƴϴ� -> �� turn ��.
             else
-            {
+            { 
                 this.currentPlayerId = index;
                 return true;
             }
         }
-        
-        Debug.Log("111111111111111111111111111");
 
         //for���� �������� -> ��� ���� �ߴ� �÷��̾�� ���ƿ�.
         //1. �� �� �� �÷��̾��� ���� ���� 0�� �ƴ϶�� - ���� ����
         if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
         {
+            Debug.Log("Next turn is player " + this.currentPlayerId);
             return true;
         }
-
-        Debug.Log("222222222222222222222222222");
 
         //2. �굵 0 -> ��� �÷��̾��� ���� ���� 0 -> ���� ����
         return false;
@@ -250,8 +267,10 @@ public class GameManager : MonoBehaviour
     {
         //�ൿ stack ����
         this.incrementStack();
+
         //����ī�� Ȱ��ȭ
-        //...
+        this.roundcards[this.currentRound].SetActive(true);
+
         //currentRoundUpdate
         this.UpdateCurrentRound();
 
@@ -287,4 +306,67 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public int getStackBehavior( string action )
+    {
+        int result = 0;
+
+        switch (action)
+        {
+            case "copse":
+                result =  (int)stackBehavior.copse;
+                break;
+
+            case "grove":
+                result =  (int)stackBehavior.grove;
+                break;
+
+            case "travelingTheater":
+                result =  (int)stackBehavior.travelingTheater;
+                break;
+
+            case "clayPit":
+                result =  (int)stackBehavior.clayPit;
+                break;
+
+            case "forest":
+                result =  (int)stackBehavior.forest;
+                break;
+
+            case "dirtPit":
+                result =  (int)stackBehavior.dirtPit;
+                break;
+
+            case "reedField":
+                result =  (int)stackBehavior.reedField;
+                break;
+
+            case "fishing":
+                result =  (int)stackBehavior.fishing;
+                break;
+
+            case "sheepMarket":
+                result =  (int)stackBehavior.sheepMarket;
+                break;
+
+            case "westernQuarry":
+                result =  (int)stackBehavior.westernQuarry;
+                break;
+
+            case "pigMarket":
+                result =  (int)stackBehavior.pigMarket;
+                break;
+
+            case "easternQuarry":
+                result =  (int)stackBehavior.easternQuarry;
+                break;
+
+            case "cattleMarket":
+                result =  (int)stackBehavior.cattleMarket;
+                break;
+
+        }
+
+        return result;
+    }
 }
+

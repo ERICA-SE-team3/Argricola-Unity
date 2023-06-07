@@ -12,11 +12,33 @@ public class SheepMarketRoundAct : ButtonParents
     */
     
     public int playerIndex = 0;
-    public int sheep = 3;   //누적된 양의 마리수가 3마리라고 가정
+    //public int sheep = 3;   //누적된 양의 마리수가 3마리라고 가정
+
+    //stack 정보 가져오기
+    int stack;
+
     public override void OnClick()
     {
-        ResourceManager.instance.addResource(playerIndex, "sheep", sheep);
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("sheepMarket")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "sheep", stack );
+
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " sheep!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("sheepMarket")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
         // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         // StartSheep();   // player보드에 양을 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
+
     }
 }

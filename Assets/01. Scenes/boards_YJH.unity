@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 31499408}
   - component: {fileID: 31499407}
   - component: {fileID: 31499409}
+  - component: {fileID: 31499410}
   m_Layer: 5
   m_Name: round11
   m_TagString: Untagged
@@ -287,7 +288,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 31499407}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 31499410}
+        m_TargetAssemblyTypeName: CowMarketRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &31499410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31499405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4721c630369c24ebab3854928b206df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
 --- !u!1 &33682111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2761,6 +2787,7 @@ GameObject:
   - component: {fileID: 639774799}
   - component: {fileID: 639774798}
   - component: {fileID: 639774800}
+  - component: {fileID: 639774801}
   m_Layer: 5
   m_Name: round8
   m_TagString: Untagged
@@ -2869,7 +2896,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 639774798}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 639774801}
+        m_TargetAssemblyTypeName: PigMarketRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &639774801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639774796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac4040b6c27e4bfd8bf8c286dcba6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
 --- !u!1 &669072071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3426,6 +3478,7 @@ GameObject:
   - component: {fileID: 840285585}
   - component: {fileID: 840285584}
   - component: {fileID: 840285586}
+  - component: {fileID: 840285587}
   m_Layer: 5
   m_Name: round10
   m_TagString: Untagged
@@ -3534,7 +3587,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 840285584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 840285587}
+        m_TargetAssemblyTypeName: EasternQuarryRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &840285587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840285582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede4e685a5bbc4dda824d598b6c10a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  isPlayerTurn: 1
 --- !u!1 &869731878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6836,6 +6915,7 @@ GameObject:
   - component: {fileID: 1032064217}
   - component: {fileID: 1032064216}
   - component: {fileID: 1032064218}
+  - component: {fileID: 1032064219}
   m_Layer: 5
   m_Name: round6
   m_TagString: Untagged
@@ -6944,7 +7024,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1032064216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1032064219}
+        m_TargetAssemblyTypeName: WesternQuarryRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1032064219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032064214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1333b0e39cc4ae1ad2d5a8d9879b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  isPlayerTurn: 1
 --- !u!224 &1035437741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 205508524801272685, guid: 442a0a284cad2574bb424824e9266a68, type: 3}
@@ -9122,6 +9228,7 @@ GameObject:
   - component: {fileID: 1517165919}
   - component: {fileID: 1517165918}
   - component: {fileID: 1517165920}
+  - component: {fileID: 1517165921}
   m_Layer: 5
   m_Name: round2
   m_TagString: Untagged
@@ -9230,7 +9337,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1517165918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1517165921}
+        m_TargetAssemblyTypeName: SheepMarketRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1517165921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517165916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc382e65c3454906b6680ffdb02364f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
 --- !u!1 &1558698808
 GameObject:
   m_ObjectHideFlags: 0
@@ -9739,6 +9871,8 @@ MonoBehaviour:
   stackOfRoundCard: 
   currentPlayerId: 0
   currentRound: 0
+  roundList: {fileID: 1200046603}
+  roundcards: []
   RoundFlag: 1
   endTurnFlag: 0
 --- !u!1 &1760505306 stripped
@@ -9771,6 +9905,7 @@ GameObject:
   - component: {fileID: 1813307289}
   - component: {fileID: 1813307288}
   - component: {fileID: 1813307290}
+  - component: {fileID: 1813307291}
   m_Layer: 5
   m_Name: round9
   m_TagString: Untagged
@@ -9879,7 +10014,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1813307288}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1813307291}
+        m_TargetAssemblyTypeName: VegetableSeedRoundAct, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1813307291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813307286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3dd9ff459d4491b9201997c1ece49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
 --- !u!1 &1862076306
 GameObject:
   m_ObjectHideFlags: 0

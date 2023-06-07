@@ -19,24 +19,42 @@ public class MainActTrevelingTheater : ButtonParents
     public int food;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
+    //stack 정보 가져오기
+    int stack;
 
-    // 음식이 있는지 확인
-    private bool HasFoods(){
-        food = ResourceManager.instance.getResourceOfPlayer(playerIndex,"food");
-        if (food > 0)
-            return true;
-        else
-            return false;
-    }
+
+    //// 음식이 있는지 확인
+    //private bool HasFoods(){
+    //    food = ResourceManager.instance.getResourceOfPlayer(playerIndex,"food");
+    //    if (food > 0)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
-        if (isPlayerTurn && HasFoods()) 
+        if (isPlayerTurn) 
         {
-            // 있다면 음식 얻기 함수 호출
-            ResourceManager.instance.addResource(playerIndex, "food", food);
+            //stack 정보 가져오기
+            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
+
+            // 있다면 니무 얻기 함수 호출
+            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
+
+            //확인 message
+            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");
+
+            //stack 초기화
+            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")] = 0;
+
+            //행동을 한 후 가족 수 하나 줄이기
+            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
+            //turn이 끝났다는 flag 
+            GameManager.instance.endTurnFlag = true;
         }
     }
 }
