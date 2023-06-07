@@ -12,8 +12,8 @@ public class PlayerBoard : MonoBehaviour
     public int house1x = 1, house1y = 0;
     public int house2x = 2, house2y = 0;
 
-    static int[] dx = {-1,1,0,0};
-    static int[] dy = {0,0,-1,1};   
+    int[] dx = {-1,1,0,0};
+    int[] dy = {0,0,-1,1};   
 
     public GameObject blockPrefab, confirmButton;
     public Player player;
@@ -143,6 +143,65 @@ public class PlayerBoard : MonoBehaviour
         Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
+
+    // -------------------------------------------------------------------------
+
+    
+    public void StartUpgradeHouse()
+    {
+        if(isHouseUpgradeStartAvailable())
+        {
+            strategy = houseStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(EndUpgradeHouse);
+        }
+        else
+        {
+            Debug.LogWarning("집 설치 행동을 시작할 수 없습니다.");
+        }
+    }
+
+    public void EndUpgradeHouse()
+    {
+        if(isHouseUpgradeEndAvailable())
+        {
+            foreach(Block block in selectedBlocks)
+            {
+                block.ShowTransparent();
+                block.ChangeHouse();
+            }
+            selectedBlocks.Clear();
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
+    }
+
+    /// <summary>
+    /// 플레이어의 최소 자원 등을 검사해서 유효성 검사하는 함수
+    /// 집 개수도 확인해야함.
+    /// 처음 입장할때 지을 공간이 있는지는 따로 검사해야함.
+    /// </summary>
+    /// <returns></returns>
+    bool isHouseUpgradeStartAvailable()
+    {
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+
+    /// <summary> <summary>
+    /// 플레이어 자원 등을 검사해서 유효성 검사하는 함수
+    /// 집 개수도 확인해야함.
+    /// 하나도 안짓는지도 확인해야함.
+    /// </summary>
+    bool isHouseUpgradeEndAvailable()
+    {
+        Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
+        return true;
+    }
+
 
     // -------------------------------------------------------------------------
 

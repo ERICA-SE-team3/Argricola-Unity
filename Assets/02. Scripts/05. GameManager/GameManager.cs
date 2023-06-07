@@ -7,19 +7,19 @@ public class GameManager : MonoBehaviour
     //GameManager
     public static GameManager instance;
 
-    //player���� ���� ArrayList, players
+    //player들을 담을 ArrayList, players
     public List<Player> players = new List<Player>();
 
-    //player�� board
+    //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
-    //stack�� �ִ� Roundcard
+    //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
 
-    //���� ������ player index
+    //현재 차례인 player index
     public int currentPlayerId;
 
-    //���� ���� - ��Ȯ�������� üũ�ϱ� ����
+    //현재 라운드 - 수확라운드인지 체크하기 위함
     public int currentRound;
 
     //roundcard list
@@ -27,31 +27,31 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> roundcards = new List<GameObject>();
 
-    //������ message ����
+    //소통할 message 형식
     MessageData message = new MessageData();
 
-    //������ ���̴� ����ī���
+    //스택이 쌓이는 라운드카드들
     public enum stackBehavior
     {
-        copse, // ����
-        grove, //��Ǯ
-        clayPit, //����ä����
-        travelingTheater, //�����ش�
-        forest, //��
-        dirtPit, //�� ä����
-        reedField, //�����
-        fishing, //����
-        sheepMarket, //�� ����
-        westernQuarry, //���� ä����
-        pigMarket, //���� ����
-        easternQuarry, //���� ä����
-        cattleMarket //�� ����
+        copse, // 덤불
+        grove, //수풀
+        clayPit, //점토채굴장
+        travelingTheater, //유랑극단
+        forest, //숲
+        dirtPit, //흙 채굴장
+        reedField, //갈대밭
+        fishing, //낚시
+        sheepMarket, //양 시장
+        westernQuarry, //서부 채굴장
+        pigMarket, //돼지 시장
+        easternQuarry, //동부 채굴장
+        cattleMarket //소 시장
     }
 
-    //���� ������ ���� flag��
-    //1. ���� ������ ��Ÿ���� flag
+    //게임 진행을 위한 flag들
+    //1. 라운드 진행을 나타내는 flag
     public bool RoundFlag = true;
-    //2. �� �÷��̾��� turn ( ���� �� �ϳ��� �� �� )�� ������ ��Ÿ���� flag
+    //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
     
     public void Start()
@@ -83,53 +83,53 @@ public class GameManager : MonoBehaviour
         ////for test -> player2's family : 3
         //this.players[2].family = 5;
 
-        //���� ī�� ��������
+        //라운드 카드 가져오기
         for (int i=0; i<14; i++)
         {
-            //���� ī�� �޾ƿ���
+            //라운드 카드 받아오기
             GameObject tmp = this.roundList.transform.GetChild(i).gameObject;
             this.roundcards.Add(tmp);
             this.roundcards[i].SetActive(false);
         }
 
-        //����ī����� ���� �ʱ�ȭ
+        //라운드카드들의 스택 초기화
         this.stackOfRoundCard = new int[13];
 
-        //���� ���� �ʱ�ȭ
+        //현재 라운드 초기화
         this.currentRound = 0;
 
-        //ù ���� �غ�
-        //stack ����
-        //���� ī�� Ȱ��ȭ
+        //첫 라운드 준비
+        //stack 증가
+        //라운드 카드 활성화
         this.preRound();
 
     }
 
-    private void Update() // 1�����Ӹ��� ����ǰ� ������ ���� ����.
+    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        //1. ���� ����
+        //1. 라운드 진행
         if ( this.RoundFlag )
         {
             Debug.Log("Current Round is " + this.currentRound);
-            //1-2. ���� ���� ���̶��
+            //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
-                //...��ٸ� == �ƹ��͵� ����
+                //...기다림 == 아무것도 안함
                 Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
             }
 
-            else //endTurnFlag is true --> 1-3. �÷��̾��� ���� ����.
+            else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
-                //1-4. ���� ���� �ο����� �÷��̾� ã��
-                //1-4-1. ���� �ο����� �÷��̾ ���� -> Round �״�� ����
+                //1-4. 다음 턴을 부여받을 플레이어 찾기
+                //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
                 if ( this.findNextPlayer() )
                 {
-                    //... �״�� ����
+                    //... 그대로 진행
                     Debug.Log("Move to Next Turn");
                     this.endTurnFlag = false;
                 }
 
-                //1-4-2. ���� �ο����� �÷��̾ ���� -> Round ���� �������� �Ѿ
+                //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
                 else
                 {
                     Debug.Log("Round is Over");
@@ -141,31 +141,31 @@ public class GameManager : MonoBehaviour
 
 
 
-        //2. ���� ��ü�� ����.
+        //2. 라운드 전체가 끝남.
         else
         {
-            //2-1. ��Ȯ�������� üũ �� ��Ȯ ����
+            //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
             {
-                Debug.Log("��Ȯ ���� ������...");
-                //��Ȯ���� ����
+                Debug.Log("수확 라운드 진행중...");
+                //수확라운드 진행
             }
 
-            //2-2. ���� ���� ������ �������� ( ������ ���� ���� üũ )
+            //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
             if ( !this.checkFinalRound() )
             {
-                //2-2-1. ���� ���� �غ� �� ����
+                //2-2-1. 다음 라운드 준비 및 진행
                 this.preRound();
             }
             else
             {
-                //2-2-2. ���� ����
+                //2-2-2. 게임 종료
                 //...
                 Debug.Log("Game is Over!");
             } 
         }
 
-        //���� ����� ����.
+        //다음 라운드로 진행.
 
     }
 
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
         this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
         this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
         
-        //NetworkManager�� ���� DB�� ����
+        //NetworkManager를 통해 DB와 소통
         NetworkManager.instance.SendMessage(message);
     }
 
@@ -216,27 +216,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //�־��� playerId�� ���� playerId�� ã�� �Լ�
+    //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
         return (playerId + 1) % 4 ;
     }
 
-    //���� �÷��̾ ã�� ��ü �Լ� // ������ : true , ���� ���� : false
+    //다음 플레이어를 찾는 전체 함수 // 다음턴 : true , 라운드 종료 : false
     bool findNextPlayer()
     {
-        //���� �÷��̾� �ε��� ���
+        //다음 플레이어 인덱스 계산
         int index = findNextPlayerId(this.currentPlayerId);
 
-        //������ �÷��̾ ã�� �� ���� �ݺ�
-        //�ᱹ ��ã�Ƽ� ���� �ѹ��� ���� ���� ���� or ã���� ���� �÷��̾�
+        //적합한 플레이어를 찾을 떄 까지 반복
+        //결국 못찾아서 덱스 한바퀴 돌면 라운드 종료 or 찾으면 다음 플레이어
         for(int i=0; i<3; i++)
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
             {
                 index = findNextPlayerId(index);
             }
-            //�ش� �÷��̾ ���� ���� 0�� �ƴϴ� -> �� turn ��.
+            //해당 플레이어가 가족 수가 0이 아니다 -> 너 turn 해.
             else
             { 
                 this.currentPlayerId = index;
@@ -244,15 +244,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //for���� �������� -> ��� ���� �ߴ� �÷��̾�� ���ƿ�.
-        //1. �� �� �� �÷��̾��� ���� ���� 0�� �ƴ϶�� - ���� ����
+        //for문을 빠져나옴 -> 방금 턴을 했던 플레이어로 돌아옴.
+        //1. 이 때 그 플레이어의 가족 수가 0이 아니라면 - 라운드 진행
         if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
         {
             Debug.Log("Next turn is player " + this.currentPlayerId);
             return true;
         }
 
-        //2. �굵 0 -> ��� �÷��̾��� ���� ���� 0 -> ���� ����
+        //2. 얘도 0 -> 모든 플레이어의 가족 수가 0 -> 라운드 종료
         return false;
 
     }
@@ -262,28 +262,28 @@ public class GameManager : MonoBehaviour
         this.currentRound = this.currentRound + 1;
     }
 
-    //���� �غ�
+    //라운드 준비
     void preRound()
     {
-        //�ൿ stack ����
+        //행동 stack 증가
         this.incrementStack();
 
-        //����ī�� Ȱ��ȭ
+        //라운드카드 활성화
         this.roundcards[this.currentRound].SetActive(true);
 
         //currentRoundUpdate
         this.UpdateCurrentRound();
 
-        //�� �÷��̾�� ���� �� ���󺹱�
+        //각 플레이어들 가족 수 원상복구
         for(int i=0; i<4; i++)
         {
             this.players[i].remainFamilyOfCurrentPlayer = this.players[i].family;
         }
 
-        //Round�� ù ���� �÷��̾�� ���� �ѱ�
+        //Round의 첫 턴인 플레이어에게 턴을 넘김
         this.foundFirstPlayer();
 
-        //RoundFlag�� true��
+        //RoundFlag를 true로
         this.RoundFlag = true;
     }
 
@@ -296,7 +296,7 @@ public class GameManager : MonoBehaviour
         else { return false;  }
     }
 
-    //������ �������� check
+    //마지막 라운드인지 check
     bool checkFinalRound()
     {
         if (this.currentRound == 14)
@@ -369,4 +369,3 @@ public class GameManager : MonoBehaviour
         return result;
     }
 }
-
