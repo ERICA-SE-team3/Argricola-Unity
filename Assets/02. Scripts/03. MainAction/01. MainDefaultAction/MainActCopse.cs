@@ -40,6 +40,13 @@ public class MainActCopse : ButtonParents
             ResourceManager.instance.addResource( GameManager.instance.getCurrentPlayerId(), "wood", 1);
             ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
+
+            ////test -> 라운드 2에서 플레이어 3일때 가족 수를 1 늘린다.
+            //if ( GameManager.instance.currentRound == 2 && GameManager.instance.getCurrentPlayerId() == 3)
+            //{
+            //    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].family++;
+            //}
+
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
 

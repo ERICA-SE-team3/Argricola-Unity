@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager: MonoBehaviour
 {
-    Vector3 position_camera_mainboard = new Vector3(0, 45, -1);
+    Vector3 position_camera_mainboard = new Vector3(66, 0, -1);
     Vector3 position_camera_player1 = new Vector3(0, 4000, -1);
     Vector3 position_camera_player2 = new Vector3(4000, 0, -1);
     Vector3 position_camera_player3 = new Vector3(0, -4000, -1);

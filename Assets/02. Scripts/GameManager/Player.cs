@@ -17,7 +17,7 @@ public class Player
     //2.선 플레이어 정보
     public bool isFirstPlayer;
 
-    //현재 플레이어의 남은 가족 수 - dummy임, 제대로 추가해야함.
+    //현재 플레이어의 남은 가족 수 
     public int remainFamilyOfCurrentPlayer;
 
     public PlayerMessageData GetPlayerMessageData()
@@ -73,7 +73,7 @@ public class Player
         this.isFirstPlayer = false;
 
 
-        this.remainFamilyOfCurrentPlayer = 2;
+        this.remainFamilyOfCurrentPlayer = this.family;
     }
 
     

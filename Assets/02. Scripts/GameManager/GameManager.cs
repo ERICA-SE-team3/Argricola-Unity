@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour
         this.Init();
         ResourceManager.instance.minusResource(0, "food",  1);
 
+        ////for test -> player2's family : 3
+        //this.players[2].family = 5;
+
         //라운드 카드 가져오기
         for(int i=0; i<14; i++)
         {
@@ -133,7 +136,6 @@ public class GameManager : MonoBehaviour
                     this.RoundFlag = false;
                 }
             }
-
         }
 
 
@@ -227,7 +229,7 @@ public class GameManager : MonoBehaviour
 
         //적합한 플레이어를 찾을 떄 까지 반복
         //결국 못찾아서 덱스 한바퀴 돌면 라운드 종료 or 찾으면 다음 플레이어
-        for(int i=1; i<4; i++)
+        for(int i=0; i<3; i++)
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
             {
