@@ -7,7 +7,7 @@ using System;
 
 public class HouseAction : PlayerBoardAction
 {
-    public override BoardEventStrategy StartInstall(GameObject confirmButton)
+    public override BoardEventStrategy StartInstall(GameObject confirmButton, List<Block> selectedBlocks)
     {
         if (IsStartInstall())
         {
@@ -15,13 +15,15 @@ public class HouseAction : PlayerBoardAction
 
             Button button = confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(EndInstall);
+            button.onClick.AddListener(() => EndInstall(selectedBlocks));
             return houseStrategy;
         }
         else
         {
             Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            return null;
         }
+        return null;
     }
 
     public override void EndInstall(List<Block> selectedBlocks)
