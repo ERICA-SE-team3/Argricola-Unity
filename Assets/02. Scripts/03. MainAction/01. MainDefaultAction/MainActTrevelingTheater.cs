@@ -41,8 +41,16 @@ public class MainActTrevelingTheater : ButtonParents
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
 
-            // 있다면 니무 얻기 함수 호출
+            //자원 획득
             ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
+
+            //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
+            if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
+            {
+                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wood", 1);
+                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
+                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 wood and 1 wheat additionaly because of MAGICIAN");
+            }
 
             //확인 message
             Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");

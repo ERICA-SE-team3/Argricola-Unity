@@ -30,6 +30,31 @@ public class GameManager : MonoBehaviour
     //소통할 message 형식
     MessageData message = new MessageData();
 
+    //직업 카드들
+    public enum Cards
+    {
+        //0~7 : 직업 카드
+        //단순자원 직업카드
+        magician, //마술사
+        woodCutter, //나무꾼
+        vegetableSeller,  //채소 장수
+
+        //추가 행동에 적용되는 카드
+        stoneCutter, //돌 자르는 사람
+        wallMaster, //초벽질공
+        woodPicker, //장작 채집자
+
+        //점수 계산에 적용되는 카드
+        organicFarmer, //유기 농부
+
+        //여러 항목에 걸친 카드
+        pigBreeder //돼지 사육사
+
+        //8~15 : 보조 설비 카드
+
+        //16 ~ 25 : 주요 설비 카드
+    }
+
     //스택이 쌓이는 라운드카드들
     public enum stackBehavior
     {
@@ -66,6 +91,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<4; i++)
         {
             Player temp = new Player();
+            temp.PlayerId = i; //플레이어Id 부여
             this.players.Add(temp);
         }
 
@@ -80,8 +106,23 @@ public class GameManager : MonoBehaviour
         this.Init();
         ResourceManager.instance.minusResource(0, "food",  1);
 
-        ////for test -> player2's family : 3
-        //this.players[2].family = 5;
+        //플레이어들에게 직업 카드 분배
+        this.players[0].jobcard_hands.Add( (int)Cards.magician ); //마술사
+        this.players[0].jobcard_hands.Add((int)Cards.woodCutter); //나무꾼
+
+        this.players[1].jobcard_hands.Add((int)Cards.vegetableSeller); //채소 장수
+        this.players[1].jobcard_hands.Add((int)Cards.woodPicker); //장작 채집자
+
+        this.players[2].jobcard_hands.Add((int)Cards.wallMaster); //초벽질공
+        this.players[2].jobcard_hands.Add((int)Cards.stoneCutter); //돌 자르는 사람
+
+        this.players[3].jobcard_hands.Add((int)Cards.organicFarmer); // 유기 농부
+        this.players[3].jobcard_hands.Add((int)Cards.pigBreeder); // 돼지 사육사
+
+        //플레이어들에게 보조설비 카드 분배
+        //...
+
+
 
         //라운드 카드 가져오기
         for (int i=0; i<14; i++)
