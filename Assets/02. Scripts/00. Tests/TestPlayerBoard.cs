@@ -310,7 +310,7 @@ public class TestPlayerBoard
             obj.GetComponent<PlayerBoard>().blockPrefab = blockPrefab;
 
             PlayerBoard playerBoard = obj.GetComponent<PlayerBoard>();
-
+            playerBoard.SetPlayer(GameManager.instance.players[0]);
             return playerBoard;
         }
     }
