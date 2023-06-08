@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
 
     //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
+
     //현재 차례인 player index
     public int currentPlayerId;
+
     //현재 라운드 - 수확라운드인지 체크하기 위함
     public int currentRound;
 
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<4; i++)
         {
             Player temp = new Player();
+            temp.id = i;
             this.players.Add(temp);
         }
 
@@ -135,7 +138,6 @@ public class GameManager : MonoBehaviour
         this.stackOfRoundCard = new int[13];
 
         //현재 라운드 초기화
-        this.currentRound = 1;
         this.currentRound = 0;
 
         //첫 라운드 준비
@@ -268,8 +270,8 @@ public class GameManager : MonoBehaviour
         //다음 플레이어 인덱스 계산
         int index = findNextPlayerId(this.currentPlayerId);
 
-        //������ �÷��̾ ã�� �� ���� �ݺ�
-        //�ᱹ ��ã�Ƽ� ���� �ѹ��� ���� ���� ���� or ã���� ���� �÷��̾�
+        //적합한 플레이어를 찾을 떄 까지 반복
+        //결국 못찾아서 덱스 한바퀴 돌면 라운드 종료 or 찾으면 다음 플레이어
         for(int i=0; i<3; i++)
         {
             if (this.players[index].remainFamilyOfCurrentPlayer == 0)
@@ -409,4 +411,3 @@ public class GameManager : MonoBehaviour
         return result;
     }
 }
-
