@@ -708,6 +708,7 @@ public class PlayerBoard : MonoBehaviour
             if (block.type == BlockType.FARM && block.seedType != SeedType.NONE)
             {
                 block.seedCount -= 1;
+                ResourceManager.instance.addResource(player.id, block.seedType.ToString().ToLower(), 1);
                 if(block.seedCount == 0)
                 {
                     block.seedType = SeedType.NONE;
