@@ -16,6 +16,9 @@ public class PlayerBoard : MonoBehaviour
     int[] dy = {0,0,-1,1};   
 
     public GameObject blockPrefab, confirmButton;
+    
+    GameObject BoardGrid, InstallButton;
+
     public Player player;
     public Block[,] blocks;
     public HouseType houseType;
@@ -73,13 +76,16 @@ public class PlayerBoard : MonoBehaviour
 
     public void InitBoard(Player player)
     {
+        BoardGrid = transform.Find("BoardGrid").gameObject;
+        InstallButton = transform.Find("InstallButton").gameObject;
+
         blocks = new Block[row, col];
         for(int i = 0; i < row; i++)
         {
             for(int j = 0; j < col; j++)
             {
                 GameObject tmp = Instantiate(blockPrefab);
-                tmp.transform.SetParent(transform);
+                tmp.transform.SetParent(BoardGrid.transform);
                 tmp.transform.localScale = Vector3.one;
                 Block tmpBlock = tmp.GetComponent<Block>();
                 tmpBlock.Init(this, i, j, BlockType.EMPTY);
@@ -93,6 +99,11 @@ public class PlayerBoard : MonoBehaviour
     {
         blocks[house1x, house1y].ChangeHouse();
         blocks[house2x, house2y].ChangeHouse();
+    }
+
+    public GameObject GetInstallButton()
+    {
+        return InstallButton;
     }
 
     //-------------------------------------------------------------------------- 
@@ -319,9 +330,10 @@ public class PlayerBoard : MonoBehaviour
 
     public void EndInstallFence()
     {
-        if(IsInstallFenceEndAvailable())
+        if(isFenceActionEndAvailable())
         {
-            InstallFence();
+            strategy = new BoardEventStrategy();
+            // InstallFence();
         }
         else
         {
@@ -338,8 +350,13 @@ public class PlayerBoard : MonoBehaviour
         return true;
     }
 
-    bool IsInstallFenceEndAvailable()
+    bool isFenceActionEndAvailable()
     {
+        if(selectedBlocks.Count != 0) {
+            Debug.LogWarning("울타리 설치를 완료해주세요.");
+            return false; 
+        }
+
         foreach(Block block in selectedBlocks)
         {
             if(block.type == BlockType.FARM)
@@ -357,9 +374,20 @@ public class PlayerBoard : MonoBehaviour
         return true;
     }
 
-    void InstallFence()
+    public bool InstallFence()
     {
-        Debug.LogWarning("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
+        int playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
+        int woodNeed = GetFenceNumber();
+
+        if(playerWood < woodNeed) {
+            Debug.LogWarning("자원이 부족합니다.");
+            selectedBlocks.Clear();
+            InstallButton.SetActive(false);
+            return false; 
+        }
+
+        ResourceManager.instance.minusResource(player.id, "wood", woodNeed);
+
         for (int j=0;j<selectedBlocks.Count;j++)
         {
             if(selectedBlocks[j].type == BlockType.FENCE)
@@ -403,10 +431,17 @@ public class PlayerBoard : MonoBehaviour
             block.ChangeFence();
         }
         selectedBlocks.Clear();
+
+        foreach(Block block in blocks)
+        {
+            block.CheckIsBlockSurroundedWithFence();
+        }
+        return true;
     }
 
-    void ReInstallFence(Block block)
+    int ReInstallFence(Block block, bool isSetFence = true)
     {
+        int woodCount = 0;
         int[] adjFenceIndex = {1,0,3,2};
         bool[] fence = new bool[4];
         for (int i=0;i<4;i++) {
@@ -418,11 +453,70 @@ public class PlayerBoard : MonoBehaviour
             if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
             if (blocks[adjBlockRow,adjBlockCol].fence[adjFenceIndex[i]] == false) {
                 fence[i] = true;
+                woodCount++;
             }
         }
-        block.SetFence(fence);
-        block.ChangeFence();
+        if(isSetFence)
+        {
+            block.SetFence(fence);
+            block.ChangeFence();
+        }
+        return woodCount;
     }
+
+    int GetFenceNumber()
+    {
+        int woodCount = 0;
+        for (int j=0;j<selectedBlocks.Count;j++)
+        {
+            if(selectedBlocks[j].type == BlockType.FENCE)
+            {
+                woodCount += ReInstallFence(selectedBlocks[j], false);
+                selectedBlocks[j].ShowTransparent();
+                continue;
+            }
+
+            var block = selectedBlocks[j];
+            block.ShowTransparent();
+            
+            bool[] fence = new bool[4];
+            
+            for (int i=0;i<4;i++) {
+                fence[i] = true;
+            }
+
+            for (int i=0;i<selectedBlocks.Count;i++) {
+                if (i!=j) {
+                    var otherBlock = selectedBlocks[i];
+                    int gapRow = otherBlock.row - block.row;
+                    int gapCol = otherBlock.col - block.col;
+                    for (int k=0;k<4;k++) {
+                        if (dx[k] == gapRow && dy[k] == gapCol) {
+                            fence[k] = false;
+                        }
+                    }
+                }
+            }
+            
+            for (int i=0;i<4;i++) {
+                if (!fence[i]) continue;
+                int adjBlockRow = block.row + dx[i];
+                int adjBlockCol = block.col + dy[i];
+                if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
+                if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
+                        fence[i] = false;
+                }
+            }
+
+            for (int i=0;i<4;i++) 
+            {
+                if(fence[i]) { woodCount++; }
+            }
+        }
+        return woodCount;
+    }
+
+    
     
     // -------------------------------------------------------------------------
 

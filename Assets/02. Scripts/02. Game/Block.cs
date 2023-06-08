@@ -16,6 +16,10 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public int cow, pig, sheep, family;
     public SeedType seedType, sowingType;
     public int seedCount;
+
+    int[] dx = {-1,1,0,0};
+    int[] dy = {0,0,-1,1};
+    int[] dfence = {1,0,3,2};
     
     public void Init(PlayerBoard board, int row, int col, BlockType type)
     {
@@ -263,6 +267,70 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             fence[i] = dir[i];
             backgroundParent.transform.Find("Fences").GetChild(i).gameObject.SetActive(fence[i]);
         }
+    }
+
+    public void CheckIsBlockSurroundedWithFence()
+    {
+        if(this.type != BlockType.EMPTY) return;
+        
+        if(isSurroundedWithFence()) { ChangeFence(); }
+    }
+
+    public bool isSurroundedWithFence()
+    {
+        bool[] isFence = new bool[4];
+
+        int x = this.row;
+        int y = this.col;
+
+        int row = this.board.row;
+        int col = this.board.col;
+
+        for(int i = 0; i < 4; i++)
+        {
+            int adjBlockRow = x + dx[i];
+            int adjBlockCol = y + dy[i];
+            if (adjBlockRow < 0 || adjBlockRow >= row || adjBlockCol < 0 || adjBlockCol >= col) continue;
+            if(board.blocks[adjBlockRow, adjBlockCol].type == BlockType.FENCE)
+            {
+                isFence[i] = true;
+            }
+        }
+
+        if(isFence[0] && isFence[1] && isFence[2] && isFence[3])
+        {
+            return true;
+        }        
+        return false;
+    }
+
+    public bool isFourSideIsFence()
+    {
+        bool[] isFence = new bool[4];
+        for(int i = 0; i < 4; i++) { isFence[i] = fence[i]; }
+
+        int x = this.row;
+        int y = this.col;
+
+        int row = this.board.row;
+        int col = this.board.col;
+
+        for(int i = 0; i < 4; i++)
+        {
+            int adjBlockRow = x + dx[i];
+            int adjBlockCol = y + dy[i];
+            if (adjBlockRow < 0 || adjBlockRow >= row || adjBlockCol < 0 || adjBlockCol >= col) continue;
+            if(board.blocks[adjBlockRow, adjBlockCol].fence[dfence[i]] || isFence[i] )
+            {
+                isFence[i] = true;
+            }
+        }
+
+        if(isFence[0] && isFence[1] && isFence[2] && isFence[3])
+        {
+            return true;
+        }        
+        return false;
     }
 
     public void _TestSetFence()
