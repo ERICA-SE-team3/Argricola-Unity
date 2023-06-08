@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerBoard;
     public GameObject sheepMarket;
+    public GameObject whisChildren;
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
     // queue에서 하나 꺼낸 행동
@@ -61,6 +62,8 @@ public class GameManager : MonoBehaviour
     public void PopQueue() {
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
+        WishChildrenRoundAct wc = whisChildren.GetComponent<WishChildrenRoundAct>();
+
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
         }
@@ -81,6 +84,9 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "Improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        }
+        else if(popAction == "wishChildren"){
+            wc.WishChildrenStart();
         }
     }
     
