@@ -51,9 +51,8 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
 
-    public GameObject playerBoard;
-    public GameObject sheepMarket;
-    public GameObject whisChildren;
+    public GameObject playerBoard, sheepMarket, wishChildren, westernQuarry;
+    // public GameObject whisChildren;
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
     // queue에서 하나 꺼낸 행동
@@ -62,7 +61,8 @@ public class GameManager : MonoBehaviour
     public void PopQueue() {
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        WishChildrenRoundAct wc = whisChildren.GetComponent<WishChildrenRoundAct>();
+        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "wishChildren"){
             wc.WishChildrenStart();
+        }
+        else if(popAction == "westernQuarry"){
+            wq.WesternQuarryStart();
         }
     }
     
