@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
             board.StartSowing();
         }
         else if(popAction == "baking"){
-            // 빵 굽기 행동 시작 (ex. actionBaking())
+            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
         }
         else if(popAction == "sheepMarket"){
             sm.sheepMarketStart();

@@ -403,6 +403,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogWarning("씨 뿌릴 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     bool IsSowingStartAvailable()
