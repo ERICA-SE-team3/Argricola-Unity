@@ -17,7 +17,7 @@ public class HouseDevelopRoundAct : ButtonParents
     public override void OnClick()
         {
           GameManager.instance.actionQueue.Enqueue("houseDevelop");
-          GameManager.instance.actionQueue.Enqueue("Improvements");
+          GameManager.instance.actionQueue.Enqueue("improvements");
           GameManager.instance.PopQueue();
           // 집개조 이후, 주요설비 및 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
           // ActCardSub(playerIndex, "쇠스랑"); // 임의로 함수명 만듦

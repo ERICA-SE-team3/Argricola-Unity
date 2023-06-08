@@ -12,7 +12,7 @@ public class FencingRoundAct : ButtonParents
   */
     public override void OnClick()
         {
-          GameManager.instance.actionQueue.Enqueue("Fencing");
+          GameManager.instance.actionQueue.Enqueue("fencing");
           GameManager.instance.PopQueue();
         }
 }

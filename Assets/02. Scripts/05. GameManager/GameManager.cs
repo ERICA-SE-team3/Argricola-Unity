@@ -81,10 +81,10 @@ public class GameManager : MonoBehaviour
         else if(popAction == "sheepMarket"){
             sm.sheepMarketStart();
         }
-        else if(popAction == "Fencing"){
+        else if(popAction == "fencing"){
             board.StartInstallFence();
         }
-        else if(popAction == "Improvements"){
+        else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
         }
         else if(popAction == "wishChildren"){
