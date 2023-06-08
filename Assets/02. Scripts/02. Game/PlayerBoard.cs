@@ -251,6 +251,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     bool IsInstallFenceStartAvailable()

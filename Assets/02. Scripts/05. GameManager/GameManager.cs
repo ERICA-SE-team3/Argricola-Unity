@@ -76,6 +76,9 @@ public class GameManager : MonoBehaviour
         else if(popAction == "sheepMarket"){
             sm.sheepMarketStart();
         }
+        else if(popAction == "Fencing"){
+            board.StartInstallFence();
+        }
     }
     
     public void Start()
