@@ -105,56 +105,56 @@ public class Player
         {
             case "magician":
                 //magician카드가 있다면
-                if (this.jobcard_owns.Contains( (int)GameManager.Cards.magician) )
+                if (this.jobcard_owns.Contains( (int)Cards.magician) )
                 {
                     return true;
                 }
                 break;
 
             case "woodCutter":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.woodCutter))
+                if (this.jobcard_owns.Contains((int)Cards.woodCutter))
                 {
                     return true;
                 }
                 break;
 
             case "vegetableSeller":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.vegetableSeller))
+                if (this.jobcard_owns.Contains((int)Cards.vegetableSeller))
                 {
                     return true;
                 }
                 break;
             case "woodPicker":
                 //magician카드가 있다면
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.woodPicker))
+                if (this.jobcard_owns.Contains((int)Cards.woodPicker))
                 {
                     return true;
                 }
                 break;
 
             case "wallMaster":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.wallMaster))
+                if (this.jobcard_owns.Contains((int)Cards.wallMaster))
                 {
                     return true;
                 }
                 break;
 
             case "stoneCutter":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.stoneCutter))
+                if (this.jobcard_owns.Contains((int)Cards.stoneCutter))
                 {
                     return true;
                 }
                 break;
 
             case "organicFarmer":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.organicFarmer))
+                if (this.jobcard_owns.Contains((int)Cards.organicFarmer))
                 {
                     return true;
                 }
                 break;
 
             case "pigBreeder":
-                if (this.jobcard_owns.Contains((int)GameManager.Cards.pigBreeder))
+                if (this.jobcard_owns.Contains((int)Cards.pigBreeder))
                 {
                     return true;
                 }
