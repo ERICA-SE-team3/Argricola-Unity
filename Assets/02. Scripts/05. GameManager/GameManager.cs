@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<4; i++)
         {
             Player temp = new Player();
+            temp.id = i;
             this.players.Add(temp);
         }
 

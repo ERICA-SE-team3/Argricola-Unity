@@ -59,6 +59,14 @@ public class PlayerBoard : MonoBehaviour
 
         strategy = new BoardEventStrategy();
 
+        // InitBoard(player);
+        // SetFirstHouse();
+    }
+
+    public void SetPlayer(Player player)
+    {
+        this.player = player;
+
         InitBoard(player);
         SetFirstHouse();
     }
@@ -149,59 +157,73 @@ public class PlayerBoard : MonoBehaviour
     
     public void StartUpgradeHouse()
     {
-        if(isHouseUpgradeStartAvailable())
-        {
-            strategy = houseStrategy;
-            Button button = confirmButton.GetComponent<Button>();
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(EndUpgradeHouse);
-        }
-        else
-        {
-            Debug.LogWarning("집 설치 행동을 시작할 수 없습니다.");
-        }
-    }
-
-    public void EndUpgradeHouse()
-    {
-        if(isHouseUpgradeEndAvailable())
-        {
-            foreach(Block block in selectedBlocks)
-            {
-                block.ShowTransparent();
-                block.ChangeHouse();
-            }
-            selectedBlocks.Clear();
-        }
-        else
-        {
-            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        strategy = new BoardEventStrategy();
+        if(isHouseUpgradeStartAvailable()) {
+            houseType += 1; 
+            UpgradeHouse(); 
         }
     }
 
     /// <summary>
     /// 플레이어의 최소 자원 등을 검사해서 유효성 검사하는 함수
-    /// 집 개수도 확인해야함.
-    /// 처음 입장할때 지을 공간이 있는지는 따로 검사해야함.
     /// </summary>
-    /// <returns></returns>
-    bool isHouseUpgradeStartAvailable()
+    public bool isHouseUpgradeStartAvailable()
     {
-        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        if(houseType == HouseType.STONE) { 
+            Debug.LogWarning("더이상 집을 업그레이드 할 수 없습니다.");
+            return false; 
+        }
+        
+        int houseNumber = 0;
+        foreach(Block block in blocks)
+        {
+            if(block.type == BlockType.HOUSE) { houseNumber++; }
+        }
+
+        int playerReed, playerWood, playerClay, playerStone;
+        switch(houseType)
+        {
+            case HouseType.WOOD:
+                playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
+                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
+
+                if(playerWood < 5 * houseNumber || playerReed < 2 * houseNumber) {
+                    Debug.LogWarning("자원이 부족합니다.");
+                    return false; 
+                }
+                break;
+
+            case HouseType.CLAY:
+                playerClay = ResourceManager.instance.getResourceOfPlayer(player.id, "clay");
+                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
+
+                if(playerClay < 5 * houseNumber || playerReed < 2 * houseNumber) {
+                    Debug.LogWarning("자원이 부족합니다.");
+                    return false; 
+                }
+                break;
+
+            case HouseType.STONE:
+                playerStone = ResourceManager.instance.getResourceOfPlayer(player.id, "stone");
+                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
+
+                if(playerStone < 5 * houseNumber || playerReed < 2 * houseNumber) {
+                    Debug.LogWarning("자원이 부족합니다.");
+                    return false; 
+                }
+                break;
+        }
         return true;
     }
 
-    /// <summary> <summary>
-    /// 플레이어 자원 등을 검사해서 유효성 검사하는 함수
-    /// 집 개수도 확인해야함.
-    /// 하나도 안짓는지도 확인해야함.
-    /// </summary>
-    bool isHouseUpgradeEndAvailable()
+    void UpgradeHouse()
     {
-        Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
-        return true;
+        Debug.Log("HouseType:" + houseType);
+        foreach(Block block in blocks)
+        {
+            if(block.type == BlockType.HOUSE) { block.ChangeHouse(); }
+        }
     }
-
 
     // -------------------------------------------------------------------------
 
@@ -590,6 +612,14 @@ public class PlayerBoard : MonoBehaviour
     public void _TestSetHouse() { blocks[2,4]._TestSetHouse(); }
 
     public void _TestSetFarm() { blocks[2,4]._TestSetFarm(); }
+
+    public void _SetPlayer() { 
+        SetPlayer(GameManager.instance.players[0]); 
+        ResourceManager.instance.addResource(player.id, "wood", 10);
+        ResourceManager.instance.addResource(player.id, "clay", 10);
+        ResourceManager.instance.addResource(player.id, "stone", 10);
+        ResourceManager.instance.addResource(player.id, "reed", 10);
+    }
 
     // -------------------------------------------------------------------------
 

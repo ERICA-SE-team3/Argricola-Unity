@@ -6,6 +6,8 @@ using UnityEngine;
 public class Player
 {
     //1. �ڿ� ����
+    public int id;
+
     public int pig, cow, sheep;
     public int wheat, vegetable;
     public int wood, rock, reed, clay;
@@ -41,7 +43,6 @@ public class Player
         msgdata.room = this.room;
 
         //card
-
 
         return msgdata;
     }
