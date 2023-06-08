@@ -5,21 +5,26 @@ using UnityEngine;
 
 public class Player
 {
-    //1. �ڿ� ����
+    public const int MAXROOM = 5;
+
+    //0. 플레이어 id
     public int id;
 
+    //1. 자원 정보
     public int pig, cow, sheep;
     public int wheat, vegetable;
     public int wood, rock, reed, clay;
     public int food, begging;
     public int family, fence, shed, room;
+
     public List<int> card_owns;
     public List<int> card_hands;
 
-    //2.�� �÷��̾� ����
+
+    //2.선 플레이어 정보
     public bool isFirstPlayer;
 
-    //���� �÷��̾��� ���� ���� �� 
+    //현재 플레이어의 남은 가족 수 
     public int remainFamilyOfCurrentPlayer;
 
     public PlayerMessageData GetPlayerMessageData()
@@ -44,6 +49,7 @@ public class Player
 
         //card
 
+
         return msgdata;
     }
 
@@ -61,7 +67,7 @@ public class Player
 
     public void Init()
     {
-        //1. �ڿ� �ʱ�ȭ
+        //1. 자원 초기화
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
@@ -70,14 +76,11 @@ public class Player
         this.card_owns = new List<int>();
         this.card_hands = new List<int>();
 
-        //2. �� �÷��̾� ���� �ʱ�ȭ
+        //2. 선 플레이어 정보 초기화
         this.isFirstPlayer = false;
 
 
         this.remainFamilyOfCurrentPlayer = this.family;
     }
 
-    
-
-    
 }
