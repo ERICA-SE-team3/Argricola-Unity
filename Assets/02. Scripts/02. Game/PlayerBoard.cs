@@ -715,6 +715,47 @@ public class PlayerBoard : MonoBehaviour
         ResourceManager.instance.addResource(player.id, "reed", 10);
     }
 
+    public void _StartInstallHouse()
+    {
+        if(isHouseInstallStartAvailable())
+        {
+            Debug.Log( "Let's start to make House!" );
+            strategy = houseStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(_EndInstallHouse);
+
+            GameManager.instance.actionFlag = true;
+        }
+        else
+        {
+            Debug.LogWarning("집 설치 행동을 시작할 수 없습니다.");
+        }
+    }
+
+    public void _EndInstallHouse()
+    {
+        if(isHouseInstallEndAvailable())
+        {
+            foreach(Block block in selectedBlocks)
+            {
+                block.ShowTransparent();
+                block.ChangeHouse();
+            }
+            selectedBlocks.Clear();
+
+            GameManager.instance.actionFlag = false;
+            GameManager.instance.endTurnFlag = true;
+
+            Debug.Log( "Making Home is Finish!" );
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
+    }
+    
+
     // -------------------------------------------------------------------------
 
     public void OnHoverEnter(Block block) { strategy.OnHoverEnter(block); }

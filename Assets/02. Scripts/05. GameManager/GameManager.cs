@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public List<Player> players = new List<Player>();
 
     //player의 parent
-    public GameObject Playerboards;
+    public GameObject objPlayerboards;
 
     //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
@@ -82,12 +82,21 @@ public class GameManager : MonoBehaviour
             this.players[i].id = i;
         }
 
-        // //playerboard start
-        // for (int i = 0; i < 4; i++)
-        // {
-        //    PlayerBoard tempB = Playerboards.transform.GetChild(i).gameObject;
-        //    this.playerBoards.Add(tempB);
-        // }
+        //playerboard start
+        for (int i = 0; i < 4; i++)
+        {
+           GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
+           GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
+           GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
+           PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
+           this.playerBoards.Add(tempPB);
+        }
+
+        //Setplayer to playerboard
+        for(int i=0; i<4; i++) {
+            this.playerBoards[i].SetPlayer( this.players[i] );
+        }
+        
 
         //give first to player1 
         this.Init();
@@ -208,17 +217,17 @@ public class GameManager : MonoBehaviour
 
     //--------------------------------------------------------------------------------------------
 
-    //Update to NetworkManager
-    public void sendmsg( ActionType actiontype )
-    {
-        this.message.actionPlayerId = this.currentPlayerId;
-        this.message.actionType = ActionType.BUSH;
-        this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
-        this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
+    // //Update to NetworkManager
+    // public void sendmsg( ActionType actiontype )
+    // {
+    //     this.message.actionPlayerId = this.currentPlayerId;
+    //     this.message.actionType = ActionType.BUSH;
+    //     this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
+    //     this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
         
-        //NetworkManager를 통해 DB와 소통
-        NetworkManager.instance.SendMessage(message);
-    }
+    //     //NetworkManager를 통해 DB와 소통
+    //     NetworkManager.instance.SendMessage(message);
+    // }
 
     public int getCurrentPlayerId()
     {
