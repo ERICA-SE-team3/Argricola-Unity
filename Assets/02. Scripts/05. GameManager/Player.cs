@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player
 {
     //0. 플레이어 id
-    public int PlayerId;
+    public int id;
 
     //1. 자원 정보
     public int pig, cow, sheep;
@@ -96,7 +96,7 @@ public class Player
         //card가 없으면 return false
         if ( this.jobcard_owns.Count == 0 )
         {
-            Debug.Log("Player " + this.PlayerId + " has no jobcards!");
+            Debug.Log("Player " + this.id + " has no jobcards!");
             return false;
         }
 
