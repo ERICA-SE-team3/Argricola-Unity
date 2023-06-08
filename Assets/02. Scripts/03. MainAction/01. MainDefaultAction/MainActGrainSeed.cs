@@ -6,19 +6,25 @@ public class MainActGrainSeed : ButtonParents
 {
     public int playerIndex = 0;
 
-    public int stacked = 1;
     public override void OnClick()
     {
-        // ÀÖ´Ù¸é ´Ï¹« ¾ò±â ÇÔ¼ö È£Ãâ
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", stacked);
+        // ìˆë‹¤ë©´ ë‹ˆë¬´ ì–»ê¸° í•¨ìˆ˜ í˜¸ì¶œ
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
 
-        //È®ÀÎ message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stacked + " wheat!");
+        //ì±„ì†Œ ì¥ìˆ˜ ì¹´ë“œë¥¼ ë³´ìœ ì¤‘ì´ë¼ë©´ ë‚˜ë¬´ 1ê°œ ì¶”ê°€
+        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("vegetableSeller"))
+        {
+            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "vegetable", 1);
+            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 vegetable additionaly because of VEGETABLESELLER");
+        }
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //í™•ì¸ message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " wheat!");
+
+        //í–‰ë™ì„ í•œ í›„ ê°€ì¡± ìˆ˜ í•˜ë‚˜ ì¤„ì´ê¸°
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnì´ ëë‚¬ë‹¤ëŠ” flag 
         GameManager.instance.endTurnFlag = true;
     }
 }

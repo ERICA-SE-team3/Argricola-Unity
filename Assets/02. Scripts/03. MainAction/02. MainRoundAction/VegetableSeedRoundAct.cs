@@ -8,16 +8,16 @@ public class VegetableSeedRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // ÀÖ´Ù¸é ´Ï¹« ¾ò±â ÇÔ¼ö È£Ãâ
+        // ìˆë‹¤ë©´ ë‹ˆë¬´ ì–»ê¸° í•¨ìˆ˜ í˜¸ì¶œ
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "vegetable", 1);
 
-        //È®ÀÎ message
+        //í™•ì¸ message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " vegetable!");
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //í–‰ë™ì„ í•œ í›„ ê°€ì¡± ìˆ˜ í•˜ë‚˜ ì¤„ì´ê¸°
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnì´ ëë‚¬ë‹¤ëŠ” flag 
         GameManager.instance.endTurnFlag = true;
     }
 }

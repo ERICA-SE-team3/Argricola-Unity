@@ -5,31 +5,31 @@ using UnityEngine;
 
 public class Player
 {
-    //0. ÇÃ·¹ÀÌ¾î id
+    //0. í”Œë ˆì´ì–´ id
     public int PlayerId;
 
-    //1. ÀÚ¿ø Á¤º¸
+    //1. ìì› ì •ë³´
     public int pig, cow, sheep;
     public int wheat, vegetable;
     public int wood, rock, reed, clay;
     public int food, begging;
     public int family, fence, shed, room;
 
-    //Á÷¾÷ Ä«µå
+    //ì§ì—… ì¹´ë“œ
     public List<int> jobcard_owns;
     public List<int> jobcard_hands;
 
-    //º¸Á¶¼³ºñ Ä«µå
+    //ë³´ì¡°ì„¤ë¹„ ì¹´ë“œ
     public List<int> subcard_owns;
     public List<int> subcard_hands;
 
-    //ÁÖ¿ä Ä«µå
+    //ì£¼ìš” ì¹´ë“œ
     public List<int> maincard_owns;
 
-    //2.¼± ÇÃ·¹ÀÌ¾î Á¤º¸
+    //2.ì„  í”Œë ˆì´ì–´ ì •ë³´
     public bool isFirstPlayer;
 
-    //ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ ³²Àº °¡Á· ¼ö 
+    //í˜„ì¬ í”Œë ˆì´ì–´ì˜ ë‚¨ì€ ê°€ì¡± ìˆ˜ 
     public int remainFamilyOfCurrentPlayer;
 
     public PlayerMessageData GetPlayerMessageData()
@@ -72,7 +72,7 @@ public class Player
 
     public void Init()
     {
-        //1. ÀÚ¿ø ÃÊ±âÈ­
+        //1. ìì› ì´ˆê¸°í™”
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
@@ -84,7 +84,7 @@ public class Player
         this.subcard_hands = new List<int>();
         this.maincard_owns = new List<int>();
 
-        //2. ¼± ÇÃ·¹ÀÌ¾î Á¤º¸ ÃÊ±âÈ­
+        //2. ì„  í”Œë ˆì´ì–´ ì •ë³´ ì´ˆê¸°í™”
         this.isFirstPlayer = false;
 
 
@@ -93,18 +93,18 @@ public class Player
 
     public bool HasJobCard( string cardName )
     {
-        //card°¡ ¾øÀ¸¸é return false
+        //cardê°€ ì—†ìœ¼ë©´ return false
         if ( this.jobcard_owns.Count == 0 )
         {
             Debug.Log("Player " + this.PlayerId + " has no jobcards!");
             return false;
         }
 
-        //card°¡ ÀÖ´Ù¸é
+        //cardê°€ ìˆë‹¤ë©´
         switch (cardName) 
         {
             case "magician":
-                //magicianÄ«µå°¡ ÀÖ´Ù¸é
+                //magicianì¹´ë“œê°€ ìˆë‹¤ë©´
                 if (this.jobcard_owns.Contains( (int)GameManager.Cards.magician) )
                 {
                     return true;
@@ -125,7 +125,7 @@ public class Player
                 }
                 break;
             case "woodPicker":
-                //magicianÄ«µå°¡ ÀÖ´Ù¸é
+                //magicianì¹´ë“œê°€ ìˆë‹¤ë©´
                 if (this.jobcard_owns.Contains((int)GameManager.Cards.woodPicker))
                 {
                     return true;
@@ -161,7 +161,7 @@ public class Player
                 break;
         }
 
-        //ÇØ´ç Ä«µå°¡ ¾ø´Ù¸é
+        //í•´ë‹¹ ì¹´ë“œê°€ ì—†ë‹¤ë©´
         return false;
     }
 

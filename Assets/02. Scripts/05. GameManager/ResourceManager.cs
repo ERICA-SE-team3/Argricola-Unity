@@ -11,7 +11,7 @@ public class ResourceManager : MonoBehaviour
         ResourceManager.instance = this;
     }
 
-    //¿ì¸®´Â ÀÌ ÇÔ¼ö¸¸ »ç¿ëÇÕ´Ï´Ù,
+    //ìš°ë¦¬ëŠ” ì´ í•¨ìˆ˜ë§Œ ì‚¬ìš©í•©ë‹ˆë‹¤,
     public void addResource( int playerId, string Resourcename, int count )
     {
         switch (Resourcename)
@@ -172,7 +172,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    //ÀÚ¿øµé get ÇÔ¼ö
+    //ìì›ë“¤ get í•¨ìˆ˜
     public int getResourceOfPlayer( int playerId, string Resourcename )
     {
         int result = 0;

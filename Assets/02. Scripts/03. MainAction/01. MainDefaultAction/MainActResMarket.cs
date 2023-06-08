@@ -11,13 +11,13 @@ public class MainActResMarket : ButtonParents
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
 
-        //È®ÀÎ message
+        //í™•ì¸ message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + "reed and stone and food");
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //í–‰ë™ì„ í•œ í›„ ê°€ì¡± ìˆ˜ í•˜ë‚˜ ì¤„ì´ê¸°
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnì´ ëë‚¬ë‹¤ëŠ” flag 
         GameManager.instance.endTurnFlag = true;
 
     }

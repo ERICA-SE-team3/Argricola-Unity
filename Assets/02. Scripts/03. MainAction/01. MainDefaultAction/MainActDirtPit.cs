@@ -6,27 +6,27 @@ public class MainActDirtPit : ButtonParents
 {
     public int playerIndex = 0;
 
-    //stack Á¤º¸ °¡Á®¿À±â
+    //stack ì •ë³´ ê°€ì ¸ì˜¤ê¸°
     int stack;
 
     public override void OnClick()
     {
-        //stack Á¤º¸ °¡Á®¿À±â
+        //stack ì •ë³´ ê°€ì ¸ì˜¤ê¸°
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 
-        // ÀÖ´Ù¸é ´Ï¹« ¾ò±â ÇÔ¼ö È£Ãâ
+        // ìˆë‹¤ë©´ ë‹ˆë¬´ ì–»ê¸° í•¨ìˆ˜ í˜¸ì¶œ
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "clay", stack * 1);
 
-        //È®ÀÎ message
+        //í™•ì¸ message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack * 2 + " clay!");
 
-        //stack ÃÊ±âÈ­
+        //stack ì´ˆê¸°í™”
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")] = 0;
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //í–‰ë™ì„ í•œ í›„ ê°€ì¡± ìˆ˜ í•˜ë‚˜ ì¤„ì´ê¸°
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnì´ ëë‚¬ë‹¤ëŠ” flag 
         GameManager.instance.endTurnFlag = true;
     }
 }
