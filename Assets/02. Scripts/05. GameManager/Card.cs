@@ -19,7 +19,7 @@ public enum Cards
         organicFarmer, //유기 농부
 
         //여러 항목에 걸친 카드
-        pigBreeder //돼지 사육사
+        pigBreeder, //돼지 사육사
 
         //8~15 : 보조 설비 카드
 

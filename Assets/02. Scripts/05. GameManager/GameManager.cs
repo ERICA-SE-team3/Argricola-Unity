@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     //player들을 담을 ArrayList, players
     public List<Player> players = new List<Player>();
 
+    //player의 parent
+    public GameObject Playerboards;
+
     //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
@@ -53,6 +56,9 @@ public class GameManager : MonoBehaviour
     public bool RoundFlag = true;
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
+
+    //3. 농지, 울타리 등등의 행동 시작과 행동 끝 사이에 유저의 선택을 기다려야하는 "추가 행동"을 위한 flag
+    public bool actionFlag = false;
     
     public void Start()
     {
@@ -76,12 +82,12 @@ public class GameManager : MonoBehaviour
             this.players[i].id = i;
         }
 
-        ////playerboard start
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    PlayerBoard tempB = new PlayerBoard();
+        // //playerboard start
+        // for (int i = 0; i < 4; i++)
+        // {
+        //    PlayerBoard tempB = Playerboards.transform.GetChild(i).gameObject;
         //    this.playerBoards.Add(tempB);
-        //}
+        // }
 
         //give first to player1 
         this.Init();
@@ -142,7 +148,11 @@ public class GameManager : MonoBehaviour
             if ( !this.endTurnFlag )
             {
                 //...기다림 == 아무것도 안함
-                Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
+                Debug.Log("Player " + this.currentPlayerId + "Wait to Choose Action... ");
+
+                if ( this.actionFlag ) {
+                    Debug.Log("Player " + this.currentPlayerId + "Wait to End Action... ");
+                }
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
