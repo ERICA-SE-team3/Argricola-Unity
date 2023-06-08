@@ -131,6 +131,8 @@ public class PlayerBoard : MonoBehaviour
             {
                 block.ShowTransparent();
                 block.ChangeHouse();
+                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 5);
+                ResourceManager.instance.minusResource(player.id, "reed", 2);
             }
             selectedBlocks.Clear();
         }
@@ -322,6 +324,7 @@ public class PlayerBoard : MonoBehaviour
                 block.ChangeFarm();
             }
             selectedBlocks.Clear();
+            strategy = new BoardEventStrategy();
         }
         else
         {
@@ -671,7 +674,9 @@ public class PlayerBoard : MonoBehaviour
                     blocks[i,j].CloseSowing();
                 }
             }
-
+            
+            selectedBlocks.Clear();
+            strategy = new BoardEventStrategy();
             // action.EndSowingCallback();
         }
         else
@@ -696,6 +701,26 @@ public class PlayerBoard : MonoBehaviour
 
     // -------------------------------------------------------------------------
 
+    public void Cultivate()
+    {
+        foreach (var block in blocks)
+        {
+            if (block.type == BlockType.FARM && block.seedType != SeedType.NONE)
+            {
+                block.seedCount -= 1;
+                if(block.seedCount == 0)
+                {
+                    block.seedType = SeedType.NONE;
+                }
+                block.RenewSeedUI();
+            }
+        }
+    }
+
+
+
+
+    // -------------------------------------------------------------------------
     /// <summary>
     /// 동물 옮기기 시작
     /// </summary>

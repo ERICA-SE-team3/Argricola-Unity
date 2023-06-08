@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
+
 
 public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -245,6 +247,30 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         {
             seedType = type;
             seedCount = 2;
+        }
+        RenewSeedUI();
+    }
+
+    public void RenewSeedUI()
+    {
+        backgroundParent.transform.Find("Seed").gameObject.SetActive(true);
+
+        if(seedType == SeedType.WHEAT)
+        {
+            backgroundParent.transform.Find("Seed").Find("Wheat").gameObject.SetActive(true);
+            backgroundParent.transform.Find("Seed").Find("Vegetable").gameObject.SetActive(false);
+            backgroundParent.transform.Find("Seed").Find("Wheat").Find("Text").GetComponent<TMP_Text>().text = seedCount.ToString();
+
+        }
+        else if(seedType == SeedType.VEGETABLE)
+        {
+            backgroundParent.transform.Find("Seed").Find("Wheat").gameObject.SetActive(false);
+            backgroundParent.transform.Find("Seed").Find("Vegetable").gameObject.SetActive(true);
+            backgroundParent.transform.Find("Seed").Find("Vegetable").Find("Text").GetComponent<TMP_Text>().text = seedCount.ToString();
+        }
+        else
+        {
+            backgroundParent.transform.Find("Seed").gameObject.SetActive(false);
         }
     }
 
