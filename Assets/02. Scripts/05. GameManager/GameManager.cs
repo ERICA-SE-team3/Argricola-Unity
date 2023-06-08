@@ -50,6 +50,33 @@ public class GameManager : MonoBehaviour
     public bool RoundFlag = true;
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
+
+    public GameObject playerBoard;
+    public GameObject sheepMarket;
+    // 행동 관리하는 Queue 생성
+    public Queue<string> actionQueue = new Queue<string>();
+    // queue에서 하나 꺼낸 행동
+    public string popAction;
+
+    public void PopQueue() {
+        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
+        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
+        if(actionQueue.Count == 0){
+            this.endTurnFlag = true;
+        }
+
+        popAction = actionQueue.Dequeue();
+        
+        if(popAction == "sowing"){
+            board.StartSowing();
+        }
+        else if(popAction == "baking"){
+            // 빵 굽기 행동 시작 (ex. actionBaking())
+        }
+        else if(popAction == "sheepMarket"){
+            sm.sheepMarketStart();
+        }
+    }
     
     public void Start()
     {
@@ -266,7 +293,7 @@ public class GameManager : MonoBehaviour
         //행동 stack 증가
         this.incrementStack();
 
-        //����ī�� Ȱ��ȭ
+        //라운드카드 활성화
         this.roundcards[this.currentRound].SetActive(true);
 
         //currentRoundUpdate
