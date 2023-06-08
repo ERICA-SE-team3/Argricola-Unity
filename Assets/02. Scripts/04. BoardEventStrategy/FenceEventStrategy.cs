@@ -9,6 +9,9 @@ public class FenceEventStrategy : BoardEventStrategy
     public override void OnHoverEnter(Block block) 
     {
         PlayerBoard board = block.board;
+
+        if(block.isSurroundedWithFence()) { block.ShowRed(); return; }
+
         if(isFenceAvailable(block)) 
         {
             Debug.Log("Fence is available");
@@ -17,7 +20,6 @@ public class FenceEventStrategy : BoardEventStrategy
         }
         else if (!board.selectedBlocks.Contains(block))
         {
-            Debug.Log("Farm is unavailable");
             block.ShowRed();
         }
     }
@@ -25,6 +27,10 @@ public class FenceEventStrategy : BoardEventStrategy
     public override void OnHoverExit(Block block) 
     { 
         PlayerBoard board = block.board;
+
+        if(block.isSurroundedWithFence()) {
+            block.ShowTransparent();
+        }
         
         if(!board.selectedBlocks.Contains(block))
         {
@@ -36,23 +42,24 @@ public class FenceEventStrategy : BoardEventStrategy
     { 
         PlayerBoard board = block.board;
 
-        if(!isFenceAvailable(block)) { return; }
+        if(block.isSurroundedWithFence()) { return; }
 
-        if(board.selectedBlocks.Count == 0)
-        {
-            GameObject installButton = board.GetInstallButton();
-            installButton.SetActive(true);
-
-            Button button = installButton.GetComponent<Button>();
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => {
-                board.InstallFence();
-                installButton.SetActive(false);
-            });
-        }
 
         if(isFenceAvailable(block))
         {
+            if(board.selectedBlocks.Count == 0)
+            {
+                GameObject installButton = board.GetInstallButton();
+                installButton.SetActive(true);
+
+                Button button = installButton.GetComponent<Button>();
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() => {
+                    if(board.InstallFence())
+                        installButton.SetActive(false);
+                });
+            }
+            
             board.selectedBlocks.Add(block);
             block.ShowGreen();
         }
@@ -80,6 +87,8 @@ public class FenceEventStrategy : BoardEventStrategy
         bool isBlockAdjacentToFence;
         // Block shouldn't be in selected blocks
         bool isBlockInSelectedBlocks = board.selectedBlocks.Contains(block);
+        // Block's fence should not be surrounded
+        bool isBlockIsSurroundedWithFence = block.isFourSideIsFence();
 
         // Check if block is empty
         isBlockEmpty = block.type == BlockType.EMPTY;
@@ -88,7 +97,7 @@ public class FenceEventStrategy : BoardEventStrategy
         // Check if block is adjacent to a fence
         isBlockAdjacentToFence = IsBlockAdjacentToFence(block);
 
-        return (isBlockEmpty || isBlockFence) && isBlockAdjacentToFence && !isBlockInSelectedBlocks;
+        return (isBlockEmpty || isBlockFence) && isBlockAdjacentToFence && !isBlockInSelectedBlocks && !isBlockIsSurroundedWithFence;
     }
 
     bool IsBlockAdjacentToFence(Block block)

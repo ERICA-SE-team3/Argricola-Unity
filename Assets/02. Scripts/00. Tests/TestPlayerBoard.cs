@@ -16,6 +16,8 @@ public class TestPlayerBoard
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
 
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
+
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
             playerBoard.Start();
@@ -33,6 +35,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
             
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -56,6 +60,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
             
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -81,6 +87,8 @@ public class TestPlayerBoard
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
             
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
+            
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
             playerBoard.Start();
@@ -105,6 +113,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+            
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
 
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -126,6 +136,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
 
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -152,6 +164,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+            
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
 
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -183,6 +197,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
 
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
@@ -217,6 +233,8 @@ public class TestPlayerBoard
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
 
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
+
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
             playerBoard.Start();
@@ -247,6 +265,8 @@ public class TestPlayerBoard
         {
             GameObject manager = InitGameResource();
             GameManager gm = manager.GetComponent<GameManager>();
+
+            ResourceManager.instance.addResource(gm.players[0].id, "wood", 1000);
 
             PlayerBoard playerBoard = InitPlayerBoard();
             playerBoard.player = gm.players[0];
