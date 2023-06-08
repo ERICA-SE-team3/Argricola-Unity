@@ -458,7 +458,21 @@ public class PlayerBoard : MonoBehaviour
         int row = block.board.row;
         int col = block.board.col;
 
-        
+        for(int i = 0; i < 4; i++)
+        {
+            int adjBlockRow = x + dx[i];
+            int adjBlockCol = y + dy[i];
+            if (adjBlockRow < 0 || adjBlockRow >= row || adjBlockCol < 0 || adjBlockCol >= col) continue;
+            if(blocks[adjBlockRow, adjBlockCol].type == BlockType.FENCE)
+            {
+                isFence[i] = true;
+            }
+        }
+
+        if(isFence[0] && isFence[1] && isFence[2] && isFence[3])
+        {
+            block.ChangeFence();
+        }        
     }
     
     // -------------------------------------------------------------------------

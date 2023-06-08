@@ -234,16 +234,12 @@ public class TestPlayerBoard
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
-            // 테스팅 블럭
-            playerBoard.StartInstallFence();
-            playerBoard.OnClick(playerBoard.blocks[1,3]);
-            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
-
+            // 테스팅 블럭 - 자동으로 울타리 처리가 되어있어야 함.
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[2], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[3], false);
+            Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FENCE);
         }
 
         [Test]
