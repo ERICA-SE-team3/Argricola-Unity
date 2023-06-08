@@ -420,6 +420,11 @@ public class PlayerBoard : MonoBehaviour
             block.ChangeFence();
         }
         selectedBlocks.Clear();
+
+        foreach(Block block in blocks)
+        {
+            CheckIsBlockSurroundedWithFence(block);
+        }
     }
 
     void ReInstallFence(Block block)
@@ -439,6 +444,21 @@ public class PlayerBoard : MonoBehaviour
         }
         block.SetFence(fence);
         block.ChangeFence();
+    }
+
+    void CheckIsBlockSurroundedWithFence(Block block)
+    {
+        if(block.type != BlockType.EMPTY) return;
+
+        bool[] isFence = new bool[4];
+
+        int x = block.row;
+        int y = block.col;
+
+        int row = block.board.row;
+        int col = block.board.col;
+
+        
     }
     
     // -------------------------------------------------------------------------
