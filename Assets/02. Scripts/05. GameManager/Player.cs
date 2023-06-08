@@ -54,7 +54,6 @@ public class Player
 
         //card
 
-
         return msgdata;
     }
 

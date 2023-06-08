@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
     //소통할 message 형식
     MessageData message = new MessageData();
 
-    //직업 카드들
-
     //스택이 쌓이는 라운드카드들
     public enum stackBehavior
     {
@@ -55,8 +53,8 @@ public class GameManager : MonoBehaviour
     public bool RoundFlag = true;
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
-
-    private void Start()
+    
+    public void Start()
     {
         //GameManager Singleton
         GameManager.instance = this;
@@ -68,6 +66,7 @@ public class GameManager : MonoBehaviour
         for (int i=0; i<4; i++)
         {
             Player temp = new Player();
+            temp.id = i;
             this.players.Add(temp);
         }
 
@@ -397,4 +396,3 @@ public class GameManager : MonoBehaviour
         return result;
     }
 }
-
