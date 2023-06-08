@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>2023-06-08 - 오전 8:32:48</Generatedon>
-    <Parser>OpenCoverParser</Parser>
+    <Generatedon>6/8/2023 - 11:38:36 AM</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
     <Assemblies>2</Assemblies>
     <Classes>49</Classes>
-    <Files>49</Files>
-    <Coveredlines>567</Coveredlines>
-    <Uncoveredlines>1375</Uncoveredlines>
-    <Coverablelines>1942</Coverablelines>
-    <Totallines>4108</Totallines>
+    <Files>98</Files>
+    <Coveredlines>1139</Coveredlines>
+    <Uncoveredlines>2767</Uncoveredlines>
+    <Coverablelines>3906</Coverablelines>
+    <Totallines>4140</Totallines>
     <Linecoverage>29.1</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="00.Tests" classes="1" coverage="100" coveredlines="199" coverablelines="199" totallines="319" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="TestPlayerBoard" coverage="100" coveredlines="199" coverablelines="199" totallines="319" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="00.Tests" classes="1" coverage="100" coveredlines="399" coverablelines="399" totallines="319" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="TestPlayerBoard" coverage="100" coveredlines="399" coverablelines="399" totallines="319" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
-    <Assembly name="Argricola" classes="48" coverage="21.1" coveredlines="368" coverablelines="1743" totallines="3789" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="ActionBakingBread" coverage="0" coveredlines="0" coverablelines="4" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Block" coverage="28.1" coveredlines="56" coverablelines="199" totallines="308" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="BoardEventStrategy" coverage="0" coveredlines="0" coverablelines="3" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ButtonManager" coverage="0" coveredlines="0" coverablelines="4" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ButtonParents" coverage="0" coveredlines="0" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="CameraManager" coverage="0" coveredlines="0" coverablelines="30" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="CowMarketRoundAct" coverage="11.1" coveredlines="1" coverablelines="9" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="CultivationRoundAct" coverage="0" coveredlines="0" coverablelines="6" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="EasternQuarryRoundAct" coverage="20" coveredlines="2" coverablelines="10" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FarmDevelopRoundAct" coverage="0" coveredlines="0" coverablelines="16" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FarmEventStrategy" coverage="0" coveredlines="0" coverablelines="60" totallines="93" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FenceEventStrategy" coverage="0" coveredlines="0" coverablelines="50" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FencingRoundAct" coverage="0" coveredlines="0" coverablelines="16" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="GameManager" coverage="34.1" coveredlines="57" coverablelines="167" totallines="371" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="GrainUtilizationRoundAct" coverage="0" coveredlines="0" coverablelines="13" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Hand" coverage="0" coveredlines="0" coverablelines="6" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HandleCounter" coverage="0" coveredlines="0" coverablelines="21" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HouseDevelopRoundAct" coverage="0" coveredlines="0" coverablelines="13" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HouseEventStrategy" coverage="0" coveredlines="0" coverablelines="52" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ImprovementsRoundAct" coverage="0" coveredlines="0" coverablelines="13" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActClayPit" coverage="0" coveredlines="0" coverablelines="9" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActCopse" coverage="0" coveredlines="0" coverablelines="13" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActDayLaborer" coverage="0" coveredlines="0" coverablelines="11" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActDirtPit" coverage="0" coveredlines="0" coverablelines="9" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActExpand" coverage="0" coveredlines="0" coverablelines="18" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActFishing" coverage="0" coveredlines="0" coverablelines="13" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActForest" coverage="0" coveredlines="0" coverablelines="13" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActGrainSeed" coverage="0" coveredlines="0" coverablelines="8" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActGrove" coverage="0" coveredlines="0" coverablelines="13" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActReedField" coverage="0" coveredlines="0" coverablelines="9" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActResMarket" coverage="0" coveredlines="0" coverablelines="9" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MainActTrevelingTheater" coverage="0" coveredlines="0" coverablelines="13" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MoveAnimalEventStrategy" coverage="0" coveredlines="0" coverablelines="3" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="NetworkManager" coverage="0" coveredlines="0" coverablelines="103" totallines="172" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="PigMarketRoundAct" coverage="11.1" coveredlines="1" coverablelines="9" totallines="42" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Player" coverage="42.8" coveredlines="15" coverablelines="35" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="PlayerBoard" coverage="55.2" coveredlines="215" coverablelines="389" totallines="602" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="PlayerMessageData" coverage="0" coveredlines="0" coverablelines="16" totallines="143" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ResourceManager" coverage="8.5" coveredlines="17" coverablelines="200" totallines="399" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ShedEventStrategy" coverage="0" coveredlines="0" coverablelines="44" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="SheepMarketRoundAct" coverage="11.1" coveredlines="1" coverablelines="9" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="SowingEventStrategy" coverage="0" coveredlines="0" coverablelines="22" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="StompHelper.StompMessage" coverage="0" coveredlines="0" coverablelines="19" totallines="71" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="StompHelper.StompMessageSerializer" coverage="0" coveredlines="0" coverablelines="30" totallines="65" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="UrgentWishChildrenRoundAct" coverage="0" coveredlines="0" coverablelines="5" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="VegetableSeedRoundAct" coverage="14.2" coveredlines="1" coverablelines="7" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="WesternQuarryRoundAct" coverage="20" coveredlines="2" coverablelines="10" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="WishChildrenRoundAct" coverage="0" coveredlines="0" coverablelines="10" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="Argricola" classes="48" coverage="21.1" coveredlines="740" coverablelines="3507" totallines="3821" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="ActionBakingBread" coverage="0" coveredlines="0" coverablelines="8" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Block" coverage="28.1" coveredlines="112" coverablelines="398" totallines="308" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="BoardEventStrategy" coverage="0" coveredlines="0" coverablelines="6" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ButtonManager" coverage="0" coveredlines="0" coverablelines="8" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ButtonParents" coverage="0" coveredlines="0" coverablelines="4" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="CameraManager" coverage="0" coveredlines="0" coverablelines="60" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="CowMarketRoundAct" coverage="11.1" coveredlines="2" coverablelines="18" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="CultivationRoundAct" coverage="0" coveredlines="0" coverablelines="12" totallines="26" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="EasternQuarryRoundAct" coverage="20" coveredlines="4" coverablelines="20" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FarmDevelopRoundAct" coverage="0" coveredlines="0" coverablelines="32" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FarmEventStrategy" coverage="0" coveredlines="0" coverablelines="120" totallines="93" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FenceEventStrategy" coverage="0" coveredlines="0" coverablelines="100" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FencingRoundAct" coverage="0" coveredlines="0" coverablelines="32" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="GameManager" coverage="34.3" coveredlines="115" coverablelines="335" totallines="372" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="GrainUtilizationRoundAct" coverage="0" coveredlines="0" coverablelines="26" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Hand" coverage="0" coveredlines="0" coverablelines="12" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HandleCounter" coverage="0" coveredlines="0" coverablelines="42" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HouseDevelopRoundAct" coverage="0" coveredlines="0" coverablelines="26" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HouseEventStrategy" coverage="0" coveredlines="0" coverablelines="104" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ImprovementsRoundAct" coverage="0" coveredlines="0" coverablelines="26" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActClayPit" coverage="0" coveredlines="0" coverablelines="18" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActCopse" coverage="0" coveredlines="0" coverablelines="26" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActDayLaborer" coverage="0" coveredlines="0" coverablelines="22" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActDirtPit" coverage="0" coveredlines="0" coverablelines="18" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActExpand" coverage="0" coveredlines="0" coverablelines="36" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActFishing" coverage="0" coveredlines="0" coverablelines="26" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActForest" coverage="0" coveredlines="0" coverablelines="26" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActGrainSeed" coverage="0" coveredlines="0" coverablelines="16" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActGrove" coverage="0" coveredlines="0" coverablelines="26" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActReedField" coverage="0" coveredlines="0" coverablelines="18" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActResMarket" coverage="0" coveredlines="0" coverablelines="18" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainActTrevelingTheater" coverage="0" coveredlines="0" coverablelines="26" totallines="60" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MoveAnimalEventStrategy" coverage="0" coveredlines="0" coverablelines="6" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="NetworkManager" coverage="0" coveredlines="0" coverablelines="206" totallines="172" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="PigMarketRoundAct" coverage="11.1" coveredlines="2" coverablelines="18" totallines="42" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Player" coverage="42.8" coveredlines="30" coverablelines="70" totallines="83" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="PlayerBoard" coverage="54.2" coveredlines="433" coverablelines="798" totallines="632" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="PlayerMessageData" coverage="0" coveredlines="0" coverablelines="32" totallines="143" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ResourceManager" coverage="8.5" coveredlines="34" coverablelines="400" totallines="399" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ShedEventStrategy" coverage="0" coveredlines="0" coverablelines="88" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="SheepMarketRoundAct" coverage="11.1" coveredlines="2" coverablelines="18" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="SowingEventStrategy" coverage="0" coveredlines="0" coverablelines="44" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="StompHelper.StompMessage" coverage="0" coveredlines="0" coverablelines="38" totallines="71" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="StompHelper.StompMessageSerializer" coverage="0" coveredlines="0" coverablelines="60" totallines="65" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="UrgentWishChildrenRoundAct" coverage="0" coveredlines="0" coverablelines="10" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="VegetableSeedRoundAct" coverage="14.2" coveredlines="2" coverablelines="14" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="WesternQuarryRoundAct" coverage="20" coveredlines="4" coverablelines="20" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="WishChildrenRoundAct" coverage="0" coveredlines="0" coverablelines="20" totallines="30" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
   </Coverage>
 </CoverageReport>
