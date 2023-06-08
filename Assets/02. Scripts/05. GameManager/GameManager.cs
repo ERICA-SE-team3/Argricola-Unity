@@ -79,14 +79,10 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
 
-    private void Awake()
+    private void Start()
     {
         //GameManager Singleton
         GameManager.instance = this;
-    }
-
-    private void Start()
-    {
 
         Debug.Log("Let's Ready the Game!!!");  
 
@@ -101,7 +97,7 @@ public class GameManager : MonoBehaviour
         //PlayerId 부여
         for(int i=0; i<4; i++)
         {
-            this.players[i].PlayerId = i;
+            this.players[i].id = i;
         }
 
         ////playerboard start
