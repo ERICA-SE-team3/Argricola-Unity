@@ -93,6 +93,9 @@ public class GameManager : MonoBehaviour
         else if(popAction == "westernQuarry"){
             wq.WesternQuarryStart();
         }
+        else if(popAction == "houseDevelop"){
+            board.StartUpgradeHouse();
+        }
     }
     
     public void Start()

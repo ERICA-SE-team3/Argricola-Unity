@@ -173,6 +173,7 @@ public class PlayerBoard : MonoBehaviour
             houseType += 1; 
             UpgradeHouse(); 
         }
+        GameManager.instance.PopQueue();
     }
 
     /// <summary>
