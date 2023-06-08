@@ -16,6 +16,9 @@ public class PlayerBoard : MonoBehaviour
     int[] dy = {0,0,-1,1};   
 
     public GameObject blockPrefab, confirmButton;
+    
+    GameObject BoardGrid, InstallButton;
+
     public Player player;
     public Block[,] blocks;
     public HouseType houseType;
@@ -73,13 +76,16 @@ public class PlayerBoard : MonoBehaviour
 
     public void InitBoard(Player player)
     {
+        BoardGrid = transform.Find("BoardGrid").gameObject;
+        InstallButton = transform.Find("InstallButton").gameObject;
+
         blocks = new Block[row, col];
         for(int i = 0; i < row; i++)
         {
             for(int j = 0; j < col; j++)
             {
                 GameObject tmp = Instantiate(blockPrefab);
-                tmp.transform.SetParent(transform);
+                tmp.transform.SetParent(BoardGrid.transform);
                 tmp.transform.localScale = Vector3.one;
                 Block tmpBlock = tmp.GetComponent<Block>();
                 tmpBlock.Init(this, i, j, BlockType.EMPTY);
@@ -93,6 +99,11 @@ public class PlayerBoard : MonoBehaviour
     {
         blocks[house1x, house1y].ChangeHouse();
         blocks[house2x, house2y].ChangeHouse();
+    }
+
+    public GameObject GetInstallButton()
+    {
+        return InstallButton;
     }
 
     //-------------------------------------------------------------------------- 
@@ -321,7 +332,8 @@ public class PlayerBoard : MonoBehaviour
     {
         if(IsInstallFenceEndAvailable())
         {
-            InstallFence();
+            strategy = new BoardEventStrategy();
+            // InstallFence();
         }
         else
         {
@@ -340,6 +352,11 @@ public class PlayerBoard : MonoBehaviour
 
     bool IsInstallFenceEndAvailable()
     {
+        if(selectedBlocks.Count != 0) {
+            Debug.LogWarning("울타리 설치를 완료해주세요.");
+            return false; 
+        }
+
         foreach(Block block in selectedBlocks)
         {
             if(block.type == BlockType.FARM)
@@ -357,7 +374,7 @@ public class PlayerBoard : MonoBehaviour
         return true;
     }
 
-    void InstallFence()
+    public void InstallFence()
     {
         Debug.LogWarning("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
         for (int j=0;j<selectedBlocks.Count;j++)

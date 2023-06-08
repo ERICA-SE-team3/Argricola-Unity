@@ -21,7 +21,8 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FENCE);
@@ -38,11 +39,12 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallShed();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.EndInstallShed();
 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].hasShed, true);
@@ -60,13 +62,14 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallFarm();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.EndInstallFarm();
 
+            // LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
 
-            LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FARM);
@@ -83,13 +86,14 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallHouse();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,0]);
+            playerBoard.OnClick(playerBoard.blocks[0,0]);
             playerBoard.EndInstallHouse();
 
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,0]);
+            // LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
 
-            LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
+            playerBoard.StartInstallFence();
+            playerBoard.OnClick(playerBoard.blocks[0,0]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[0,0].type, BlockType.HOUSE);
@@ -107,7 +111,8 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
             
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], true);
@@ -127,11 +132,13 @@ public class TestPlayerBoard
             playerBoard.Start();
 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[2,3]);
+            playerBoard.OnClick(playerBoard.blocks[2,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[2,3].fence[0], false);
@@ -150,25 +157,25 @@ public class TestPlayerBoard
             playerBoard.player = gm.players[0];
             playerBoard.Start();
 
-            // 상
+            // 상,우 
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,3]);
+            playerBoard.OnClick(playerBoard.blocks[0,3]);
+            playerBoard.OnClick(playerBoard.blocks[0,4]);
+            playerBoard.OnClick(playerBoard.blocks[1,4]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
-            // 하
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[2,3]);
-            playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
-            Assert.AreEqual(playerBoard.blocks[1,3].fence[1], false);
+            Assert.AreEqual(playerBoard.blocks[1,3].fence[1], true);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[2], true);
-            Assert.AreEqual(playerBoard.blocks[1,3].fence[3], true);
+            Assert.AreEqual(playerBoard.blocks[1,3].fence[3], false);
         }
 
         [Test]
@@ -181,30 +188,26 @@ public class TestPlayerBoard
             playerBoard.player = gm.players[0];
             playerBoard.Start();
 
-            // 상
+            // 상, 하, 우
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,3]);
-            playerBoard.EndInstallFence();
-
-            // 하
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[2,3]);
-            playerBoard.EndInstallFence();
-
-            // 좌
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,2]);
+            playerBoard.OnClick(playerBoard.blocks[0,3]);
+            playerBoard.OnClick(playerBoard.blocks[0,4]);
+            playerBoard.OnClick(playerBoard.blocks[1,4]);
+            playerBoard.OnClick(playerBoard.blocks[2,4]);
+            playerBoard.OnClick(playerBoard.blocks[2,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], false);
-            Assert.AreEqual(playerBoard.blocks[1,3].fence[2], false);
-            Assert.AreEqual(playerBoard.blocks[1,3].fence[3], true);
+            Assert.AreEqual(playerBoard.blocks[1,3].fence[2], true);
+            Assert.AreEqual(playerBoard.blocks[1,3].fence[3], false);
         }
 
         
@@ -218,29 +221,23 @@ public class TestPlayerBoard
             playerBoard.player = gm.players[0];
             playerBoard.Start();
 
-            // 상
+            // 상, 하, 좌, 우
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,3]);
-            playerBoard.EndInstallFence();
-
-            // 하
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[2,3]);
-            playerBoard.EndInstallFence();
-
-            // 좌
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,2]);
-            playerBoard.EndInstallFence();
-
-            // 우
-            playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,4]);
+            playerBoard.OnClick(playerBoard.blocks[0,3]);
+            playerBoard.OnClick(playerBoard.blocks[0,4]);
+            playerBoard.OnClick(playerBoard.blocks[1,4]);
+            playerBoard.OnClick(playerBoard.blocks[2,4]);
+            playerBoard.OnClick(playerBoard.blocks[2,3]);
+            playerBoard.OnClick(playerBoard.blocks[2,2]);
+            playerBoard.OnClick(playerBoard.blocks[1,2]);
+            playerBoard.OnClick(playerBoard.blocks[0,2]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
@@ -261,14 +258,16 @@ public class TestPlayerBoard
 
             // 3개 설치
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[0,3]);
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[2,3]);
+            playerBoard.OnClick(playerBoard.blocks[0,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[2,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
-            playerBoard.selectedBlocks.Add(playerBoard.blocks[1,3]);
+            playerBoard.OnClick(playerBoard.blocks[1,3]);
+            playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
             playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], true);
@@ -298,8 +297,7 @@ public class TestPlayerBoard
 
         public PlayerBoard InitPlayerBoard()
         {
-            GameObject obj = new GameObject();
-            obj.AddComponent<PlayerBoard>();
+            GameObject obj = Object.Instantiate(Resources.Load<GameObject>("01. Prefabs/PlayerBoard"));
 
             GameObject confirmButton = new GameObject();
             confirmButton.AddComponent<Button>();

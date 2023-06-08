@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class FenceEventStrategy : BoardEventStrategy
 {
@@ -35,6 +36,21 @@ public class FenceEventStrategy : BoardEventStrategy
     { 
         PlayerBoard board = block.board;
 
+        if(!isFenceAvailable(block)) { return; }
+
+        if(board.selectedBlocks.Count == 0)
+        {
+            GameObject installButton = board.GetInstallButton();
+            installButton.SetActive(true);
+
+            Button button = installButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => {
+                board.InstallFence();
+                installButton.SetActive(false);
+            });
+        }
+
         if(isFenceAvailable(block))
         {
             board.selectedBlocks.Add(block);
@@ -42,6 +58,11 @@ public class FenceEventStrategy : BoardEventStrategy
         }
         else if (board.selectedBlocks.Contains(block))
         {
+            if(board.selectedBlocks.Count == 1)
+            {
+                GameObject installButton = board.GetInstallButton();
+                installButton.SetActive(false);
+            }
             board.selectedBlocks.Remove(block);
             block.ShowTransparent();
         }
