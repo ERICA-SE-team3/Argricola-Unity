@@ -80,6 +80,10 @@ public class FenceEventStrategy : BoardEventStrategy
         PlayerBoard board = block.board;
 
         // 선택한 애들이랑, 기존 fence들까지 해서 인접해있는지 확인.
+        foreach(Block selectedBlock in board.selectedBlocks)
+        {
+            
+        }
         return true;
     }
 }
