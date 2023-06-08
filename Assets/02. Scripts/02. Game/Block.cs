@@ -14,7 +14,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public bool hasShed;
     public bool[] fence;
     public int cow, pig, sheep, family;
-    public SeedType seedType;
+    public SeedType seedType, sowingType;
     public int seedCount;
     
     public void Init(PlayerBoard board, int row, int col, BlockType type)
@@ -59,6 +59,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public bool ChangeFarm()
     {
+        Debug.Log("ChangeFarm");
         currentBackground?.SetActive(false);
         currentBackground = backgroundParent.transform.Find("Farm").gameObject;
         currentBackground.SetActive(true);
@@ -125,6 +126,81 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         // hex : #FFFFFFF00
         empty.color = new Color(255,255,255,0);
         return true;
+    }
+
+    public void ShowSowing()
+    {
+        backgroundParent.transform.Find("Sowing").gameObject.SetActive(true);
+        sowingType = SeedType.NONE;
+        // RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+        // // hex : #FFFFFFF00
+        // empty.color = new Color(255,255,255,0.725f);
+    }
+
+    public void CloseSowing()
+    {
+        backgroundParent.transform.Find("Sowing").gameObject.SetActive(false);
+        sowingType = SeedType.NONE;
+    }
+
+    public void ClickWheat() {ClickSeed(SeedType.WHEAT);}
+    public void ClickVegetable() {ClickSeed(SeedType.VEGETABLE);}
+
+    public void ClickSeed(SeedType seed)
+    {
+        if(sowingType == seed)
+        {
+            ActivateSeed(sowingType, false);
+        }
+        else
+        {
+            if(sowingType != SeedType.NONE)
+                ActivateSeed(sowingType, false);
+            ActivateSeed(seed, true);
+        }
+    }
+
+    public void ActivateSeed(SeedType type, bool isActive)
+    {
+        if(type == SeedType.WHEAT)
+        {
+            if(isActive)
+            {
+                backgroundParent.transform.Find("Sowing").Find("Wheat").Find("isActive").gameObject.SetActive(true);
+                sowingType = SeedType.WHEAT;
+                seedCount = 3;
+            }
+            else
+            {
+                backgroundParent.transform.Find("Sowing").Find("Wheat").Find("isActive").gameObject.SetActive(false);
+                sowingType = SeedType.NONE;
+                seedCount = 0;
+            }
+        }
+        else if(type == SeedType.VEGETABLE)
+        {
+            if(isActive)
+            {
+                backgroundParent.transform.Find("Sowing").Find("Vegetable").Find("isActive").gameObject.SetActive(true);
+                sowingType = SeedType.VEGETABLE;
+                seedCount = 2;
+            }
+            else
+            {
+                backgroundParent.transform.Find("Sowing").Find("Vegetable").Find("isActive").gameObject.SetActive(false);
+                sowingType = SeedType.NONE;
+                seedCount = 0;
+            }
+        }
+    }
+
+
+    public void ShowConfirm()
+    {
+        // backgroundParent.transform.Find("Empty").gameObject.SetActive(true);
+        // RawImage empty = backgroundParent.transform.Find("Empty").GetComponent<RawImage>();
+        // // hex : #FFFFFFF00
+        // empty.color = new Color(255,255,255,0.725f);
     }
 
     string GetHouseBackgroundName(HouseType type)
