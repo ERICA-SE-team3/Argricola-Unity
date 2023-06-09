@@ -4419,6 +4419,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 445845075105420076, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 461540512528233731, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6991,6 +6995,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3848033742748496358, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.b
+      value: 0.67058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848033742748496358, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848033742748496358, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.15294118
+      objectReference: {fileID: 0}
     - target: {fileID: 3901351251809994372, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7302,6 +7318,18 @@ PrefabInstance:
     - target: {fileID: 4196633545476637276, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263695676522274928, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.b
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263695676522274928, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263695676522274928, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.2627451
       objectReference: {fileID: 0}
     - target: {fileID: 4273062090271469393, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7806,6 +7834,18 @@ PrefabInstance:
     - target: {fileID: 5009210596452211427, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090942304701021781, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.b
+      value: 0.015686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090942304701021781, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 0.40784317
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090942304701021781, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 5118816190352267711, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12052,10 +12092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  playerReed: 0
-  playerWood: 0
-  playerClay: 0
-  playerRock: 0
 --- !u!1 &1384011544
 GameObject:
   m_ObjectHideFlags: 0
