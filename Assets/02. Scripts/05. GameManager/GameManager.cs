@@ -263,6 +263,7 @@ public class GameManager : MonoBehaviour
             if ( this.players[i].isFirstPlayer )
             {
                 this.currentPlayerId = i;
+                SidebarManager.instance.HighlightCurrentPlayer(i);
                 break;
             }
         }
@@ -271,6 +272,7 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
+        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 
