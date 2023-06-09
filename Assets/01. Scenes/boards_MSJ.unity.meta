@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/01. Scenes/boards_MSJ.unity.meta
 guid: c6c26901bee0c4b4286155c9bc34fe85
+========
+guid: c1d573e1be93449dca3ca8a04036e474
+>>>>>>>> develop:Assets/04. Packages/NuGetForUnity.3.1.0.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
