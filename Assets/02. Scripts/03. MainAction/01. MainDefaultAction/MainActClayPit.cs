@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class MainActClayPit : ButtonParents
 {
-<<<<<<< HEAD
-=======
-
->>>>>>> fd47d86 (FIX : review 요청사항 + 메인판 활동 농장확장 구현)
     int stack;
-
     public override void OnClick()
     {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
