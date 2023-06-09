@@ -34,7 +34,7 @@ public class AnimalAction : PlayerBoardAction
         else
         {
             Debug.LogWarning("동물 옮길 수 없습니다. 다시 선택해주세요.");
-        }
+        } 
     }
 
     public override bool IsStartInstall()
