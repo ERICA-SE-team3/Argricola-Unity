@@ -7,7 +7,7 @@ public class GrainUtilizationRoundAct : ButtonParents
     /* 곡식활용 행동 : 씨뿌리기 그리고 또는 빵굽기
 
     1. OnClick 시 씨뿌릴건지 / 빵구울건지 물어봐야함
-    2-1. 씨 뿌린다면
+    2. 씨 뿌린다면
         - startsowing()
         - endsowingcallback() -> 빵구울건지 물어봄
     3. 사용자에게 빵굽기행동 할건지 말건지 물어봄
@@ -19,23 +19,12 @@ public class GrainUtilizationRoundAct : ButtonParents
     // ActionType type = ActionType.GrainUtilizationRoundAct;
     
     public override void OnClick(){
-        bool shouldSowing = true; // 씨뿌리기 할건지? (일단 true)
-
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        if (shouldSowing == true) {
-            // StartSowing(this);
-        }
-        else {
-            // StartBaking();
-        }
-
-    }
-
-    public void EndSowingCallback()
-    {   // 씨뿌리기 끝나고 빵구울건지 그냥 끝낼건지
-        bool shouldBaking = true; 
-        if(shouldBaking == true) {
-            // StartBaking();
-        }
+        GameManager.instance.actionQueue.Enqueue("sowing");
+        GameManager.instance.actionQueue.Enqueue("baking");
+        // foreach (string item in GameManager.instance.actionQueue) {
+        //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
+        // }
+        GameManager.instance.PopQueue(); 
     }
 }

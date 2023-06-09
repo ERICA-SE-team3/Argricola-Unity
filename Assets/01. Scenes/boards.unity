@@ -2982,7 +2982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &682423304
 GameObject:
@@ -8360,7 +8360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &1439863180
 GameObject:
@@ -9182,7 +9182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &1749828427
 GameObject:
@@ -9195,6 +9195,7 @@ GameObject:
   - component: {fileID: 1749828429}
   - component: {fileID: 1749828428}
   - component: {fileID: 1749828430}
+  - component: {fileID: 1749828431}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -9282,6 +9283,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1862076306}
+--- !u!114 &1749828431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749828427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e8214b4a0feab4cb57cdab9f7df6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBoards: []
+  stackOfRoundCard: 
+  currentPlayerId: 0
+  currentRound: 0
+  RoundFlag: 1
+  endTurnFlag: 1
 --- !u!1 &1813307286
 GameObject:
   m_ObjectHideFlags: 0
@@ -11066,7 +11085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7704917561937125421, guid: ee7bd8ec7950ded48a2cf28fe7337384, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7704917561937125421, guid: ee7bd8ec7950ded48a2cf28fe7337384, type: 3}
       propertyPath: m_AnchorMax.x

@@ -173,6 +173,7 @@ public class PlayerBoard : MonoBehaviour
             houseType += 1; 
             UpgradeHouse(); 
         }
+        GameManager.instance.PopQueue();
     }
 
     /// <summary>
@@ -339,6 +340,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogError("설치할 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     bool IsInstallFenceStartAvailable()
@@ -631,6 +633,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogWarning("씨 뿌릴 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     bool IsSowingStartAvailable()
