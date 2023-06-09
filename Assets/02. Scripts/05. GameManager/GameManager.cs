@@ -96,7 +96,14 @@ public class GameManager : MonoBehaviour
         else if(popAction == "houseDevelop"){
             board.StartUpgradeHouse();
         }
+        else if(popAction == "houseBuild"){
+            board.StartInstallHouse();
+        }
+        else if(popAction == "shedBuild"){
+            board.StartInstallShed();
+        }
     }
+
     
     public void Start()
     {
