@@ -18,12 +18,12 @@ public class SidebarManager : MonoBehaviour
     void Start()
     {
         for(int i = 0; i < 4; i++){
-            sidebarUpdate(i);
+            SidebarUpdate(i);
         }
     }
 
     // Update is called once per frame
-    public void sidebarUpdate(int playerIndex){
+    public void SidebarUpdate(int playerIndex){
         GameObject sidebarPlayerObject = players[playerIndex];
         sidebarPlayerObject.transform.Find("woodObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].wood.ToString();
         sidebarPlayerObject.transform.Find("clayObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].clay.ToString();

@@ -77,7 +77,7 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { roomIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
-        SidebarManager.instance.sidebarUpdate(playerId);
+        SidebarManager.instance.SidebarUpdate(playerId);
     }
 
     public void minusResource(int playerId, string Resourcename, int count)
@@ -145,7 +145,7 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { roomDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
-        SidebarManager.instance.sidebarUpdate(playerId);
+        SidebarManager.instance.SidebarUpdate(playerId);
     }
 
     public void PrintResourceOfPlayer()
