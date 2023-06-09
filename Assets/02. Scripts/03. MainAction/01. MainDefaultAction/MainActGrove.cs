@@ -15,8 +15,8 @@ public class MainActGrove : ButtonParents
 
     public int playerIndex = 0;
 
-    // player 의 wood 개수 가져오기
-    public int wood;
+    // 누적되어있는 나무의 개수를 정의
+    public int woods;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     //stack 정보 가져오기
