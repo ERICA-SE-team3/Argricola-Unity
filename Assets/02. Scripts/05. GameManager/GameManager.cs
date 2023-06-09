@@ -112,6 +112,9 @@ public class GameManager : MonoBehaviour
         else if(popAction == "cowMarket"){
             cm.CowMarketStart();
         }
+        else if(popAction == "cultivation"){
+            board.StartInstallFarm();
+        }
     }
     
     public void Start()
