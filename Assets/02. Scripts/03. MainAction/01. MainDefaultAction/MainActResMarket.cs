@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class MainActResMarket : ButtonParents
 {
-    public int playerIndex = 0;
     public override void OnClick()
     {
+
+        // ï¿½Ö´Ù¸ï¿½ ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
 
-        //È®ÀÎ message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + "reed and stone and food");
+        //È®ï¿½ï¿½ message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " reed/stone/food!");
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½ flag 
         GameManager.instance.endTurnFlag = true;
 
     }

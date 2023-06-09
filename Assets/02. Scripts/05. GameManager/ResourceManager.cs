@@ -11,7 +11,7 @@ public class ResourceManager : MonoBehaviour
         ResourceManager.instance = this;
     }
 
-    //¿ì¸®´Â ÀÌ ÇÔ¼ö¸¸ »ç¿ëÇÕ´Ï´Ù,
+    //ï¿½ì¸®ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½,
     public void addResource( int playerId, string Resourcename, int count )
     {
         switch (Resourcename)
@@ -77,6 +77,7 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { roomIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
+        SidebarManager.instance.sidebarUpdate(playerId);
     }
 
     public void minusResource(int playerId, string Resourcename, int count)
@@ -144,6 +145,7 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { roomDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
         }
+        SidebarManager.instance.sidebarUpdate(playerId);
     }
 
     public void PrintResourceOfPlayer()
@@ -171,7 +173,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    //ÀÚ¿øµé get ÇÔ¼ö
+    //ï¿½Ú¿ï¿½ï¿½ï¿½ get ï¿½Ô¼ï¿½
     public int getResourceOfPlayer( int playerId, string Resourcename )
     {
         int result = 0;

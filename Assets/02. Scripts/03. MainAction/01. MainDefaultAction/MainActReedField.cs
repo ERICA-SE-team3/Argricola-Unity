@@ -1,32 +1,30 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MainActReedField : ButtonParents
 {
-    public int playerIndex = 0;
-
-    //stack Á¤º¸ °¡Á®¿À±â
     int stack;
 
     public override void OnClick()
     {
-        //stack Á¤º¸ °¡Á®¿À±â
+        //stack ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
-        // ÀÖ´Ù¸é ´Ï¹« ¾ò±â ÇÔ¼ö È£Ãâ
+        // ï¿½Ö´Ù¸ï¿½ ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
 
-        //È®ÀÎ message
+        //È®ï¿½ï¿½ message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " reed!");
 
-        //stack ÃÊ±âÈ­
+        //stack ï¿½Ê±ï¿½È­
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")] = 0;
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
+        //ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turnÀÌ ³¡³µ´Ù´Â flag 
+        //turnï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù´ï¿½ flag 
         GameManager.instance.endTurnFlag = true;
+
     }
 }
