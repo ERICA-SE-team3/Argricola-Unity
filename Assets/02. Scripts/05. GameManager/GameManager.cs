@@ -264,6 +264,7 @@ public class GameManager : MonoBehaviour
             {
                 this.currentPlayerId = i;
                 SidebarManager.instance.HighlightCurrentPlayer(i);
+                SidebarManager.instance.FirstPlayerIcon(i);
                 break;
             }
         }

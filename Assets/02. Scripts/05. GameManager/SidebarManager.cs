@@ -50,6 +50,17 @@ public class SidebarManager : MonoBehaviour
                 sidebarPlayerObject.GetComponentInChildren<Outline>().enabled = false;
             }
         }
+    }
 
+    public void FirstPlayerIcon(int playerIndex){
+        GameObject sidebarPlayerObject;
+        for(int i = 0; i < 4; i++){
+            sidebarPlayerObject = players[i];
+            if(i == playerIndex){
+                sidebarPlayerObject.transform.Find("firstObject").Find("firstPlayer").GetComponent<Image>().enabled = true;
+            }else{
+                sidebarPlayerObject.transform.Find("firstObject").Find("firstPlayer").GetComponent<Image>().enabled = false;
+            }
+        }
     }
 }
