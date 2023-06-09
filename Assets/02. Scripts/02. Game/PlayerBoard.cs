@@ -131,6 +131,8 @@ public class PlayerBoard : MonoBehaviour
             {
                 block.ShowTransparent();
                 block.ChangeHouse();
+                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 5);
+                ResourceManager.instance.minusResource(player.id, "reed", 2);
             }
             selectedBlocks.Clear();
         }
@@ -148,6 +150,49 @@ public class PlayerBoard : MonoBehaviour
     /// <returns></returns>
     bool isHouseInstallStartAvailable()
     {
+        if(player.room >= Player.MAXROOM)
+        {
+            Debug.LogWarning("더이상 집을 지을 수 없습니다.");
+            return false;
+        }
+
+        int playerReed, playerWood, playerClay, playerStone;
+        playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
+        playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
+        playerClay = ResourceManager.instance.getResourceOfPlayer(player.id, "clay");
+        playerStone = ResourceManager.instance.getResourceOfPlayer(player.id, "stone");
+
+        if(playerReed < 2)
+        {
+            Debug.LogWarning("갈대가 부족합니다.");
+            return false;
+        }
+
+        switch(houseType)
+        {
+            case HouseType.WOOD:
+                if(playerWood < 5)
+                {
+                    Debug.LogWarning("목재가 부족합니다.");
+                    return false;
+                }
+                break;
+            case HouseType.CLAY:
+                if(playerClay < 5)
+                {
+                    Debug.LogWarning("점토가 부족합니다.");
+                    return false;
+                }
+                break;
+            case HouseType.STONE:
+                if(playerStone < 5)
+                {
+                    Debug.LogWarning("돌이 부족합니다.");
+                    return false;
+                }
+                break;
+        }
+
         Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
@@ -233,7 +278,11 @@ public class PlayerBoard : MonoBehaviour
         Debug.Log("HouseType:" + houseType);
         foreach(Block block in blocks)
         {
-            if(block.type == BlockType.HOUSE) { block.ChangeHouse(); }
+            if(block.type == BlockType.HOUSE) {
+                block.ChangeHouse(); 
+                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 5);
+                ResourceManager.instance.minusResource(player.id, "reed", 2);
+            }
         }
     }
 
@@ -276,6 +325,7 @@ public class PlayerBoard : MonoBehaviour
                 block.ChangeFarm();
             }
             selectedBlocks.Clear();
+            strategy = new BoardEventStrategy();
         }
         else
         {
@@ -480,7 +530,7 @@ public class PlayerBoard : MonoBehaviour
 
             var block = selectedBlocks[j];
             block.ShowTransparent();
-            
+
             bool[] fence = new bool[4];
             
             for (int i=0;i<4;i++) {
@@ -626,7 +676,9 @@ public class PlayerBoard : MonoBehaviour
                     blocks[i,j].CloseSowing();
                 }
             }
-
+            
+            selectedBlocks.Clear();
+            strategy = new BoardEventStrategy();
             // action.EndSowingCallback();
         }
         else
@@ -652,6 +704,27 @@ public class PlayerBoard : MonoBehaviour
 
     // -------------------------------------------------------------------------
 
+    public void Cultivate()
+    {
+        foreach (var block in blocks)
+        {
+            if (block.type == BlockType.FARM && block.seedType != SeedType.NONE)
+            {
+                block.seedCount -= 1;
+                ResourceManager.instance.addResource(player.id, block.seedType.ToString().ToLower(), 1);
+                if(block.seedCount == 0)
+                {
+                    block.seedType = SeedType.NONE;
+                }
+                block.RenewSeedUI();
+            }
+        }
+    }
+
+
+
+
+    // -------------------------------------------------------------------------
     /// <summary>
     /// 동물 옮기기 시작
     /// </summary>
