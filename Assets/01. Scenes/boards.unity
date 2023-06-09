@@ -2973,7 +2973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &682423304
 GameObject:
@@ -12203,7 +12203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  food: 0
+  foods: 0
   isPlayerTurn: 1
 --- !u!1 &1396737648
 GameObject:
@@ -12352,7 +12352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  food: 0
+  foods: 0
   isPlayerTurn: 1
 --- !u!1 &1422285767
 GameObject:
@@ -12501,7 +12501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &1439863180
 GameObject:
@@ -13323,7 +13323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  wood: 0
+  woods: 0
   isPlayerTurn: 1
 --- !u!1 &1749828427
 GameObject:
@@ -13440,10 +13440,15 @@ MonoBehaviour:
   stackOfRoundCard: 
   currentPlayerId: 0
   currentRound: 0
-  roundList: {fileID: 0}
+  roundList: {fileID: 1200046603}
   roundcards: []
   RoundFlag: 1
-  endTurnFlag: 0
+  endTurnFlag: 1
+  playerBoard: {fileID: 0}
+  sheepMarket: {fileID: 0}
+  wishChildren: {fileID: 0}
+  westernQuarry: {fileID: 0}
+  popAction: 
 --- !u!1 &1813307286
 GameObject:
   m_ObjectHideFlags: 0
@@ -15227,7 +15232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7704917561937125421, guid: ee7bd8ec7950ded48a2cf28fe7337384, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7704917561937125421, guid: ee7bd8ec7950ded48a2cf28fe7337384, type: 3}
       propertyPath: m_AnchorMax.x
