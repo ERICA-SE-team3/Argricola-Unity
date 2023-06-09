@@ -11,21 +11,16 @@ public class MainActExpand : ButtonParents
     public int playerRock;
     public override void OnClick()
     {
-        playerReed = ResourceManager.instance.getResourceOfPlayer(playerIndex, "reed");
-        playerWood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
-        playerClay = ResourceManager.instance.getResourceOfPlayer(playerIndex, "dirt");
-        playerRock = ResourceManager.instance.getResourceOfPlayer(playerIndex, "Rock");
-
-        if(playerReed > 1){
-            if(playerWood > 4){
-                ResourceManager.instance.minusResource(playerIndex, "reed", 2);
-                ResourceManager.instance.minusResource(playerIndex, "wood", 5);
-                ResourceManager.instance.addResource(playerIndex, "room", 1);
-            }
-        }
-        if(playerWood > 1){
-            ResourceManager.instance.minusResource(playerIndex, "wood", 2);
-            ResourceManager.instance.addResource(playerIndex, "shed", 1);
-        }
+        //그리고 또는 외양간 짓기
     }
+
+//====================================================================
+
+    public void _OnClick() {
+        //방 만들기
+        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartInstallHouse();
+
+        //
+    }
+
 }

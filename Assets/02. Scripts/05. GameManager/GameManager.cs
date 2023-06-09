@@ -156,11 +156,14 @@ public class GameManager : MonoBehaviour
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
-                //...기다림 == 아무것도 안함
-                Debug.Log("Player " + this.currentPlayerId + "Wait to Choose Action... ");
-
+                //actionFlag on
                 if ( this.actionFlag ) {
                     Debug.Log("Player " + this.currentPlayerId + "Wait to End Action... ");
+                }
+
+                //...기다림 == 아무것도 안함
+                else {
+                    Debug.Log("Player " + this.currentPlayerId + "Wait to Choose Action... ");
                 }
             }
 

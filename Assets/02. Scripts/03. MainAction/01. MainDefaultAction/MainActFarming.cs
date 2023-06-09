@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class MainActFarming : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    //===============================================
+    public void _OnClick() {
+        //농지
+        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartInstallFarm();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //
     }
 }

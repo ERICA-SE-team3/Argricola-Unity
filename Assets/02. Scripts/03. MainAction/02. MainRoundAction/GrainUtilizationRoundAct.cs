@@ -38,4 +38,15 @@ public class GrainUtilizationRoundAct : ButtonParents
             // StartBaking();
         }
     }
+
+
+    public void _OnClick() {
+        //씨 뿌리기
+        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartSowing();
+
+        //그리고 또는
+
+        //빵굽기
+    }
+
 }

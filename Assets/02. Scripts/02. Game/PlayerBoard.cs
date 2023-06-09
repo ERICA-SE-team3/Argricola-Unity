@@ -715,7 +715,7 @@ public class PlayerBoard : MonoBehaviour
         ResourceManager.instance.addResource(player.id, "reed", 10);
     }
 
-    public void _StartInstallHouse()
+    public void TestStartInstallHouse()
     {
         if(isHouseInstallStartAvailable())
         {
@@ -723,7 +723,7 @@ public class PlayerBoard : MonoBehaviour
             strategy = houseStrategy;
             Button button = confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(_EndInstallHouse);
+            button.onClick.AddListener(TestEndInstallHouse);
 
             GameManager.instance.actionFlag = true;
         }
@@ -733,7 +733,7 @@ public class PlayerBoard : MonoBehaviour
         }
     }
 
-    public void _EndInstallHouse()
+    public void TestEndInstallHouse()
     {
         if(isHouseInstallEndAvailable())
         {
@@ -755,6 +755,127 @@ public class PlayerBoard : MonoBehaviour
         }
     }
     
+    public void TestStartUpgradeHouse()
+    {
+        strategy = new BoardEventStrategy();
+        if(isHouseUpgradeStartAvailable()) {
+            houseType += 1; 
+
+            Debug.Log( "Let's Upgrade Houses!!" );
+            GameManager.instance.actionFlag = true;
+
+            TestUpgradeHouse(); 
+        }
+    }
+
+    void TestUpgradeHouse()
+    {
+        Debug.Log("HouseType:" + houseType);
+        foreach(Block block in blocks)
+        {
+            if(block.type == BlockType.HOUSE) { block.ChangeHouse(); }
+        }
+
+        GameManager.instance.actionFlag = false;
+        GameManager.instance.endTurnFlag = true;
+
+        Debug.Log( "Upgrading Home is Finish!" );
+    }
+
+    public void TestStartInstallFarm()
+    {
+        if(isFarmInstallStartAvailable())
+        {
+            strategy = farmStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(TestEndInstallFarm);
+
+            Debug.Log( "Let's start to make Farm!" );
+            GameManager.instance.actionFlag = true;
+        }
+        else
+        {
+            Debug.LogWarning("밭 설치 행동을 시작할 수 없습니다.");
+        }
+    }
+
+    public void TestEndInstallFarm()
+    {
+        if(isFarmInstallEndAvailable())
+        {
+            foreach(Block block in selectedBlocks)
+            {
+                block.ShowTransparent();
+                block.ChangeFarm();
+            }
+            selectedBlocks.Clear();
+
+            GameManager.instance.actionFlag = false;
+            GameManager.instance.endTurnFlag = true;
+
+            Debug.Log( "Making Farm is Finish!" );
+        }
+        else
+        {
+            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+        }
+    }
+    
+    public void TestStartSowing()
+    {
+        if(IsSowingStartAvailable())
+        {
+            SetFarmBlockToSow();
+            strategy = sowingStrategy;
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(TestEndSowing);
+
+            Debug.Log( "Let's start to sowing!" );
+            GameManager.instance.actionFlag = true;
+
+        }
+        else
+        {
+            Debug.LogWarning("씨 뿌리기 행동을 시작할 수 없습니다.");
+        }
+    }
+
+    /// <summary>
+    /// 씨 뿌리기 마무리
+    /// </summary>
+    public void TestEndSowing()
+    {
+        if(IsSowingEndAvailable())
+        {
+            for(int i=0;i<row;i++)
+            {
+                for(int j=0;j<col;j++)
+                {
+                    if(blocks[i,j].sowingType != SeedType.NONE)
+                    {
+                        blocks[i,j].SetSeed(blocks[i,j].sowingType);
+                    }
+
+                    blocks[i,j].CloseSowing();
+                }
+            }
+
+            Debug.Log( "Sowing is Finish!" );
+
+            // action.EndSowingCallback();
+            GameManager.instance.actionFlag = false;
+            GameManager.instance.endTurnFlag = true;
+
+        }
+        else
+        {
+            Debug.LogWarning("씨 뿌릴 수 없습니다. 다시 선택해주세요.");
+        }
+    }
+
+
 
     // -------------------------------------------------------------------------
 

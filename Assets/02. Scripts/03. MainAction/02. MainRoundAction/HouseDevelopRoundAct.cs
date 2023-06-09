@@ -39,7 +39,7 @@ public class HouseDevelopRoundAct : ButtonParents
     //======================================================================
 
     public void _OnClick() {
-      GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ]._StartInstallHouse();
+      GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartUpgradeHouse();
     }
 
 }

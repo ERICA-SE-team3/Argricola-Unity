@@ -23,4 +23,15 @@ public class CultivationRoundAct : ButtonParents
             // StartSowing();
         }
     }
+
+    public void _OnClick() {
+        //농지
+        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartInstallFarm();
+
+        //그리고 또는
+
+        //Sow - 하지만 현재 각 행동별로 endTurn이 구성되어있어서 각주 처리
+        // GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartSowing();
+
+    }
 }
