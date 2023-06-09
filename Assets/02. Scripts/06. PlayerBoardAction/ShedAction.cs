@@ -5,22 +5,23 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class HouseAction : PlayerBoardAction
+
+public class ShedAction : PlayerBoardAction
 {
     public override BoardEventStrategy StartInstall(PlayerBoard playerBoard)
     {
         if (IsStartInstall())
         {
-            BoardEventStrategy houseStrategy = new HouseEventStrategy();
+            BoardEventStrategy shedStrategy = new ShedEventStrategy();
 
             Button button = playerBoard.confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => EndInstall(playerBoard));
-            return houseStrategy;
+            return shedStrategy;
         }
         else
         {
-            Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            Debug.LogError("외양간 설치 행동을 시작할 수 없습니다.");
             return null;
         }
     }
@@ -31,8 +32,8 @@ public class HouseAction : PlayerBoardAction
         {
             foreach (Block block in playerBoard.selectedBlocks)
             {
+                block.SetShed();
                 block.ShowTransparent();
-                block.ChangeHouse();
             }
             playerBoard.selectedBlocks.Clear();
         }

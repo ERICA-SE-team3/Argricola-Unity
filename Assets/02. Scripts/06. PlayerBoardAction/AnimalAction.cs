@@ -5,22 +5,22 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class HouseAction : PlayerBoardAction
+public class AnimalAction : PlayerBoardAction
 {
     public override BoardEventStrategy StartInstall(PlayerBoard playerBoard)
     {
         if (IsStartInstall())
         {
-            BoardEventStrategy houseStrategy = new HouseEventStrategy();
+            BoardEventStrategy moveAnimalStrategy = new MoveAnimalEventStrategy();
 
             Button button = playerBoard.confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => EndInstall(playerBoard));
-            return houseStrategy;
+            return moveAnimalStrategy;
         }
         else
         {
-            Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            Debug.LogError("동물 옮기기 행동을 시작할 수 없습니다.");
             return null;
         }
     }
@@ -29,16 +29,11 @@ public class HouseAction : PlayerBoardAction
     {
         if (IsEndInstall())
         {
-            foreach (Block block in playerBoard.selectedBlocks)
-            {
-                block.ShowTransparent();
-                block.ChangeHouse();
-            }
-            playerBoard.selectedBlocks.Clear();
+            throw new System.NotImplementedException();
         }
         else
         {
-            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+            Debug.LogWarning("동물 옮길 수 없습니다. 다시 선택해주세요.");
         }
     }
 
