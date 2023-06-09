@@ -22,7 +22,7 @@ public class SheepMarketRoundAct : ButtonParents
         GameManager.instance.actionQueue.Enqueue("sheepMarket");
         GameManager.instance.PopQueue();
     }
-    public void sheepMarketStart()
+    public void SheepMarketStart()
     {
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("sheepMarket")];
