@@ -39,4 +39,28 @@ public class SidebarManager : MonoBehaviour
         sidebarPlayerObject.transform.Find("fenceObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].fence.ToString();
         sidebarPlayerObject.transform.Find("shedObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].shed.ToString();
     }
+
+    public void HighlightCurrentPlayer(int playerIndex){
+        GameObject sidebarPlayerObject;
+        for(int i = 0; i < 4; i++){
+            sidebarPlayerObject = players[i];
+            if(i == playerIndex){
+                sidebarPlayerObject.GetComponentInChildren<Outline>().enabled = true;
+            }else{
+                sidebarPlayerObject.GetComponentInChildren<Outline>().enabled = false;
+            }
+        }
+    }
+
+    public void FirstPlayerIcon(int playerIndex){
+        GameObject sidebarPlayerObject;
+        for(int i = 0; i < 4; i++){
+            sidebarPlayerObject = players[i];
+            if(i == playerIndex){
+                sidebarPlayerObject.transform.Find("firstObject").Find("firstPlayer").GetComponent<Image>().enabled = true;
+            }else{
+                sidebarPlayerObject.transform.Find("firstObject").Find("firstPlayer").GetComponent<Image>().enabled = false;
+            }
+        }
+    }
 }
