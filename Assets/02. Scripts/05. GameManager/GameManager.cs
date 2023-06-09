@@ -155,12 +155,12 @@ public class GameManager : MonoBehaviour
         //1. 라운드 진행
         if ( this.RoundFlag )
         {
-            Debug.Log("Current Round is " + this.currentRound);
+            // Debug.Log("Current Round is " + this.currentRound);
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
                 //...기다림 == 아무것도 안함
-                Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
+                // Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.

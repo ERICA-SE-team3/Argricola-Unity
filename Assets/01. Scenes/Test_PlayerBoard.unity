@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1690,6 +1690,10 @@ PrefabInstance:
       value: PlayerBoard
       objectReference: {fileID: 0}
     - target: {fileID: 2952987442040855741, guid: 1b6c0c611991ca24ab155b11503eadcd, type: 3}
+      propertyPath: blockPrefab
+      value: 
+      objectReference: {fileID: 9201724396451683000, guid: 94fccfa59dd82e94ab326b8e8a10f14d, type: 3}
+    - target: {fileID: 2952987442040855741, guid: 1b6c0c611991ca24ab155b11503eadcd, type: 3}
       propertyPath: confirmButton
       value: 
       objectReference: {fileID: 1288293887}
@@ -1763,7 +1767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952987442040855742, guid: 1b6c0c611991ca24ab155b11503eadcd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 63
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 2952987442040855742, guid: 1b6c0c611991ca24ab155b11503eadcd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2889,7 +2893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -451}
+  m_AnchoredPosition: {x: 0, y: -417}
   m_SizeDelta: {x: 1600, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1288293889
