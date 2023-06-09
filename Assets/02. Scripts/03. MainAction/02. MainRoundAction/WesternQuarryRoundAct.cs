@@ -25,6 +25,13 @@ public class WesternQuarryRoundAct : ButtonParents
         // 있다면 니무 얻기 함수 호출
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", stack);
 
+        //돌집게 카드를 보유중이라면 나무 1개 추가
+        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("stoneClamp"))
+        {
+            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
+            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 stone additionaly because of STONECLAMP");
+        }
+        
         //확인 message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
 

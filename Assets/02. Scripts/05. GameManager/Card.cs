@@ -22,6 +22,24 @@ public enum Cards
         pigBreeder, //돼지 사육사
 
         //8~15 : 보조 설비 카드
+        //단순 자원
+        stoneClamp, //돌집게    8
+        clayMining, //양토채굴장
+        woodBoat, // 통나무배
+        rake, //쇠스랑 
+        
+        //추가 행동
+        watterBottle, //물통
+
+        //설비 구매
+        woodYard, //목재소
+
+        //수확
+        butter, //버터 제조기
+
+        //점수용 카드
+        bottle  //병   15
+        
 
         //16 ~ 25 : 주요 설비 카드
     }

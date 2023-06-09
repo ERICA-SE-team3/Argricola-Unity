@@ -23,6 +23,13 @@ public class MainActDayLaborer : ButtonParents
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 2);
 
+            //돌집게 카드를 보유중이라면 나무 1개 추가
+            if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("clayMining"))
+            {
+                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "clay", 3);
+                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 clay additionaly because of CLAYMINING");
+            }
+
             //확인 message
             Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 2 + " food!");
 

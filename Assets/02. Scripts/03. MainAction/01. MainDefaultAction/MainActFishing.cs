@@ -44,6 +44,14 @@ public class MainActFishing : ButtonParents
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
 
+            //돌집게 카드를 보유중이라면 나무 1개 추가
+            if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("woodBoat"))
+            {
+                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
+                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
+                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 food and reed additionaly because of WOODBOAT");
+            }
+
             //확인 message
             Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");
 

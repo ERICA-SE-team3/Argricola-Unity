@@ -164,4 +164,78 @@ public class Player
         return false;
     }
 
+    public bool HasSubCard( string cardName )
+    {
+        //card가 없으면 return false
+        if ( this.jobcard_owns.Count == 0 )
+        {
+            Debug.Log("Player " + this.id + " has no Subcards!");
+            return false;
+        }
+
+        //card가 있다면
+        switch (cardName) 
+        {
+            case "stoneClamp":
+                //magician카드가 있다면
+                if (this.subcard_owns.Contains( (int)Cards.stoneClamp) )
+                {
+                    return true;
+                }
+                break;
+
+            case "clayMining":
+                if (this.subcard_owns.Contains((int)Cards.clayMining))
+                {
+                    return true;
+                }
+                break;
+
+            case "woodBoat":
+                if (this.subcard_owns.Contains((int)Cards.woodBoat))
+                {
+                    return true;
+                }
+                break;
+            case "rake":
+                
+                if (this.subcard_owns.Contains((int)Cards.rake))
+                {
+                    return true;
+                }
+                break;
+
+            case "watterBottle":
+                if (this.subcard_owns.Contains((int)Cards.watterBottle))
+                {
+                    return true;
+                }
+                break;
+
+            case "woodYard":
+                if (this.subcard_owns.Contains((int)Cards.woodYard))
+                {
+                    return true;
+                }
+                break;
+
+            case "butter":
+                if (this.subcard_owns.Contains((int)Cards.butter))
+                {
+                    return true;
+                }
+                break;
+
+            case "bottle":
+                if (this.subcard_owns.Contains((int)Cards.bottle))
+                {
+                    return true;
+                }
+                break;
+        }
+
+        //해당 카드가 없다면
+        return false;
+    }
+    
 }

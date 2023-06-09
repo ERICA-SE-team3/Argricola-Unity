@@ -114,14 +114,25 @@ public class GameManager : MonoBehaviour
         this.players[3].jobcard_hands.Add((int)Cards.organicFarmer); // 유기 농부
         this.players[3].jobcard_hands.Add((int)Cards.pigBreeder); // 돼지 사육사
 
+        //플레이어들에게 보조설비 카드 분배
+        this.players[0].subcard_hands.Add( (int)Cards.stoneClamp ); //돌집게
+        this.players[0].subcard_hands.Add( (int)Cards.clayMining ); //양토채굴장
+
+        this.players[1].subcard_hands.Add( (int)Cards.woodBoat ); //통나무배
+        this.players[1].subcard_hands.Add( (int)Cards.rake ); //쇠스랑
+
+        this.players[2].subcard_hands.Add( (int)Cards.watterBottle ); //물통
+        this.players[2].subcard_hands.Add( (int)Cards.woodYard ); //목재소
+
+        this.players[3].subcard_hands.Add( (int)Cards.butter ); //버터제조기
+        this.players[3].subcard_hands.Add( (int)Cards.bottle ); //병
 
 
 
         // food of firstplayer to 2
         ResourceManager.instance.minusResource(0, "food", 1);
 
-        //플레이어들에게 보조설비 카드 분배
-        //...
+
 
 
 
