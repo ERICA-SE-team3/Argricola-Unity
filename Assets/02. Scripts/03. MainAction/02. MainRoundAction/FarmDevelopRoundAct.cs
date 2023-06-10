@@ -10,15 +10,20 @@ public class FarmDevelopRoundAct : ButtonParents
     3. 종류와 개수에 알맞게 자원소모     ex. 나무집 방 2개 -> 갈대 1개 + 흙 2개 소모
     4. 울타리치기
   */
-    public int playerIndex = 0;
-    public bool isPlayerTurn = true;
-    public int wood;
-    public int useWood;
+
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        GameManager.instance.actionQueue.Enqueue("houseDevelop");
-        GameManager.instance.actionQueue.Enqueue("fencing");
-        GameManager.instance.PopQueue(); 
+        // if(playerIndex == userPlayerId)
+        // {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            GameManager.instance.actionQueue.Enqueue("houseDevelop");
+            GameManager.instance.actionQueue.Enqueue("fencing");
+            GameManager.instance.PopQueue(); 
+        // }
     }
 }

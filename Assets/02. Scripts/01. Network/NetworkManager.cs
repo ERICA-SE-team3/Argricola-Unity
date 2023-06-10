@@ -18,6 +18,10 @@ public class NetworkManager : MonoBehaviour
     WebSocket ws;
     StompMessageSerializer serializer = new StompMessageSerializer();
     String clientId = "1";
+
+    public int playerId = -1;
+    GameObject lobbyObj;
+    LobbySceneManager lobby;
     
     public void Awake() {
         if(instance == null)
@@ -33,14 +37,16 @@ public class NetworkManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        SetWebSocket(url);
         DontDestroyOnLoad(this.gameObject);
+        lobbyObj = GameObject.Find("LobbySceneManager");
+        lobby = lobbyObj.GetComponent<LobbySceneManager>();
+        // SetWebSocket(url);
+        // Parse("{\"type\": \"userCountCheck\", \"sender\": \"server\", \"channelId\": \"1\", \"data\": \"{\"userCount\":1}\"}");
     }
-
-    // Update is called once per frame
-    public void Update()
+    
+    public void SetWebSocket()
     {
-        
+        SetWebSocket(url);
     }
 
     public void SetWebSocket(string url)
@@ -79,7 +85,8 @@ public class NetworkManager : MonoBehaviour
     
     void ws_OnError(object sender, ErrorEventArgs e)
     {
-        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.ToString());
+        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Message.ToString());
+        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.Message.ToString());
     }
 
     void ws_OnClose(object sender, CloseEventArgs e)
@@ -106,12 +113,48 @@ public class NetworkManager : MonoBehaviour
         sub["id"] = "sub-0"; 
         sub["destination"] = "/sub/channel/" + clientId;
         ws.Send(serializer.Serialize(sub));
+        SendReadyMessage();
     }
 
     void Parse(string json)
     {
-        MessageData message = JsonUtility.FromJson<MessageData>(json);
+        StompMessageBody message = JsonUtility.FromJson<StompMessageBody>(json);
+        switch(message.type)
+        {
+            case "userCountCheck":
+                int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
+                if(playerId == -1) 
+                { 
+                    playerId = userCount; 
+                }
+                lobby.playerCount = userCount;
+                lobby.GetReady();
+                break;
+            case "cardDeck":
+                CardDeck cardDeck = JsonUtility.FromJson<CardDeck>(message.data);
+                Debug.Log(cardDeck.cards[0].user);
+                break;
+            default:
+                Debug.Log("default");
+                break;
+        }
+        Debug.Log(message.data);
     }
+
+    public void SendReadyMessage()
+    {
+        StompMessageBody body = new StompMessageBody();
+        body.channelId = "1";
+        body.data = "";
+        body.sender = "4";
+        body.type = "userCountCheck";
+        string body_json = JsonUtility.ToJson(body);
+
+        var pub = new StompMessage(StompFrame.SEND,body_json);
+        pub["destination"] = readyMsgDest;
+        ws.Send(serializer.Serialize(pub));
+    }
+
 
     public void SendMessage()
     {
@@ -147,18 +190,6 @@ public class NetworkManager : MonoBehaviour
         ws.Send(serializer.Serialize(pub));
     }
 
-    public void _SendReadyMessage()
-    {
-        StompMessageBody body = new StompMessageBody();
-        body.sender = clientId;
-        body.channelId = clientId;
-
-        string body_json = JsonUtility.ToJson(body);
-
-        var pub = new StompMessage(StompFrame.SEND, body_json);
-        pub["destination"] = readyMsgDest;
-        ws.Send(serializer.Serialize(pub));
-    }
 }
 
 [System.Serializable]
@@ -169,4 +200,25 @@ public class MessageData
     
     public PlayerMessageData player; 
     public PlayerBoardMessageData playerBoard; 
+}
+
+
+[System.Serializable]
+public class UserCountCheck
+{
+    public int userCount;
+}
+
+[System.Serializable]
+public class CardDeck
+{
+    public List<Deck> cards;
+}
+
+[System.Serializable]
+public class Deck
+{
+    public int user;
+    public List<int> jobCards;
+    public List<int> facilityCards;
 }

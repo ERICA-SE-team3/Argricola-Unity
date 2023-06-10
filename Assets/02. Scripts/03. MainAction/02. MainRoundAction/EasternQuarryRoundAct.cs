@@ -12,11 +12,18 @@ public class EasternQuarryRoundAct : ButtonParents
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
     //stack 정보 가져오기
     int stack;
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-      GameManager.instance.actionQueue.Enqueue("easternQuarry");
-      GameManager.instance.PopQueue();
+        // if(playerIndex == userPlayerId)
+        // {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            GameManager.instance.actionQueue.Enqueue("easternQuarry");
+            GameManager.instance.PopQueue();
+        // }
     }
     public void EasternQuarryStart()
     {

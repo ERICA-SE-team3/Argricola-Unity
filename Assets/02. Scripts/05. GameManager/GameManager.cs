@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     //player들을 담을 ArrayList, players
     public List<Player> players = new List<Player>();
 
+
+    //로컬 플레이어 객체 인덱스, 로비에서 번호 부여받을 예정
+
+    public int localPlayerIndex = 0;
+
     //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
@@ -94,6 +99,9 @@ public class GameManager : MonoBehaviour
         else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
         }
+        else if(popAction == "subCard"){
+            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        }
         else if(popAction == "wishChildren"){
             wc.WishChildrenStart();
         }
@@ -174,6 +182,7 @@ public class GameManager : MonoBehaviour
         //라운드 카드 활성화
         this.preRound();
 
+        this.endTurnFlag = false;
     }
 
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
@@ -196,8 +205,10 @@ public class GameManager : MonoBehaviour
                 if ( this.findNextPlayer() )
                 {
                     //... 그대로 진행
+                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                     Debug.Log("Move to Next Turn");
                     this.endTurnFlag = false;
+                    
                 }
 
                 //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
@@ -215,6 +226,14 @@ public class GameManager : MonoBehaviour
         //2. 라운드 전체가 끝남.
         else
         {
+            for(int i=0; i<4; i++)
+            {
+                if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
+                {
+                    ResourceManager.instance.minusResource(i, "baby", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                    ResourceManager.instance.addResource(i, "family", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                }
+            }
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
             {
@@ -292,7 +311,6 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
-        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 
@@ -334,11 +352,13 @@ public class GameManager : MonoBehaviour
     void UpdateCurrentRound()
     {
         this.currentRound = this.currentRound + 1;
+        RoundDescriptor.instance.RoundNumberUpdate(this.currentRound);
     }
 
     //라운드 준비
     void preRound()
     {
+        RoundDescriptor.instance.RoundDescriptiorUpdate("준비단계");
         //행동 stack 증가
         this.incrementStack();
 
@@ -359,12 +379,14 @@ public class GameManager : MonoBehaviour
 
         //RoundFlag를 true로
         this.RoundFlag = true;
+        RoundDescriptor.instance.RoundDescriptiorUpdate("일하기단계");
     }
 
     bool checkHarvest()
     {
         if ( (this.currentRound == 4) || (this.currentRound == 7) || (this.currentRound == 9) ||
             (this.currentRound == 11) || (this.currentRound == 13) || (this.currentRound == 14) ) {
+            RoundDescriptor.instance.RoundDescriptiorUpdate("수확단계");
             return true;
         }
         else { return false;  }

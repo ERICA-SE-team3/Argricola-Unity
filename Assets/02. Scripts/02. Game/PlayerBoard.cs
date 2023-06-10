@@ -13,7 +13,8 @@ public class PlayerBoard : MonoBehaviour
     public int house2x = 2, house2y = 0;
 
     int[] dx = {-1,1,0,0};
-    int[] dy = {0,0,-1,1};   
+    int[] dy = {0,0,-1,1};
+    int[] dfence = {1,0,3,2};
 
     public GameObject blockPrefab, confirmButton;
     
@@ -22,6 +23,9 @@ public class PlayerBoard : MonoBehaviour
     public Player player;
     public Block[,] blocks;
     public HouseType houseType;
+
+    public int leftSheep, leftPig, leftCow;
+    public Block PetHouseBlock;
 
     public List<Block> selectedBlocks;
 
@@ -106,6 +110,12 @@ public class PlayerBoard : MonoBehaviour
         return InstallButton;
     }
 
+    public void ShowAnimalModal(Block block)
+    {
+        transform.Find("MoveAnimalModal").gameObject.SetActive(true);
+        transform.Find("MoveAnimalModal").GetComponent<AnimalModalManager>().SetModal(block);
+    }
+
     //-------------------------------------------------------------------------- 
 
     public void StartInstallHouse()
@@ -140,6 +150,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     /// <summary>
@@ -430,60 +441,21 @@ public class PlayerBoard : MonoBehaviour
     public bool InstallFence()
     {
         int playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
-        int woodNeed = GetFenceNumber();
+        List<Tuple<int,int,bool[]>> fenceList = GetFenceList();
+        int woodNeed = GetNeedFenceNumber(fenceList);
+    
+        Debug.LogWarning("자원 계산 결과." + playerWood + " / " + woodNeed);
 
         if(playerWood < woodNeed) {
-            Debug.LogWarning("자원이 부족합니다.");
+            Debug.LogWarning("자원이 부족합니다." + playerWood + " / " + woodNeed);
             selectedBlocks.Clear();
             InstallButton.SetActive(false);
             return false; 
         }
 
         ResourceManager.instance.minusResource(player.id, "wood", woodNeed);
-
-        for (int j=0;j<selectedBlocks.Count;j++)
-        {
-            if(selectedBlocks[j].type == BlockType.FENCE)
-            {
-                ReInstallFence(selectedBlocks[j]);
-                selectedBlocks[j].ShowTransparent();
-                continue;
-            }
-
-            var block = selectedBlocks[j];
-            bool[] fence = new bool[4];
-            
-            for (int i=0;i<4;i++) {
-                fence[i] = true;
-            }
-
-            for (int i=0;i<selectedBlocks.Count;i++) {
-                if (i!=j) {
-                    var otherBlock = selectedBlocks[i];
-                    int gapRow = otherBlock.row - block.row;
-                    int gapCol = otherBlock.col - block.col;
-                    for (int k=0;k<4;k++) {
-                        if (dx[k] == gapRow && dy[k] == gapCol) {
-                            fence[k] = false;
-                        }
-                    }
-                }
-            }
-            
-            for (int i=0;i<4;i++) {
-                if (!fence[i]) continue;
-                int adjBlockRow = block.row + dx[i];
-                int adjBlockCol = block.col + dy[i];
-                if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
-                if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
-                        fence[i] = false;
-                }
-            }
-
-            block.SetFence(fence);
-            block.ChangeFence();
-        }
-        selectedBlocks.Clear();
+        
+        SetFence(fenceList);
 
         foreach(Block block in blocks)
         {
@@ -492,81 +464,76 @@ public class PlayerBoard : MonoBehaviour
         return true;
     }
 
-    int ReInstallFence(Block block, bool isSetFence = true)
+    int GetNeedFenceNumber(List<Tuple<int,int,bool[]>> fenceList)
     {
         int woodCount = 0;
-        int[] adjFenceIndex = {1,0,3,2};
-        bool[] fence = new bool[4];
-        for (int i=0;i<4;i++) {
-            fence[i] = block.fence[i];
-        }
-        for (int i=0;i<4;i++) {
-            int adjBlockRow = block.row + dx[i];
-            int adjBlockCol = block.col + dy[i];
-            if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
-            if (blocks[adjBlockRow,adjBlockCol].fence[adjFenceIndex[i]] == false) {
-                fence[i] = true;
-                woodCount++;
+        foreach (Tuple<int,int,bool[]> fence in fenceList) {
+            for (int i=0;i<4;i++) {
+                if (fence.Item3[i]) woodCount++;
             }
-        }
-        if(isSetFence)
-        {
-            block.SetFence(fence);
-            block.ChangeFence();
         }
         return woodCount;
     }
 
-    int GetFenceNumber()
+    void SetFence(List<Tuple<int,int,bool[]>> fenceList)
     {
-        int woodCount = 0;
-        for (int j=0;j<selectedBlocks.Count;j++)
+        foreach(Tuple<int,int,bool[]> fence in fenceList)
         {
-            if(selectedBlocks[j].type == BlockType.FENCE)
+            Block block = blocks[fence.Item1, fence.Item2];
+            bool[] fenceArray = fence.Item3;
+            for(int i = 0; i < 4; i++)
             {
-                woodCount += ReInstallFence(selectedBlocks[j], false);
-                selectedBlocks[j].ShowTransparent();
-                continue;
+                if(block.fence[i])
+                    { fenceArray[i] = true; }
             }
+            block.SetFence(fenceArray);
+            block.ChangeFence();
 
-            var block = selectedBlocks[j];
             block.ShowTransparent();
-
-            bool[] fence = new bool[4];
-            
-            for (int i=0;i<4;i++) {
-                fence[i] = true;
-            }
-
-            for (int i=0;i<selectedBlocks.Count;i++) {
-                if (i!=j) {
-                    var otherBlock = selectedBlocks[i];
-                    int gapRow = otherBlock.row - block.row;
-                    int gapCol = otherBlock.col - block.col;
-                    for (int k=0;k<4;k++) {
-                        if (dx[k] == gapRow && dy[k] == gapCol) {
-                            fence[k] = false;
-                        }
-                    }
-                }
-            }
-            
-            for (int i=0;i<4;i++) {
-                if (!fence[i]) continue;
-                int adjBlockRow = block.row + dx[i];
-                int adjBlockCol = block.col + dy[i];
-                if (adjBlockRow < 0 || adjBlockRow >= this.row || adjBlockCol < 0 || adjBlockCol >= this.col) continue;
-                if (blocks[adjBlockRow,adjBlockCol].type == BlockType.FENCE) {
-                        fence[i] = false;
-                }
-            }
-
-            for (int i=0;i<4;i++) 
-            {
-                if(fence[i]) { woodCount++; }
-            }
         }
-        return woodCount;
+        selectedBlocks.Clear();
+    }
+
+    public List<Tuple<int,int,bool[]>> GetFenceList()
+    {
+        List<Tuple<int,int,bool[]>> fenceList = new List<Tuple<int,int,bool[]>>();
+
+        foreach(Block sb in selectedBlocks)
+        {
+            Tuple<int,int,bool[]> fence = new Tuple<int,int,bool[]>(sb.row, sb.col, new bool[4]);
+            for(int i = 0; i < 4; i++) 
+            {
+                fence.Item3[i] = true;
+            }
+
+            for(int i = 0; i < 4; i++)
+            {
+                if(sb.type == BlockType.FENCE && sb.fence[i])
+                {
+                    fence.Item3[i] = false;
+                    continue;
+                } 
+
+                int nx = sb.row + dx[i];
+                int ny = sb.col + dy[i];
+
+                if(nx < 0 || nx >= this.row || ny < 0 || ny >= this.col) continue;
+                if(selectedBlocks.Contains(blocks[nx, ny])) {
+                    fence.Item3[i] = false;
+                    continue; 
+                }
+                if(blocks[nx, ny].type == BlockType.EMPTY)
+                {
+                    fence.Item3[i] = true;
+                    continue;
+                }
+                if(blocks[nx, ny].type == BlockType.FENCE && blocks[nx,ny].fence[dfence[i]]) 
+                    fence.Item3[i] = false;
+            }
+            Debug.Log(fence.Item3);
+            fenceList.Add(fence);
+        }
+        return fenceList;
     }
 
     
@@ -603,6 +570,7 @@ public class PlayerBoard : MonoBehaviour
         {
             Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
         }
+        GameManager.instance.PopQueue();
     }
 
     bool IsInstallShedStartAvailable()
@@ -749,6 +717,7 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     public void EndMoveAnimal()
     {
+
         if(IsMoveAnimalEndAvailable())
         {
             throw new System.NotImplementedException();
@@ -786,10 +755,23 @@ public class PlayerBoard : MonoBehaviour
 
     public void _SetPlayer() { 
         SetPlayer(GameManager.instance.players[0]); 
-        ResourceManager.instance.addResource(player.id, "wood", 10);
+        ResourceManager.instance.addResource(player.id, "wood", 30);
         ResourceManager.instance.addResource(player.id, "clay", 10);
         ResourceManager.instance.addResource(player.id, "stone", 10);
         ResourceManager.instance.addResource(player.id, "reed", 10);
+
+        // ! 테스팅용 코드
+        leftSheep = 3;
+        leftPig = 2;
+        leftCow = 1;
+
+        ResourceManager.instance.addResource(player.id,"sheep", 3);
+        ResourceManager.instance.addResource(player.id,"pig", 2);
+        ResourceManager.instance.addResource(player.id,"cow", 1);
+        
+        AnimalModalManager.leftSheep = this.leftSheep;
+        AnimalModalManager.leftPig = this.leftPig;
+        AnimalModalManager.leftCow = this.leftCow;
     }
 
     // -------------------------------------------------------------------------
