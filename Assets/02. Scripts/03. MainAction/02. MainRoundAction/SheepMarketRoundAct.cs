@@ -44,11 +44,5 @@ public class SheepMarketRoundAct : ButtonParents
         GameManager.instance.PopQueue();
     }
 
-    public void _Onclick() {
-        
-        GameManager.instance.QueueList[playerIndex].Enqueue("sheepMarket");
-        GameManager.instance._PopQueue(playerIndex);
-
-    }
 }
 

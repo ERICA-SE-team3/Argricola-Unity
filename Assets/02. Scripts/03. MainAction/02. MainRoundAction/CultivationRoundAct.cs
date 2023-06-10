@@ -19,19 +19,5 @@ public class CultivationRoundAct : ButtonParents
         GameManager.instance.PopQueue(); 
     }
 
-    public void _OnClick() {
-        //농지
-        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartInstallFarm();
-
-        //그리고 또는
-
-        //Sow - 하지만 현재 각 행동별로 endTurn이 구성되어있어서 각주 처리
-        // GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartSowing();
-
-        //장작 채집자 카드
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodPicker"))
-        {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodPicker");
-        }
-    }
+    
 }

@@ -29,19 +29,5 @@ public class GrainUtilizationRoundAct : ButtonParents
     }
 
 
-    public void _OnClick() {
-        //씨 뿌리기
-        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartSowing();
-
-        //그리고 또는
-
-        //빵굽기
-
-        //장작채집자 카드
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodPicker"))
-        {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodPicker");
-        }
-    }
 
 }

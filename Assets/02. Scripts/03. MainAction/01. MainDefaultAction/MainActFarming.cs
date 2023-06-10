@@ -8,14 +8,4 @@ public class MainActFarming : ButtonParents
 
     }
     //===============================================
-    public void _OnClick() {
-        //농지
-        GameManager.instance.playerBoards[ GameManager.instance.getCurrentPlayerId() ].TestStartInstallFarm();
-
-        //장작 채집자 카드
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodPicker"))
-        {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodPicker");
-        }
-    }
 }

@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     // public List< Queue<string> > QueueList = new List< Queue<string> >();
 
     //=============================================================
+
     public void PopQueue() {
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "cultivation"){
             board.StartInstallFarm();
+        }
         else if(popAction == "houseBuild"){
             board.StartInstallHouse();
         }
@@ -136,8 +138,9 @@ public class GameManager : MonoBehaviour
             board.StartInstallShed();
         }
     }
-
     
+    
+
     public void Start()
     {
         //GameManager Singleton
@@ -177,13 +180,6 @@ public class GameManager : MonoBehaviour
         // for(int i=0; i<4; i++) {
         //     this.playerBoards[i].SetPlayer( this.players[i] );
         // }
-
-        
-        // TestQueue 추가
-        this.QueueList.Add( actionQueue1 );
-        this.QueueList.Add( actionQueue2 );
-        this.QueueList.Add( actionQueue3 );
-        this.QueueList.Add( actionQueue4 );
 
         //=======================================
         
@@ -247,6 +243,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
         if ( this.RoundFlag )
@@ -255,15 +252,7 @@ public class GameManager : MonoBehaviour
                 //1-2. 턴을 진행 중이라면
                 if ( !this.endTurnFlag )
                 {
-                    //actionFlag on
-                    if ( this.actionFlag ) {
-                        Debug.Log("Player " + this.currentPlayerId + "Wait to End Action... ");
-                    }
-
-                    //...기다림 == 아무것도 안함
-                    else {
-                        Debug.Log("Player " + this.currentPlayerId + "Wait to Choose Action... ");
-                    }
+                    
                 }
 
                 else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
@@ -667,55 +656,5 @@ public class GameManager : MonoBehaviour
         //2-2. 승자 발표!
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
     }
-
-
-//==========================================================================
-    public void _PopQueue(int PlayerId) {
-        PlayerBoard board = this.playerBoards[PlayerId];
-        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
-        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
-
-
-
-        if(this.QueueList[PlayerId].Count == 0){
-            this.endTurnFlag = true;
-        }
-
-        this.popAction = this.QueueList[PlayerId].Dequeue();
-        
-        if(this.popAction == "sowing"){
-            board.StartSowing();
-        }
-        else if(this.popAction == "baking"){
-            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
-        }
-        else if(this.popAction == "sheepMarket"){
-            sm.sheepMarketStart();
-        }
-        else if(this.popAction == "fencing"){
-            board.StartInstallFence();
-        }
-        else if(this.popAction == "improvements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(this.popAction == "wishChildren"){
-            wc.WishChildrenStart();
-        }
-        else if(this.popAction == "westernQuarry"){
-            wq.WesternQuarryStart();
-        }
-        else if(this.popAction == "houseDevelop"){
-            board.StartUpgradeHouse();
-        }
-        else if(this.popAction == "houseBuild"){
-            board.StartInstallHouse();
-        }
-        else if(this.popAction == "shedBuild"){
-            board.StartInstallShed();
-        }
-    }
-
-
 
 }

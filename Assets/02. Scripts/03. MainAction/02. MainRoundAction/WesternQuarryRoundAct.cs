@@ -45,10 +45,5 @@ public class WesternQuarryRoundAct : ButtonParents
       GameManager.instance.PopQueue();
     }
 
-    public void _Onclick() {
-        
-        GameManager.instance.QueueList[playerIndex].Enqueue("westernQuarry");
-        GameManager.instance.PopQueue();
 
-    }
 }

@@ -35,11 +35,4 @@ public class WishChildrenRoundAct : ButtonParents
         GameManager.instance.PopQueue();
     }
 
-
-    public void _Onclick() {
-        
-        GameManager.instance.QueueList[playerIndex].Enqueue("wishChildren");
-        GameManager.instance.PopQueue();
-
-    }
 }
