@@ -106,6 +106,7 @@ public class NetworkManager : MonoBehaviour
         sub["id"] = "sub-0"; 
         sub["destination"] = "/sub/channel/" + clientId;
         ws.Send(serializer.Serialize(sub));
+        SendMessage();
     }
 
     void Parse(string json)
