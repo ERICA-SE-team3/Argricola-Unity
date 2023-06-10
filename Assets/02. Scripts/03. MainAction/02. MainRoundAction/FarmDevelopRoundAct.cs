@@ -16,26 +16,8 @@ public class FarmDevelopRoundAct : ButtonParents
     public int useWood;
 
     public override void OnClick()
-        {
-          // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-          // StartInstallHouse();
-          // SelectUser();
-          if (isPlayerTurn && HasWoods())
-          {
-            // StartInstallFence() 호출할 때 유저가 가지고있는 나무의 개수를 넘겨주거나, 함수 내부적으로 가져와야 할듯, 왜냐면 울타리 설치한 만큼만 minusResource() 해야해서
-            
-            // StartInstallFence()
-            useWood = 4;  // fence 설치할 때 사용한 나무의 개수를 4개라고 가정
-            ResourceManager.instance.minusResource(playerIndex, "wood", wood - useWood);
-            ResourceManager.instance.addResource(playerIndex, "fence", useWood);
-          }          
-        }
-
-    private bool HasWoods(){
-        wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
-        if (wood > 0)
-            return true;
-        else
-            return false;
+    {
+        GameManager.instance.actionQueue.Enqueue("houseDevelop");
+        GameManager.instance.actionQueue.Enqueue("fencing");
+        GameManager.instance.PopQueue(); 
     }
-}
