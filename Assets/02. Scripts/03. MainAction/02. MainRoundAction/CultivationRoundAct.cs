@@ -28,7 +28,14 @@ public class CultivationRoundAct : ButtonParents
             //그리고/또는
 
             GameManager.instance.actionQueue.Enqueue("sowing");
-            GameManager.instance.PopQueue(); 
+            GameManager.instance.PopQueue();
+            
+            //장작 채집자 카드
+            if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
+            {
+                GameManager.instance.players[playerIndex].ActCard("woodPicker");
+            }
+
         // }
     }
 

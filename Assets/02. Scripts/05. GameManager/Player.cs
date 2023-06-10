@@ -411,6 +411,12 @@ public class Player
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
 
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.stoneClamp);
                     Debug.Log("player 0" + " get stoneClamp job card!");
                 }
@@ -437,6 +443,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",2 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.woodBoat);
                     Debug.Log("player 0" + " get woodBoat job card!");
                 }
@@ -450,6 +463,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.rake);
                     Debug.Log("player 0" + " get rake job card!");
                 }
@@ -489,6 +509,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.butter);
                     Debug.Log("player 0" + " get butter job card!");
                 }
@@ -503,6 +530,13 @@ public class Player
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",this.family );
                     ResourceManager.instance.minusResource( id, "food",this.family );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.bottle);
                     Debug.Log("player 0" + " get bottle job card!");
                 }
@@ -608,6 +642,13 @@ public class Player
                         ResourceManager.instance.addResource( this.id, "stone", 1 );
                         Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
                     }
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.maincard_owns.Add((int)Cards.joinery);
                     Debug.Log("player 0" + " get joinery job card!");
                 }
@@ -655,6 +696,13 @@ public class Player
                 {
                     ResourceManager.instance.minusResource(id, "wood", 1);
                     ResourceManager.instance.minusResource(id, "stone", 3);
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     if( this.HasJobCard( "stoneCutter" ) ) {
                         ResourceManager.instance.addResource( this.id, "stone", 1 );
                         Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );

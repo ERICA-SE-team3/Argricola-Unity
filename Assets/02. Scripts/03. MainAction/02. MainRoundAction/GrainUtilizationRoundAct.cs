@@ -40,6 +40,12 @@ public class GrainUtilizationRoundAct : ButtonParents
             // }
             GameManager.instance.PopQueue(); 
         // }
+
+            //장작 채집자 카드
+            if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
+            {
+                GameManager.instance.players[playerIndex].ActCard("woodPicker");
+            }
     }
 
     public void StartSowing() {
