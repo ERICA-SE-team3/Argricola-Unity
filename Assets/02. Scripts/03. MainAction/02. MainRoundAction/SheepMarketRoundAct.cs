@@ -16,11 +16,16 @@ public class SheepMarketRoundAct : ButtonParents
 
     //stack 정보 가져오기
     int stack;
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        GameManager.instance.actionQueue.Enqueue("sheepMarket");
-        GameManager.instance.PopQueue();
+        // if(playerIndex == userPlayerId)
+        // {
+            GameManager.instance.actionQueue.Enqueue("sheepMarket");
+            GameManager.instance.PopQueue();
+        // }
     }
     public void SheepMarketStart()
     {

@@ -9,14 +9,19 @@ public class WesternQuarryRoundAct : ButtonParents
     2. 누적된 돌의 개수만큼 플레이어 자원개수 증가
   */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
     //stack 정보 가져오기
     int stack;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-      GameManager.instance.actionQueue.Enqueue("westernQuarry");
-      GameManager.instance.PopQueue();
+        // if(playerIndex == userPlayerId)
+        // {
+          GameManager.instance.actionQueue.Enqueue("westernQuarry");
+          GameManager.instance.PopQueue();
+        // }
     }
     public void WesternQuarryStart()
     {
