@@ -37,7 +37,7 @@ public class LobbySceneManager : MonoBehaviour
         if(playerCount == maxPlayer)
         {
             maxPlayer += 1;
-            SceneManager.LoadSceneAsync("GameScene");
+            SceneManager.LoadSceneAsync("Game");
         }
     }
 

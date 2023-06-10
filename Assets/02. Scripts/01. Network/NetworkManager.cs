@@ -20,6 +20,8 @@ public class NetworkManager : MonoBehaviour
     String clientId = "1";
 
     public int playerId = -1;
+    GameObject lobbyObj;
+    LobbySceneManager lobby;
     
     public void Awake() {
         if(instance == null)
@@ -36,9 +38,16 @@ public class NetworkManager : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        lobbyObj = GameObject.Find("LobbySceneManager");
+        lobby = lobbyObj.GetComponent<LobbySceneManager>();
         // SetWebSocket(url);
+        // Parse("{\"type\": \"userCountCheck\", \"sender\": \"server\", \"channelId\": \"1\", \"data\": \"{\"userCount\":1}\"}");
     }
-
+    
+    public void SetWebSocket()
+    {
+        SetWebSocket(url);
+    }
 
     public void SetWebSocket(string url)
     {
@@ -77,6 +86,7 @@ public class NetworkManager : MonoBehaviour
     void ws_OnError(object sender, ErrorEventArgs e)
     {
         Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Message.ToString());
+        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.Message.ToString());
     }
 
     void ws_OnClose(object sender, CloseEventArgs e)
@@ -109,13 +119,16 @@ public class NetworkManager : MonoBehaviour
     void Parse(string json)
     {
         StompMessageBody message = JsonUtility.FromJson<StompMessageBody>(json);
-        Debug.Log(message.data);
         switch(message.type)
         {
             case "userCountCheck":
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
-                if(playerId == -1) { playerId = userCount; }
-                GameObject.Find("LobbySceneManager").GetComponent<LobbySceneManager>().playerCount = userCount;
+                if(playerId == -1) 
+                { 
+                    playerId = userCount; 
+                }
+                lobby.playerCount = userCount;
+                lobby.GetReady();
                 break;
             case "cardDeck":
                 CardDeck cardDeck = JsonUtility.FromJson<CardDeck>(message.data);
