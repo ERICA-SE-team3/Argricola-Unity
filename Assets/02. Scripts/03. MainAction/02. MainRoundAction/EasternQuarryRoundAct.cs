@@ -27,6 +27,7 @@ public class EasternQuarryRoundAct : ButtonParents
     }
     public void EasternQuarryStart()
     {
+      playerIndex = GameManager.instance.getCurrentPlayerId();
       //stack 정보 가져오기
       stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")];
 

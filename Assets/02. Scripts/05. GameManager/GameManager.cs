@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     //player들을 담을 ArrayList, players
     public List<Player> players = new List<Player>();
 
+    //player의 parent
+    public GameObject objPlayerboards;
 
     //로컬 플레이어 객체 인덱스, 로비에서 번호 부여받을 예정
 
@@ -58,15 +60,17 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
 
-    public GameObject playerBoard, sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
+    public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
+    public GameObject farming, grainUtilization, fencing, houseDevelop, expand;
     // public GameObject whisChildren;
+
+    
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
     public void PopQueue() {
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
         PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
         WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
@@ -75,6 +79,21 @@ public class GameManager : MonoBehaviour
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
 
+        //집 업그레이드
+        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+
+        //집짓기
+        MainActExpand ex = expand.GetComponent<MainActExpand>();
+
+        //농지
+        MainActFarming fr = farming.GetComponent<MainActFarming>();
+
+        //빵굽기, 씨뿌리기
+        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
+
+        //울타리치기
+        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
         }
@@ -82,19 +101,17 @@ public class GameManager : MonoBehaviour
         popAction = actionQueue.Dequeue();
         
         if(popAction == "sowing"){
-            board.StartSowing();
+            gu.StartSowing();
         }
         else if(popAction == "baking"){
             // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
+            gu.StartBaking();
         }
         else if(popAction == "sheepMarket"){
             sm.SheepMarketStart();
         }
         else if(popAction == "pigMarket"){
             pm.PigMarketStart();
-        }
-        else if(popAction == "fencing"){
-            board.StartInstallFence();
         }
         else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
@@ -109,7 +126,7 @@ public class GameManager : MonoBehaviour
             wq.WesternQuarryStart();
         }
         else if(popAction == "houseDevelop"){
-            board.StartUpgradeHouse();
+            hd.StartHouseDeveloping();
         }
         else if(popAction == "vegetableSeed"){
             vs.VegetableSeedStart();
@@ -121,24 +138,36 @@ public class GameManager : MonoBehaviour
             cm.CowMarketStart();
         }
         else if(popAction == "cultivation"){
-            board.StartInstallFarm();
+            fr.FarmingStart();
         }
         else if(popAction == "houseBuild"){
-            board.StartInstallHouse();
+            ex.StartHouseInstall();
         }
         else if(popAction == "shedBuild"){
-            board.StartInstallShed();
+            ex.StartBuildShed();
+        }
+        else if(popAction == "farming"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "fencing") {
+            fc.StartFencing();
         }
     }
 
-    
+
     public void Start()
     {
+        //GameManager Singleton
+        GameManager.instance = this;
 
         Debug.Log("Let's Ready the Game!!!");  
 
-        //GameManager Singleton
-        GameManager.instance = this;
+        //라운드카드들의 스택 초기화
+        this.stackOfRoundCard = new int[13];
+
+        Debug.Log( "This is stackOfRoundCard\n" + stackOfRoundCard[0] + "\n"
+        + stackOfRoundCard[1] + "\n" + stackOfRoundCard[2] + "\n" + stackOfRoundCard[3] + "\n" );
+
 
         //player start
         for (int i=0; i<4; i++)
@@ -148,19 +177,64 @@ public class GameManager : MonoBehaviour
             this.players.Add(temp);
         }
 
-        ////playerboard start
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    PlayerBoard tempB = new PlayerBoard();
-        //    this.playerBoards.Add(tempB);
-        //}
 
-        //give first to player1 and food of firstplayer to 2
+        //=========================================
+
+        //playerboard start
+        for (int i = 0; i < 4; i++)
+        {
+           GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
+           GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
+           GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
+           PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
+           this.playerBoards.Add(tempPB);
+        }
+
+        //Setplayer to playerboard
+        for(int i=0; i<4; i++) {
+            this.playerBoards[i].SetPlayer( this.players[i] );
+        }
+
+        //=======================================
+        
+
+        //give first to player1 
         this.Init();
-        ResourceManager.instance.minusResource(0, "food",  1);
 
-        ////for test -> player2's family : 3
-        //this.players[2].family = 5;
+        //==============================================
+
+        //플레이어들에게 직업 카드 분배
+        this.players[0].jobcard_hands.Add( (int)Cards.magician ); //마술사
+        this.players[0].jobcard_hands.Add((int)Cards.woodCutter); //나무꾼
+
+        this.players[1].jobcard_hands.Add((int)Cards.vegetableSeller); //채소 장수
+        this.players[1].jobcard_hands.Add((int)Cards.woodPicker); //장작 채집자
+
+        this.players[2].jobcard_hands.Add((int)Cards.wallMaster); //초벽질공
+        this.players[2].jobcard_hands.Add((int)Cards.stoneCutter); //돌 자르는 사람
+
+        this.players[3].jobcard_hands.Add((int)Cards.organicFarmer); // 유기 농부
+        this.players[3].jobcard_hands.Add((int)Cards.pigBreeder); // 돼지 사육사
+
+        //플레이어들에게 보조설비 카드 분배
+        this.players[0].subcard_hands.Add( (int)Cards.stoneClamp ); //돌집게
+        this.players[0].subcard_hands.Add( (int)Cards.clayMining ); //양토채굴장
+
+        this.players[1].subcard_hands.Add( (int)Cards.woodBoat ); //통나무배
+        this.players[1].subcard_hands.Add( (int)Cards.rake ); //쇠스랑
+
+        this.players[2].subcard_hands.Add( (int)Cards.watterBottle ); //물통
+        this.players[2].subcard_hands.Add( (int)Cards.woodYard ); //목재소
+
+        this.players[3].subcard_hands.Add( (int)Cards.butter ); //버터제조기
+        this.players[3].subcard_hands.Add( (int)Cards.bottle ); //병
+
+        //================================================
+
+        // food of firstplayer to 2
+        ResourceManager.instance.minusResource(0, "food", 1);
+
+
 
         //라운드 카드 가져오기
         for (int i=0; i<14; i++)
@@ -171,8 +245,7 @@ public class GameManager : MonoBehaviour
             this.roundcards[i].SetActive(false);
         }
 
-        //라운드카드들의 스택 초기화
-        this.stackOfRoundCard = new int[13];
+
 
         //현재 라운드 초기화
         this.currentRound = 0;
@@ -182,88 +255,95 @@ public class GameManager : MonoBehaviour
         //라운드 카드 활성화
         this.preRound();
 
+        //오류 수정
         this.endTurnFlag = false;
     }
 
+
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        //1. 라운드 진행
         if ( this.RoundFlag )
-        {
-            // Debug.Log("Current Round is " + this.currentRound);
-            //1-2. 턴을 진행 중이라면
-            if ( !this.endTurnFlag )
             {
-                //...기다림 == 아무것도 안함
-                // Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
-            }
-
-            else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
-            {
-                //1-4. 다음 턴을 부여받을 플레이어 찾기
-                //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
-                if ( this.findNextPlayer() )
+                //1-2. 턴을 진행 중이라면
+                if ( !this.endTurnFlag )
                 {
-                    //... 그대로 진행
-                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
-                    Debug.Log("Move to Next Turn");
-                    this.endTurnFlag = false;
+                    Debug.Log( "현재 라운드는 " + this.currentRound );
+                    Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
+                    Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+                    "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[3].remainFamilyOfCurrentPlayer );
                     
                 }
 
-                //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
-                else
+                else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
                 {
-                    Debug.Log("Round is Over");
-                    this.endTurnFlag = false;
-                    this.RoundFlag = false;
+                    //1-4. 다음 턴을 부여받을 플레이어 찾기
+                    //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
+                    if ( this.findNextPlayer() )
+                    {
+                        //... 그대로 진행
+                        Debug.Log("Move to Next Turn");
+                        this.endTurnFlag = false;
+                        SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
+                    }
+
+                    //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
+                    else
+                    {
+                        Debug.Log("Round is Over");
+                        this.endTurnFlag = false;
+                        this.RoundFlag = false;
+                    }
                 }
             }
-        }
 
 
 
-        //2. 라운드 전체가 끝남.
-        else
-        {
-            //2-1. 수확라운드인지 체크 후 수확 실행
-            if (this.checkHarvest())
-            {
-                Debug.Log("수확 라운드 진행중...");
-                //수확라운드 진행
-            }
-
-            //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
-            if ( !this.checkFinalRound() )
-            {
-                //2-2-1. 다음 라운드 준비 및 진행
-                this.preRound();
-            }
+            //2. 라운드 전체가 끝남.
             else
             {
-                //2-2-2. 게임 종료
-                //...
-                Debug.Log("Game is Over!");
-            } 
-        }
+                //2-1. 수확라운드인지 체크 후 수확 실행
+                if (this.checkHarvest())
+                {
+                    Debug.Log("수확 라운드 진행중...");
+                    //수확라운드 진행
+                }
 
-        //다음 라운드로 진행.
+                //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
+                if ( !this.checkFinalRound() )
+                {
+                    //2-2-1. 다음 라운드 준비 및 진행
+                    this.preRound();
+                }
+                else
+                {
+                    //2-2-2. 게임 종료
+                    Debug.Log("Game is Over!");
+                    FinishAgriCola();
+
+
+                } 
+            }
+
+        
 
     }
 
     //--------------------------------------------------------------------------------------------
 
-    //Update to NetworkManager
-    public void sendmsg( ActionType actiontype )
-    {
-        this.message.actionPlayerId = this.currentPlayerId;
-        this.message.actionType = ActionType.BUSH;
-        this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
-        this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
+    // //Update to NetworkManager
+    // public void sendmsg( ActionType actiontype )
+    // {
+    //     this.message.actionPlayerId = this.currentPlayerId;
+    //     this.message.actionType = ActionType.BUSH;
+    //     this.message.player = this.players[currentPlayerId].GetPlayerMessageData();
+    //     this.message.playerBoard = this.playerBoards[currentPlayerId].GetBoardMessageData();
         
-        //NetworkManager를 통해 DB와 소통
-        NetworkManager.instance.SendMessage(message);
-    }
+    //     //NetworkManager를 통해 DB와 소통
+    //     NetworkManager.instance.SendMessage(message);
+    // }
 
     public int getCurrentPlayerId()
     {
@@ -456,4 +536,147 @@ public class GameManager : MonoBehaviour
 
         return result;
     }
+
+    void FinishAgriCola() 
+    {
+        //1. 점수 계산
+        int[] pointOfplayers = new int[4];
+        //플레이어 별로 계산
+        for(int i=0; i<4; i++) {
+            //자원 - 가족 점수 포함
+            //1-1. 곡식
+            if ( this.players[i].wheat ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( 1 <= this.players[i].wheat&& this.players[i].wheat <= 3  ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( 4 <= this.players[i].wheat && this.players[i].wheat <= 5 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( 6 <= this.players[i].wheat && this.players[i].wheat <= 7 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].wheat >= 8 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //1-2. 채소
+            if ( this.players[i].vegetable ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( this.players[i].vegetable ==1 ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( this.players[i].vegetable ==2 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( this.players[i].vegetable == 3 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].vegetable >= 4 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //1-3. 양
+            if ( this.players[i].sheep ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( 1 <= this.players[i].sheep&& this.players[i].sheep <= 3  ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( 4 <= this.players[i].sheep && this.players[i].sheep <= 5 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( 6 <= this.players[i].sheep && this.players[i].sheep <= 7 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].sheep >= 8 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //1-4. 돼지
+            if ( this.players[i].pig ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( 1 <= this.players[i].pig&& this.players[i].pig <= 2  ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( 3 <= this.players[i].pig && this.players[i].pig <= 4 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( 5 <= this.players[i].pig && this.players[i].pig <= 6 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].pig >= 7 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //1-5. 소
+            if ( this.players[i].cow ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( this.players[i].cow ==1  ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( 2 <= this.players[i].cow && this.players[i].cow <= 3 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( 4 <= this.players[i].cow && this.players[i].cow <= 5 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].cow >= 6 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //1-6. 밭
+            //...............
+
+
+            //1-7. 우리
+            if ( this.players[i].shed ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( this.players[i].shed ==1 ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( this.players[i].shed ==2 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( this.players[i].shed == 3 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( this.players[i].shed >= 4 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+
+            //개인보드판 빈 칸
+
+            //외양간 있는 우리 - 개당 1점
+
+            //방 점수 - 나무, 흙 ,돌이 0,1,2점
+            switch(this.playerBoards[i].houseType)
+        {
+            case HouseType.WOOD:
+                pointOfplayers[i] = pointOfplayers[i] + 0 * this.players[i].room;
+                break;
+            case HouseType.CLAY:
+                pointOfplayers[i] = pointOfplayers[i] + 1 * this.players[i].room;
+                break;
+            case HouseType.STONE:
+                pointOfplayers[i] = pointOfplayers[i] + 2 * this.players[i].room;
+                break;
+        }
+
+            //카드 점수
+            //1. 주요설비
+            //1-1. 가구제작소
+            if( this.players[i].HasMainCard( "joinery" )  ) {
+                if(3==this.players[i].wood || this.players[i].wood==4) {
+                    pointOfplayers[i] = pointOfplayers[i] + 1;
+                }
+                if(this.players[i].wood==5 || this.players[i].wood==6) {
+                    pointOfplayers[i] = pointOfplayers[i] + 2;
+                }
+                if(this.players[i].wood>=7) {
+                    pointOfplayers[i] = pointOfplayers[i] + 3;
+                }
+            }
+            //1-2. 그릇제작소
+            if( this.players[i].HasMainCard( "pottery" )  ) {
+                if(3==this.players[i].clay || this.players[i].clay==4) {
+                    pointOfplayers[i] = pointOfplayers[i] + 1;
+                }
+                if(this.players[i].clay==5 || this.players[i].clay==6) {
+                    pointOfplayers[i] = pointOfplayers[i] + 2;
+                }
+                if(this.players[i].clay>=7) {
+                    pointOfplayers[i] = pointOfplayers[i] + 3;
+                }
+            }
+
+            //1-3. 바구니제작소
+            if( this.players[i].HasMainCard( "basket" )  ) {
+                if(3==this.players[i].reed || this.players[i].reed==4) {
+                    pointOfplayers[i] = pointOfplayers[i] + 1;
+                }
+                if(this.players[i].reed==5 || this.players[i].reed==6) {
+                    pointOfplayers[i] = pointOfplayers[i] + 2;
+                }
+                if(this.players[i].reed>=7) {
+                    pointOfplayers[i] = pointOfplayers[i] + 3;
+                }
+            }
+
+            //2.보조설비
+
+            //2-1. 병
+            if( this.players[i].HasSubCard( "bottle" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 4;
+            }
+
+            //3. 직업 카드
+            //3-1. organic farmer
+            //...
+
+            //보너스 점수
+
+            //구걸 - 개당 -3
+            pointOfplayers[i] = pointOfplayers[i] - 3 * this.players[i].begging;
+
+        }
+        //2. 승자 발표
+        //2-1. 각 플레이어 점수 발표
+        int max = 0;
+        int max_players = 0;
+
+        for(int i=0; i<4; i++) {
+            if( pointOfplayers[i] > max ) { max = pointOfplayers[i]; max_players = i; }
+            Debug.Log( "Player "+ i + " totally GET " + pointOfplayers[i] + " POINTS!!!!" );
+        }
+
+        //2-2. 승자 발표!
+        Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
 }

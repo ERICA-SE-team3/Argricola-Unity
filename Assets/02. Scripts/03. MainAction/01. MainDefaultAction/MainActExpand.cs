@@ -11,12 +11,24 @@ public class MainActExpand : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         GameManager.instance.actionQueue.Enqueue("houseBuild");
+        
+        //그리고 또는 
+
         GameManager.instance.actionQueue.Enqueue("shedBuild");
 
         GameManager.instance.PopQueue();
         // }
+    }
+
+    public void StartHouseInstall() {
+        GameManager.instance.playerBoards[playerIndex].StartInstallHouse();
+    }
+
+    public void StartBuildShed() {
+        GameManager.instance.playerBoards[playerIndex].StartInstallShed();
     }
 }

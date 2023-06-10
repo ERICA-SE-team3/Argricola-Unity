@@ -21,6 +21,7 @@ public class WishChildrenRoundAct : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         GameManager.instance.actionQueue.Enqueue("wishChildren");
@@ -41,4 +42,5 @@ public class WishChildrenRoundAct : ButtonParents
         // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
         GameManager.instance.PopQueue();
     }
+
 }

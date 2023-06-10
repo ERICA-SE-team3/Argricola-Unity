@@ -18,15 +18,27 @@ public class HouseDevelopRoundAct : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
-            GameManager.instance.actionQueue.Enqueue("improvements");
             GameManager.instance.actionQueue.Enqueue("houseDevelop");
+
+            //그리고 
+
+            //주요설비 및 보조설비 구매
+            //...
+
             GameManager.instance.PopQueue();
             // 집개조 이후, 주요설비 및 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
             // ActCardSub(playerIndex, "쇠스랑"); // 임의로 함수명 만듦
         // }
         }
+
+    public void StartHouseDeveloping() {
+      GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
+    }
+
+
 }

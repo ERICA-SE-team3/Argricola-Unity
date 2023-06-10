@@ -19,12 +19,20 @@ public class MainActDayLaborer : ButtonParents
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         ResourceManager.instance.addResource(playerIndex, "food", 2);
 
-        //확인 message
-        Debug.Log("Player " + playerIndex + " get " + 2 + " food!");
+        //돌집게 카드를 보유중이라면 나무 1개 추가
+        if (GameManager.instance.players[playerIndex].HasSubCard("clayMining"))
+        {
+            ResourceManager.instance.addResource(playerIndex, "clay", 3);
+            Debug.Log("Player " + playerIndex + " get 1 clay additionaly because of CLAYMINING");
+        }
+
+            //확인 message
+            Debug.Log("Player " + playerIndex + " get " + 2 + " food!");
 
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(playerIndex, "family", 1);

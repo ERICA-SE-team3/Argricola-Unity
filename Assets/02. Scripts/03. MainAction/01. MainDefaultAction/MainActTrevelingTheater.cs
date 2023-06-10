@@ -22,14 +22,21 @@ public class MainActTrevelingTheater : ButtonParents
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // 사용자의 턴인지, 음식이 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
 
-            // 있다면 니무 얻기 함수 호출
+            //자원 획득
             ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
+
+            //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
+            if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
+            {
+                GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("magician");
+            }
 
             //확인 message
             Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");

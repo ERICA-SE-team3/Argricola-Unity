@@ -21,6 +21,7 @@ public class SheepMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
             GameManager.instance.actionQueue.Enqueue("sheepMarket");
@@ -48,4 +49,6 @@ public class SheepMarketRoundAct : ButtonParents
         // StartSheep();   // player보드에 양을 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
         GameManager.instance.PopQueue();
     }
+
 }
+
