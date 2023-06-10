@@ -36,7 +36,7 @@ public class NetworkManager : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        SetWebSocket(url);
+        // SetWebSocket(url);
     }
 
 
