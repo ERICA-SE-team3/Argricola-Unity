@@ -96,7 +96,14 @@ public class GameManager : MonoBehaviour
         else if(popAction == "houseDevelop"){
             board.StartUpgradeHouse();
         }
+        else if(popAction == "houseBuild"){
+            board.StartInstallHouse();
+        }
+        else if(popAction == "shedBuild"){
+            board.StartInstallShed();
+        }
     }
+
     
     public void Start()
     {
@@ -256,6 +263,8 @@ public class GameManager : MonoBehaviour
             if ( this.players[i].isFirstPlayer )
             {
                 this.currentPlayerId = i;
+                SidebarManager.instance.HighlightCurrentPlayer(i);
+                SidebarManager.instance.FirstPlayerIcon(i);
                 break;
             }
         }
@@ -264,6 +273,7 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
+        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 
