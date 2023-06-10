@@ -69,6 +69,23 @@ public class CameraManager: MonoBehaviour
         Debug.Log(MainCamera.transform.position);
     }
 
-
+    public void Show_Player()
+    {
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
+        switch(localPlayerIndex){
+            case 0:
+                Show_Player1();
+                break;
+            case 1:
+                Show_Player2();
+                break;
+            case 2:
+                Show_Player3();
+                break;
+            case 3:
+                Show_Player4();
+                break;
+        }
+    }
 }
 
