@@ -138,8 +138,7 @@ public class GameManager : MonoBehaviour
             board.StartInstallShed();
         }
     }
-    
-    
+
 
     public void Start()
     {

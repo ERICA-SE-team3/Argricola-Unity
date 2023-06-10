@@ -490,6 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fedd12bcdd6bb41a29c2ae3a012c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainBoardPosition: {x: 0, y: 0, z: 0}
+  mainCardPosition: {x: 0, y: 0, z: 0}
   MainCamera: {fileID: 1862076306}
 --- !u!4 &35936702
 Transform:
@@ -3841,7 +3843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a188629e06cc46cf940246aaf3fbefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldSowing: 1
 --- !u!1 &728606090
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,7 +4184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  isPlayerTurn: 1
 --- !u!1 &869731878
 GameObject:
   m_ObjectHideFlags: 0
@@ -14702,6 +14702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objPlayerboards: {fileID: 109690288}
+  localPlayerIndex: 0
   playerBoards: []
   stackOfRoundCard: 
   currentPlayerId: 0
@@ -14710,11 +14711,14 @@ MonoBehaviour:
   roundcards: []
   RoundFlag: 1
   endTurnFlag: 0
-  actionFlag: 0
   playerBoard: {fileID: 2002419795}
   sheepMarket: {fileID: 1517165916}
   wishChildren: {fileID: 1307117758}
   westernQuarry: {fileID: 1032064214}
+  pigMarket: {fileID: 0}
+  vegetableSeed: {fileID: 0}
+  easternQuarry: {fileID: 0}
+  cowMarket: {fileID: 0}
   popAction: 
 --- !u!1 &1754513159
 GameObject:
