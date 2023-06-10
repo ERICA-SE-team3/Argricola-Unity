@@ -26,8 +26,8 @@ public class MainActFishing : ButtonParents
     public override void OnClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
-        if (playerIndex == userPlayerId) 
-        {
+        // if (playerIndex == userPlayerId) 
+        // {
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")];
 
@@ -45,6 +45,6 @@ public class MainActFishing : ButtonParents
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

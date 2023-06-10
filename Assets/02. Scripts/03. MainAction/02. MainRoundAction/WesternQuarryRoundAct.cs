@@ -17,11 +17,11 @@ public class WesternQuarryRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
           GameManager.instance.actionQueue.Enqueue("westernQuarry");
           GameManager.instance.PopQueue();
-        }
+        // }
     }
     public void WesternQuarryStart()
     {

@@ -12,8 +12,8 @@ public class MainActReedField : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
             ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
@@ -25,6 +25,6 @@ public class MainActReedField : ButtonParents
             ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
             GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

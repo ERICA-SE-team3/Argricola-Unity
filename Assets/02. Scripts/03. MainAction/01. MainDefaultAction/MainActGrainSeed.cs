@@ -13,8 +13,8 @@ public class MainActGrainSeed : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {   
+        // if(playerIndex == userPlayerId)
+        // {   
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
 
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " wheat!");
@@ -22,6 +22,6 @@ public class MainActGrainSeed : ButtonParents
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

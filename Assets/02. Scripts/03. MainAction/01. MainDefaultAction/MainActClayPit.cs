@@ -12,8 +12,8 @@ public class MainActClayPit : ButtonParents
     public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
 
         ResourceManager.instance.addResource(playerIndex, "clay", stack * 2);
@@ -25,6 +25,6 @@ public class MainActClayPit : ButtonParents
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

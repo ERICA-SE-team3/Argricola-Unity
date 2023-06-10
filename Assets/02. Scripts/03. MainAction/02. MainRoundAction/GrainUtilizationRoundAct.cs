@@ -22,8 +22,8 @@ public class GrainUtilizationRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
 
@@ -33,6 +33,6 @@ public class GrainUtilizationRoundAct : ButtonParents
             //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
             // }
             GameManager.instance.PopQueue(); 
-        }
+        // }
     }
 }

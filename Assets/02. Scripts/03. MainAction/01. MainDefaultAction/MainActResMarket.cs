@@ -12,8 +12,8 @@ public class MainActResMarket : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
@@ -24,6 +24,6 @@ public class MainActResMarket : ButtonParents
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

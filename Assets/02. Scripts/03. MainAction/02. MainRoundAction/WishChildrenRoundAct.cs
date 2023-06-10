@@ -21,12 +21,12 @@ public class WishChildrenRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         GameManager.instance.actionQueue.Enqueue("wishChildren");
         GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
         GameManager.instance.PopQueue();
-        }
+        // }
       }
     public void WishChildrenStart()
     {

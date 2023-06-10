@@ -11,12 +11,12 @@ public class MainActExpand : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         GameManager.instance.actionQueue.Enqueue("houseBuild");
         GameManager.instance.actionQueue.Enqueue("shedBuild");
 
         GameManager.instance.PopQueue();
-        }
+        // }
     }
 }

@@ -16,8 +16,8 @@ public class MainActCopse : ButtonParents
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("copse")];
 
@@ -35,6 +35,6 @@ public class MainActCopse : ButtonParents
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

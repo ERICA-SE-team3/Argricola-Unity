@@ -19,8 +19,8 @@ public class MainActDayLaborer : ButtonParents
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         ResourceManager.instance.addResource(playerIndex, "food", 2);
 
         //확인 message
@@ -31,6 +31,6 @@ public class MainActDayLaborer : ButtonParents
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

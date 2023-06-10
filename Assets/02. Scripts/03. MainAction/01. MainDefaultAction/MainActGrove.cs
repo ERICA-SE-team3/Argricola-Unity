@@ -23,8 +23,8 @@ public class MainActGrove : ButtonParents
     public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
-        if (playerIndex == userPlayerId) 
-        {
+        // if (playerIndex == userPlayerId) 
+        // {
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")];
 
@@ -42,6 +42,6 @@ public class MainActGrove : ButtonParents
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

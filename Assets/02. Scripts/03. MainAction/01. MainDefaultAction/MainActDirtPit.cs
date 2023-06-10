@@ -13,8 +13,8 @@ public class MainActDirtPit : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 
         ResourceManager.instance.addResource(playerIndex, "clay", stack * 1);
@@ -26,6 +26,6 @@ public class MainActDirtPit : ButtonParents
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
         GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

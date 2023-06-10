@@ -21,11 +21,11 @@ public class SheepMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
             GameManager.instance.actionQueue.Enqueue("sheepMarket");
             GameManager.instance.PopQueue();
-        }
+        // }
     }
     public void SheepMarketStart()
     {

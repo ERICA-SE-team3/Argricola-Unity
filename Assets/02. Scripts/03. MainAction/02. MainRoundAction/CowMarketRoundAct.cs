@@ -21,11 +21,11 @@ public class CowMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        if(playerIndex == userPlayerId)
-        {
+        // if(playerIndex == userPlayerId)
+        // {
             GameManager.instance.actionQueue.Enqueue("cowMarket");
             GameManager.instance.PopQueue();
-        }
+        // }
     }
     public void CowMarketStart()
     {
