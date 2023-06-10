@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class VegetableSeedRoundAct : ButtonParents
 {
-    public int playerIndex = 0;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    // player ë³¸ì¸ì˜ id ê°’
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        // ÀÖ´Ù¸é ´Ï¹« ¾ò±â ÇÔ¼ö È£Ãâ
+        // if(playerIndex == userPlayerId)
+        // {
+            GameManager.instance.actionQueue.Enqueue("vegetableSeed");
+            GameManager.instance.PopQueue();
+        // }
+    }
+    public void VegetableSeedStart()
+    {   
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "vegetable", 1);
 
-        //È®ÀÎ message
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " vegetable!");
 
-        //Çàµ¿À» ÇÑ ÈÄ °¡Á· ¼ö ÇÏ³ª ÁÙÀÌ±â
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
-
-        //turnÀÌ ³¡³µ´Ù´Â flag 
-        GameManager.instance.endTurnFlag = true;
+        GameManager.instance.PopQueue();
     }
 }

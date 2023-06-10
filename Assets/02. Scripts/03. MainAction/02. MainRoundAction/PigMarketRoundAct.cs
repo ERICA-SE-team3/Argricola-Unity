@@ -11,32 +11,38 @@ public class PigMarketRoundAct : ButtonParents
     4. 개인판에서 소를 배치시키는 함수 실행
     */
     
-    public int playerIndex = 0;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
     //stack 정보 가져오기
     int stack;
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        //stack 정보 가져오기
-        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+        // if(playerIndex == userPlayerId)
+        // {
+            GameManager.instance.actionQueue.Enqueue("pigMarket");
+            GameManager.instance.PopQueue();
+        // }
+    }
+    public void PigMarketStart()
+    {
+    //stack 정보 가져오기
+    stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
 
-        // 있다면 니무 얻기 함수 호출
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "pig", stack );
+    // 있다면 pig 얻기 
+    ResourceManager.instance.addResource(playerIndex, "pig", stack );
 
-        //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " pig!");
+    //확인 message
+    Debug.Log("Player " + playerIndex + " get " + stack + " pig!");
 
-        //stack 초기화
-        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
+    //stack 초기화
+    GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
 
-        //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+    //행동을 한 후 가족 수 하나 줄이기
+    ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
-        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        // StartPig();  // player보드에 돼지를 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
-
-        //turn이 끝났다는 flag 
-        GameManager.instance.endTurnFlag = true;
+    GameManager.instance.PopQueue();
     }
 }

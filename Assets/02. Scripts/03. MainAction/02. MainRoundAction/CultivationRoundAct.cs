@@ -11,16 +11,20 @@ public class CultivationRoundAct : ButtonParents
         3-1. 할거면 씨뿌리기 행동 진행
         3-2. 안할거면 끝
     */
-    public bool shouldSowing = true; // 씨뿌리기 할거임? (일단 true)
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        // PR 리뷰 수정사항 : 정해지지 않은 함수명 주석처리
-        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        // StartInstallFarm();
-        if(shouldSowing == true)
-        {
-            // StartSowing();
-        }
+        // if(playerIndex == userPlayerId)
+        // {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            GameManager.instance.actionQueue.Enqueue("cultivation");
+            GameManager.instance.actionQueue.Enqueue("sowing");
+            GameManager.instance.PopQueue(); 
+        // }
     }
 }

@@ -13,30 +13,18 @@ public class MainActGrove : ButtonParents
     - 사용자의 턴일 때, 쌓여있는 나무만큼 얻어야함 -> addResource() 호출
     */
 
-    public int playerIndex = 0;
-
-    // 누적되어있는 나무의 개수를 정의
-    public int woods;
-    public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
-
-    //stack 정보 가져오기
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
     int stack;
 
-    //// 나무가 있는지 확인
-    //private bool HasWoods(){
-    //    wood = ResourceManager.instance.getResourceOfPlayer(playerIndex, "wood");
-    //    if (wood > 0)
-    //        return true;
-    //    else
-    //        return false;
-    //}
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     // 사용자가 '수풀'행동을 클릭했을 때
     public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
-        if (isPlayerTurn) 
-        {
+        // if (playerIndex == userPlayerId) 
+        // {
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")];
 
@@ -54,7 +42,6 @@ public class MainActGrove : ButtonParents
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-
-        }
+        // }
     }
 }
