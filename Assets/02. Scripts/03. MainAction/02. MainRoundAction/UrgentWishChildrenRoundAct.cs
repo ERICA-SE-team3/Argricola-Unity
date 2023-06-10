@@ -14,5 +14,6 @@ public class UrgentWishChildrenRoundAct : ButtonParents
     public override void OnClick()
     {
         ResourceManager.instance.addResource(playerIndex, "family", 1);
+        GameManager.instance.endTurnFlag = true;
     }
 }

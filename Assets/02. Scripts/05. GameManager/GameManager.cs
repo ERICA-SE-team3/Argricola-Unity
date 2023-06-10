@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
 
-    public GameObject playerBoard, sheepMarket, wishChildren, westernQuarry;
+    public GameObject playerBoard, sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
     // public GameObject whisChildren;
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
@@ -66,8 +66,12 @@ public class GameManager : MonoBehaviour
     public void PopQueue() {
         PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
+        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
         WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
         WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
+        VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
+        EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
+        CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
@@ -82,7 +86,10 @@ public class GameManager : MonoBehaviour
             // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
         }
         else if(popAction == "sheepMarket"){
-            sm.sheepMarketStart();
+            sm.SheepMarketStart();
+        }
+        else if(popAction == "pigMarket"){
+            pm.PigMarketStart();
         }
         else if(popAction == "fencing"){
             board.StartInstallFence();
@@ -99,6 +106,17 @@ public class GameManager : MonoBehaviour
         else if(popAction == "houseDevelop"){
             board.StartUpgradeHouse();
         }
+        else if(popAction == "vegetableSeed"){
+            vs.VegetableSeedStart();
+        }
+        else if(popAction == "easternQuarry"){
+            eq.EasternQuarryStart();
+        }
+        else if(popAction == "cowMarket"){
+            cm.CowMarketStart();
+        }
+        else if(popAction == "cultivation"){
+            board.StartInstallFarm();
         else if(popAction == "houseBuild"){
             board.StartInstallHouse();
         }
