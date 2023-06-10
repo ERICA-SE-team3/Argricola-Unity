@@ -38,6 +38,9 @@ public class SidebarManager : MonoBehaviour
         sidebarPlayerObject.transform.Find("familyObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].family.ToString();
         sidebarPlayerObject.transform.Find("fenceObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].fence.ToString();
         sidebarPlayerObject.transform.Find("shedObject").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].shed.ToString();
+        if(isMyTurn(playerIndex)){
+            UpperbarResource.instance.UpperbarResourcebarUpdate(playerIndex);
+        }
     }
 
     public void HighlightCurrentPlayer(int playerIndex){
@@ -62,5 +65,9 @@ public class SidebarManager : MonoBehaviour
                 sidebarPlayerObject.transform.Find("firstObject").Find("firstPlayer").GetComponent<Image>().enabled = false;
             }
         }
+    }
+
+    public bool isMyTurn(int playerIndex){
+        return GameManager.instance.localPlayerIndex == playerIndex;
     }
 }

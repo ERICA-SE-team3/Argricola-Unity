@@ -11,17 +11,12 @@ public class CultivationRoundAct : ButtonParents
         3-1. 할거면 씨뿌리기 행동 진행
         3-2. 안할거면 끝
     */
-    public bool shouldSowing = true; // 씨뿌리기 할거임? (일단 true)
 
     public override void OnClick()
     {
-        // PR 리뷰 수정사항 : 정해지지 않은 함수명 주석처리
-        // PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        // StartInstallFarm();
-        if(shouldSowing == true)
-        {
-            // StartSowing();
-        }
+        GameManager.instance.actionQueue.Enqueue("cultivation");
+        GameManager.instance.actionQueue.Enqueue("sowing");
+        GameManager.instance.PopQueue(); 
     }
 
     public void _OnClick() {
