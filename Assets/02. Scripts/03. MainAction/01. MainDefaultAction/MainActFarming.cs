@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class MainActFarming : ButtonParents
 {
-    public override void OnClick(){
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
+    public override void OnClick(){
+        GameManager.instance.actionQueue.Enqueue("shedBuild");
+
+        GameManager.instance.PopQueue();
     }
-    //===============================================
+    
+    public void FarmingStart()
+    {   
+        GameManager.instance.playerBoards[ playerIndex ].StartInstallFarm();
+    }
+
 }

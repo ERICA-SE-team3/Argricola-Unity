@@ -60,25 +60,17 @@ public class GameManager : MonoBehaviour
     //2. 각 플레이어의 turn ( 가족 수 하나당 한 턴 )이 끝남을 나타내는 flag
     public bool endTurnFlag = false;
 
-    public GameObject playerBoard, sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
+    public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
+    public GameObject farming, grainUtilization, fencing, houseDevelop, expand;
     // public GameObject whisChildren;
+
+    
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
-    //=============================================================
-    public Queue<string> actionQueue1 = new Queue<string>();
-    public Queue<string> actionQueue2 = new Queue<string>();
-    public Queue<string> actionQueue3 = new Queue<string>();
-    public Queue<string> actionQueue4 = new Queue<string>();
-
-    // public List< Queue<string> > QueueList = new List< Queue<string> >();
-
-    //=============================================================
-
     public void PopQueue() {
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
         PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
         WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
@@ -87,6 +79,21 @@ public class GameManager : MonoBehaviour
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
 
+        //집 업그레이드
+        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+
+        //집짓기
+        MainActExpand ex = expand.GetComponent<MainActExpand>();
+
+        //농지
+        MainActFarming fr = farming.GetComponent<MainActFarming>();
+
+        //빵굽기, 씨뿌리기
+        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
+
+        //울타리치기
+        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
         }
@@ -94,19 +101,17 @@ public class GameManager : MonoBehaviour
         popAction = actionQueue.Dequeue();
         
         if(popAction == "sowing"){
-            board.StartSowing();
+            gu.StartSowing();
         }
         else if(popAction == "baking"){
             // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
+            gu.StartBaking();
         }
         else if(popAction == "sheepMarket"){
             sm.SheepMarketStart();
         }
         else if(popAction == "pigMarket"){
             pm.PigMarketStart();
-        }
-        else if(popAction == "fencing"){
-            board.StartInstallFence();
         }
         else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
@@ -121,7 +126,7 @@ public class GameManager : MonoBehaviour
             wq.WesternQuarryStart();
         }
         else if(popAction == "houseDevelop"){
-            board.StartUpgradeHouse();
+            hd.StartHouseDeveloping();
         }
         else if(popAction == "vegetableSeed"){
             vs.VegetableSeedStart();
@@ -133,13 +138,19 @@ public class GameManager : MonoBehaviour
             cm.CowMarketStart();
         }
         else if(popAction == "cultivation"){
-            board.StartInstallFarm();
+            fr.FarmingStart();
         }
         else if(popAction == "houseBuild"){
-            board.StartInstallHouse();
+            ex.StartHouseInstall();
         }
         else if(popAction == "shedBuild"){
-            board.StartInstallShed();
+            ex.StartBuildShed();
+        }
+        else if(popAction == "farming"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "fencing") {
+            fc.StartFencing();
         }
     }
 
@@ -169,20 +180,20 @@ public class GameManager : MonoBehaviour
 
         //=========================================
 
-        // //playerboard start
-        // for (int i = 0; i < 4; i++)
-        // {
-        //    GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
-        //    GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
-        //    GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
-        //    PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
-        //    this.playerBoards.Add(tempPB);
-        // }
+        //playerboard start
+        for (int i = 0; i < 4; i++)
+        {
+           GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
+           GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
+           GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
+           PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
+           this.playerBoards.Add(tempPB);
+        }
 
-        // //Setplayer to playerboard
-        // for(int i=0; i<4; i++) {
-        //     this.playerBoards[i].SetPlayer( this.players[i] );
-        // }
+        //Setplayer to playerboard
+        for(int i=0; i<4; i++) {
+            this.playerBoards[i].SetPlayer( this.players[i] );
+        }
 
         //=======================================
         
@@ -253,14 +264,16 @@ public class GameManager : MonoBehaviour
     {
         if ( this.RoundFlag )
             {
-                // Debug.Log("Current Round is " + this.currentRound);
                 //1-2. 턴을 진행 중이라면
                 if ( !this.endTurnFlag )
                 {
-                    //... 그대로 진행
-                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
-                    Debug.Log("Move to Next Turn");
-                    this.endTurnFlag = false;
+                    Debug.Log( "현재 라운드는 " + this.currentRound );
+                    Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
+                    Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+                    "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[3].remainFamilyOfCurrentPlayer );
                     
                 }
 
@@ -271,9 +284,9 @@ public class GameManager : MonoBehaviour
                     if ( this.findNextPlayer() )
                     {
                         //... 그대로 진행
-                        SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                         Debug.Log("Move to Next Turn");
                         this.endTurnFlag = false;
+                        SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                     }
 
                     //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감

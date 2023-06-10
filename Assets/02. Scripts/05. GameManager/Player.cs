@@ -534,6 +534,7 @@ public class Player
             case "fireplace2":
                 if ( !this.maincard_owns.Contains( (int)Cards.fireplace2) && this.clay> 3 )
                 {
+                    ResourceManager.instance.minusResource(id, "clay", 3);
                     this.maincard_owns.Add((int)Cards.fireplace2);
                     Debug.Log("player 0" + " get fireplace2 job card!");
                 }
@@ -567,6 +568,12 @@ public class Player
             case "clayOven":
                 if ( !this.maincard_owns.Contains( (int)Cards.clayOven) && this.clay> 3 && this.rock >1 )
                 {
+                    ResourceManager.instance.minusResource(id, "clay", 3);
+                    ResourceManager.instance.minusResource(id, "stone", 1);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.clayOven);
                     Debug.Log("player 0" + " get clayOven job card!");
                 }
@@ -578,6 +585,12 @@ public class Player
             case "stoneOven":
                 if ( !this.maincard_owns.Contains( (int)Cards.stoneOven) && this.clay> 1 && this.rock >3 )
                 {
+                    ResourceManager.instance.minusResource(id, "clay", 1);
+                    ResourceManager.instance.minusResource(id, "stone", 3);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.stoneOven);
                     Debug.Log("player 0" + " get stoneOven job card!");
                 }
@@ -589,6 +602,12 @@ public class Player
             case "joinery":
                 if ( !this.maincard_owns.Contains( (int)Cards.joinery) && this.wood> 2 && this.rock >2)
                 {
+                    ResourceManager.instance.minusResource(id, "wood", 2);
+                    ResourceManager.instance.minusResource(id, "stone", 2);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.joinery);
                     Debug.Log("player 0" + " get joinery job card!");
                 }
@@ -600,6 +619,12 @@ public class Player
             case "pottery":
                 if ( !this.maincard_owns.Contains( (int)Cards.pottery)&& this.wood> 2 && this.rock >2 )
                 {
+                    ResourceManager.instance.minusResource(id, "clay", 2);
+                    ResourceManager.instance.minusResource(id, "stone", 2);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.pottery);
                     Debug.Log("player 0" + " get pottery job card!");
                 }
@@ -611,6 +636,12 @@ public class Player
             case "basket":
                 if ( !this.maincard_owns.Contains( (int)Cards.basket) && this.reed> 2 && this.rock >2 )
                 {
+                    ResourceManager.instance.minusResource(id, "reed", 2);
+                    ResourceManager.instance.minusResource(id, "stone", 2);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.basket);
                     Debug.Log("player 0" + " get basket job card!");
                 }
@@ -622,6 +653,12 @@ public class Player
             case "well":
                 if ( !this.maincard_owns.Contains( (int)Cards.well)&& this.wood> 1 && this.rock >3 )
                 {
+                    ResourceManager.instance.minusResource(id, "wood", 1);
+                    ResourceManager.instance.minusResource(id, "stone", 3);
+                    if( this.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( this.id, "stone", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
+                    }
                     this.maincard_owns.Add((int)Cards.well);
                     Debug.Log("player 0" + " get well job card!");
                 }

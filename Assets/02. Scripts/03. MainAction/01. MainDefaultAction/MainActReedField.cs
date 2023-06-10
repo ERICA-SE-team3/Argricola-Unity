@@ -12,24 +12,10 @@ public class MainActReedField : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
-
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
-
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " reed!");
-
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")] = 0;
-
-            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
-
-            GameManager.instance.endTurnFlag = true;
-        // }
-    }
-
-    public void _Onclick() {
-        //stack 정보 가져오기
+            //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
         // 있다면 니무 얻기 함수 호출
@@ -46,5 +32,7 @@ public class MainActReedField : ButtonParents
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
+        // }
     }
+
 }

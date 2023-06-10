@@ -145,6 +145,22 @@ public class PlayerBoard : MonoBehaviour
                 ResourceManager.instance.minusResource(player.id, "reed", 2);
             }
             selectedBlocks.Clear();
+
+            //돌 자르는 사람
+            if( houseType == HouseType.STONE ) {
+                    if( player.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( player.id, "stone", 1 );
+                        Debug.Log( "Player " + player.id + " get 1 stone because of STONECUTTER" );
+                    }
+                }
+
+            //초벽질공
+            if( houseType == HouseType.CLAY ) {
+                    if( player.HasJobCard( "wallMaster" ) ) {
+                        ResourceManager.instance.addResource( player.id, "food", 3 );
+                        Debug.Log( "Player " + player.id + " get 3 food because of WALLMASTER" );
+                    }
+        }
         }
         else
         {
@@ -215,8 +231,41 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     bool isHouseInstallEndAvailable()
     {
-        
-        Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
+        //1. 집을 하나도 선택하지 않은 채로
+        if( selectedBlocks.Count == 0) return false;
+
+        //2. 선택한 집 갯수를 지을 수 있는 자원이 있나
+        int playerWood, playerClay, playerStone;
+        playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
+        playerClay = ResourceManager.instance.getResourceOfPlayer(player.id, "clay");
+        playerStone = ResourceManager.instance.getResourceOfPlayer(player.id, "stone");
+
+        switch(houseType)
+        {
+            case HouseType.WOOD:
+                if(playerWood < selectedBlocks.Count * 5)
+                {
+                    Debug.LogWarning("목재가 부족합니다.");
+                    return false;
+                }
+                break;
+            case HouseType.CLAY:
+                if(playerStone < selectedBlocks.Count * 5)
+                {
+                    Debug.LogWarning("점토가 부족합니다.");
+                    return false;
+                }
+                break;
+            case HouseType.STONE:
+                if(playerClay < selectedBlocks.Count * 5)
+                {
+                    Debug.LogWarning("돌이 부족합니다.");
+                    return false;
+                }
+                break;
+        }
+
+        Debug.LogWarning("설치 가능한지 검사하는 함수");
         return true;
     }
 
@@ -296,6 +345,22 @@ public class PlayerBoard : MonoBehaviour
                 ResourceManager.instance.minusResource(player.id, "reed", 2);
             }
         }
+        //돌 자르는 사람
+        if( houseType == HouseType.STONE ) {
+                    if( player.HasJobCard( "stoneCutter" ) ) {
+                        ResourceManager.instance.addResource( player.id, "stone", 1 );
+                        Debug.Log( "Player " + player.id + " get 1 stone because of STONECUTTER" );
+                    }
+        }
+
+        //초벽질공
+        if( houseType == HouseType.STONE ) {
+                    if( player.HasJobCard( "wallMaster" ) ) {
+                        ResourceManager.instance.addResource( player.id, "food", 3 );
+                        Debug.Log( "Player " + player.id + " get 3 food because of WALLMASTER" );
+                    }
+        }
+
     }
 
     // -------------------------------------------------------------------------

@@ -14,6 +14,7 @@ public class MainActDirtPit : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];

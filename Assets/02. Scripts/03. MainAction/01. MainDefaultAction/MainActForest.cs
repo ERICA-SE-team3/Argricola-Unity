@@ -24,6 +24,7 @@ public class MainActForest : ButtonParents
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // 사용자의 턴인지, 나무가 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {
@@ -34,9 +35,9 @@ public class MainActForest : ButtonParents
             ResourceManager.instance.addResource(playerIndex, "wood", stack * 3);
 
             //나무꾼 카드를 보유중이라면 나무 1개 추가
-            if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodCutter"))
+            if (GameManager.instance.players[playerIndex].HasJobCard("woodCutter"))
             {
-                GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodCutter");
+                GameManager.instance.players[playerIndex].ActCard("woodCutter");
             }
 
             //확인 message

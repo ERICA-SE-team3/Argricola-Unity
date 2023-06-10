@@ -5,16 +5,16 @@ using UnityEngine;
 // 점토채굴장
 public class MainActClayPit : ButtonParents
 {
-    public int playerIndex = 0;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
     //stack 정보 가져오기
     int stack;
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];

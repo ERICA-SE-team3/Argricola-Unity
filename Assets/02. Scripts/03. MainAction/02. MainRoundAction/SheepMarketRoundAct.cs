@@ -21,6 +21,7 @@ public class SheepMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
             GameManager.instance.actionQueue.Enqueue("sheepMarket");

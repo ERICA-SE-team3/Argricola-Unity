@@ -25,6 +25,7 @@ public class MainActFishing : ButtonParents
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // 사용자의 턴인지, 음식이 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {
@@ -35,11 +36,9 @@ public class MainActFishing : ButtonParents
             ResourceManager.instance.addResource(playerIndex, "food", stack);
 
             //돌집게 카드를 보유중이라면 나무 1개 추가
-            if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("woodBoat"))
+            if (GameManager.instance.players[playerIndex].HasSubCard("woodBoat"))
             {
-                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
-                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
-                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 food and reed additionaly because of WOODBOAT");
+                GameManager.instance.players[playerIndex].ActCard("woodBoat");
             }
 
             //확인 message

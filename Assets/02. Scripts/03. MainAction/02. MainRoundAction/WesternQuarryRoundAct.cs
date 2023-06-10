@@ -25,6 +25,7 @@ public class WesternQuarryRoundAct : ButtonParents
     }
     public void WesternQuarryStart()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
       //stack 정보 가져오기
       stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")];
 

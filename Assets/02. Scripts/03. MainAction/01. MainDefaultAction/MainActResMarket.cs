@@ -12,6 +12,7 @@ public class MainActResMarket : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);

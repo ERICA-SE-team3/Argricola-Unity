@@ -22,6 +22,7 @@ public class MainActGrove : ButtonParents
     // 사용자가 '수풀'행동을 클릭했을 때
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // 사용자의 턴인지, 나무가 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {

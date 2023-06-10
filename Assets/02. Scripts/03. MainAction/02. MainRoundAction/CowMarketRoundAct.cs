@@ -29,6 +29,7 @@ public class CowMarketRoundAct : ButtonParents
     }
     public void CowMarketStart()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cowMarket")];
 

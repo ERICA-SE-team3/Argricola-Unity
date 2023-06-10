@@ -10,6 +10,7 @@ public class VegetableSeedRoundAct : ButtonParents
 
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
             GameManager.instance.actionQueue.Enqueue("vegetableSeed");
@@ -18,11 +19,11 @@ public class VegetableSeedRoundAct : ButtonParents
     }
     public void VegetableSeedStart()
     {   
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "vegetable", 1);
+        ResourceManager.instance.addResource(playerIndex, "vegetable", 1);
 
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 1 + " vegetable!");
+        Debug.Log("Player " + playerIndex + " get " + 1 + " vegetable!");
 
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        ResourceManager.instance.minusResource(playerIndex, "family", 1);
         GameManager.instance.PopQueue();
     }
 }
