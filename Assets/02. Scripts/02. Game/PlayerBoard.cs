@@ -215,6 +215,7 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     bool isHouseInstallEndAvailable()
     {
+        
         Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
         return true;
     }
