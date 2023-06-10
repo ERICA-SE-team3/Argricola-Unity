@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MainActReedField : ButtonParents
 {
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    public GameObject reedField;
     int stack;
 
     // player 본인의 id 값
@@ -24,6 +26,8 @@ public class MainActReedField : ButtonParents
 
             ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
+            reedField.GetComponent<Button>().enabled = false;
+            
             GameManager.instance.endTurnFlag = true;
         // }
     }

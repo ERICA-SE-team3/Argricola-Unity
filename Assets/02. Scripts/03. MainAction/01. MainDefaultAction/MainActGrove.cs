@@ -14,6 +14,8 @@ public class MainActGrove : ButtonParents
     */
 
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    public GameObject grove;
     int stack;
 
     // player 본인의 id 값
@@ -40,6 +42,8 @@ public class MainActGrove : ButtonParents
             //행동을 한 후 가족 수 하나 줄이기
             ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
+            //수풀 비활성화
+            grove.GetComponent<Button>().enabled = false;
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
         // }

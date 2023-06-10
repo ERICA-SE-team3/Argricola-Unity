@@ -14,6 +14,7 @@ public class MainActTrevelingTheater : ButtonParents
     */
 
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public GameObject travelingTheater;
     int stack;
 
     // player 본인의 id 값
@@ -40,6 +41,9 @@ public class MainActTrevelingTheater : ButtonParents
             //행동을 한 후 가족 수 하나 줄이기
             ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
+            //유랑극단 비활성화
+            travelingTheater.SetActive(false);
+            
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
         // }

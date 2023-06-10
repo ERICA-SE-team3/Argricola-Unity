@@ -5,6 +5,8 @@ using UnityEngine;
 public class MainActResMarket : ButtonParents
 {
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    public GameObject resMarket;
     int stack;
 
     // player 본인의 id 값
@@ -23,6 +25,7 @@ public class MainActResMarket : ButtonParents
 
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
+        resMarket.SetActive(false);
         GameManager.instance.endTurnFlag = true;
         // }
     }

@@ -13,6 +13,8 @@ public class MainActDayLaborer : ButtonParents
     */
 
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    public GameObject dayLaborer;
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
@@ -29,8 +31,11 @@ public class MainActDayLaborer : ButtonParents
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
+        //날품팔이 비활성화
+        dayLaborer.GetComponent<Button>().enabled = false;
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
         // }
+        
     }
 }

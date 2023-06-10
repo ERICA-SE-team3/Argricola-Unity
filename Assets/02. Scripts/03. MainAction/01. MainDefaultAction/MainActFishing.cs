@@ -19,6 +19,7 @@ public class MainActFishing : ButtonParents
     // 현재 진행중인 플레리어의 id값
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
+    public GameObject fishing;
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
@@ -43,8 +44,13 @@ public class MainActFishing : ButtonParents
             //행동을 한 후 가족 수 하나 줄이기
             ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
+            //낚시 비활성화
+            fishing.GetComponent<Button>().enabled = false;
+            
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
+
+            
         // }
     }
 }

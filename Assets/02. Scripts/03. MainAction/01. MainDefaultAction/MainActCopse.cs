@@ -8,6 +8,7 @@ public class MainActCopse : ButtonParents
 {
     public int playerIndex = GameManager.instance.getCurrentPlayerId();
 
+    public GameObject copse;
     //stack 정보 가져오기
     int stack;
     // player 본인의 id 값
@@ -33,8 +34,12 @@ public class MainActCopse : ButtonParents
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
+        //덤불 비활성화
+        copse.GetComponent<Button>().enabled = false;
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
+
+
         // }
     }
 }
