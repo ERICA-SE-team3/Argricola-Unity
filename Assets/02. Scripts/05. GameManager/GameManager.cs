@@ -114,8 +114,14 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "cultivation"){
             board.StartInstallFarm();
+        else if(popAction == "houseBuild"){
+            board.StartInstallHouse();
+        }
+        else if(popAction == "shedBuild"){
+            board.StartInstallShed();
         }
     }
+
     
     public void Start()
     {
@@ -174,12 +180,12 @@ public class GameManager : MonoBehaviour
         //1. 라운드 진행
         if ( this.RoundFlag )
         {
-            Debug.Log("Current Round is " + this.currentRound);
+            // Debug.Log("Current Round is " + this.currentRound);
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
                 //...기다림 == 아무것도 안함
-                Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
+                // Debug.Log("Player " + this.currentPlayerId + "Wait to Action... ");
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
@@ -275,6 +281,8 @@ public class GameManager : MonoBehaviour
             if ( this.players[i].isFirstPlayer )
             {
                 this.currentPlayerId = i;
+                SidebarManager.instance.HighlightCurrentPlayer(i);
+                SidebarManager.instance.FirstPlayerIcon(i);
                 break;
             }
         }
@@ -283,6 +291,7 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
+        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 
