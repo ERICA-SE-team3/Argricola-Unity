@@ -221,6 +221,14 @@ public class GameManager : MonoBehaviour
         //2. 라운드 전체가 끝남.
         else
         {
+            for(int i=0; i<4; i++)
+            {
+                if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
+                {
+                    ResourceManager.instance.minusResource(i, "baby", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                    ResourceManager.instance.addResource(i, "family", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                }
+            }
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
             {

@@ -15,7 +15,7 @@ public class Player
     public int wheat, vegetable;
     public int wood, rock, reed, clay;
     public int food, begging;
-    public int family, fence, shed, room;
+    public int family, fence, shed, room, baby;
 
     public List<int> card_owns;
     public List<int> card_hands;
@@ -43,6 +43,7 @@ public class Player
         msgdata.food = this.food;
         msgdata.begging = this.begging;
         msgdata.family = this.family;
+        msgdata.baby = this.baby;
         msgdata.fence = this.fence;
         msgdata.shed = this.shed;
         msgdata.room = this.room;
@@ -72,7 +73,7 @@ public class Player
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
-        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
+        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2; this.baby = 0;
         this.card_owns = new List<int>();
         this.card_hands = new List<int>();
 

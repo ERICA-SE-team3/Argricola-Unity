@@ -10,7 +10,7 @@ public class PlayerMessageData
     public int wheat,vegetable;
     public int wood,rock,reed,clay;
     public int food,begging;
-    public int family,fence,shed,room;
+    public int family,fence,shed,room, baby;
     public int houseGrade;
     public List<int> card_owns;
     public List<int> card_hands;
@@ -32,7 +32,7 @@ public class PlayerMessageData
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
-        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2;
+        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2; this.baby = 0;
         this.card_owns = new List<int>();
         this.card_hands = new List<int>();
     }
