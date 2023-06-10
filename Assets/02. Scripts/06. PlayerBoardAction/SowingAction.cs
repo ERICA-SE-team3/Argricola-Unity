@@ -31,10 +31,10 @@ public class SowingAction : PlayerBoardAction
     {
         if (IsEndInstall())
         {
-            foreach (PlayerBoard.SowingBlockNode node in playerBoard.selectedSowingBlocks)
-            {
-                node.block.SetSeed(node.type);
-            }
+            // foreach (PlayerBoard.SowingBlockNode node in playerBoard.selectedSowingBlocks)
+            // {
+            //     node.block.SetSeed(node.type);
+            // }
         }
         else
         {
