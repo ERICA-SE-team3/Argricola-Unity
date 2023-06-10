@@ -46,8 +46,7 @@ public class MainActForest : ButtonParents
             //나무꾼 카드를 보유중이라면 나무 1개 추가
             if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodCutter"))
             {
-                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wood", 1);
-                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 wood additionaly because of WOODCUTTER");
+                GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodCutter");
             }
 
             //확인 message

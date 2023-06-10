@@ -10,6 +10,7 @@ public class CameraManager: MonoBehaviour
     Vector3 position_camera_player3 = new Vector3(0, -4000, -1);
     Vector3 position_camera_player4 = new Vector3(-4000, 0, -1);
     Vector3 position_Lobby_player = new Vector3(0, 1588, -1);
+    Vector3 position_mainCard = new Vector3( 10000, 5000, -1 );
     public GameObject MainCamera;
 
     public void Show_Player1()

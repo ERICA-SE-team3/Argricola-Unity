@@ -26,15 +26,14 @@ public class WesternQuarryRoundAct : ButtonParents
       // 있다면 돌 얻기 함수 호출
       ResourceManager.instance.addResource(playerIndex, "stone", stack);
 
-        //돌집게 카드를 보유중이라면 나무 1개 추가
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("stoneClamp"))
+      //돌집게 카드를 보유중이라면 나무 1개 추가
+      if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("stoneClamp"))
         {
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 stone additionaly because of STONECLAMP");
+            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("stoneClamp");
         }
         
         //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
+      Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
 
       //stack 초기화
       GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")] = 0;
@@ -44,5 +43,12 @@ public class WesternQuarryRoundAct : ButtonParents
 
       // 큐가 빈 상태로 popQueue()를 다시 호출하여 turn이 끝났다는 flag 를 얻음
       GameManager.instance.PopQueue();
+    }
+
+    public void _Onclick() {
+        
+        GameManager.instance.QueueList[playerIndex].Enqueue("westernQuarry");
+        GameManager.instance.PopQueue();
+
     }
 }

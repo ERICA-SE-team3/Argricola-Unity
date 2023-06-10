@@ -24,10 +24,9 @@ public class EasternQuarryRoundAct : ButtonParents
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", stack);
 
         //돌집게 카드를 보유중이라면 나무 1개 추가
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("stoneClamp"))
+        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("stoneClamp"))
         {
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 stone additionaly because of STONECLAMP");
+            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("stoneClamp");
         }
 
         //확인 message

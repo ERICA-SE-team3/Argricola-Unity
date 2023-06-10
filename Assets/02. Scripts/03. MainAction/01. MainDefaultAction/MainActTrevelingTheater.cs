@@ -47,9 +47,7 @@ public class MainActTrevelingTheater : ButtonParents
             //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
             if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
             {
-                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wood", 1);
-                ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
-                Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get 1 wood and 1 wheat additionaly because of MAGICIAN");
+                GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("magician");
             }
 
             //확인 message

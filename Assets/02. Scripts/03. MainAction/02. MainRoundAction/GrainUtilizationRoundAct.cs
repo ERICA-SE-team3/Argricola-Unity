@@ -36,6 +36,12 @@ public class GrainUtilizationRoundAct : ButtonParents
         //그리고 또는
 
         //빵굽기
+
+        //장작채집자 카드
+        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodPicker"))
+        {
+            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodPicker");
+        }
     }
 
 }

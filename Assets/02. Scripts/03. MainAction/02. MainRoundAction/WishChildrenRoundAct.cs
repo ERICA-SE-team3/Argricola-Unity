@@ -34,4 +34,12 @@ public class WishChildrenRoundAct : ButtonParents
         // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
         GameManager.instance.PopQueue();
     }
+
+
+    public void _Onclick() {
+        
+        GameManager.instance.QueueList[playerIndex].Enqueue("wishChildren");
+        GameManager.instance.PopQueue();
+
+    }
 }

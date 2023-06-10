@@ -38,8 +38,19 @@ public enum Cards
         butter, //버터 제조기
 
         //점수용 카드
-        bottle  //병   15
+        bottle,  //병   15
         
 
         //16 ~ 25 : 주요 설비 카드
+        fireplace1,  //화로1
+        fireplace2,  //화로2
+        cookingHearth1, //화덕1
+        cookingHearth2, //화덕2
+        clayOven, //흙가마
+        stoneOven, //돌가마
+        joinery, //가구제작소
+        pottery, //그릇제작소
+        basket, //바구니제작소
+        well  //우물
     }
+
