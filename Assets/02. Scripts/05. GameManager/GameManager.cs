@@ -241,6 +241,8 @@ public class GameManager : MonoBehaviour
         //라운드 카드 활성화
         this.preRound();
 
+        //오류 수정
+        this.endTurnFlag = false;
     }
 
 
@@ -252,7 +254,7 @@ public class GameManager : MonoBehaviour
                 //1-2. 턴을 진행 중이라면
                 if ( !this.endTurnFlag )
                 {
-                    
+
                 }
 
                 else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
@@ -262,6 +264,7 @@ public class GameManager : MonoBehaviour
                     if ( this.findNextPlayer() )
                     {
                         //... 그대로 진행
+                        SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                         Debug.Log("Move to Next Turn");
                         this.endTurnFlag = false;
                     }
@@ -360,7 +363,6 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
-        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 

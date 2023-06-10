@@ -60,7 +60,6 @@ public class MainActCopse : ButtonParents
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-
         }
 
         
