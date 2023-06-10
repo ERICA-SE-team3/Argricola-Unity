@@ -143,39 +143,37 @@ public class GameManager : MonoBehaviour
         }
 
 
-        //PlayerId 부여
-        for(int i=0; i<4; i++)
-        {
-            this.players[i].id = i;
-        }
-
-        //playerboard start
-        for (int i = 0; i < 4; i++)
-        {
-           GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
-           GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
-           GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
-           PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
-           this.playerBoards.Add(tempPB);
-        }
-
-        //Setplayer to playerboard
-        for(int i=0; i<4; i++) {
-            this.playerBoards[i].SetPlayer( this.players[i] );
-        }
-
         //=========================================
-        // TestQueue 추가
-        this.QueueList.Add( actionQueue1 );
-        this.QueueList.Add( actionQueue2 );
-        this.QueueList.Add( actionQueue3 );
-        this.QueueList.Add( actionQueue4 );
+
+        // //playerboard start
+        // for (int i = 0; i < 4; i++)
+        // {
+        //    GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
+        //    GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
+        //    GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
+        //    PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
+        //    this.playerBoards.Add(tempPB);
+        // }
+
+        // //Setplayer to playerboard
+        // for(int i=0; i<4; i++) {
+        //     this.playerBoards[i].SetPlayer( this.players[i] );
+        // }
+
+        
+        // // TestQueue 추가
+        // this.QueueList.Add( actionQueue1 );
+        // this.QueueList.Add( actionQueue2 );
+        // this.QueueList.Add( actionQueue3 );
+        // this.QueueList.Add( actionQueue4 );
 
         //=======================================
         
 
         //give first to player1 
         this.Init();
+
+        //==============================================
 
         //플레이어들에게 직업 카드 분배
         this.players[0].jobcard_hands.Add( (int)Cards.magician ); //마술사
@@ -203,7 +201,7 @@ public class GameManager : MonoBehaviour
         this.players[3].subcard_hands.Add( (int)Cards.butter ); //버터제조기
         this.players[3].subcard_hands.Add( (int)Cards.bottle ); //병
 
-
+        //================================================
 
         // food of firstplayer to 2
         ResourceManager.instance.minusResource(0, "food", 1);
