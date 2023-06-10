@@ -11,11 +11,20 @@ public class CultivationRoundAct : ButtonParents
         3-1. 할거면 씨뿌리기 행동 진행
         3-2. 안할거면 끝
     */
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        GameManager.instance.actionQueue.Enqueue("cultivation");
-        GameManager.instance.actionQueue.Enqueue("sowing");
-        GameManager.instance.PopQueue(); 
+        if(playerIndex == userPlayerId)
+        {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            GameManager.instance.actionQueue.Enqueue("cultivation");
+            GameManager.instance.actionQueue.Enqueue("sowing");
+            GameManager.instance.PopQueue(); 
+        }
     }
 }

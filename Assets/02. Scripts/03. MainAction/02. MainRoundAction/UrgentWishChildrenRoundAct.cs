@@ -8,12 +8,18 @@ public class UrgentWishChildrenRoundAct : ButtonParents
     1. 해당 행동 Onclick
     2. 닥치고 기본가족늘리기 행동 실행
   */
-    public int playerIndex = 0;
-    public bool isPlayerTurn = true;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        ResourceManager.instance.addResource(playerIndex, "family", 1);
-        GameManager.instance.endTurnFlag = true;
+        if(playerIndex == userPlayerId)
+        {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            ResourceManager.instance.addResource(playerIndex, "family", 1);
+            GameManager.instance.endTurnFlag = true;
+        }
     }
 }
