@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
         //라운드 카드 활성화
         this.preRound();
 
+        this.endTurnFlag = false;
     }
 
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
@@ -199,8 +200,10 @@ public class GameManager : MonoBehaviour
                 if ( this.findNextPlayer() )
                 {
                     //... 그대로 진행
+                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                     Debug.Log("Move to Next Turn");
                     this.endTurnFlag = false;
+                    
                 }
 
                 //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
@@ -295,7 +298,6 @@ public class GameManager : MonoBehaviour
     //주어진 playerId의 다음 playerId를 찾는 함수
     int findNextPlayerId( int playerId )
     {
-        SidebarManager.instance.HighlightCurrentPlayer(playerId);
         return (playerId + 1) % 4 ;
     }
 
