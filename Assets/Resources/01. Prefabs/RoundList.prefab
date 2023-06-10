@@ -295,7 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  isPlayerTurn: 1
 --- !u!1 &5771712683431672078
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class FenceEventStrategy : BoardEventStrategy
     {
         PlayerBoard board = block.board;
 
-        if(block.isSurroundedWithFence()) { block.ShowRed(); return; }
+        if(block.isFourSideIsFence()) { block.ShowRed(); return; }
 
         if(isFenceAvailable(block)) 
         {
@@ -28,7 +28,7 @@ public class FenceEventStrategy : BoardEventStrategy
     { 
         PlayerBoard board = block.board;
 
-        if(block.isSurroundedWithFence()) {
+        if(block.isFourSideIsFence()) {
             block.ShowTransparent();
         }
         
@@ -42,7 +42,7 @@ public class FenceEventStrategy : BoardEventStrategy
     { 
         PlayerBoard board = block.board;
 
-        if(block.isSurroundedWithFence()) { return; }
+        if(block.isFourSideIsFence()) { return; }
 
 
         if(isFenceAvailable(block))
