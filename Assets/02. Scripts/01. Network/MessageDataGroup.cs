@@ -86,6 +86,14 @@ public enum HouseType
     NONE
 }
 
+public enum AnimalType
+{
+    NONE,
+    SHEEP,
+    PIG,
+    COW
+}
+
 [System.Serializable]
 public class MainBoardMessageData
 {

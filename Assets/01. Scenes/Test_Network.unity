@@ -606,9 +606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba89ad47cfc24ae285f220cde4b0a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebuging: 1
-  url: ws://172.17.70.247:8080/ws
-  debugUrl: ws://172.17.75.214:8080/ws
+  isDebuging: 0
+  url: ws://15.165.71.224:8080/ws
+  debugUrl: ws://15.165.71.224:8080/ws
   readyMsgDest: /pub/hello
   playMsgDest: /pub/play
 --- !u!4 &1168646768
