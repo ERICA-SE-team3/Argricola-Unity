@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     //player의 parent
     public GameObject objPlayerboards;
 
+    //로컬 플레이어 객체 인덱스, 로비에서 번호 부여받을 예정
+    public int localPlayerIndex = 0;
+
     //player의 board
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
@@ -67,12 +70,12 @@ public class GameManager : MonoBehaviour
     public string popAction;
 
     //=============================================================
-    public Queue<string> actionQueue1 = new Queue<string>();
-    public Queue<string> actionQueue2 = new Queue<string>();
-    public Queue<string> actionQueue3 = new Queue<string>();
-    public Queue<string> actionQueue4 = new Queue<string>();
+    // public Queue<string> actionQueue1 = new Queue<string>();
+    // public Queue<string> actionQueue2 = new Queue<string>();
+    // public Queue<string> actionQueue3 = new Queue<string>();
+    // public Queue<string> actionQueue4 = new Queue<string>();
 
-    public List< Queue<string> > QueueList = new List< Queue<string> >();
+    // public List< Queue<string> > QueueList = new List< Queue<string> >();
 
     //=============================================================
     public void PopQueue() {
@@ -291,7 +294,7 @@ public class GameManager : MonoBehaviour
                 {
                     //2-2-2. 게임 종료
                     Debug.Log("Game is Over!");
-                    // FinishAgriCola();
+                    FinishAgriCola();
 
 
                 } 
