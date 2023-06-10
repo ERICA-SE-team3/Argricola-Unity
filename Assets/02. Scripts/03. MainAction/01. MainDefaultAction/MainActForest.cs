@@ -15,8 +15,8 @@ public class MainActForest : ButtonParents
 
     public int playerIndex = 0;
 
-    // player 의 wood 개수 가져오기
-    public int wood;
+    // 누적되어있는 나무의 개수를 정의
+    public int woods;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     //stack 정보 가져오기
@@ -31,7 +31,7 @@ public class MainActForest : ButtonParents
     //        return false;
     //}
 
-    // 사용자가 행동을 클릭했을 때
+    // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
         // 사용자의 턴인지, 나무가 있는지 확인
@@ -63,5 +63,7 @@ public class MainActForest : ButtonParents
             GameManager.instance.endTurnFlag = true;
 
         }
+
+        
     }
 }

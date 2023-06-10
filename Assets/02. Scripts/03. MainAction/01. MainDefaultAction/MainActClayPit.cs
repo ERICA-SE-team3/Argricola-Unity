@@ -8,7 +8,6 @@ public class MainActClayPit : ButtonParents
 
     //stack 정보 가져오기
     int stack;
-
     public override void OnClick()
     {
         //stack 정보 가져오기
@@ -21,7 +20,7 @@ public class MainActClayPit : ButtonParents
         Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack * 2 + " clay!");
 
         //stack 초기화
-        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")] = 0;
+        GameManager.instance.stackOfRounWdCard[GameManager.instance.getStackBehavior("clayPit")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class MainActDirtPit : ButtonParents
 {
-    public int playerIndex = 0;
 
     //stack 정보 가져오기
     int stack;
 
     public override void OnClick()
     {
+        
+    }
+
+    public void _OnClick() {
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 

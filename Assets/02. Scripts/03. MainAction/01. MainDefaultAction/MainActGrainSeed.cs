@@ -8,6 +8,11 @@ public class MainActGrainSeed : ButtonParents
 
     public override void OnClick()
     {
+
+    }
+
+    //=========================================================
+    public void _Onclick() {
         // 있다면 니무 얻기 함수 호출
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
 

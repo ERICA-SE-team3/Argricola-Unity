@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MainActExpand : ButtonParents
 {
-    public int playerIndex = 0;
-    public int playerReed;
-    public int playerWood;
-    public int playerClay;
-    public int playerRock;
+    public int playerIndex;
     public override void OnClick()
     {
-        //그리고 또는 외양간 짓기
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        GameManager.instance.actionQueue.Enqueue("houseBuild");
+        GameManager.instance.actionQueue.Enqueue("shedBuild");
+        GameManager.instance.PopQueue();
     }
 
 //====================================================================

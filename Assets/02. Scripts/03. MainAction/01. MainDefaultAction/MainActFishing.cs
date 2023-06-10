@@ -15,8 +15,8 @@ public class MainActFishing : ButtonParents
 
     public int playerIndex = 0;
 
-    // player 의 food 개수 가져오기
-    public int food;
+    // 누적되어있는 음식의 개수를 3개라 가정
+    public int foods;
     public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
 
     //stack 정보 가져오기

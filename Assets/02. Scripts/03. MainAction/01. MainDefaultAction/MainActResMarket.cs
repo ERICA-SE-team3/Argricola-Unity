@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class MainActResMarket : ButtonParents
 {
-    public int playerIndex = 0;
     public override void OnClick()
     {
+
+
+    }
+
+    public void _Onclick() {
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
@@ -19,6 +23,5 @@ public class MainActResMarket : ButtonParents
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
-
     }
 }

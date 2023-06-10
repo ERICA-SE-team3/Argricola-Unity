@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player
 {
+    public const int MAXROOM = 5;
+
     //0. 플레이어 id
     public int id;
 
@@ -53,6 +55,7 @@ public class Player
         msgdata.room = this.room;
 
         //card
+
 
         return msgdata;
     }
