@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +33,7 @@ public class FenceAction : PlayerBoardAction
         }
         else
         {
-            Debug.LogError("¿ïÅ¸¸® ¼³Ä¡ Çàµ¿À» ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("ìš¸íƒ€ë¦¬ ì„¤ì¹˜ í–‰ë™ì„ ì‹œì‘í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return null;
         }
     }
@@ -46,20 +46,20 @@ public class FenceAction : PlayerBoardAction
         }
         else
         {
-            Debug.LogWarning("¼³Ä¡ÇÒ ¼ö ¾ø½À´Ï´Ù. ´Ù½Ã ¼±ÅÃÇØÁÖ¼¼¿ä.");
+            Debug.LogWarning("ì„¤ì¹˜í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•´ì£¼ì„¸ìš”.");
         }
     }
 
 
     public override bool IsStartInstall()
     {
-        Debug.LogError("¼³Ä¡ ½ÃÀÛ Àü °¡´ÉÇÑÁö °Ë»çÇÏ´Â ÇÔ¼ö - ¾ÆÁ÷ ±¸Çö ¾ÈµÊ");
+        Debug.LogError("ì„¤ì¹˜ ì‹œì‘ ì „ ê°€ëŠ¥í•œì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜ - ì•„ì§ êµ¬í˜„ ì•ˆë¨");
         return true;
     }
 
     public override bool IsEndInstall()
     {
-        Debug.LogError("¼³Ä¡ °¡´ÉÇÑÁö °Ë»çÇÏ´Â ÇÔ¼ö - ¾ÆÁ÷ ±¸Çö ¾ÈµÊ");
+        Debug.LogError("ì„¤ì¹˜ ê°€ëŠ¥í•œì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜ - ì•„ì§ êµ¬í˜„ ì•ˆë¨");
         return true;
     }
 
@@ -69,7 +69,7 @@ public class FenceAction : PlayerBoardAction
         int[] dx = { -1, 1, 0, 0 };
         int[] dy = { 0, 0, -1, 1 };
 
-        Debug.LogError("¿ïÅ¸¸® ¼³Ä¡ ÇÏ´Â ¹è¿­ »ı¼º, ÇØ´ç ¹è¿­À» ÅëÇØ ¼³Ä¡");
+        Debug.LogError("ìš¸íƒ€ë¦¬ ì„¤ì¹˜ í•˜ëŠ” ë°°ì—´ ìƒì„±, í•´ë‹¹ ë°°ì—´ì„ í†µí•´ ì„¤ì¹˜");
         for (int j = 0; j < playerBoard.selectedBlocks.Count; j++)
         {
             var block = playerBoard.selectedBlocks[j];

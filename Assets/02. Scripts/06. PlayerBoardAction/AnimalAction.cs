@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +20,7 @@ public class AnimalAction : PlayerBoardAction
         }
         else
         {
-            Debug.LogError("µ¿¹° ¿Å±â±â Çàµ¿À» ½ÃÀÛÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("ë™ë¬¼ ì˜®ê¸°ê¸° í–‰ë™ì„ ì‹œì‘í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return null;
         }
     }
@@ -33,19 +33,19 @@ public class AnimalAction : PlayerBoardAction
         }
         else
         {
-            Debug.LogWarning("µ¿¹° ¿Å±æ ¼ö ¾ø½À´Ï´Ù. ´Ù½Ã ¼±ÅÃÇØÁÖ¼¼¿ä.");
+            Debug.LogWarning("ë™ë¬¼ ì˜®ê¸¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì„ íƒí•´ì£¼ì„¸ìš”.");
         } 
     }
 
     public override bool IsStartInstall()
     {
-        Debug.LogError("¼³Ä¡ ½ÃÀÛ Àü °¡´ÉÇÑÁö °Ë»çÇÏ´Â ÇÔ¼ö - ¾ÆÁ÷ ±¸Çö ¾ÈµÊ");
+        Debug.LogError("ì„¤ì¹˜ ì‹œì‘ ì „ ê°€ëŠ¥í•œì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜ - ì•„ì§ êµ¬í˜„ ì•ˆë¨");
         return true;
     }
 
     public override bool IsEndInstall()
     {
-        Debug.LogError("¼³Ä¡ °¡´ÉÇÑÁö °Ë»çÇÏ´Â ÇÔ¼ö - ¾ÆÁ÷ ±¸Çö ¾ÈµÊ");
+        Debug.LogError("ì„¤ì¹˜ ê°€ëŠ¥í•œì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜ - ì•„ì§ êµ¬í˜„ ì•ˆë¨");
         return true;
     }
 }
