@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
     public string popAction;
 
     //=============================================================
-    // public Queue<string> actionQueue1 = new Queue<string>();
-    // public Queue<string> actionQueue2 = new Queue<string>();
-    // public Queue<string> actionQueue3 = new Queue<string>();
-    // public Queue<string> actionQueue4 = new Queue<string>();
+    public Queue<string> actionQueue1 = new Queue<string>();
+    public Queue<string> actionQueue2 = new Queue<string>();
+    public Queue<string> actionQueue3 = new Queue<string>();
+    public Queue<string> actionQueue4 = new Queue<string>();
 
     // public List< Queue<string> > QueueList = new List< Queue<string> >();
 
@@ -179,11 +179,11 @@ public class GameManager : MonoBehaviour
         // }
 
         
-        // // TestQueue 추가
-        // this.QueueList.Add( actionQueue1 );
-        // this.QueueList.Add( actionQueue2 );
-        // this.QueueList.Add( actionQueue3 );
-        // this.QueueList.Add( actionQueue4 );
+        // TestQueue 추가
+        this.QueueList.Add( actionQueue1 );
+        this.QueueList.Add( actionQueue2 );
+        this.QueueList.Add( actionQueue3 );
+        this.QueueList.Add( actionQueue4 );
 
         //=======================================
         
