@@ -277,6 +277,36 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public void SetAnimal(int sheep, int pig, int cow) 
     {
         this.sheep = sheep; this.pig = pig; this.cow = cow;
+
+        if(sheep > 0)
+        {
+            backgroundParent.transform.Find("Sheep").gameObject.SetActive(true);
+            backgroundParent.transform.Find("Sheep").Find("Text").GetComponent<TMP_Text>().text = sheep.ToString();
+        }
+        else
+        {
+            backgroundParent.transform.Find("Sheep").gameObject.SetActive(false);
+        }
+
+        if(pig > 0)
+        {
+            backgroundParent.transform.Find("Pig").gameObject.SetActive(true);
+            backgroundParent.transform.Find("Pig").Find("Text").GetComponent<TMP_Text>().text = pig.ToString();
+        }
+        else
+        {
+            backgroundParent.transform.Find("Pig").gameObject.SetActive(false);
+        }
+
+        if(cow > 0)
+        {
+            backgroundParent.transform.Find("Cow").gameObject.SetActive(true);
+            backgroundParent.transform.Find("Cow").Find("Text").GetComponent<TMP_Text>().text = cow.ToString();
+        }
+        else
+        {
+            backgroundParent.transform.Find("Cow").gameObject.SetActive(false);
+        }
     }
 
     public void SetShed() 
