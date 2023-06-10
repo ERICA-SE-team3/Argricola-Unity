@@ -12,16 +12,16 @@ public class MainActDayLaborer : ButtonParents
     - 사용자의 턴일 때, 무조건 음식 2개를 얻어야함
     */
 
-    public int playerIndex = 0;
-    public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
-        if (isPlayerTurn) // 사용자의 턴인지 확인
-        {
-            // 있다면 니무 얻기 함수 호출
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 2);
+        // if(playerIndex == userPlayerId)
+        // {
+        ResourceManager.instance.addResource(playerIndex, "food", 2);
 
             //돌집게 카드를 보유중이라면 나무 1개 추가
             if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasSubCard("clayMining"))
@@ -33,11 +33,11 @@ public class MainActDayLaborer : ButtonParents
             //확인 message
             Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + 2 + " food!");
 
-            //행동을 한 후 가족 수 하나 줄이기
-            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-        }
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
+        // }
     }
 }

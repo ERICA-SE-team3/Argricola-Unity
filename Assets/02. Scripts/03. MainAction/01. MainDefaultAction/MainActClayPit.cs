@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 점토채굴장
 public class MainActClayPit : ButtonParents
 {
     public int playerIndex = 0;
 
     //stack 정보 가져오기
     int stack;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
     {
-        //stack 정보 가져오기
+        // if(playerIndex == userPlayerId)
+        // {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
 
-        // 있다면 니무 얻기 함수 호출
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "clay", stack * 2);
+        ResourceManager.instance.addResource(playerIndex, "clay", stack * 2);
 
-        //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack * 2 + " clay!");
+        Debug.Log("Player " + playerIndex + " get " + stack * 2 + " clay!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")] = 0;
 
-        //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;
-
+        // }
     }
 }

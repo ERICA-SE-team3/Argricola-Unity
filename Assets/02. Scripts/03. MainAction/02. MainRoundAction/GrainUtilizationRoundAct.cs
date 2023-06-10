@@ -14,18 +14,26 @@ public class GrainUtilizationRoundAct : ButtonParents
         if (빵굽기 x) then (act 종료)
         else (빵굽기 o) then (빵굽기 시작)
     */
-    public GameObject playerBoard;
 
-    // ActionType type = ActionType.GrainUtilizationRoundAct;
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
     
-    public override void OnClick(){
-        PlayerBoard board = playerBoard.GetComponent<PlayerBoard>();
-        GameManager.instance.actionQueue.Enqueue("sowing");
-        GameManager.instance.actionQueue.Enqueue("baking");
-        // foreach (string item in GameManager.instance.actionQueue) {
-        //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
+
+    public override void OnClick()
+    {
+        // if(playerIndex == userPlayerId)
+        // {
+            // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
+            ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+
+            GameManager.instance.actionQueue.Enqueue("sowing");
+            GameManager.instance.actionQueue.Enqueue("baking");
+            // foreach (string item in GameManager.instance.actionQueue) {
+            //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
+            // }
+            GameManager.instance.PopQueue(); 
         // }
-        GameManager.instance.PopQueue(); 
     }
 
 

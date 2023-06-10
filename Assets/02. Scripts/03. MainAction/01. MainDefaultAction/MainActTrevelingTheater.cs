@@ -13,31 +13,18 @@ public class MainActTrevelingTheater : ButtonParents
     - 사용자의 턴일 때, 쌓여있는 음식의 개수만큼 얻어야함 -> addResource() 호출
     */
 
-    public int playerIndex = 0;
-
-    // 누적되어있는 음식의 개수를 3개라 가정
-    public int foods;
-    public bool isPlayerTurn = true;  // 사용자의 턴이라고 가정 -> (사용자의 턴이 맞는지 검증하는 과정은 어디서??)
-
-    //stack 정보 가져오기
+    public int playerIndex = GameManager.instance.getCurrentPlayerId();
     int stack;
 
-
-    //// 음식이 있는지 확인
-    //private bool HasFoods(){
-    //    food = ResourceManager.instance.getResourceOfPlayer(playerIndex,"food");
-    //    if (food > 0)
-    //        return true;
-    //    else
-    //        return false;
-    //}
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
         // 사용자의 턴인지, 음식이 있는지 확인
-        if (isPlayerTurn) 
-        {
+        // if (playerIndex == userPlayerId) 
+        // {
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
 
@@ -61,6 +48,6 @@ public class MainActTrevelingTheater : ButtonParents
 
             //turn이 끝났다는 flag 
             GameManager.instance.endTurnFlag = true;
-        }
+        // }
     }
 }

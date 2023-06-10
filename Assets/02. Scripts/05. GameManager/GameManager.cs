@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject objPlayerboards;
 
     //로컬 플레이어 객체 인덱스, 로비에서 번호 부여받을 예정
+
     public int localPlayerIndex = 0;
 
     //player의 board
@@ -109,6 +110,9 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        }
+        else if(popAction == "subCard"){
+            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
         }
         else if(popAction == "wishChildren"){
             wc.WishChildrenStart();
@@ -253,7 +257,11 @@ public class GameManager : MonoBehaviour
                 //1-2. 턴을 진행 중이라면
                 if ( !this.endTurnFlag )
                 {
-
+                    //... 그대로 진행
+                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
+                    Debug.Log("Move to Next Turn");
+                    this.endTurnFlag = false;
+                    
                 }
 
                 else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
