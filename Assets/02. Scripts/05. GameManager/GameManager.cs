@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "cultivation"){
             board.StartInstallFarm();
+        }
         else if(popAction == "houseBuild"){
             board.StartInstallHouse();
         }
