@@ -12,13 +12,11 @@ public class RoundDescriptor : MonoBehaviour
     }
 
     public void RoundNumberUpdate(int round){
-        GameObject roundDescriptiorObject = roundDescriptior;
-        roundDescriptiorObject.transform.Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = round.ToString();
+        roundDescriptior.transform.Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = round.ToString();
     }
 
     public void RoundDescriptiorUpdate(string description){
-        GameObject roundDescriptiorObject = roundDescriptior;
-        roundDescriptiorObject.transform.Find("StringBox").Find("StringDescription").GetComponent<Text>().text = description;
+        roundDescriptior.transform.Find("StringBox").Find("StringDescription").GetComponent<Text>().text = description;
     }
     // Start is called before the first frame update
 }

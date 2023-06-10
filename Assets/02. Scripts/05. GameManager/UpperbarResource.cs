@@ -13,20 +13,19 @@ public class UpperbarResource : MonoBehaviour
     // Start is called before the first frame update
 
     public void UpperbarResourcebarUpdate(int playerIndex){
-        GameObject upperbarResource = upperbar;
-        upperbarResource.transform.Find("family").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].family.ToString();
-        upperbarResource.transform.Find("fence").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].fence.ToString();
-        upperbarResource.transform.Find("shed").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].shed.ToString();
-        upperbarResource.transform.Find("cow").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].cow.ToString();
-        upperbarResource.transform.Find("pig").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].pig.ToString();
-        upperbarResource.transform.Find("sheep").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].sheep.ToString();
-        upperbarResource.transform.Find("clay").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].clay.ToString();
-        upperbarResource.transform.Find("rock").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].rock.ToString();
-        upperbarResource.transform.Find("reed").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].reed.ToString();
-        upperbarResource.transform.Find("wood").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].wood.ToString();
-        upperbarResource.transform.Find("wheat").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].wheat.ToString();
-        upperbarResource.transform.Find("vegetable").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].vegetable.ToString();
-        upperbarResource.transform.Find("food").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].food.ToString();
-        upperbarResource.transform.Find("begging").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].begging.ToString();
+        upperbar.transform.Find("family").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].family.ToString();
+        upperbar.transform.Find("fence").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].fence.ToString();
+        upperbar.transform.Find("shed").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].shed.ToString();
+        upperbar.transform.Find("cow").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].cow.ToString();
+        upperbar.transform.Find("pig").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].pig.ToString();
+        upperbar.transform.Find("sheep").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].sheep.ToString();
+        upperbar.transform.Find("clay").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].clay.ToString();
+        upperbar.transform.Find("rock").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].rock.ToString();
+        upperbar.transform.Find("reed").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].reed.ToString();
+        upperbar.transform.Find("wood").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].wood.ToString();
+        upperbar.transform.Find("wheat").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].wheat.ToString();
+        upperbar.transform.Find("vegetable").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].vegetable.ToString();
+        upperbar.transform.Find("food").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].food.ToString();
+        upperbar.transform.Find("begging").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = GameManager.instance.players[playerIndex].begging.ToString();
     }
 }
