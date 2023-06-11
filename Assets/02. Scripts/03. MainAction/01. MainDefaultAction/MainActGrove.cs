@@ -13,13 +13,7 @@ public class MainActGrove : ButtonParents
     - 사용자의 턴일 때, 쌓여있는 나무만큼 얻어야함 -> addResource() 호출
     */
 
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-
-    public GameObject grove;
-=======
     public int playerIndex;
->>>>>>> develop
     int stack;
 
     // player 본인의 id 값
@@ -57,17 +51,9 @@ public class MainActGrove : ButtonParents
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")] = 0;
 
-<<<<<<< HEAD
-            //수풀 비활성화
-            grove.GetComponent<Button>().enabled = false;
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-        // }
-=======
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
         GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }

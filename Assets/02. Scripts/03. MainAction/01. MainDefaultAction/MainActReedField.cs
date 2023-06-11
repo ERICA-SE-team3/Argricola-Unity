@@ -4,13 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MainActReedField : ButtonParents
 {
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-
-    public GameObject reedField;
-=======
     public int playerIndex;
->>>>>>> develop
     int stack;
 
     // player 본인의 id 값
@@ -18,24 +12,6 @@ public class MainActReedField : ButtonParents
 
     public override void OnClick()
     {
-<<<<<<< HEAD
-        // if(playerIndex == userPlayerId)
-        // {
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
-
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
-
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " reed!");
-
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")] = 0;
-
-            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
-
-            reedField.GetComponent<Button>().enabled = false;
-            
-            GameManager.instance.endTurnFlag = true;
-        // }
-=======
         playerIndex = GameManager.instance.getCurrentPlayerId();
         if(playerIndex == localPlayerIndex)
         {
@@ -44,7 +20,6 @@ public class MainActReedField : ButtonParents
             GameManager.instance.actionQueue.Enqueue("reedFeild");
             GameManager.instance.PopQueue();
         }
->>>>>>> develop
     }
     public void ReedFeildStart()
     {

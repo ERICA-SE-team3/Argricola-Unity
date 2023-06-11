@@ -57,19 +57,7 @@ public class MainActFishing : ButtonParents
 
             //행동을 한 후 가족 수 하나 줄이기
             ResourceManager.instance.minusResource(playerIndex, "family", 1);
-<<<<<<< HEAD
-
-            //낚시 비활성화
-            fishing.GetComponent<Button>().enabled = false;
-            
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-
-            
-        // }
-=======
             
             GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }

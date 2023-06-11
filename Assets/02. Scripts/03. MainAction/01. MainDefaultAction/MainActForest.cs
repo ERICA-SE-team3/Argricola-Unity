@@ -34,28 +34,6 @@ public class MainActForest : ButtonParents
             GameManager.instance.PopQueue();
         }
 
-<<<<<<< HEAD
-            // 있다면 니무 얻기 함수 호출
-            ResourceManager.instance.addResource(playerIndex, "wood", stack * 3);
-
-            //확인 message
-            Debug.Log("Player " + playerIndex + " get " + stack * 3 + " wood!");
-
-            //stack 초기화
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("forest")] = 0;
-
-            //행동을 한 후 가족 수 하나 줄이기
-            ResourceManager.instance.minusResource(playerIndex, "family", 1);
-
-            //덤불 비활성화
-            forest.GetComponent<Button>().enabled = false;
-            
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-
-        // }
-=======
->>>>>>> develop
 
         
     }

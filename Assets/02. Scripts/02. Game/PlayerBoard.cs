@@ -240,10 +240,6 @@ public class PlayerBoard : MonoBehaviour
     /// </summary>
     bool isHouseInstallEndAvailable()
     {
-<<<<<<< HEAD
-        
-        Debug.LogWarning("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
-=======
         //1. 집을 하나도 선택하지 않은 채로
         if( selectedBlocks.Count == 0) return false;
 
@@ -279,7 +275,6 @@ public class PlayerBoard : MonoBehaviour
         }
 
         Debug.LogWarning("설치 가능한지 검사하는 함수");
->>>>>>> develop
         return true;
     }
 

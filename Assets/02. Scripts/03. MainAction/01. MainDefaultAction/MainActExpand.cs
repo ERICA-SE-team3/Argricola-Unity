@@ -26,19 +26,11 @@ public class MainActExpand : ButtonParents
         }
     }
 
-<<<<<<< HEAD
-        expand.GetComponent<Button>().enabled = false;
-        GameManager.instance.PopQueue();
-        // }
-
-
-=======
     public void StartHouseInstall() {
         GameManager.instance.playerBoards[playerIndex].StartInstallHouse();
     }
 
     public void StartBuildShed() {
         GameManager.instance.playerBoards[playerIndex].StartInstallShed();
->>>>>>> develop
     }
 }

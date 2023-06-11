@@ -7,15 +7,8 @@ using UnityEngine.UI;
 public class MainActClayPit : ButtonParents
 {
     public int playerIndex;
-
     //stack 정보 가져오기
     int stack;
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-    public GameObject clayPit;
-=======
-
->>>>>>> develop
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
@@ -43,15 +36,6 @@ public class MainActClayPit : ButtonParents
 
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
-<<<<<<< HEAD
-        clayPit.GetComponent<Button>().enabled = false;
-
-        GameManager.instance.endTurnFlag = true;
-
-
-        // }
-=======
         GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }

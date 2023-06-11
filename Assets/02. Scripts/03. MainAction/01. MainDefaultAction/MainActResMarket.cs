@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class MainActResMarket : ButtonParents
 {
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-
-    public GameObject resMarket;
-=======
     public int playerIndex;
->>>>>>> develop
     int stack;
 
     // player 본인의 id 값
@@ -39,12 +33,6 @@ public class MainActResMarket : ButtonParents
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-<<<<<<< HEAD
-        resMarket.SetActive(false);
-        GameManager.instance.endTurnFlag = true;
-        // }
-=======
         GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }

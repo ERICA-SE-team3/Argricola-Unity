@@ -54,14 +54,6 @@ public class MainActGrainSeed : ButtonParents
 
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-<<<<<<< HEAD
-        grainSeed.GetComponent<Button>().enabled = false;
-        
-        GameManager.instance.endTurnFlag = true;
-        // }
-    }
-=======
         GameManager.instance.PopQueue();
     }    
->>>>>>> develop
 }

@@ -6,13 +6,7 @@ using UnityEngine.UI;
 // 흙 채굴장
 public class MainActDirtPit : ButtonParents
 {
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-
-    public GameObject dirtPit;
-=======
     //stack 정보 가져오기
->>>>>>> develop
     int stack;
     public int playerIndex;
     // player 본인의 id 값
@@ -43,16 +37,6 @@ public class MainActDirtPit : ButtonParents
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")] = 0;
 
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
-<<<<<<< HEAD
-
-        dirtPit.GetComponent<Button>().enabled = false;
-
-        GameManager.instance.endTurnFlag = true;
-
-
-        // }
-=======
         GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }

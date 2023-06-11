@@ -13,12 +13,7 @@ public class MainActTrevelingTheater : ButtonParents
     - 사용자의 턴일 때, 쌓여있는 음식의 개수만큼 얻어야함 -> addResource() 호출
     */
 
-<<<<<<< HEAD
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-    public GameObject travelingTheater;
-=======
     public int playerIndex;
->>>>>>> develop
     int stack;
 
     // player 본인의 id 값
@@ -56,18 +51,9 @@ public class MainActTrevelingTheater : ButtonParents
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")] = 0;
 
-<<<<<<< HEAD
-            //유랑극단 비활성화
-            travelingTheater.SetActive(false);
-            
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-        // }
-=======
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
         GameManager.instance.PopQueue();
->>>>>>> develop
     }
 }
