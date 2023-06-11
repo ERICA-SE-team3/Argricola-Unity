@@ -15,7 +15,8 @@ public class MainActClayPit : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         playerIndex = GameManager.instance.getCurrentPlayerId();
         if(playerIndex == userPlayerId)
-        {        
+        {   
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[3] = true;
             GameManager.instance.actionQueue.Enqueue("clayPit");
@@ -25,16 +26,18 @@ public class MainActClayPit : ButtonParents
 
     public void ClayPitStart()
     {
+        int userId = GameManager.instance.localPlayerIndex;
+
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
 
-        ResourceManager.instance.addResource(playerIndex, "clay", stack * 2);
+        ResourceManager.instance.addResource(userId, "clay", stack * 2);
 
-        Debug.Log("Player " + playerIndex + " get " + stack * 2 + " clay!");
+        Debug.Log("Player " + userId + " get " + stack * 2 + " clay!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")] = 0;
 
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(userId, "family", 1);
 
         GameManager.instance.PopQueue();
     }

@@ -13,6 +13,7 @@ public class MainActLessonFood1 : ButtonParents
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[10] = true;
             GameManager.instance.actionQueue.Enqueue("lessonFood1");

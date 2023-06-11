@@ -68,11 +68,11 @@ public class BlockData
     public int col;
     public BlockType type;
     public bool hasShed;
+    public bool hasFamily;
     public bool[] fence;
     public int cow;
     public int pig;
     public int sheep;
-    public int family;
     public SeedType seedType;
     public int seedCount;
 }
