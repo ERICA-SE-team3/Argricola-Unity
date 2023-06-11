@@ -135,7 +135,7 @@ public class NetworkManager : MonoBehaviour
                 if(playerId == -1) 
                 { 
                     playerId = userCount;
-                    // GameManager.instance.localPlayerIndex = playerId;
+                    GameManager.instance.localPlayerIndex = playerId;
                 }
                 lobby.playerCount = userCount;
                 lobby.GetReady();
