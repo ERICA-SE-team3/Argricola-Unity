@@ -12,6 +12,7 @@ public class PlayerMessageData
     public int food,begging;
     public int family,fence,shed,room, baby;
     public int houseGrade;
+    public int remainFamilyOfCurrentPlayer;
     public List<int> card_owns;
     public List<int> card_hands;
     public int Jobs {
@@ -33,6 +34,7 @@ public class PlayerMessageData
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
         this.family = 2; this.fence = 0; this.shed = 0; this.room = 2; this.baby = 0;
+        this.remainFamilyOfCurrentPlayer = family;
         this.card_owns = new List<int>();
         this.card_hands = new List<int>();
     }
