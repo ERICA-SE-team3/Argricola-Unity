@@ -23,6 +23,7 @@ public class SheepMarketRoundAct : ButtonParents
         if(playerIndex == userPlayerId)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.SHEEP_MARKET;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[17] = true;
             GameManager.instance.actionQueue.Enqueue("sheepMarket");

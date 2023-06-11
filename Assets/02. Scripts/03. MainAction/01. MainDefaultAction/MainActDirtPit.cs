@@ -17,6 +17,7 @@ public class MainActDirtPit : ButtonParents
         if(playerIndex == userPlayerId)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.DIRT_PIT;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[13] = true;
             GameManager.instance.actionQueue.Enqueue("dirtPit");

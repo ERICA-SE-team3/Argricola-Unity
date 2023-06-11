@@ -15,6 +15,7 @@ public class MainActReedField : ButtonParents
         if(playerIndex == localPlayerIndex)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.REED_FIELD;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[14] = true;
             GameManager.instance.actionQueue.Enqueue("reedFeild");

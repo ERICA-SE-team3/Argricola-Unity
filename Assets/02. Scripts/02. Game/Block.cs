@@ -373,6 +373,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void SetFamily()
     {
+        board.familyBlocks.Add(this);
         this.hasFamily = true;
         this.transform.Find("Family").gameObject.SetActive(true);
     }

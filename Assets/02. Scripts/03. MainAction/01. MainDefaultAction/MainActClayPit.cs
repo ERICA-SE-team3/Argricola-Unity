@@ -17,6 +17,7 @@ public class MainActClayPit : ButtonParents
         if(playerIndex == userPlayerId)
         {   
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.CLAY_PIT;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[3] = true;
             GameManager.instance.actionQueue.Enqueue("clayPit");

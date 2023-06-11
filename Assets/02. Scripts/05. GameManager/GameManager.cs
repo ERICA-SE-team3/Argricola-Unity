@@ -245,7 +245,6 @@ public class GameManager : MonoBehaviour
             fr.FarmingStart();
 
             messageQueue.Enqueue( ActionType.FARMLAND_END );
-            this.PopQueue();
         }
 
         else if(popAction == "cvFarming"){
@@ -550,9 +549,10 @@ public class GameManager : MonoBehaviour
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
-                if(currentPlayerId == localPlayerIndex) 
-                { 
-                
+                if(currentPlayerId == localPlayerIndex) { 
+                    SendMessage(queueActionType);
+                    queueActionType = ActionType.NONE;
+                    // SendMessage(); 
                 }
 
 
