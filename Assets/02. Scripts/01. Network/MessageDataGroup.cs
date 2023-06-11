@@ -134,7 +134,7 @@ public enum ActionType
     MEETING_PLACE,
     MEETING_PLACE_END,
     SEED,
-    FRAMLAND,
+    FARMLAND,
     FARMLAND_END,
     DATALLER,
     FOREST,

@@ -273,7 +273,7 @@ public class GameManager : MonoBehaviour
             ActionType.FENCE,
             ActionType.FARM_EXPANSION,
             ActionType.MEETING_PLACE,
-            ActionType.FRAMLAND,
+            ActionType.FARMLAND,
             ActionType.MAJOR_FACILITIES,
             ActionType.GRAIN_UTILIZATION,
             ActionType.BASIC_FAMILY_INCREASE,

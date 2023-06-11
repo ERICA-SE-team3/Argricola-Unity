@@ -26,7 +26,7 @@ public static class ActionToActConverter
                 return 7;
             case ActionType.SEED:
                 return 8;
-            case ActionType.FRAMLAND:
+            case ActionType.FARMLAND:
                 return 9;
             case ActionType.LESSON_TWO:
                 return 10;

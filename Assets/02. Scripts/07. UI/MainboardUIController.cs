@@ -157,7 +157,7 @@ public class MainboardUIController : MonoBehaviour
             case ActionType.FARM_EXPANSION:
             case ActionType.FARM_EXPANSION_END:
                 return expand;
-            case ActionType.FRAMLAND:
+            case ActionType.FARMLAND:
             case ActionType.FARMLAND_END:
                 return farming;
             case ActionType.FISHING:

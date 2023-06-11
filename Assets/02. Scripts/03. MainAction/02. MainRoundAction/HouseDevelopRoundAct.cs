@@ -24,7 +24,8 @@ public class HouseDevelopRoundAct : ButtonParents
         if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[22]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
-            GameManager.instance.queueActionType = ActionType.HOUSE_RENOVATION;
+            GameManager.instance.queueActionType = ActionType.HOUSE_RENOVATION_END;
+            GameManager.instance.SendMessage(ActionType.HOUSE_RENOVATION);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[22] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 

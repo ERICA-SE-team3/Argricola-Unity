@@ -24,7 +24,8 @@ public class WishChildrenRoundAct : ButtonParents
         if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[20]==false)
         {
           MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
-          GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE;
+          GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE_END;
+          GameManager.instance.SendMessage(ActionType.BASIC_FAMILY_INCREASE);
           //행동을 했음 표시
           GameManager.instance.IsDoingAct[20] = true;
           
