@@ -65,15 +65,17 @@ public class GameManager : MonoBehaviour
 
 
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
-        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
 
-        buttons.Add(sm);
-        buttons.Add(pm);
-        buttons.Add(wc);
+        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
+        
+        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+        
         WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
+        
         VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
+        
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
+        
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
         //집 업그레이드
         HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
@@ -89,8 +91,6 @@ public class GameManager : MonoBehaviour
         ImprovementsRoundAct im = improvements.GetComponent<ImprovementsRoundAct>();
         // 주요 설비
         UrgentWishChildrenRoundAct uwc = urgentWishChildren.GetComponent<UrgentWishChildrenRoundAct>();
-
-
         //집짓기
         MainActExpand ex = expand.GetComponent<MainActExpand>();
         //농지
@@ -340,6 +340,7 @@ public class GameManager : MonoBehaviour
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
         if(isGameScene) { Round(); }
+
         if(isDataUpdated) 
         {
             isDataUpdated = false;
@@ -464,6 +465,10 @@ public class GameManager : MonoBehaviour
             if (this.checkHarvest())
             {
                 Debug.Log("수확 라운드 진행중...");
+                for(int i = 0; i < 4; i++)
+                {
+                    playerBoards[i].Cultivate();
+                }
                 //수확라운드 진행
             }
 
@@ -574,6 +579,7 @@ public class GameManager : MonoBehaviour
     public void preRound()
     {
         RoundDescriptor.instance.RoundDescriptiorUpdate("준비단계");
+
         //행동 stack 증가
         this.incrementStack();
 
@@ -677,9 +683,7 @@ public class GameManager : MonoBehaviour
             case "cattleMarket":
                 result =  (int)StackBehavior.cattleMarket;
                 break;
-
         }
-
         return result;
     }
 
@@ -906,6 +910,7 @@ public class GameManager : MonoBehaviour
         //2-2. 승자 발표!
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
     }
+}
 
 //스택이 쌓이는 라운드카드들
 public enum StackBehavior
@@ -923,5 +928,4 @@ public enum StackBehavior
     pigMarket, //돼지 시장
     easternQuarry, //동부 채굴장
     cattleMarket //소 시장
-}
 }

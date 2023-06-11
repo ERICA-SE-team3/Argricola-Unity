@@ -29,9 +29,11 @@ public class FarmDevelopRoundAct : ButtonParents
             GameManager.instance.PopQueue(); 
         }
     }
+
     public void StartHouseDeveloping() {
       GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
     }
+    
     public void StartFencing() {
       GameManager.instance.playerBoards[playerIndex].StartInstallFence();
     }
