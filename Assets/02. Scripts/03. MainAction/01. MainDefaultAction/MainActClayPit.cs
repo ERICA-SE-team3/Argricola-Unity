@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 점토채굴장
 public class MainActClayPit : ButtonParents
 {
     public int playerIndex;
-
     //stack 정보 가져오기
     int stack;
-
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
     {
         int userPlayerId = GameManager.instance.localPlayerIndex;

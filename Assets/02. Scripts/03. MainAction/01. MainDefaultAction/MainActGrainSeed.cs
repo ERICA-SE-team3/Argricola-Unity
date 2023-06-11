@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 갈대밭
 public class MainActGrainSeed : ButtonParents
 {
     public int playerIndex;
+
+    public GameObject grainSeed;
+
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {

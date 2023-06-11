@@ -594,7 +594,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6855815095972260315, guid: cb1c776e61cc7904981e532a5d545d90, type: 3}
   m_PrefabInstance: {fileID: 209116882}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+--- !u!1 &210416233
+=======
 --- !u!1 &252472451
+>>>>>>> develop
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2219,6 +2223,8 @@ PrefabInstance:
     - target: {fileID: 143108784462903075, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CameraManager, Argricola
+<<<<<<< HEAD
+=======
       objectReference: {fileID: 0}
     - target: {fileID: 170152193808002312, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2315,6 +2321,7 @@ PrefabInstance:
     - target: {fileID: 263068205791891746, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+>>>>>>> develop
       objectReference: {fileID: 0}
     - target: {fileID: 308124046046790641, guid: bd670ae807d10b742b587bc5eefd33a2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11672,7 +11679,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upperbar: {fileID: 893648462884320515}
+<<<<<<< HEAD
+--- !u!1001 &6968448802347500572
+=======
 --- !u!1001 &921328388685751202
+>>>>>>> develop
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2

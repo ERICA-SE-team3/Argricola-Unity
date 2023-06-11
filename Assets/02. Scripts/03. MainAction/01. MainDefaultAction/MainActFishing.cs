@@ -19,6 +19,10 @@ public class MainActFishing : ButtonParents
     // 현재 진행중인 플레리어의 id값
     public int playerIndex;
 
+    public GameObject fishing;
+    // player 본인의 id 값
+    public int userPlayerId = GameManager.instance.localPlayerIndex;
+
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {

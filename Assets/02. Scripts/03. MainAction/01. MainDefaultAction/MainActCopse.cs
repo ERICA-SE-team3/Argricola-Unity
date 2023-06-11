@@ -8,6 +8,7 @@ public class MainActCopse : ButtonParents
 {
     public int playerIndex;
 
+    public GameObject copse;
     //stack 정보 가져오기
     int stack;
     
