@@ -30,16 +30,17 @@ public class GrainUtilizationRoundAct : ButtonParents
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
 
-            //씨뿌리기
-            GameManager.instance.actionQueue.Enqueue("guSowing");
+            // //씨뿌리기
+            // GameManager.instance.actionQueue.Enqueue("guSowing");
 
-            //그리고/또는
+            // //그리고/또는
 
-            //빵굽기
-            GameManager.instance.actionQueue.Enqueue("guBaking");
+            // //빵굽기
+            // GameManager.instance.actionQueue.Enqueue("guBaking");
             // foreach (string item in GameManager.instance.actionQueue) {
             //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
             // }
+            GameManager.instance.actionQueue.Enqueue("grainUtilization");
             GameManager.instance.PopQueue(); 
 
             //장작 채집자 카드

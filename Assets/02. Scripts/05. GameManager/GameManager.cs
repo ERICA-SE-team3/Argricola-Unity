@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public List<Player> players = new List<Player>();
 
+    //우물용 변수
+    public int well = 5;
 
     public GameObject playerBoardsObj;
     /// <summary>
@@ -56,6 +58,9 @@ public class GameManager : MonoBehaviour
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
+
+    // 메시지를 관리하는 메시지 Queue 생성
+    public Queue<ActionType> messageQueue = new Queue<ActionType>();
 
     // queue에서 하나 꺼낸 행동
     public string popAction;
@@ -119,15 +124,86 @@ public class GameManager : MonoBehaviour
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
+
+            //종료 메시지
+            //dequeue되는걸 받아서 메시지 전송
             Debug.Log( "Queue is Empty!!" );
             return;
         }
 
         popAction = actionQueue.Dequeue();
         
-        if(popAction == "guSowing"){
+        if(popAction == "grainUtilization"){
+            messageQueue.Enqueue( ActionType.GRAIN_UTILIZATION  );
+            SendMessage(messageQueue.Dequeue());
             gu.StartSowing();
+            gu.StartBaking();
+
+            messageQueue.Enqueue(ActionType.GRAIN_UTILIZATION_END);
         }
+
+        else if(popAction == "improvements"){
+            messageQueue.Enqueue( ActionType.MAJOR_FACILITIES  );
+            SendMessage(messageQueue.Dequeue());
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            im.ImprovementsStart();
+            im.ClearButtons();
+
+            messageQueue.Enqueue( ActionType.MAJOR_FACILITIES_END  );
+        }
+
+        else if(popAction == "wishChildren"){
+            messageQueue.Enqueue( ActionType.BASIC_FAMILY_INCREASE  );
+            SendMessage(ActionType.BASIC_FAMILY_INCREASE);
+            wc.WishChildrenStart();
+
+            messageQueue.Enqueue( ActionType.BASIC_FAMILY_INCREASE_END  );
+        }
+
+        else if(popAction == "urgentWishChildren"){
+            messageQueue.Enqueue( ActionType.URGENT_FAMILY_INCREASE  );
+            SendMessage(ActionType.URGENT_FAMILY_INCREASE);
+            uwc.UrgentWishChildrenStart();
+
+            messageQueue.Enqueue( ActionType.URGENT_FAMILY_INCREASE_END  );
+        }
+
+        else if(popAction == "hdHouseDevelop"){
+            messageQueue.Enqueue( ActionType.HOUSE_RENOVATION  );
+            SendMessage(ActionType.HOUSE_RENOVATION);
+            hd.StartHouseDeveloping();
+            im.ImprovementsStart(); // 주요 설비
+
+            messageQueue.Enqueue( ActionType.HOUSE_RENOVATION_END  );
+        }
+
+        else if(popAction == "fdHouseDevelop"){
+            messageQueue.Enqueue( ActionType.FARM_REMODELING  );
+            SendMessage(ActionType.FARM_REMODELING);
+            fd.StartHouseDeveloping();
+            fd.StartFencing();
+
+            messageQueue.Enqueue( ActionType.FARM_REMODELING_END  );
+        }
+
+        else if(popAction == "cultivation"){
+            messageQueue.Enqueue( ActionType.FIELD_FARMING  );
+            SendMessage(ActionType.FIELD_FARMING);
+            cv.FarmingStart();
+            cv.SowingStart();
+
+            messageQueue.Enqueue( ActionType.FIELD_FARMING_END  );
+        }
+
+        else if(popAction == "houseBuild"){
+            messageQueue.Enqueue( ActionType.FARM_EXPANSION  );
+            SendMessage(ActionType.FARM_EXPANSION);
+            ex.StartHouseInstall();
+            ex.StartBuildShed();
+
+            messageQueue.Enqueue( ActionType.FARM_EXPANSION_END  );
+        }
+
         if(popAction == "cvSowing"){
             cv.SowingStart();
         }
@@ -135,108 +211,135 @@ public class GameManager : MonoBehaviour
             gu.StartBaking();
         }
         else if(popAction == "sheepMarket"){
+            messageQueue.Enqueue( ActionType.SHEEP_MARKET  );
             sm.SheepMarketStart();
         }
         else if(popAction == "pigMarket"){
+            messageQueue.Enqueue( ActionType.PIG_MARKET  );
             pm.PigMarketStart();
-        }
-        else if(popAction == "improvements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-            im.ImprovementsStart();
         }
         else if(popAction == "hdImprovements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-            hd.ImprovementsStart();
         }
         else if(popAction == "subCard"){
             // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
             wc.StartSubCard();
         }
-        else if(popAction == "wishChildren"){
-            wc.WishChildrenStart();
+
+        else if(popAction == "farming"){
+            messageQueue.Enqueue( ActionType.FRAMLAND  );
+            fr.FarmingStart();
+            SendMessage(ActionType.FRAMLAND);
+
+            messageQueue.Enqueue( ActionType.FARMLAND_END   );
         }
-        else if(popAction == "urgentWishChildren"){
-            uwc.UrgentWishChildrenStart();
+
+        else if(popAction == "cvFarming"){
+            cv.FarmingStart();
         }
+
+        else if(popAction == "fencing") {
+            messageQueue.Enqueue( ActionType.FENCE  );
+            SendMessage(ActionType.FENCE);
+            fc.StartFencing();
+            
+            messageQueue.Enqueue( ActionType.FENCE_END  );
+        }
+
+        else if(popAction == "lessonFood1") {
+            messageQueue.Enqueue( ActionType.LESSON_ONE  );
+            lf1.LessonFoodStartOne();
+            SendMessage();
+
+            messageQueue.Enqueue( ActionType.LESSON_ONE_END  );
+        }
+
+        else if(popAction == "lessonFood2") {
+            messageQueue.Enqueue( ActionType.LESSON_TWO  );
+            lf2.LessonFoodStartTwo();
+            SendMessage();
+
+            messageQueue.Enqueue( ActionType.LESSON_TWO_END  );
+        }
+
+        else if(popAction == "meeting") {
+            messageQueue.Enqueue( ActionType.MEETING_PLACE  );
+            SendMessage(ActionType.MEETING_PLACE);
+            meet.MeetingStart();
+            meet.StartSubCard();
+            
+
+            messageQueue.Enqueue( ActionType.MEETING_PLACE_END );
+        }
+
         else if(popAction == "westernQuarry"){
+            messageQueue.Enqueue( ActionType.WESTREN_QUARRY  );
             wq.WesternQuarryStart();
         }
-        else if(popAction == "hdHouseDevelop"){
-            hd.StartHouseDeveloping();
-        }
-        else if(popAction == "fdHouseDevelop"){
-            fd.StartHouseDeveloping();
-        }
+
         else if(popAction == "vegetableSeed"){
+            messageQueue.Enqueue( ActionType.VEGETABLE_SEEDS  );
             vs.VegetableSeedStart();
         }
         else if(popAction == "easternQuarry"){
+            messageQueue.Enqueue( ActionType.EASTERN_QUARRY  );
             eq.EasternQuarryStart();
         }
         else if(popAction == "cowMarket"){
+            messageQueue.Enqueue( ActionType.COW_MARKET  );
             cm.CowMarketStart();
-        }
-        else if(popAction == "cultivation"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "houseBuild"){
-            ex.StartHouseInstall();
         }
         else if(popAction == "shedBuild"){
             ex.StartBuildShed();
         }
-        else if(popAction == "farming"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "cvFarming"){
-            cv.FarmingStart();
-        }
-        else if(popAction == "fencing") {
-            fc.StartFencing();
-        }
+
         else if(popAction == "fdFencing") {
             fd.StartFencing();
         }
         else if(popAction == "clayPit") {
+            messageQueue.Enqueue( ActionType.CLAY_PIT  );
             cp.ClayPitStart();
         }
         else if(popAction == "copse") {
+            messageQueue.Enqueue( ActionType.BUSH );
             cs.CopseStart();
+            
         }
         else if(popAction == "dayLaborer") {
+            messageQueue.Enqueue( ActionType.DATALLER  );
             dl.DayLaborerStart();
         }
         else if(popAction == "dirtPit") {
+            messageQueue.Enqueue( ActionType.DIRT_PIT  );
             dp.DirtPitStart();
         }
         else if(popAction == "fishing") {
+            messageQueue.Enqueue( ActionType.FISHING  );
             fs.FishingStart();
         }
         else if(popAction == "forest") {
+            messageQueue.Enqueue( ActionType.FOREST  );
             frst.ForestStart();
         }
         else if(popAction == "grainSeed") {
+            messageQueue.Enqueue( ActionType.SEED  );
             gs.GrainSeedStart();
+
         }
         else if(popAction == "grove") {
+            messageQueue.Enqueue( ActionType.DOBULE_BUSH  );
             gv.GroveStart();
         }
-        else if(popAction == "lessonFood1") {
-            lf1.LessonFoodStartOne();
-        }
-        else if(popAction == "lessonFood2") {
-            lf2.LessonFoodStartTwo();
-        }
-        else if(popAction == "meeting") {
-            meet.MeetingStart();
-        }
         else if(popAction == "reedFeild") {
+            messageQueue.Enqueue( ActionType.REED_FIELD  );
             rf.ReedFeildStart();
         }
         else if(popAction == "resMarket") {
+            messageQueue.Enqueue( ActionType.RESOURCE_MARKET  );
             rm.ResMarketStart();
         }
         else if(popAction == "trevelingTheater") {
+            messageQueue.Enqueue( ActionType.TROUPE  );
             tt.TrevelingTheaterStart();
         }
     }
@@ -420,7 +523,12 @@ public class GameManager : MonoBehaviour
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
-                if(currentPlayerId == localPlayerIndex) { SendMessage(); }
+                if(currentPlayerId == localPlayerIndex) 
+                { 
+                    ActionType a = messageQueue.Dequeue();
+                    SendMessage(a); 
+                }
+
 
                 //1-4. 다음 턴을 부여받을 플레이어 찾기
                 //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
@@ -587,6 +695,13 @@ public class GameManager : MonoBehaviour
 
         //Round의 첫 턴인 플레이어에게 턴을 넘김
         this.foundFirstPlayer();
+
+        //preRound에 삽입될 우물용 함수
+        if( this.players[ this.localPlayerIndex ].HasMainCard("well") && well > 0 ) 
+        {
+            ResourceManager.instance.addResource( this.localPlayerIndex, "food", 1 );
+            this.well = this.well - 1 ;
+        }
 
         //RoundFlag를 true로
         this.RoundFlag = true;

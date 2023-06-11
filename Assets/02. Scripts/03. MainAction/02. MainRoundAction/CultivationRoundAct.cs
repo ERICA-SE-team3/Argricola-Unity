@@ -25,9 +25,10 @@ public class CultivationRoundAct : ButtonParents
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[28] = true;
-            GameManager.instance.actionQueue.Enqueue("cvFarming");
-            //그리고/또는
-            GameManager.instance.actionQueue.Enqueue("cvSowing");
+            // GameManager.instance.actionQueue.Enqueue("cvFarming");
+            // //그리고/또는
+            // GameManager.instance.actionQueue.Enqueue("cvSowing");
+            GameManager.instance.actionQueue.Enqueue("cultivation");
             GameManager.instance.PopQueue();
         }
     }

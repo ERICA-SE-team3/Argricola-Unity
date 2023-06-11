@@ -22,7 +22,7 @@ public class HouseDevelopRoundAct : ButtonParents
         if(playerIndex == userPlayerId)
         {
             //행동을 했음 표시
-          GameManager.instance.IsDoingAct[22] = true;
+            GameManager.instance.IsDoingAct[22] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
             GameManager.instance.actionQueue.Enqueue("hdHouseDevelop");

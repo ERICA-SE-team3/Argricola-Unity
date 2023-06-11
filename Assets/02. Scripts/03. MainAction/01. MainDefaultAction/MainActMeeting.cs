@@ -32,11 +32,9 @@ public class MainActMeeting : ButtonParents
 
         //2. 선 플레이어 부여
         GameManager.instance.players[playerIndex].isFirstPlayer = true;
+    }
 
-
-        //그리고/또는
-
-        //아무것도 없다면
+    public void StartSubCard() {
         if (GameManager.instance.players[playerIndex].subcard_owns.Count == 0)
         {
             GameManager.instance.players[playerIndex].GetSubCard( GameManager.instance.players[playerIndex].GetCarNameString( GameManager.instance.players[playerIndex].subcard_hands[0] ) );     
@@ -50,8 +48,8 @@ public class MainActMeeting : ButtonParents
 
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
-
-        GameManager.instance.PopQueue();
     }
+
+    
 
 }
