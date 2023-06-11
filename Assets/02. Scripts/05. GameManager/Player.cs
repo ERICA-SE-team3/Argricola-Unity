@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class Player
@@ -55,8 +56,13 @@ public class Player
         msgdata.shed = this.shed;
         msgdata.room = this.room;
 
-        //card
+        msgdata.jobcard_owns = this.jobcard_owns.ToList();
+        msgdata.jobcard_hands = this.jobcard_hands.ToList();
 
+        msgdata.subcard_owns = this.subcard_owns.ToList();
+        msgdata.subcard_hands = this.subcard_hands.ToList();
+
+        msgdata.maincard_owns = this.maincard_owns.ToList();
 
         return msgdata;
     }
@@ -79,7 +85,15 @@ public class Player
         fence = data.fence;
         shed = data.shed;
         room = data.room;
+
         //card
+        this.jobcard_owns = data.jobcard_owns.ToList();
+        this.jobcard_hands = data.jobcard_hands.ToList();
+
+        this.subcard_owns = data.subcard_owns.ToList();
+        this.subcard_hands = data.subcard_hands.ToList();
+
+        this.maincard_owns = data.maincard_owns.ToList();
     }
 
     //---------------------------------------------------------------------------

@@ -12,8 +12,17 @@ public class PlayerMessageData
     public int food,begging;
     public int family,fence,shed,room, baby;
     public int houseGrade;
-    public List<int> card_owns;
-    public List<int> card_hands;
+    //직업 카드
+    public List<int> jobcard_owns;
+    public List<int> jobcard_hands;
+
+    //보조설비 카드
+    public List<int> subcard_owns;
+    public List<int> subcard_hands;
+
+    //주요 카드
+    public List<int> maincard_owns;
+
     public int Jobs {
         get         { return CountJobs(); }
         private set { ; }
@@ -21,8 +30,7 @@ public class PlayerMessageData
 
     int CountJobs()
     {
-        // Count Job cars at card_owns
-        return 0;
+        return this.jobcard_hands.Count;
     }
 
     public void Init()
@@ -33,10 +41,14 @@ public class PlayerMessageData
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
         this.family = 2; this.fence = 0; this.shed = 0; this.room = 2; this.baby = 0;
-        this.card_owns = new List<int>();
-        this.card_hands = new List<int>();
+        this.jobcard_owns = new List<int>();
+        this.jobcard_hands = new List<int>();
+        this.subcard_owns = new List<int>();
+        this.subcard_hands = new List<int>();
+        this.maincard_owns = new List<int>(); 
     }
 }
+
 
 [System.Serializable]
 public class PlayerBoardMessageData
