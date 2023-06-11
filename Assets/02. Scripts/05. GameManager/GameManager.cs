@@ -175,7 +175,8 @@ public class GameManager : MonoBehaviour
             messageQueue.Enqueue( ActionType.HOUSE_RENOVATION  );
             SendMessage(ActionType.HOUSE_RENOVATION);
             hd.StartHouseDeveloping();
-            im.ImprovementsStart(); // 주요 설비
+            hd.ImprovementsStart(); // 주요 설비
+            hd.ClearButtons();
 
             messageQueue.Enqueue( ActionType.HOUSE_RENOVATION_END  );
         }
@@ -221,20 +222,25 @@ public class GameManager : MonoBehaviour
             messageQueue.Enqueue( ActionType.PIG_MARKET  );
             pm.PigMarketStart();
         }
-        else if(popAction == "hdImprovements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(popAction == "subCard"){
-            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-            wc.StartSubCard();
-        }
+        
+        // else if(popAction == "hdImprovements"){
+        //     messageQueue.Enqueue( ActionType.HOUSE_RENOVATION );
+        //     SendMessage( ActionType.HOUSE_RENOVATION );
+        //     hd.StartHouseDeveloping();
+
+        //     hd.ImprovementsStart();
+        //     hd.ClearButtons();
+
+        //     messageQueue.Enqueue( ActionType.HOUSE_RENOVATION_END );
+        // }
+        
 
         else if(popAction == "farming"){
             messageQueue.Enqueue( ActionType.FRAMLAND  );
             fr.FarmingStart();
             SendMessage(ActionType.FRAMLAND);
 
-            messageQueue.Enqueue( ActionType.FARMLAND_END   );
+            messageQueue.Enqueue( ActionType.FARMLAND_END );
         }
 
         else if(popAction == "cvFarming"){
@@ -452,6 +458,7 @@ public class GameManager : MonoBehaviour
             {
                 SidebarManager.instance.SidebarUpdate(i);
             }
+            
             Logger.Log(msgData);
         }
     }

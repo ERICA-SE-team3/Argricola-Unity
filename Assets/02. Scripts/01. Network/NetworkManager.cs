@@ -131,6 +131,7 @@ public class NetworkManager : MonoBehaviour
         {
             case "userCountCheck":
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
+                Debug.Log("UserCount : " + userCount);
                 if(playerId == -1) 
                 { 
                     playerId = userCount;
@@ -149,6 +150,7 @@ public class NetworkManager : MonoBehaviour
                 // 게임매니저에 보내야함.
                 break;
         }
+        Debug.Log(message.data);
     }
 
     public void SendReadyMessage()
@@ -190,7 +192,8 @@ public class NetworkManager : MonoBehaviour
         body.sender = clientId;
         body.type = StompFrame.SEND;
         string body_json = JsonUtility.ToJson(body);
-
+        Debug.Log(body_json);
+        
         // body_json = Regex.Unescape(body_json);
 
         var pub = new StompMessage(StompFrame.SEND,body_json);
