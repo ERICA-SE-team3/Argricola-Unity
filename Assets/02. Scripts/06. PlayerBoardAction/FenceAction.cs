@@ -7,53 +7,48 @@ using System;
 
 public class FenceAction : PlayerBoardAction
 {
+    Block[,] blocks;
 
-    public bool IsFenceInBoard(PlayerBoard playerBoard)
+    int[] dx = {-1,1,0,0};
+    int[] dy = {0,0,-1,1};
+    int[] dfence = {1,0,3,2};
+
+    public FenceAction(PlayerBoard board) : base(board) { }
+
+    public override bool StartInstall()
     {
-        foreach (Block block in playerBoard.blocks)
-        {
-            if (block.type == BlockType.FENCE)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public override BoardEventStrategy StartInstall(PlayerBoard playerBoard)
-    {
-        if (IsStartInstall())
-        {
-            BoardEventStrategy fenceStrategy = new FenceEventStrategy();
-
-            Button button = playerBoard.confirmButton.GetComponent<Button>();
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => EndInstall(playerBoard));
-            return fenceStrategy;
-        }
-        else
+        if (!IsStartInstall())
         {
             Debug.LogError("울타리 설치 행동을 시작할 수 없습니다.");
-            return null;
+            return false;
         }
+
+        board.strategy = new FenceEventStrategy();
+        
+        Button button = board.confirmButton.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() => EndInstall());
+        return true;
     }
 
-    public override void EndInstall(PlayerBoard playerBoard)
+    public override void EndInstall()
     {
-        if (IsEndInstall())
+        if (!IsEndInstall())
         {
-            InstallFence(playerBoard);
+            Debug.LogError("울타리 설치 행동을 종료할 수 없습니다.");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
-        }
-    }
 
+        ResetBoard();
+        GameManager.instance.PopQueue();
+    }
 
     public override bool IsStartInstall()
     {
         Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        // 나무 개수 확인
+        // 울타리 지을 수 있는 영역 확인
+        // 등등..
         return true;
     }
 
@@ -63,52 +58,102 @@ public class FenceAction : PlayerBoardAction
         return true;
     }
 
-
-    public void InstallFence(PlayerBoard playerBoard)
+    public bool InstallFence()
     {
-        int[] dx = { -1, 1, 0, 0 };
-        int[] dy = { 0, 0, -1, 1 };
+        int playerID = board.player.id;
 
-        Debug.LogError("울타리 설치 하는 배열 생성, 해당 배열을 통해 설치");
-        for (int j = 0; j < playerBoard.selectedBlocks.Count; j++)
-        {
-            var block = playerBoard.selectedBlocks[j];
-            bool[] fence = new bool[4];
-            for (int i = 0; i < 4; i++)
-            {
-                fence[i] = true;
-            }
-            for (int i = 0; i < playerBoard.selectedBlocks.Count; i++)
-            {
-                if (i != j)
-                {
-                    var otherBlock = playerBoard.selectedBlocks[i];
-                    int gapRow = otherBlock.row - block.row;
-                    int gapCol = otherBlock.col - block.col;
-                    for (int k = 0; k < 4; k++)
-                    {
-                        if (dx[k] == gapRow && dy[k] == gapCol)
-                        {
-                            fence[k] = false;
-                        }
-                    }
-                }
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                if (!fence[i]) continue;
-                int adjBlockRow = block.row + dx[i];
-                int adjBlockCol = block.col + dy[i];
-                if (adjBlockRow < 0 || adjBlockRow >= playerBoard.row || adjBlockCol < 0 || adjBlockCol >= playerBoard.col) continue;
-                if (playerBoard.blocks[adjBlockRow, adjBlockCol].type == BlockType.FENCE)
-                {
-                    fence[i] = false;
-                }
-            }
-            block.SetFence(fence);
-            block.ChangeFence();
+        int playerWood = ResourceManager.instance.getResourceOfPlayer(playerID, "wood");
+        List<Tuple<int,int,bool[]>> fenceList = GetFenceList();
+        int woodNeed = GetNeedFenceNumber(fenceList);
+    
+        Debug.LogWarning("자원 계산 결과." + playerWood + " / " + woodNeed);
+
+        if(playerWood < woodNeed) {
+            Debug.LogWarning("자원이 부족합니다." + playerWood + " / " + woodNeed);
+            board.selectedBlocks.Clear();
+            board.GetInstallButton().SetActive(false);
+            return false; 
         }
-        playerBoard.selectedBlocks.Clear();
+
+        ResourceManager.instance.minusResource(playerID, "wood", woodNeed);
+        
+        SetFence(fenceList);
+
+        foreach(Block block in blocks)
+        {
+            block.CheckIsBlockSurroundedWithFence();
+        }
+        return true;
     }
 
+    int GetNeedFenceNumber(List<Tuple<int,int,bool[]>> fenceList)
+    {
+        int woodCount = 0;
+        foreach (Tuple<int,int,bool[]> fence in fenceList) {
+            for (int i=0;i<4;i++) {
+                if (fence.Item3[i]) woodCount++;
+            }
+        }
+        return woodCount;
+    }
+
+    void SetFence(List<Tuple<int,int,bool[]>> fenceList)
+    {
+        foreach(Tuple<int,int,bool[]> fence in fenceList)
+        {
+            Block block = blocks[fence.Item1, fence.Item2];
+            bool[] fenceArray = fence.Item3;
+            for(int i = 0; i < 4; i++)
+            {
+                if(block.fence[i])
+                    { fenceArray[i] = true; }
+            }
+            block.SetFence(fenceArray);
+            block.ChangeFence();
+
+            block.ShowTransparent();
+        }
+        board.selectedBlocks.Clear();
+    }
+
+    public List<Tuple<int,int,bool[]>> GetFenceList()
+    {
+        List<Tuple<int,int,bool[]>> fenceList = new List<Tuple<int,int,bool[]>>();
+
+        foreach(Block sb in board.selectedBlocks)
+        {
+            Tuple<int,int,bool[]> fence = new Tuple<int,int,bool[]>(sb.row, sb.col, new bool[4]);
+            for(int i = 0; i < 4; i++) 
+            {
+                fence.Item3[i] = true;
+            }
+
+            for(int i = 0; i < 4; i++)
+            {
+                if(sb.type == BlockType.FENCE && sb.fence[i])
+                {
+                    fence.Item3[i] = false;
+                    continue;
+                } 
+
+                int nx = sb.row + dx[i];
+                int ny = sb.col + dy[i];
+
+                if(nx < 0 || nx >= board.row || ny < 0 || ny >= board.col) continue;
+                if(board.selectedBlocks.Contains(blocks[nx, ny])) {
+                    fence.Item3[i] = false;
+                    continue; 
+                }
+                if(blocks[nx, ny].type == BlockType.EMPTY)
+                {
+                    fence.Item3[i] = true;
+                    continue;
+                }
+                if(blocks[nx, ny].type == BlockType.FENCE && blocks[nx,ny].fence[dfence[i]]) 
+                    fence.Item3[i] = false;
+            }
+            fenceList.Add(fence);
+        }
+        return fenceList;
+    }
 }
