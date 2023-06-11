@@ -54,7 +54,7 @@ public class Player
         msgdata.fence = this.fence;
         msgdata.shed = this.shed;
         msgdata.room = this.room;
-
+        msgdata.remainFamilyOfCurrentPlayer = this.remainFamilyOfCurrentPlayer;
         //card
 
 

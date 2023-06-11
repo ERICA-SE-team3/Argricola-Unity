@@ -30,9 +30,6 @@ public class GameManager : MonoBehaviour
 
     //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
-
-
-    public GameObject mainboardObj;
     
     //roundcard list
     public GameObject roundList;
@@ -62,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     public void PopQueue() {
         List<ButtonParents> buttons = new List<ButtonParents>();
-
 
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
 
@@ -247,8 +243,11 @@ public class GameManager : MonoBehaviour
             tt.TrevelingTheaterStart();
         }
     }
+
     public CardDeck deck;
     public bool isGameScene = false, isDataUpdated = false;
+
+    MessageData msgData;
 
     public List<ActionType> NotEndTrunTypeList = new List<ActionType>();
     // -----------------------------------------------------------------------------------------------------------------
@@ -348,6 +347,7 @@ public class GameManager : MonoBehaviour
             {
                 SidebarManager.instance.SidebarUpdate(i);
             }
+            Logger.Log(msgData);
         }
     }
 
@@ -355,6 +355,9 @@ public class GameManager : MonoBehaviour
     public void GetMessage(MessageData data)
     {
         if (data.actionPlayerId == localPlayerIndex) return;
+
+        msgData = data;
+
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
@@ -383,6 +386,8 @@ public class GameManager : MonoBehaviour
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
 
         NetworkManager.instance.SendMessage(message);
+
+        Logger.Log(message);
     }
 
     /// <summary>
@@ -401,6 +406,8 @@ public class GameManager : MonoBehaviour
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
 
         NetworkManager.instance.SendMessage(message);
+
+        Logger.Log(message);
     }
 
     bool isActionTypeEndTurn(ActionType actionType)
