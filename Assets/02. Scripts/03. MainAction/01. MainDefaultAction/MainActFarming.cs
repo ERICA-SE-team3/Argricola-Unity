@@ -9,7 +9,7 @@ public class MainActFarming : ButtonParents
     public override void OnClick(){
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
-        if(playerIndex == localPlayerIndex)
+        if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[9]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FRAMLAND;

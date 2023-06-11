@@ -10,7 +10,7 @@ public class MainActMeeting : ButtonParents
         //플레이어의 현재 보조설비카드가 0개
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
-        if(playerIndex == localPlayerIndex)
+        if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[7]==false)
         {
             GameManager.instance.queueActionType = ActionType.MEETING_PLACE;
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);

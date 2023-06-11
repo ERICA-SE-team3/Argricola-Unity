@@ -26,7 +26,7 @@ public class MainActFishing : ButtonParents
         // player 본인의 id 값
         int userPlayerId = GameManager.instance.localPlayerIndex;
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        if (playerIndex == userPlayerId) 
+        if (playerIndex == userPlayerId && GameManager.instance.IsDoingAct[15]==false ) 
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FISHING;

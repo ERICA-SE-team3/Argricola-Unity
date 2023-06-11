@@ -16,7 +16,7 @@ public class EasternQuarryRoundAct : ButtonParents
     public override void OnClick()
     {
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[25]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.EASTERN_QUARRY;
