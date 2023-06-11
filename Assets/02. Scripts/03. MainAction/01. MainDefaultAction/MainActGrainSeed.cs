@@ -6,7 +6,7 @@ using UnityEngine;
 public class MainActGrainSeed : ButtonParents
 {
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
@@ -14,12 +14,16 @@ public class MainActGrainSeed : ButtonParents
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {   
-
-        //행동을 했음 표시
-        GameManager.instance.IsDoingAct[8] = true;
-
+        if(playerIndex == userPlayerId)
+        {   
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[8] = true;
+            GameManager.instance.actionQueue.Enqueue("grainSeed");
+            GameManager.instance.PopQueue();
+        }
+    }
+    public void GrainSeedStart()
+    {
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wheat", 1);
 
         //채소 장수 카드를 보유중이라면 나무 1개 추가
@@ -47,9 +51,6 @@ public class MainActGrainSeed : ButtonParents
 
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        GameManager.instance.endTurnFlag = true;
-        // }
-    }
-
-    
+        GameManager.instance.PopQueue();
+    }    
 }

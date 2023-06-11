@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
     public bool endTurnFlag = false;
 
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
-    public GameObject farming, grainUtilization, fencing, houseDevelop, expand;
-    // public GameObject whisChildren;
+    public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
+    public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
 
     
     // 행동 관리하는 Queue 생성
@@ -60,6 +60,186 @@ public class GameManager : MonoBehaviour
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
+    public void PopQueue() {
+        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
+        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
+        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
+        VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
+        EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
+        CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
+        //집 업그레이드
+        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+        //빵굽기, 씨뿌리기
+        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
+        //울타리치기
+        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+        // 밭 농사
+        CultivationRoundAct cv = cultivation.GetComponent<CultivationRoundAct>();
+        // 농장 개조
+        FarmDevelopRoundAct fd = farmDevelop.GetComponent<FarmDevelopRoundAct>();
+        // 주요 설비
+        ImprovementsRoundAct im = improvements.GetComponent<ImprovementsRoundAct>();
+        // 주요 설비
+        UrgentWishChildrenRoundAct uwc = urgentWishChildren.GetComponent<UrgentWishChildrenRoundAct>();
+
+
+        //집짓기
+        MainActExpand ex = expand.GetComponent<MainActExpand>();
+        //농지
+        MainActFarming fr = farming.GetComponent<MainActFarming>();
+        // 점토채굴장
+        MainActClayPit cp = clayPit.GetComponent<MainActClayPit>();
+        // 덤불
+        MainActCopse cs = copse.GetComponent<MainActCopse>();
+        // 날품팔이
+        MainActDayLaborer dl = dayLaborer.GetComponent<MainActDayLaborer>();
+        // 흙 채굴장
+        MainActDirtPit dp = dirtPit.GetComponent<MainActDirtPit>();
+        // 낚시
+        MainActFishing fs = fishing.GetComponent<MainActFishing>();
+        // 숲
+        MainActForest frst = forest.GetComponent<MainActForest>();
+        // 갈대밭
+        MainActGrainSeed gs = grainSeed.GetComponent<MainActGrainSeed>();
+        // 수풀
+        MainActGrove gv = grove.GetComponent<MainActGrove>();
+        // 교습1
+        MainActLessonFood1 lf1 = lessonFood1.GetComponent<MainActLessonFood1>();
+        // 교습2
+        MainActLessonFood2 lf2 = lessonFood1.GetComponent<MainActLessonFood2>();
+        // 회합장소
+        MainActMeeting meet = meeting.GetComponent<MainActMeeting>();
+        // 갈대밭
+        MainActReedField rf = reedFeild.GetComponent<MainActReedField>();
+        // 자원시장
+        MainActResMarket rm = resMarket.GetComponent<MainActResMarket>();
+        // 유량극단
+        MainActTrevelingTheater tt = trevelingTheater.GetComponent<MainActTrevelingTheater>();
+
+        if(actionQueue.Count == 0){
+            this.endTurnFlag = true;
+            Debug.Log( "Queue is Empty!!" );
+            return;
+        }
+
+        popAction = actionQueue.Dequeue();
+        
+        if(popAction == "guSowing"){
+            gu.StartSowing();
+        }
+        if(popAction == "cvSowing"){
+            cv.SowingStart();
+        }
+        else if(popAction == "guBaking"){
+            gu.StartBaking();
+        }
+        else if(popAction == "sheepMarket"){
+            sm.SheepMarketStart();
+        }
+        else if(popAction == "pigMarket"){
+            pm.PigMarketStart();
+        }
+        else if(popAction == "improvements"){
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            im.ImprovementsStart();
+        }
+        else if(popAction == "hdImprovements"){
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            hd.ImprovementsStart();
+        }
+        else if(popAction == "subCard"){
+            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            wc.StartSubCard();
+        }
+        else if(popAction == "wishChildren"){
+            wc.WishChildrenStart();
+        }
+        else if(popAction == "urgentWishChildren"){
+            uwc.UrgentWishChildrenStart();
+        }
+        else if(popAction == "westernQuarry"){
+            wq.WesternQuarryStart();
+        }
+        else if(popAction == "hdHouseDevelop"){
+            hd.StartHouseDeveloping();
+        }
+        else if(popAction == "fdHouseDevelop"){
+            fd.StartHouseDeveloping();
+        }
+        else if(popAction == "vegetableSeed"){
+            vs.VegetableSeedStart();
+        }
+        else if(popAction == "easternQuarry"){
+            eq.EasternQuarryStart();
+        }
+        else if(popAction == "cowMarket"){
+            cm.CowMarketStart();
+        }
+        else if(popAction == "cultivation"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "houseBuild"){
+            ex.StartHouseInstall();
+        }
+        else if(popAction == "shedBuild"){
+            ex.StartBuildShed();
+        }
+        else if(popAction == "farming"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "cvFarming"){
+            cv.FarmingStart();
+        }
+        else if(popAction == "fencing") {
+            fc.StartFencing();
+        }
+        else if(popAction == "fdFencing") {
+            fd.StartFencing();
+        }
+        else if(popAction == "clayPit") {
+            cp.ClayPitStart();
+        }
+        else if(popAction == "copse") {
+            cs.CopseStart();
+        }
+        else if(popAction == "dayLaborer") {
+            dl.DayLaborerStart();
+        }
+        else if(popAction == "dirtPit") {
+            dp.DirtPitStart();
+        }
+        else if(popAction == "fishing") {
+            fs.FishingStart();
+        }
+        else if(popAction == "forest") {
+            frst.ForestStart();
+        }
+        else if(popAction == "grainSeed") {
+            gs.GrainSeedStart();
+        }
+        else if(popAction == "grove") {
+            gv.GroveStart();
+        }
+        else if(popAction == "lessonFood1") {
+            lf1.LessonFoodStartOne();
+        }
+        else if(popAction == "lessonFood2") {
+            lf2.LessonFoodStartTwo();
+        }
+        else if(popAction == "meeting") {
+            meet.MeetingStart();
+        }
+        else if(popAction == "reedFeild") {
+            rf.ReedFeildStart();
+        }
+        else if(popAction == "resMarket") {
+            rm.ResMarketStart();
+        }
+        else if(popAction == "trevelingTheater") {
+            tt.TrevelingTheaterStart();
+        }
+    }
     public CardDeck deck;
     public bool isGameScene = false, isDataUpdated = false;
 
@@ -720,94 +900,6 @@ public class GameManager : MonoBehaviour
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
     }
 
-        public void PopQueue() {
-        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
-        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
-        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
-        VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
-        EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
-        CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
-
-        //집 업그레이드
-        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
-
-        //집짓기
-        MainActExpand ex = expand.GetComponent<MainActExpand>();
-
-        //농지
-        MainActFarming fr = farming.GetComponent<MainActFarming>();
-
-        //빵굽기, 씨뿌리기
-        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
-
-        //울타리치기
-        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
-
-        if(actionQueue.Count == 0){
-            this.endTurnFlag = true;
-            Debug.Log( "Queue is Empty!!" );
-            return;
-        }
-
-
-        popAction = actionQueue.Dequeue();
-        
-        if(popAction == "sowing"){
-            gu.StartSowing();
-        }
-        else if(popAction == "baking"){
-            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
-            gu.StartBaking();
-        }
-        else if(popAction == "sheepMarket"){
-            sm.SheepMarketStart();
-        }
-        else if(popAction == "pigMarket"){
-            pm.PigMarketStart();
-        }
-        else if(popAction == "improvements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(popAction == "subCard"){
-            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(popAction == "wishChildren"){
-            wc.WishChildrenStart();
-        }
-        else if(popAction == "westernQuarry"){
-            wq.WesternQuarryStart();
-        }
-        else if(popAction == "houseDevelop"){
-            hd.StartHouseDeveloping();
-        }
-        else if(popAction == "vegetableSeed"){
-            vs.VegetableSeedStart();
-        }
-        else if(popAction == "easternQuarry"){
-            eq.EasternQuarryStart();
-        }
-        else if(popAction == "cowMarket"){
-            cm.CowMarketStart();
-        }
-        else if(popAction == "cultivation"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "houseBuild"){
-            ex.StartHouseInstall();
-        }
-        else if(popAction == "shedBuild"){
-            ex.StartBuildShed();
-        }
-        else if(popAction == "farming"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "fencing") {
-            fc.StartFencing();
-        }
-    }
-}
-
 //스택이 쌓이는 라운드카드들
 public enum StackBehavior
 {
@@ -824,4 +916,5 @@ public enum StackBehavior
     pigMarket, //돼지 시장
     easternQuarry, //동부 채굴장
     cattleMarket //소 시장
+}
 }

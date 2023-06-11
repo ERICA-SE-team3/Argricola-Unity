@@ -11,15 +11,15 @@ public class FencingRoundAct : ButtonParents
     3. 사용자의 나무 개수만큼 울타리로 변경
   */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
 
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[18] = true;
@@ -28,7 +28,7 @@ public class FencingRoundAct : ButtonParents
             GameManager.instance.actionQueue.Enqueue("fencing");
             GameManager.instance.PopQueue();
 
-        // }
+        }
     }
 
     public void StartFencing() {

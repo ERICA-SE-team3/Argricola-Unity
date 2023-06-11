@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class MainActReedField : ButtonParents
 {
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     int stack;
 
     // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
+    public int localPlayerIndex = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
-
-        //행동을 했음 표시
-        GameManager.instance.IsDoingAct[14] = true;
-
-            //stack 정보 가져오기
+        if(playerIndex == localPlayerIndex)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[14] = true;
+            GameManager.instance.actionQueue.Enqueue("reedFeild");
+            GameManager.instance.PopQueue();
+        }
+    }
+    public void ReedFeildStart()
+    {
+        //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
         // 있다면 니무 얻기 함수 호출
@@ -34,9 +38,7 @@ public class MainActReedField : ButtonParents
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-        //turn이 끝났다는 flag 
-        GameManager.instance.endTurnFlag = true;
-        // }
+        GameManager.instance.PopQueue();
     }
 
 }

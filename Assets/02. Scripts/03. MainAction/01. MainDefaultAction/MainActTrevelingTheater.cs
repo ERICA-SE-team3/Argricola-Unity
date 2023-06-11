@@ -13,7 +13,7 @@ public class MainActTrevelingTheater : ButtonParents
     - 사용자의 턴일 때, 쌓여있는 음식의 개수만큼 얻어야함 -> addResource() 호출
     */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     int stack;
 
     // player 본인의 id 값
@@ -22,36 +22,38 @@ public class MainActTrevelingTheater : ButtonParents
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
-            playerIndex = GameManager.instance.getCurrentPlayerId();
-        // 사용자의 턴인지, 음식이 있는지 확인
-        // if (playerIndex == userPlayerId) 
-        // {
-
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        if (playerIndex == userPlayerId) 
+        {
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[5] = true;
-            //stack 정보 가져오기
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
+            GameManager.instance.actionQueue.Enqueue("trevelingTheater");
+            GameManager.instance.PopQueue();
+        }
+    }
+    public void TrevelingTheaterStart()
+    {
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
 
-            //자원 획득
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
+        //자원 획득
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
 
-            //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
-            if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
-            {
-                GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("magician");
-            }
+        //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
+        if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
+        {
+            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("magician");
+        }
 
-            //확인 message
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");
 
-            //stack 초기화
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")] = 0;
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")] = 0;
 
-            //행동을 한 후 가족 수 하나 줄이기
-            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
 
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-        // }
+        GameManager.instance.PopQueue();
     }
 }
