@@ -29,6 +29,7 @@ public class SheepMarketRoundAct : ButtonParents
 
         }
     }
+
     public void SheepMarketStart()
     {
         //stack 정보 가져오기

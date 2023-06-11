@@ -420,6 +420,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBoardsParent: {fileID: 1271186160}
   roundButtonParent: {fileID: 4600259215532837899}
+  sheepMarket: {fileID: 4600259216016675676}
+  wishChildren: {fileID: 4600259215706228414}
+  westernQuarry: {fileID: 4600259216505963222}
+  pigMarket: {fileID: 4600259216079863372}
+  vegetableSeed: {fileID: 4600259215173276054}
+  easternQuarry: {fileID: 4600259216414847886}
+  cowMarket: {fileID: 4600259216713362061}
+  grainUtilization: {fileID: 4600259216681991359}
+  fencing: {fileID: 4600259215428203869}
+  houseDevelop: {fileID: 4600259216159548105}
+  cultivation: {fileID: 4600259216262741289}
+  farmDevelop: {fileID: 4600259217042055782}
+  improvements: {fileID: 4600259216614722535}
+  urgentWishChildren: {fileID: 4600259215920761163}
+  clayPit: {fileID: 4600259216370017672}
+  copse: {fileID: 4600259216075863239}
+  dayLaborer: {fileID: 4600259216410476582}
+  dirtPit: {fileID: 4600259217110333436}
+  expand: {fileID: 4600259215877500762}
+  farming: {fileID: 4600259215345602112}
+  fishing: {fileID: 4600259215864006768}
+  forest: {fileID: 4600259215044995550}
+  grainSeed: {fileID: 4600259216770767428}
+  grove: {fileID: 4600259215855736263}
+  lessonFood1: {fileID: 4600259216117335336}
+  lessonFood2: {fileID: 4600259216536701351}
+  meeting: {fileID: 4600259216622158839}
+  reedFeild: {fileID: 4600259216925158361}
+  resMarket: {fileID: 4600259215308229324}
+  trevelingTheater: {fileID: 4600259215883524376}
 --- !u!1 &251086270
 GameObject:
   m_ObjectHideFlags: 0
@@ -18420,7 +18450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215173276054
 GameObject:
   m_ObjectHideFlags: 0
@@ -18568,7 +18597,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215308229324
 GameObject:
   m_ObjectHideFlags: 0
@@ -18716,7 +18744,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215345602112
 GameObject:
   m_ObjectHideFlags: 0
@@ -18864,7 +18891,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  localPlayerIndex: 0
 --- !u!1 &4600259215428203869
 GameObject:
   m_ObjectHideFlags: 0
@@ -19012,7 +19038,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215532837899
 GameObject:
   m_ObjectHideFlags: 0
@@ -19378,7 +19403,6 @@ MonoBehaviour:
   playerIndex: 0
   countFamily: 0
   countRoom: 0
-  userPlayerId: 0
 --- !u!1 &4600259215855736263
 GameObject:
   m_ObjectHideFlags: 0
@@ -19526,7 +19550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215864006768
 GameObject:
   m_ObjectHideFlags: 0
@@ -19674,7 +19697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215877500762
 GameObject:
   m_ObjectHideFlags: 0
@@ -19822,7 +19844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215883524376
 GameObject:
   m_ObjectHideFlags: 0
@@ -19970,7 +19991,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215920761163
 GameObject:
   m_ObjectHideFlags: 0
@@ -20118,7 +20138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259215929835096
 GameObject:
   m_ObjectHideFlags: 0
@@ -20318,7 +20337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216075863239
 GameObject:
   m_ObjectHideFlags: 0
@@ -20466,7 +20484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216079863372
 GameObject:
   m_ObjectHideFlags: 0
@@ -20614,7 +20631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216117335336
 GameObject:
   m_ObjectHideFlags: 0
@@ -20738,7 +20754,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4600259216117335341}
-        m_TargetAssemblyTypeName: mainActLessonFood1, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainActLessonFood1, Argricola
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -20909,7 +20925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216262741289
 GameObject:
   m_ObjectHideFlags: 0
@@ -21057,7 +21072,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216370017672
 GameObject:
   m_ObjectHideFlags: 0
@@ -21205,7 +21219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216410476582
 GameObject:
   m_ObjectHideFlags: 0
@@ -21353,7 +21366,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216414847886
 GameObject:
   m_ObjectHideFlags: 0
@@ -21501,7 +21513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216505963222
 GameObject:
   m_ObjectHideFlags: 0
@@ -21649,7 +21660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216536701351
 GameObject:
   m_ObjectHideFlags: 0
@@ -21797,7 +21807,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  localPlayerIndex: 0
 --- !u!1 &4600259216614722535
 GameObject:
   m_ObjectHideFlags: 0
@@ -21945,7 +21954,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216622158839
 GameObject:
   m_ObjectHideFlags: 0
@@ -22093,7 +22101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  localPlayerIndex: 0
 --- !u!1 &4600259216681991359
 GameObject:
   m_ObjectHideFlags: 0
@@ -22241,7 +22248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216713362061
 GameObject:
   m_ObjectHideFlags: 0
@@ -22389,7 +22395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216770767428
 GameObject:
   m_ObjectHideFlags: 0
@@ -22537,7 +22542,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259216925158361
 GameObject:
   m_ObjectHideFlags: 0
@@ -22685,7 +22689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  localPlayerIndex: 0
 --- !u!1 &4600259216987285745
 GameObject:
   m_ObjectHideFlags: 0
@@ -22988,7 +22991,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!114 &4600259217110332416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23058,7 +23060,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &4600259217110333436
 GameObject:
   m_ObjectHideFlags: 0
