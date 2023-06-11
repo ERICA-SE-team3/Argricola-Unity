@@ -12,12 +12,11 @@ public class FarmDevelopRoundAct : ButtonParents
   */
 
     public int playerIndex;
-    // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
             //행동을 했음 표시
@@ -31,9 +30,11 @@ public class FarmDevelopRoundAct : ButtonParents
             GameManager.instance.PopQueue(); 
         }
     }
+
     public void StartHouseDeveloping() {
       GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
     }
+    
     public void StartFencing() {
       GameManager.instance.playerBoards[playerIndex].StartInstallFence();
     }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class MainActLessonFood2 : ButtonParents
 {
     public int playerIndex;
-    public int localPlayerIndex = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
             //행동을 했음 표시

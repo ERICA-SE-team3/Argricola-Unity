@@ -5,10 +5,11 @@ using UnityEngine;
 public class MainActMeeting : ButtonParents
 {
     public int playerIndex;
-    public int localPlayerIndex = GameManager.instance.localPlayerIndex;
+
     public override void OnClick() {
         //플레이어의 현재 보조설비카드가 0개
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
             //행동을 했음 표시    
