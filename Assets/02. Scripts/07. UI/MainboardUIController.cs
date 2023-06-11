@@ -68,8 +68,10 @@ public class MainboardUIController : MonoBehaviour
 
     public void ActivatePlayerOnButton(ButtonParents button, int playerIndex)
     {
+        if(buttons.Contains(button)) { return; }
         buttons.Add(button);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;
+        image.SetActive(true);
         image.GetComponent<Image>().sprite = playerSprites[playerIndex];
         GameManager.instance.playerBoards[playerIndex].UseFamily();
     }
@@ -83,7 +85,6 @@ public class MainboardUIController : MonoBehaviour
         ButtonParents button = GetButtonObject(type).GetComponent<ButtonParents>();
         if(buttons.Contains(button)) { return; }
         buttons.Add(button);
-        Debug.Log(button, button.gameObject);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;
         image.SetActive(true);
         image.GetComponent<Image>().sprite = playerSprites[playerIndex];
