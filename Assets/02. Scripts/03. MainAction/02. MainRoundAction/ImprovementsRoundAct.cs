@@ -22,6 +22,7 @@ public class ImprovementsRoundAct : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[19] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 

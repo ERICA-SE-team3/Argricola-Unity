@@ -18,13 +18,14 @@ public class MainActCopse : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[0] = true;
             GameManager.instance.actionQueue.Enqueue("copse");
             GameManager.instance.PopQueue();
         }
-
     }
+
     public void CopseStart()
     {
         //stack 정보 가져오기

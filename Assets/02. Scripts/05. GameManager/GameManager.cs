@@ -294,7 +294,7 @@ public class GameManager : MonoBehaviour
         this.stackOfRoundCard = new int[13];
 
         //player start
-        for (int i=1; i<5; i++) 
+        for (int i=0; i<4; i++) 
         {
             Player temp = new Player();
             temp.id = i;
@@ -340,19 +340,22 @@ public class GameManager : MonoBehaviour
     {
         if(isDataUpdated) 
         {
-            Debug.Log("Update");
             isDataUpdated = false;
             for(int i = 0; i < 4; i++)
             {
                 SidebarManager.instance.SidebarUpdate(i);
             }
             Logger.Log(msgData);
+
+            if(msgData.actionType != ActionType.CHANGE_RESOURCE && msgData.actionType != ActionType.MOVE_ANIMAL)
+            {
+                MainboardUIController.instance.ActivatePlayerOnButton(msgData.actionType, msgData.actionPlayerId);
+            }   
         }
 
         if(isGameScene) { Round(); }
 
     }
-
 
     public void GetMessage(MessageData data)
     {
@@ -411,7 +414,7 @@ public class GameManager : MonoBehaviour
         Logger.Log(message);
     }
 
-    bool isActionTypeEndTurn(ActionType actionType)
+    public bool isActionTypeEndTurn(ActionType actionType)
     {
         if(NotEndTrunTypeList.Contains(actionType))
             return false;
@@ -425,13 +428,7 @@ public class GameManager : MonoBehaviour
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
-                // Debug.Log( "현재 라운드는 " + this.currentRound );
-            //     Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
-            //     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
-            //     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[2].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[3].remainFamilyOfCurrentPlayer );
+                // 대기
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
@@ -449,6 +446,7 @@ public class GameManager : MonoBehaviour
                     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[2].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[3].remainFamilyOfCurrentPlayer );
+
                     this.endTurnFlag = false;
                     SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                 }
@@ -470,9 +468,11 @@ public class GameManager : MonoBehaviour
             {
                 if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
                 {
-                    ResourceManager.instance.minusResource(i, "baby", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
-                    ResourceManager.instance.addResource(i, "family", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                    ResourceManager.instance.minusResource(i, "baby", 1);
+                    ResourceManager.instance.addResource(i, "family", 1);
+                    playerBoards[i].AddFamily();
                 }
+                playerBoards[i].ResetFamily();
             }
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())

@@ -15,6 +15,7 @@ public class PlayerMessageData
     public int remainFamilyOfCurrentPlayer;
     public List<int> card_owns;
     public List<int> card_hands;
+
     public int Jobs {
         get         { return CountJobs(); }
         private set { ; }
@@ -53,11 +54,11 @@ public class BlockData
     public int col;
     public BlockType type;
     public bool hasShed;
+    public bool hasFamily;
     public bool[] fence;
     public int cow;
     public int pig;
     public int sheep;
-    public int family;
     public SeedType seedType;
     public int seedCount;
 }

@@ -95,6 +95,7 @@ public class NetworkManager : MonoBehaviour
     {
         Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Message.ToString());
         Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.Message.ToString());
+        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.StackTrace.ToString());
     }
 
     void ws_OnClose(object sender, CloseEventArgs e)

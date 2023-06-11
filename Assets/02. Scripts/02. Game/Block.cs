@@ -13,15 +13,17 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public int row, col;
     public BlockType type;
-    public bool hasShed;
+    public bool hasShed, hasFamily;
     public bool[] fence;
-    public int cow, pig, sheep, family;
+    public int cow, pig, sheep;
     public SeedType seedType, sowingType;
     public int seedCount;
 
     int[] dx = {-1,1,0,0};
     int[] dy = {0,0,-1,1};
     int[] dfence = {1,0,3,2};
+
+    bool isUpdated = false;
 
     public void SetBlockMessageData(BlockData data)
     {
@@ -31,9 +33,35 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         this.cow = data.cow;
         this.pig = data.pig;
         this.sheep = data.sheep;
-        this.family = data.family;
+        this.hasFamily = data.hasFamily;
         this.seedType = data.seedType;
         this.seedCount = data.seedCount;
+    }
+
+    private void Update() {
+        if(!isUpdated)
+        {
+            isUpdated = true;
+            if(type == BlockType.FARM)
+            {
+                SetSeed(seedType, seedCount);
+                ChangeFarm();
+            }
+            else if(type == BlockType.FENCE)
+            {
+                SetFence(fence);
+                ChangeFence();
+            }
+            else if(type == BlockType.HOUSE)
+            {
+                ChangeHouse();
+            }
+            else if(type == BlockType.EMPTY)
+            {
+                ChangeEmpty();
+            }
+            SetAnimal(cow, pig, sheep);
+        }
     }
 
     
@@ -43,9 +71,10 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         this.row = row; this.col = col;
         this.type = type;
         hasShed = false;
+        hasFamily = false;
         fence = new bool[4] {false,false,false,false};
         
-        cow = 0; pig = 0; sheep = 0; family = 0;
+        cow = 0; pig = 0; sheep = 0; 
 
         seedType = SeedType.NONE;
         seedCount = 0;
@@ -245,7 +274,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         blockData.type = type;
         blockData.hasShed = hasShed;
         blockData.fence = fence;
-        blockData.cow = cow; blockData.pig = pig; blockData.sheep = sheep; blockData.family = family;
+        blockData.cow = cow; blockData.pig = pig; blockData.sheep = sheep; blockData.hasFamily = hasFamily;
         blockData.seedType = seedType; blockData.seedCount = seedCount;
         return blockData;
     }
@@ -261,6 +290,19 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         {
             seedType = type;
             seedCount = 2;
+        }
+        RenewSeedUI();
+    }
+
+    public void SetSeed(SeedType type, int count)
+    {
+        if(type == SeedType.WHEAT)
+        {
+            seedCount = count;
+        }
+        if(type == SeedType.VEGETABLE)
+        {
+            seedCount = count;
         }
         RenewSeedUI();
     }
@@ -327,6 +369,22 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         this.hasShed = true;
         this.transform.Find("Shed").gameObject.SetActive(true);
+    }
+
+    public void SetFamily()
+    {
+        this.hasFamily = true;
+        this.transform.Find("Family").gameObject.SetActive(true);
+    }
+
+    public void UseFamily()
+    {
+        this.transform.Find("Family").gameObject.SetActive(false);
+    }
+
+    public void ResetFamily()
+    {
+        this.transform.Find("Family").gameObject.SetActive(true);
     }
 
     public void SetFence(bool[] dir) 

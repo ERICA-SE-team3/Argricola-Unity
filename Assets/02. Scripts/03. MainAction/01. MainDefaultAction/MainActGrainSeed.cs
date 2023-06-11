@@ -13,6 +13,7 @@ public class MainActGrainSeed : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {   
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[8] = true;
             GameManager.instance.actionQueue.Enqueue("grainSeed");

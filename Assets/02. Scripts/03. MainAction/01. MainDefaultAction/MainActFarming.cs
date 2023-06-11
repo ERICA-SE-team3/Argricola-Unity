@@ -11,6 +11,7 @@ public class MainActFarming : ButtonParents
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             ResourceManager.instance.minusResource( playerIndex, "family",1 );
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[9] = true;
