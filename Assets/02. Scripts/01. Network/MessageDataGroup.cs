@@ -12,6 +12,8 @@ public class PlayerMessageData
     public int food,begging;
     public int family,fence,shed,room, baby;
     public int houseGrade;
+
+    public int remainFamilyOfCurrentPlayer;
     //직업 카드
     public List<int> jobcard_owns;
     public List<int> jobcard_hands;
@@ -46,6 +48,9 @@ public class PlayerMessageData
         this.subcard_owns = new List<int>();
         this.subcard_hands = new List<int>();
         this.maincard_owns = new List<int>(); 
+
+        this.remainFamilyOfCurrentPlayer = family;
+        
     }
 }
 

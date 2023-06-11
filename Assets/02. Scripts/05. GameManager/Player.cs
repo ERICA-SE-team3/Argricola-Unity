@@ -58,6 +58,8 @@ public class Player
 
         msgdata.jobcard_owns = this.jobcard_owns.ToList();
         msgdata.jobcard_hands = this.jobcard_hands.ToList();
+        msgdata.remainFamilyOfCurrentPlayer = this.remainFamilyOfCurrentPlayer;
+        //card
 
         msgdata.subcard_owns = this.subcard_owns.ToList();
         msgdata.subcard_hands = this.subcard_hands.ToList();
@@ -69,22 +71,24 @@ public class Player
 
     public void SetPlayerMessageData(PlayerMessageData data)
     {
-        isFirstPlayer = data.isFirstPlayer;
-        pig = data.pig;
-        cow = data.cow;
-        sheep = data.sheep;
-        wheat = data.wheat;
-        vegetable = data.vegetable;
-        wood = data.wood;
-        rock = data.rock;
-        reed = data.reed;
-        clay = data.clay;
-        food = data.food;
-        begging = data.begging;
-        family = data.family;
-        fence = data.fence;
-        shed = data.shed;
-        room = data.room;
+        this.isFirstPlayer = data.isFirstPlayer;
+        this.pig = data.pig;
+        this.cow = data.cow;
+        this.sheep = data.sheep;
+        this.wheat = data.wheat;
+        this.vegetable = data.vegetable;
+        this.wood = data.wood;
+        this.rock = data.rock;
+        this.reed = data.reed;
+        this.clay = data.clay;
+        this.food = data.food;
+        this.begging = data.begging;
+        this.family = data.family;
+        this.fence = data.fence;
+        this.shed = data.shed;
+        this.room = data.room;
+
+        this.remainFamilyOfCurrentPlayer = data.remainFamilyOfCurrentPlayer;
 
         //card
         this.jobcard_owns = data.jobcard_owns.ToList();
