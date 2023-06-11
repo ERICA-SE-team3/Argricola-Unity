@@ -13,6 +13,7 @@ public class VegetableSeedRoundAct : ButtonParents
         if(playerIndex == userPlayerId)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.VEGETABLE_SEEDS;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[24] = true;
             GameManager.instance.actionQueue.Enqueue("vegetableSeed");

@@ -13,6 +13,8 @@ public class MainActExpand : ButtonParents
         if(playerIndex == userPlayerId)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.FARM_EXPANSION;
+            
             ResourceManager.instance.minusResource( playerIndex, "family",1 );
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[6] = true;
