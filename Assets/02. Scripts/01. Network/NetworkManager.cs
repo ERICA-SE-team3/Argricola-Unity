@@ -145,7 +145,8 @@ public class NetworkManager : MonoBehaviour
                 GameManager.instance.deck = cardDeck;
                 break;
             default:
-                Debug.Log("default");
+                MessageData msgData = JsonUtility.FromJson<MessageData>(message.data);
+                GameManager.instance.GetMessage(msgData);
                 // 게임매니저에 보내야함.
                 break;
         }
@@ -191,7 +192,7 @@ public class NetworkManager : MonoBehaviour
         body.sender = clientId;
         body.type = StompFrame.SEND;
         string body_json = JsonUtility.ToJson(body);
-        // Debug.Log(body_json);
+        Debug.Log(body_json);
 
         // body_json = Regex.Unescape(body_json);
 

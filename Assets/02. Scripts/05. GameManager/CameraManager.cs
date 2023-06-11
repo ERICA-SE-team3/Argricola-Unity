@@ -6,7 +6,7 @@ public class CameraManager: MonoBehaviour
 {
     int playerStartX = 0, offsetX = 1500;
     int playerY = 1050;
-    Vector3 playerCameraOffset = new Vector3(150, -80, 0);
+    Vector3 playerCameraOffset = new Vector3(150, 0, 0);
     List<Vector3> playerPositions = new List<Vector3>();
 
     public Vector3 mainBoardPosition, mainCardPosition;
@@ -19,7 +19,7 @@ public class CameraManager: MonoBehaviour
     private void Start() {
         for(int i = 0; i < 4; i++)
         {
-            playerPositions.Add(new Vector3(playerStartX + offsetX *i, playerY, -1) - playerCameraOffset);
+            playerPositions.Add(new Vector3(playerStartX + offsetX *i, playerY, -10) + playerCameraOffset);
         }
 
         MainCamera = Camera.main.gameObject;

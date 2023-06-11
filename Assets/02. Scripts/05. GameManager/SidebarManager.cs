@@ -26,8 +26,6 @@ public class SidebarManager : MonoBehaviour
     // Update is called once per frame
     public void SidebarUpdate(int playerIndex){
         GameObject sidebarPlayerObject = players[playerIndex];
-        Debug.Log(sidebarPlayerObject);
-        Debug.Log(GameManager.instance.players.Count);
         sidebarPlayerObject.transform.Find("woodObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].wood.ToString();
         sidebarPlayerObject.transform.Find("clayObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].clay.ToString();
         sidebarPlayerObject.transform.Find("rockObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].rock.ToString();

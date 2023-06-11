@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int localPlayerIndex = 0;
+    public int localPlayerIndex = -1;
 
     /// <summary>
     /// Player들을 담을 ArrayList
@@ -42,8 +42,6 @@ public class GameManager : MonoBehaviour
     //그 턴에 한 행동 관리 array
     public bool[] IsDoingAct;
 
-    //소통할 message 형식
-    MessageData message = new MessageData();
 
     //게임 진행을 위한 flag들
     //1. 라운드 진행을 나타내는 flag
@@ -58,22 +56,49 @@ public class GameManager : MonoBehaviour
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
+
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
     public CardDeck deck;
-    public bool isGameScene = false;
+    public bool isGameScene = false, isDataUpdated = false;
 
+    public List<ActionType> NotEndTrunTypeList = new List<ActionType>();
     // -----------------------------------------------------------------------------------------------------------------
 
     private void Awake() {
-        if (instance == null)
+        if(instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
             Destroy(this.gameObject);
+            return;
+        }
+    }
+
+    private void Start() {
+        ActionType[] notEndTurnList = {
+            ActionType.LESSON_ONE,
+            ActionType.LESSON_TWO,
+            ActionType.FENCE,
+            ActionType.FARM_EXPANSION,
+            ActionType.MEETING_PLACE,
+            ActionType.FRAMLAND,
+            ActionType.MAJOR_FACILITIES,
+            ActionType.GRAIN_UTILIZATION,
+            ActionType.BASIC_FAMILY_INCREASE,
+            ActionType.HOUSE_RENOVATION,
+            ActionType.FIELD_FARMING,
+            ActionType.URGENT_FAMILY_INCREASE,
+            ActionType.FARM_REMODELING,
+        };
+
+        for(int i = 0; i < notEndTurnList.Length; i++)
+        {
+            NotEndTrunTypeList.Add(notEndTurnList[i]);
         }
     }
 
@@ -128,8 +153,74 @@ public class GameManager : MonoBehaviour
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
         if(isGameScene) { Round(); }
+        if(isDataUpdated) 
+        {
+            isDataUpdated = false;
+            for(int i = 0; i < 4; i++)
+            {
+                SidebarManager.instance.SidebarUpdate(i);
+            }
+        }
     }
 
+
+    public void GetMessage(MessageData data)
+    {
+        if (data.actionPlayerId == localPlayerIndex) return;
+        players[data.actionPlayerId].SetPlayerMessageData(data.player);
+        playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
+        isDataUpdated = true;
+        if(data.actionType != ActionType.CHANGE_RESOURCE && data.actionType != ActionType.MOVE_ANIMAL)
+        {
+            if(isActionTypeEndTurn(data.actionType))
+                endTurnFlag = true;
+        }
+    }
+    
+    /// <summary>
+    /// 행동을 보내는 함수
+    /// </summary>
+    public void SendMessage()
+    {
+        //소통할 message 형식
+        MessageData message = new MessageData();
+        
+        // 액션 디큐하는 공간
+        // ActionType didActiontype = Dequeue();
+        message.actionPlayerId = localPlayerIndex;
+
+        // 임시로 채워넣은 행동
+        message.actionType = ActionType.BUSH;
+        message.player = players[localPlayerIndex].GetPlayerMessageData();
+        message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
+
+        NetworkManager.instance.SendMessage(message);
+    }
+
+    /// <summary>
+    /// 행동을 보내는 함수
+    /// </summary>
+    /// <param name="actionType"></param>
+    public void SendMessage(ActionType actionType)
+    {
+        //소통할 message 형식
+        MessageData message = new MessageData();
+        
+        message.actionPlayerId = localPlayerIndex;
+
+        message.actionType = actionType;
+        message.player = players[localPlayerIndex].GetPlayerMessageData();
+        message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
+
+        NetworkManager.instance.SendMessage(message);
+    }
+
+    bool isActionTypeEndTurn(ActionType actionType)
+    {
+        if(NotEndTrunTypeList.Contains(actionType))
+            return false;
+        return true;
+    }
 
     public void Round()
     {
@@ -139,17 +230,18 @@ public class GameManager : MonoBehaviour
             if ( !this.endTurnFlag )
             {
                 Debug.Log( "현재 라운드는 " + this.currentRound );
-                Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
-                Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
-                "\n" + this.players[0].remainFamilyOfCurrentPlayer +
-                "\n" + this.players[1].remainFamilyOfCurrentPlayer +
-                "\n" + this.players[2].remainFamilyOfCurrentPlayer +
-                "\n" + this.players[3].remainFamilyOfCurrentPlayer );
-                
+            //     Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
+            //     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+            //     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+            //     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+            //     "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+            //     "\n" + this.players[3].remainFamilyOfCurrentPlayer );
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
+                if(currentPlayerId == localPlayerIndex) { SendMessage(); }
+
                 //1-4. 다음 턴을 부여받을 플레이어 찾기
                 //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
                 if ( this.findNextPlayer() )
@@ -169,8 +261,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-
 
         //2. 라운드 전체가 끝남.
         else
@@ -193,13 +283,8 @@ public class GameManager : MonoBehaviour
                 //2-2-2. 게임 종료
                 Debug.Log("Game is Over!");
                 FinishAgriCola();
-
-
             } 
         }
-
-    
-
     }
     //--------------------------------------------------------------------------------------------
 
