@@ -11,7 +11,7 @@ public class MainActGrainSeed : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[8]==false)
         {   
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.SEED;

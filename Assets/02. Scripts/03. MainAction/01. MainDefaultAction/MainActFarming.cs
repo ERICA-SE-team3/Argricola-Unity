@@ -9,7 +9,7 @@ public class MainActFarming : ButtonParents
     public override void OnClick(){
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
-        if(playerIndex == localPlayerIndex)
+        if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[9]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FRAMLAND;
@@ -17,14 +17,14 @@ public class MainActFarming : ButtonParents
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[9] = true;
             GameManager.instance.actionQueue.Enqueue("farming");
+            
+            GameManager.instance.PopQueue();
 
             //장작 채집자 카드
             if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
             {
                 GameManager.instance.players[playerIndex].ActCard("woodPicker");
             }
-            
-            GameManager.instance.PopQueue();
         }
 
 

@@ -20,7 +20,7 @@ public class CowMarketRoundAct : ButtonParents
     public override void OnClick()
     {
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[26]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.COW_MARKET;

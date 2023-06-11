@@ -14,7 +14,7 @@ public class MainActClayPit : ButtonParents
     {
         int userPlayerId = GameManager.instance.localPlayerIndex;
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[3]==false)
         {   
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.CLAY_PIT;

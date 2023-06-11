@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class Player
@@ -54,33 +55,49 @@ public class Player
         msgdata.fence = this.fence;
         msgdata.shed = this.shed;
         msgdata.room = this.room;
+
+        msgdata.jobcard_owns = this.jobcard_owns.ToList();
+        msgdata.jobcard_hands = this.jobcard_hands.ToList();
         msgdata.remainFamilyOfCurrentPlayer = this.remainFamilyOfCurrentPlayer;
         //card
 
+        msgdata.subcard_owns = this.subcard_owns.ToList();
+        msgdata.subcard_hands = this.subcard_hands.ToList();
+
+        msgdata.maincard_owns = this.maincard_owns.ToList();
 
         return msgdata;
     }
 
     public void SetPlayerMessageData(PlayerMessageData data)
     {
-        isFirstPlayer = data.isFirstPlayer;
-        pig = data.pig;
-        cow = data.cow;
-        sheep = data.sheep;
-        wheat = data.wheat;
-        vegetable = data.vegetable;
-        wood = data.wood;
-        rock = data.rock;
-        reed = data.reed;
-        clay = data.clay;
-        food = data.food;
-        begging = data.begging;
-        family = data.family;
-        fence = data.fence;
-        shed = data.shed;
-        room = data.room;
-        remainFamilyOfCurrentPlayer = data.remainFamilyOfCurrentPlayer;
+        this.isFirstPlayer = data.isFirstPlayer;
+        this.pig = data.pig;
+        this.cow = data.cow;
+        this.sheep = data.sheep;
+        this.wheat = data.wheat;
+        this.vegetable = data.vegetable;
+        this.wood = data.wood;
+        this.rock = data.rock;
+        this.reed = data.reed;
+        this.clay = data.clay;
+        this.food = data.food;
+        this.begging = data.begging;
+        this.family = data.family;
+        this.fence = data.fence;
+        this.shed = data.shed;
+        this.room = data.room;
+
+        this.remainFamilyOfCurrentPlayer = data.remainFamilyOfCurrentPlayer;
+
         //card
+        this.jobcard_owns = data.jobcard_owns.ToList();
+        this.jobcard_hands = data.jobcard_hands.ToList();
+
+        this.subcard_owns = data.subcard_owns.ToList();
+        this.subcard_hands = data.subcard_hands.ToList();
+
+        this.maincard_owns = data.maincard_owns.ToList();
     }
 
     //---------------------------------------------------------------------------

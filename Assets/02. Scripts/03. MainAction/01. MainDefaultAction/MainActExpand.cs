@@ -10,7 +10,7 @@ public class MainActExpand : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[6]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FARM_EXPANSION;

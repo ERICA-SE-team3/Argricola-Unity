@@ -10,7 +10,7 @@ public class VegetableSeedRoundAct : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[24]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.VEGETABLE_SEEDS;

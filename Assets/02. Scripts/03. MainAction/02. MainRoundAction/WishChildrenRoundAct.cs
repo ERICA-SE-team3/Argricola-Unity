@@ -21,7 +21,7 @@ public class WishChildrenRoundAct : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[20]==false)
         {
           MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
           GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE;

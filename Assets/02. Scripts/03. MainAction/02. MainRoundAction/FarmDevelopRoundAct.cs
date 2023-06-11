@@ -17,7 +17,7 @@ public class FarmDevelopRoundAct : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[29]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FARM_REMODELING;
@@ -25,9 +25,10 @@ public class FarmDevelopRoundAct : ButtonParents
             GameManager.instance.IsDoingAct[29] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
+            // GameManager.instance.actionQueue.Enqueue("fdHouseDevelop");
+            // //그리고   
+            // GameManager.instance.actionQueue.Enqueue("fdFencing");
             GameManager.instance.actionQueue.Enqueue("fdHouseDevelop");
-            //그리고   
-            GameManager.instance.actionQueue.Enqueue("fdFencing");
             GameManager.instance.PopQueue(); 
         }
     }
