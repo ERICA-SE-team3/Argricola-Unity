@@ -5,22 +5,27 @@ using UnityEngine;
 // 흙 채굴장
 public class MainActDirtPit : ButtonParents
 {
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-
     //stack 정보 가져오기
     int stack;
+    public int playerIndex;
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
+    // 사용자가 행동을 클릭했을 때
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[13] = true;
+            GameManager.instance.actionQueue.Enqueue("dirtPit");
+            GameManager.instance.PopQueue();
+        }
+    }
 
-        //행동을 했음 표시
-        GameManager.instance.IsDoingAct[13] = true;
-
+    public void DirtPitStart()
+    {
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 
         ResourceManager.instance.addResource(playerIndex, "clay", stack * 1);
@@ -31,9 +36,6 @@ public class MainActDirtPit : ButtonParents
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")] = 0;
 
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
-
-        //turn이 끝났다는 flag 
-        GameManager.instance.endTurnFlag = true;
-        // }
+        GameManager.instance.PopQueue();
     }
 }

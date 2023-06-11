@@ -18,12 +18,17 @@ public class MainActCopse : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
 
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[0] = true;
+            GameManager.instance.actionQueue.Enqueue("copse");
+            GameManager.instance.PopQueue();
+        }
 
-        //행동을 했음 표시
-        GameManager.instance.IsDoingAct[0] = true;
-
+    }
+    public void CopseStart()
+    {
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("copse")];
 
@@ -45,11 +50,8 @@ public class MainActCopse : ButtonParents
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(this.playerIndex, "family", 1);
 
-            //turn이 끝났다는 flag 
-            GameManager.instance.endTurnFlag = true;
-        }
-
-        
+        GameManager.instance.PopQueue();
+    }        
 }
 
 

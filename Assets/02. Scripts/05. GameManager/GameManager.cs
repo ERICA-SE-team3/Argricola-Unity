@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
     public bool endTurnFlag = false;
 
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
-    public GameObject farming, grainUtilization, fencing, houseDevelop, expand;
-    // public GameObject whisChildren;
+    public GameObject grainUtilization, fencing, houseDevelop;
+    public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
 
     
     // 행동 관리하는 Queue 생성
@@ -81,21 +81,46 @@ public class GameManager : MonoBehaviour
         VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
-
         //집 업그레이드
         HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+        //빵굽기, 씨뿌리기
+        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
+        //울타리치기
+        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+
 
         //집짓기
         MainActExpand ex = expand.GetComponent<MainActExpand>();
-
         //농지
         MainActFarming fr = farming.GetComponent<MainActFarming>();
-
-        //빵굽기, 씨뿌리기
-        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
-
-        //울타리치기
-        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+        // 점토채굴장
+        MainActClayPit cp = clayPit.GetComponent<MainActClayPit>();
+        // 덤불
+        MainActCopse cs = copse.GetComponent<MainActCopse>();
+        // 날품팔이
+        MainActDayLaborer dl = dayLaborer.GetComponent<MainActDayLaborer>();
+        // 흙 채굴장
+        MainActDirtPit dp = dirtPit.GetComponent<MainActDirtPit>();
+        // 낚시
+        MainActFishing fs = fishing.GetComponent<MainActFishing>();
+        // 숲
+        MainActForest frst = forest.GetComponent<MainActForest>();
+        // 갈대밭
+        MainActGrainSeed gs = grainSeed.GetComponent<MainActGrainSeed>();
+        // 수풀
+        MainActGrove gv = grove.GetComponent<MainActGrove>();
+        // 교습1
+        MainActLessonFood1 lf1 = lessonFood1.GetComponent<MainActLessonFood1>();
+        // 교습2
+        MainActLessonFood2 lf2 = lessonFood1.GetComponent<MainActLessonFood2>();
+        // 회합장소
+        MainActMeeting meet = meeting.GetComponent<MainActMeeting>();
+        // 갈대밭
+        MainActReedField rf = reedFeild.GetComponent<MainActReedField>();
+        // 자원시장
+        MainActResMarket rm = resMarket.GetComponent<MainActResMarket>();
+        // 유량극단
+        MainActTrevelingTheater tt = trevelingTheater.GetComponent<MainActTrevelingTheater>();
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
@@ -109,7 +134,6 @@ public class GameManager : MonoBehaviour
             gu.StartSowing();
         }
         else if(popAction == "baking"){
-            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
             gu.StartBaking();
         }
         else if(popAction == "sheepMarket"){
@@ -156,6 +180,48 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "fencing") {
             fc.StartFencing();
+        }
+        else if(popAction == "clayPit") {
+            cp.ClayPitStart();
+        }
+        else if(popAction == "copse") {
+            cs.CopseStart();
+        }
+        else if(popAction == "dayLaborer") {
+            dl.DayLaborerStart();
+        }
+        else if(popAction == "dirtPit") {
+            dp.DirtPitStart();
+        }
+        else if(popAction == "fishing") {
+            fs.FishingStart();
+        }
+        else if(popAction == "forest") {
+            frst.ForestStart();
+        }
+        else if(popAction == "grainSeed") {
+            gs.GrainSeedStart();
+        }
+        else if(popAction == "grove") {
+            gv.GroveStart();
+        }
+        else if(popAction == "lessonFood1") {
+            lf1.LessonFoodStartOne();
+        }
+        else if(popAction == "lessonFood2") {
+            lf2.LessonFoodStartTwo();
+        }
+        else if(popAction == "meeting") {
+            meet.MeetingStart();
+        }
+        else if(popAction == "reedFeild") {
+            rf.ReedFeildStart();
+        }
+        else if(popAction == "resMarket") {
+            rm.ResMarketStart();
+        }
+        else if(popAction == "trevelingTheater") {
+            tt.TrevelingTheaterStart();
         }
     }
 
