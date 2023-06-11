@@ -41,7 +41,7 @@ public class WishChildrenRoundAct : ButtonParents
         {
           //행동을 한 후 가족 수 하나 줄이기
           ResourceManager.instance.minusResource(playerIndex, "family", 1);
-          ResourceManager.instance.addResource(playerIndex, "family", 1);
+          ResourceManager.instance.addResource(playerIndex, "baby", 1);
         }
         // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
         GameManager.instance.PopQueue();

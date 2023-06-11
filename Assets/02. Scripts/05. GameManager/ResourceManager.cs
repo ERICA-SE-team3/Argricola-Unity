@@ -65,6 +65,10 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { familyIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
+            case "baby":
+                for (int i = 0; i < count; i++) { babyIncrement( playerId ); PrintResourceOfPlayer(); }
+                break;
+
             case "fence":
                 for (int i = 0; i < count; i++) { fenceIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
@@ -131,6 +135,10 @@ public class ResourceManager : MonoBehaviour
 
             case "family":
                 for (int i = 0; i < count; i++) { familyDecrement( playerId ); } PrintResourceOfPlayer(); 
+                break;
+
+            case "baby":
+                for (int i = 0; i < count; i++) { babyDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
@@ -228,6 +236,10 @@ public class ResourceManager : MonoBehaviour
                 result = GameManager.instance.players[playerId].family;
                 break;
 
+            case "baby":
+                result = GameManager.instance.players[playerId].baby;
+                break;
+
             case "fence":
                 result = GameManager.instance.players[playerId].fence;
                 break;
@@ -307,6 +319,11 @@ public class ResourceManager : MonoBehaviour
         GameManager.instance.players[playerId].family = GameManager.instance.players[playerId].family + 1;
     }
 
+    void babyIncrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby + 1;
+    }
+
     void fenceIncrement( int playerId )
     {
         GameManager.instance.players[playerId].fence = GameManager.instance.players[playerId].fence + 1;
@@ -382,6 +399,11 @@ public class ResourceManager : MonoBehaviour
     void familyDecrement( int playerId )
     {
         GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer = GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer - 1;
+    }
+
+    void babyDecrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby - 1;
     }
 
     void fenceDecrement( int playerId )
