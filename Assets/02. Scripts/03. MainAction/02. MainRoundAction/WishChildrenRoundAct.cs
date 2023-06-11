@@ -12,25 +12,23 @@ public class WishChildrenRoundAct : ButtonParents
     4. 한 후에 보조설비 카드 하나 획득
   */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     public int countFamily;
     public int countRoom;
-    // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
-
-        //행동을 했음 표시
-        GameManager.instance.IsDoingAct[20] = true;
-        
-        GameManager.instance.actionQueue.Enqueue("wishChildren");
-        GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
-        GameManager.instance.PopQueue();
+          //행동을 했음 표시
+          GameManager.instance.IsDoingAct[20] = true;
+          
+          GameManager.instance.actionQueue.Enqueue("wishChildren");
+          GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
+          GameManager.instance.PopQueue();
         }
       }
     public void WishChildrenStart()

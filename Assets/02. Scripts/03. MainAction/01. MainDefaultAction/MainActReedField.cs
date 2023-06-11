@@ -7,12 +7,11 @@ public class MainActReedField : ButtonParents
     public int playerIndex;
     int stack;
 
-    // player 본인의 id 값
-    public int localPlayerIndex = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
             //행동을 했음 표시

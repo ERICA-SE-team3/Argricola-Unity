@@ -61,9 +61,16 @@ public class GameManager : MonoBehaviour
     public string popAction;
 
     public void PopQueue() {
+        List<ButtonParents> buttons = new List<ButtonParents>();
+
+
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
         PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
         WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+
+        buttons.Add(sm);
+        buttons.Add(pm);
+        buttons.Add(wc);
         WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
         VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();

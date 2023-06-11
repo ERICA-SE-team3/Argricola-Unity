@@ -10,10 +10,9 @@ public class MainActClayPit : ButtonParents
     //stack 정보 가져오기
     int stack;
 
-    // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
     public override void OnClick()
     {
+        int userPlayerId = GameManager.instance.localPlayerIndex;
         playerIndex = GameManager.instance.getCurrentPlayerId();
         if(playerIndex == userPlayerId)
         {        
