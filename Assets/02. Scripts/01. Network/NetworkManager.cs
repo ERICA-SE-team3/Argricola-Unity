@@ -86,7 +86,7 @@ public class NetworkManager : MonoBehaviour
         }
         else if (msg.Command == StompFrame.MESSAGE)
         {
-            Debug.Log(e.Data);
+            // Debug.Log(e.Data);
             Parse(msg.Body);
         }
     }

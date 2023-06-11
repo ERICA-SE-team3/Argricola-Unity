@@ -338,10 +338,9 @@ public class GameManager : MonoBehaviour
 
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        if(isGameScene) { Round(); }
-
         if(isDataUpdated) 
         {
+            Debug.Log("Update");
             isDataUpdated = false;
             for(int i = 0; i < 4; i++)
             {
@@ -349,6 +348,9 @@ public class GameManager : MonoBehaviour
             }
             Logger.Log(msgData);
         }
+
+        if(isGameScene) { Round(); }
+
     }
 
 
@@ -357,7 +359,7 @@ public class GameManager : MonoBehaviour
         if (data.actionPlayerId == localPlayerIndex) return;
 
         msgData = data;
-
+        Debug.Log("GetMessage" + JsonUtility.ToJson(data));
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
@@ -424,7 +426,7 @@ public class GameManager : MonoBehaviour
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
-                Debug.Log( "현재 라운드는 " + this.currentRound );
+                // Debug.Log( "현재 라운드는 " + this.currentRound );
             //     Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
             //     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
             //     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
@@ -443,6 +445,11 @@ public class GameManager : MonoBehaviour
                 {
                     //... 그대로 진행
                     Debug.Log("Move to Next Turn");
+                    Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+                    "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[3].remainFamilyOfCurrentPlayer );
                     this.endTurnFlag = false;
                     SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                 }
