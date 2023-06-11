@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     // queue에서 하나 꺼낸 행동
     public string popAction;
+    public ActionType queueActionType = ActionType.NONE;
 
     public void PopQueue() {
         List<ButtonParents> buttons = new List<ButtonParents>();
@@ -433,7 +434,11 @@ public class GameManager : MonoBehaviour
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
-                if(currentPlayerId == localPlayerIndex) { SendMessage(); }
+                if(currentPlayerId == localPlayerIndex) { 
+                    SendMessage(queueActionType);
+                    queueActionType = ActionType.NONE;
+                    // SendMessage(); 
+                }
 
                 //1-4. 다음 턴을 부여받을 플레이어 찾기
                 //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행

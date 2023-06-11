@@ -25,6 +25,7 @@ public class MainActGrove : ButtonParents
         if (playerIndex == userPlayerId) 
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.DOBULE_BUSH;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[1] = true;
             GameManager.instance.actionQueue.Enqueue("grove");

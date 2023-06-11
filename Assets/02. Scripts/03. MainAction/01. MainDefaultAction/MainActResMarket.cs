@@ -15,6 +15,7 @@ public class MainActResMarket : ButtonParents
         if(playerIndex == userPlayerId)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.RESOURCE_MARKET;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[2] = true;
             GameManager.instance.actionQueue.Enqueue("resMarket");
