@@ -17,6 +17,10 @@ public class MainActDirtPit : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[13] = true;
+
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 
         ResourceManager.instance.addResource(playerIndex, "clay", stack * 1);

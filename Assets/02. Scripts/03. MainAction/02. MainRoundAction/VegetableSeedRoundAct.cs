@@ -13,8 +13,11 @@ public class VegetableSeedRoundAct : ButtonParents
             playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+            //행동을 했음 표시
+          GameManager.instance.IsDoingAct[24] = true;
             GameManager.instance.actionQueue.Enqueue("vegetableSeed");
             GameManager.instance.PopQueue();
+
         // }
     }
     public void VegetableSeedStart()

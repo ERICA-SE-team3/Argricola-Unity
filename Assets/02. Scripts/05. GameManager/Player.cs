@@ -411,6 +411,12 @@ public class Player
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
 
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.stoneClamp);
                     Debug.Log("player 0" + " get stoneClamp job card!");
                 }
@@ -437,6 +443,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",2 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.woodBoat);
                     Debug.Log("player 0" + " get woodBoat job card!");
                 }
@@ -450,6 +463,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.rake);
                     Debug.Log("player 0" + " get rake job card!");
                 }
@@ -489,6 +509,13 @@ public class Player
                 {
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",1 );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.butter);
                     Debug.Log("player 0" + " get butter job card!");
                 }
@@ -503,6 +530,13 @@ public class Player
                     //비용
                     ResourceManager.instance.minusResource( id, "wood",this.family );
                     ResourceManager.instance.minusResource( id, "food",this.family );
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.subcard_owns.Add((int)Cards.bottle);
                     Debug.Log("player 0" + " get bottle job card!");
                 }
@@ -608,6 +642,13 @@ public class Player
                         ResourceManager.instance.addResource( this.id, "stone", 1 );
                         Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
                     }
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     this.maincard_owns.Add((int)Cards.joinery);
                     Debug.Log("player 0" + " get joinery job card!");
                 }
@@ -655,6 +696,13 @@ public class Player
                 {
                     ResourceManager.instance.minusResource(id, "wood", 1);
                     ResourceManager.instance.minusResource(id, "stone", 3);
+
+                    //목재소
+                    if( this.HasJobCard( "woodYard" ) ) {
+                        ResourceManager.instance.addResource( this.id, "wood", 1 );
+                        Debug.Log( "Player " + this.id + " get 1 wood because of WOODYARD" );
+                    }
+
                     if( this.HasJobCard( "stoneCutter" ) ) {
                         ResourceManager.instance.addResource( this.id, "stone", 1 );
                         Debug.Log( "Player " + this.id + " get 1 stone because of STONECUTTER" );
@@ -816,6 +864,117 @@ public class Player
         }
     }
 
+    public string GetCarNameString( int cardNum ) {
+        string result = "";
+        switch (cardNum) 
+        {
+            case 0:
+                result =  "magician";
+                break;
+                
+            case 1:
+                result =  "woodCutter";
+                break;
+
+            case 2:
+                result =  "vegetableSeller";
+                break;
+
+            case 5:
+                result =  "woodPicker";
+                break;
+
+            case 4:
+                result =  "wallMaster";
+                break;
+
+            case 3:
+                result =  "stoneCutter";
+                break;
+
+            case 6:
+                result =  "organicFarmer";
+                break;
+
+            case 7:
+                result =  "pigBreeder";
+                break;
+
+            case 8:
+            result =  "stoneClamp";
+            break;
+                
+            case 9:
+                result =  "clayMining";
+                break;
+
+            case 10:
+                result =  "woodBoat";
+                break;
+
+            case 11:
+                result =  "rake";
+                break;
+
+            case 12:
+                result =  "watterBottle";
+                break;
+
+            case 13:
+                result =  "woodYard";
+                break;
+
+            case 14:
+                result =  "butter";
+                break;
+
+            case 15:
+                result =  "bottle";
+                break;
+
+            case 16:
+                result =  "fireplace1";
+                break;
+                
+            case 17:
+                result =  "fireplace2";
+                break;
+
+            case 18:
+                result =  "cookingHearth1";
+                break;
+
+            case 19:
+                result =  "cookingHearth2";
+                break;
+
+            case 20:
+                result =  "clayOven";
+                break;
+
+            case 21:
+                result =  "stoneOven";
+                break;
+
+            case 22:
+                result =  "joinery";
+                break;
+
+            case 23:
+                result =  "pottery";
+                break;
+            
+            case 24:
+                result =  "basket";
+                break;
+
+            case 25:
+                result =  "well";
+                break;
+        }
+
+        return result;
+    }
 
 }
 
