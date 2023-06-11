@@ -11,7 +11,7 @@ public class PigMarketRoundAct : ButtonParents
     4. 개인판에서 소를 배치시키는 함수 실행
     */
     
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     //stack 정보 가져오기
     int stack;
@@ -21,15 +21,13 @@ public class PigMarketRoundAct : ButtonParents
     public override void OnClick()
     {
             playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
-
+        if(playerIndex == userPlayerId)
+        {
             //행동을 했음 표시
-          GameManager.instance.IsDoingAct[23] = true;
+            GameManager.instance.IsDoingAct[23] = true;
             GameManager.instance.actionQueue.Enqueue("pigMarket");
             GameManager.instance.PopQueue();
-
-        // }
+        }
     }
     public void PigMarketStart()
     {

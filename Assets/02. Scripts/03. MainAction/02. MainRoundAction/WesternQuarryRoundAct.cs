@@ -17,13 +17,13 @@ public class WesternQuarryRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
           //행동을 했음 표시
           GameManager.instance.IsDoingAct[21] = true;
           GameManager.instance.actionQueue.Enqueue("westernQuarry");
           GameManager.instance.PopQueue();
-        // }
+        }
     }
     public void WesternQuarryStart()
     {
