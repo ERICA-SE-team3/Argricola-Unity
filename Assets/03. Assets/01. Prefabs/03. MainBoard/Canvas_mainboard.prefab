@@ -199,7 +199,6 @@ MonoBehaviour:
   playerIndex: 0
   countFamily: 0
   countRoom: 0
-  userPlayerId: 0
 --- !u!1 &921328387891291369
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328387901384146
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +493,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328387913057016
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328387919099066
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +787,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328387960518757
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +934,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388054384382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,7 +1081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388099281914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388349377588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1427,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388457014242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,7 +1721,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388604582143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388683613999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2015,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388719317277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388786579013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,7 +2309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388791725653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,7 +2603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328388895035851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,7 +2691,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &921328388895035855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3064,7 +3049,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389078456926
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,7 +3196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389146595268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,7 +3343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389270982507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,7 +3490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389295892618
 GameObject:
   m_ObjectHideFlags: 0
@@ -3803,7 +3784,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389325509614
 GameObject:
   m_ObjectHideFlags: 0
@@ -3951,7 +3931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389373841547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,7 +4078,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389519830404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4247,7 +4225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389523856940
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,7 +4372,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389546133546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4543,7 +4519,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &921328389647885317
 GameObject:
   m_ObjectHideFlags: 0
@@ -4838,7 +4813,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1001 &921328387638374225
 PrefabInstance:
   m_ObjectHideFlags: 0
