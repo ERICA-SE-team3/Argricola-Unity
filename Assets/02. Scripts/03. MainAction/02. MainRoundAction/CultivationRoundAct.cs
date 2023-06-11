@@ -11,36 +11,37 @@ public class CultivationRoundAct : ButtonParents
         3-1. 할거면 씨뿌리기 행동 진행
         3-2. 안할거면 끝
     */
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-            playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
-            //행동을 했음 표시
-          GameManager.instance.IsDoingAct[28] = true;
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        if(playerIndex == userPlayerId)
+        {
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
-            GameManager.instance.actionQueue.Enqueue("farming");
-
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[28] = true;
+            GameManager.instance.actionQueue.Enqueue("cvFarming");
             //그리고/또는
-
-            GameManager.instance.actionQueue.Enqueue("sowing");
+            GameManager.instance.actionQueue.Enqueue("cvSowing");
             GameManager.instance.PopQueue();
-            
-            //장작 채집자 카드
-            if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
-            {
-                GameManager.instance.players[playerIndex].ActCard("woodPicker");
-            }
-
-
-        // }
+        }
     }
-
-    
+    public void FarmingStart()
+    {   
+        //장작 채집자 카드
+        if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
+        {
+            GameManager.instance.players[playerIndex].ActCard("woodPicker");
+        }
+        GameManager.instance.playerBoards[ playerIndex ].StartInstallFarm();
+    }
+    public void SowingStart()
+    {
+        GameManager.instance.playerBoards[ playerIndex ].StartSowing();
+    }
 }
