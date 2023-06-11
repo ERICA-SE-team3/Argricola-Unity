@@ -2887,7 +2887,6 @@ MonoBehaviour:
   currentPlayerId: 0
   currentRound: 0
   stackOfRoundCard: 
-  mainboardObj: {fileID: 0}
   roundList: {fileID: 0}
   roundcards: []
   IsDoingAct: 
@@ -2900,11 +2899,29 @@ MonoBehaviour:
   vegetableSeed: {fileID: 0}
   easternQuarry: {fileID: 0}
   cowMarket: {fileID: 0}
-  farming: {fileID: 0}
   grainUtilization: {fileID: 0}
   fencing: {fileID: 0}
   houseDevelop: {fileID: 0}
+  cultivation: {fileID: 0}
+  farmDevelop: {fileID: 0}
+  improvements: {fileID: 0}
+  urgentWishChildren: {fileID: 0}
+  clayPit: {fileID: 0}
+  copse: {fileID: 0}
+  dayLaborer: {fileID: 0}
+  dirtPit: {fileID: 0}
   expand: {fileID: 0}
+  farming: {fileID: 0}
+  fishing: {fileID: 0}
+  forest: {fileID: 0}
+  grainSeed: {fileID: 0}
+  grove: {fileID: 0}
+  lessonFood1: {fileID: 0}
+  lessonFood2: {fileID: 0}
+  meeting: {fileID: 0}
+  reedFeild: {fileID: 0}
+  resMarket: {fileID: 0}
+  trevelingTheater: {fileID: 0}
   popAction: 
   deck:
     cards: []

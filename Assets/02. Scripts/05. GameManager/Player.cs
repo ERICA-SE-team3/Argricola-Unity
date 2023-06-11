@@ -79,6 +79,7 @@ public class Player
         fence = data.fence;
         shed = data.shed;
         room = data.room;
+        remainFamilyOfCurrentPlayer = data.remainFamilyOfCurrentPlayer;
         //card
     }
 

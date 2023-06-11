@@ -22,6 +22,7 @@ public class CowMarketRoundAct : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[26] = true;
             GameManager.instance.actionQueue.Enqueue("cowMarket");
