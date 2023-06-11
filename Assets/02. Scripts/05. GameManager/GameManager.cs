@@ -126,10 +126,14 @@ public class GameManager : MonoBehaviour
         MainActTrevelingTheater tt = trevelingTheater.GetComponent<MainActTrevelingTheater>();
 
         if(actionQueue.Count == 0){
+
+            SendMessage(messageQueue.Dequeue()); 
+
             this.endTurnFlag = true;
 
             //종료 메시지
             //dequeue되는걸 받아서 메시지 전송
+
             Debug.Log( "Queue is Empty!!" );
             return;
         }
@@ -237,10 +241,11 @@ public class GameManager : MonoBehaviour
 
         else if(popAction == "farming"){
             messageQueue.Enqueue( ActionType.FRAMLAND  );
+            SendMessage( messageQueue.Dequeue() );
             fr.FarmingStart();
-            SendMessage(ActionType.FRAMLAND);
 
             messageQueue.Enqueue( ActionType.FARMLAND_END );
+            this.PopQueue();
         }
 
         else if(popAction == "cvFarming"){
@@ -249,7 +254,7 @@ public class GameManager : MonoBehaviour
 
         else if(popAction == "fencing") {
             messageQueue.Enqueue( ActionType.FENCE  );
-            SendMessage(ActionType.FENCE);
+            SendMessage( messageQueue.Dequeue() );
             fc.StartFencing();
             
             messageQueue.Enqueue( ActionType.FENCE_END  );
@@ -547,8 +552,7 @@ public class GameManager : MonoBehaviour
             {
                 if(currentPlayerId == localPlayerIndex) 
                 { 
-                    ActionType a = messageQueue.Dequeue();
-                    SendMessage(a); 
+                
                 }
 
 
