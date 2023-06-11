@@ -16,11 +16,10 @@ public class CowMarketRoundAct : ButtonParents
     //stack 정보 가져오기
     int stack;
 
-    // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
+        int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
             //행동을 했음 표시

@@ -5,10 +5,10 @@ using UnityEngine;
 public class MainActFarming : ButtonParents
 {
     public int playerIndex;
-    public int localPlayerIndex = GameManager.instance.localPlayerIndex;
 
     public override void OnClick(){
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
             ResourceManager.instance.minusResource( playerIndex, "family",1 );

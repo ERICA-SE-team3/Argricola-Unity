@@ -9,12 +9,11 @@ public class UrgentWishChildrenRoundAct : ButtonParents
     2. 닥치고 기본가족늘리기 행동 실행
   */
     public int playerIndex;
-    // player 본인의 id 값
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
+        int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
             //행동을 했음 표시
