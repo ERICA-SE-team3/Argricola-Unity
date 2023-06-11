@@ -5,12 +5,13 @@ using UnityEngine;
 public class MainActExpand : ButtonParents
 {
     public int playerIndex;
+    public int localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[6]==false)
+        localPlayerIndex = GameManager.instance.localPlayerIndex;
+        if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[6]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.FARM_EXPANSION;
@@ -26,10 +27,14 @@ public class MainActExpand : ButtonParents
     }
 
     public void StartHouseInstall() {
-        GameManager.instance.playerBoards[playerIndex].StartInstallHouse();
+        Camera mainCamera = Camera.main;
+        mainCamera.GetComponent<CameraManager>().ShowPlayer(localPlayerIndex);
+        GameManager.instance.playerBoards[localPlayerIndex].StartInstallHouse();
     }
 
     public void StartBuildShed() {
+        Camera mainCamera = Camera.main;
+        mainCamera.GetComponent<CameraManager>().ShowPlayer(localPlayerIndex);
         GameManager.instance.playerBoards[playerIndex].StartInstallShed();
     }
 }

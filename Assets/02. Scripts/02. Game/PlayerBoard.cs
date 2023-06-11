@@ -181,6 +181,11 @@ public class PlayerBoard : MonoBehaviour
         else
         {
             Debug.LogWarning("집 설치 행동을 시작할 수 없습니다.");
+
+            // 원래는 안되지만, 잘못 접속하면 막으려는 용도.
+            Button button = confirmButton.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(EndInstallHouse);
         }
     }
 

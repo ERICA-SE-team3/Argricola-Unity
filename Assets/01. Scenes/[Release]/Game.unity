@@ -25110,6 +25110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &4600259215883524376
 GameObject:
   m_ObjectHideFlags: 0
@@ -25754,6 +25755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  userPlayerId: 0
 --- !u!1 &4600259216079863372
 GameObject:
   m_ObjectHideFlags: 0
@@ -26197,6 +26199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7c81f096b814fa48c3432e03bb9459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMain: {fileID: 0}
   playerIndex: 0
 --- !u!1 &4600259216262741289
 GameObject:
@@ -27233,6 +27236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de4e0e0c2c7c467381340f7e2961777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMain: {fileID: 0}
   playerIndex: 0
 --- !u!1 &4600259216622158839
 GameObject:
