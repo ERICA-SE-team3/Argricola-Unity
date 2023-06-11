@@ -17,6 +17,10 @@ public class MainActClayPit : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+        
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[3] = true;
+
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
 
         ResourceManager.instance.addResource(playerIndex, "clay", stack * 2);

@@ -24,8 +24,11 @@ public class SheepMarketRoundAct : ButtonParents
             playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[17] = true;
             GameManager.instance.actionQueue.Enqueue("sheepMarket");
             GameManager.instance.PopQueue();
+
         // }
     }
     public void SheepMarketStart()

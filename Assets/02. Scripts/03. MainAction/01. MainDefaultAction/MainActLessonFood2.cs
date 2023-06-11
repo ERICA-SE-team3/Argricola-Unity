@@ -4,72 +4,46 @@ using UnityEngine;
 
 public class MainActLessonFood2 : ButtonParents
 {
+    public int playerIndex;
+
     public override void OnClick()
     {
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1
-        //지금은 플레이어 별로 제공할 카드를 정해놓자.
+
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[4] = true;
 
         //플레이어의 현재 카드가 0개
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Count == 0)
+        if (GameManager.instance.players[playerIndex].jobcard_owns.Count == 0)
         {
-            switch (GameManager.instance.getCurrentPlayerId())
-            {
-                //플레이어 0 - 마술사
-                case 0:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.magician);
-                    Debug.Log("player 0" + " get MAGICIAN job card!");
-                    break;
-                //플레이어 1 - 채소장수
-                case 1:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.vegetableSeller);
-                    Debug.Log("player 1" + " get VEGETABLESELLER job card!");
-                    break;
-                //플레이어 2 - 초벽질공
-                case 2:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.wallMaster);
-                    Debug.Log("player 2" + " get WALLMASTER job card!");
-                    break;
-                //플레이어 3 - 유기 농부
-                case 3:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.organicFarmer);
-                    Debug.Log("player 3" + " get ORGANICFARMER job card!");
-                    break;
-            }
+            //핸드에 있는 제일 처음 카드 Get
+            GameManager.instance.players[playerIndex].jobcard_owns.Add( GameManager.instance.players[playerIndex].jobcard_hands[0] );
+            Debug.Log("player " + playerIndex + " get job card!");
+            
         }
 
         //플레이어의 현재 카드가 1개
         else
         {
-            switch (GameManager.instance.getCurrentPlayerId())
-            {
-                //플레이어 0 - 나무꾼
-                case 0:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.woodCutter);
-                    Debug.Log("player 0" + " get WOODCUTTER job card!");
-                    break;
-                //플레이어 1 - 장작채집자
-                case 1:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.woodPicker);
-                    Debug.Log("player 1" + " get WOODPICKER job card!");
-                    break;
-                //플레이어 2 - 돌 자르는 사람
-                case 2:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.stoneCutter);
-                    Debug.Log("player 2" + " get STONECUTTER job card!");
-                    break;
-                //플레이어 3 - 돼지 사육사
-                case 3:
-                    GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].jobcard_owns.Add((int)Cards.pigBreeder);
-                    Debug.Log("player 3" + " get PIGBREEDER job card!");
-                    break;
+            
+                
+               
+            GameManager.instance.players[playerIndex].jobcard_owns.Add( GameManager.instance.players[playerIndex].jobcard_hands[1] );
+            Debug.Log("player " + playerIndex + " get job card!");
+                    
+                
+                
+                    
             }
-        }
+        
 
         //음식 감소 - 현재 최대 카드는 2개 이므로 여기서 공통으로 음식을 하나씩만 뺀다.
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
+        ResourceManager.instance.minusResource(playerIndex, "food", 1);
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        ResourceManager.instance.minusResource(playerIndex, "family", 1);
 
         //turn이 끝났다는 flag 
         GameManager.instance.endTurnFlag = true;

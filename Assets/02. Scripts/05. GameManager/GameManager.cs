@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> roundcards = new List<GameObject>();
 
+    //그 턴에 한 행동 관리 array
+    public bool[] IsDoingAct;
+
     //소통할 message 형식
     MessageData message = new MessageData();
 
@@ -85,6 +88,8 @@ public class GameManager : MonoBehaviour
             this.players.Add(temp);
         }
 
+        //=========================================
+
         //playerboard start
         for (int i = 0; i < 4; i++)
         {
@@ -119,6 +124,10 @@ public class GameManager : MonoBehaviour
         SetPlayerHand();
 
         //================================================
+
+        IsDoingAct = new bool[30];
+        this.InitializeIsDoingAct();
+
 
         // food of firstplayer to 2
         ResourceManager.instance.minusResource(0, "food", 1);
@@ -322,6 +331,9 @@ public class GameManager : MonoBehaviour
         //currentRoundUpdate
         this.UpdateCurrentRound();
 
+        //act관리array 초기화
+        this.InitializeIsDoingAct();
+
         //각 플레이어들 가족 수 원상복구
         for(int i=0; i<4; i++)
         {
@@ -419,6 +431,10 @@ public class GameManager : MonoBehaviour
         return result;
     }
 
+    void InitializeIsDoingAct() {
+        for(int i=0; i<30; i++) { this.IsDoingAct[i] = false; }
+    }
+
     void FinishAgriCola() 
     {
         //1. 점수 계산
@@ -462,19 +478,38 @@ public class GameManager : MonoBehaviour
             if ( this.players[i].cow >= 6 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
 
             //1-6. 밭
-            //...............
+            int farmCount = 0;
+            int emptyCount = 0;
+            foreach(Block block in this.playerBoards[i].blocks)
+            {
+                if( block.type == BlockType.FARM ) {
+                    farmCount = farmCount + 1;
+                }
+
+                if( block.type == BlockType.EMPTY ) {
+                    emptyCount = emptyCount + 1;
+                }
+            }
+
+            if ( farmCount ==0 && farmCount == 1 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            if ( farmCount ==2  ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            if ( farmCount ==3 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            if ( farmCount ==4 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            if ( farmCount >= 5 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
 
 
             //1-7. 우리
-            if ( this.players[i].shed ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
-            if ( this.players[i].shed ==1 ) { pointOfplayers[i] = pointOfplayers[i]+1; }
-            if ( this.players[i].shed ==2 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
-            if ( this.players[i].shed == 3 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
-            if ( this.players[i].shed >= 4 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
+            // if ( this.players[i].shed ==0 ) { pointOfplayers[i] = pointOfplayers[i] -1; }
+            // if ( this.players[i].shed ==1 ) { pointOfplayers[i] = pointOfplayers[i]+1; }
+            // if ( this.players[i].shed ==2 ) { pointOfplayers[i] = pointOfplayers[i]+2; }
+            // if ( this.players[i].shed == 3 ) { pointOfplayers[i] = pointOfplayers[i]+3; }
+            // if ( this.players[i].shed >= 4 ) { pointOfplayers[i] = pointOfplayers[i]+4; }
 
             //개인보드판 빈 칸
+            pointOfplayers[i] = pointOfplayers[i] - emptyCount;
 
-            //외양간 있는 우리 - 개당 1점
+            //외양간 있는 우리 - 개당 1점 - 일단 외양간 갯수로 퉁치자
+            pointOfplayers[i] = pointOfplayers[i] + this.players[i].shed;
 
             //방 점수 - 나무, 흙 ,돌이 0,1,2점
             switch(this.playerBoards[i].houseType)
@@ -494,6 +529,9 @@ public class GameManager : MonoBehaviour
             //1. 주요설비
             //1-1. 가구제작소
             if( this.players[i].HasMainCard( "joinery" )  ) {
+                //카드 자체 점수 2점
+                pointOfplayers[i] = pointOfplayers[i] + 2;
+
                 if(3==this.players[i].wood || this.players[i].wood==4) {
                     pointOfplayers[i] = pointOfplayers[i] + 1;
                 }
@@ -506,6 +544,9 @@ public class GameManager : MonoBehaviour
             }
             //1-2. 그릇제작소
             if( this.players[i].HasMainCard( "pottery" )  ) {
+
+                pointOfplayers[i] = pointOfplayers[i] + 2;
+
                 if(3==this.players[i].clay || this.players[i].clay==4) {
                     pointOfplayers[i] = pointOfplayers[i] + 1;
                 }
@@ -519,6 +560,9 @@ public class GameManager : MonoBehaviour
 
             //1-3. 바구니제작소
             if( this.players[i].HasMainCard( "basket" )  ) {
+
+                pointOfplayers[i] = pointOfplayers[i] + 2;
+
                 if(3==this.players[i].reed || this.players[i].reed==4) {
                     pointOfplayers[i] = pointOfplayers[i] + 1;
                 }
@@ -530,11 +574,61 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            //1-4. 우물
+            if ( this.players[i].HasMainCard( "well" ) ) {
+                pointOfplayers[i] = pointOfplayers[i] + 4;
+            }
+
+            //1-5. 돌가마
+            if (this.players[i].HasMainCard( "stoneOven" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 3;
+            }
+
+            //1-6. 흙가마
+            if (this.players[i].HasMainCard( "clayOven" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 2;
+            }
+
+            //1-7. 화로 화로 화덕 화덕
+            if (this.players[i].HasMainCard( "fireplace1" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+            if (this.players[i].HasMainCard( "fireplace2" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+            if (this.players[i].HasMainCard( "cookingHearth1" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+            if (this.players[i].HasMainCard( "cookingHearth2" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+
+
             //2.보조설비
 
             //2-1. 병
             if( this.players[i].HasSubCard( "bottle" )) {
                 pointOfplayers[i] = pointOfplayers[i] + 4;
+            }
+
+            //2-2. 버터제조기
+            if( this.players[i].HasSubCard( "butter" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+
+            //2-3. 목재소
+            if( this.players[i].HasSubCard( "woodYard" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 2;
+            }
+
+            //2-4. 통나무배
+            if( this.players[i].HasSubCard( "woodBoat" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
+            }
+
+            //2-5.양토채굴장 
+            if( this.players[i].HasSubCard( "clayMining" )) {
+                pointOfplayers[i] = pointOfplayers[i] + 1;
             }
 
             //3. 직업 카드
@@ -587,7 +681,10 @@ public class GameManager : MonoBehaviour
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
+            Debug.Log( "Queue is Empty!!" );
+            return;
         }
+
 
         popAction = actionQueue.Dequeue();
         

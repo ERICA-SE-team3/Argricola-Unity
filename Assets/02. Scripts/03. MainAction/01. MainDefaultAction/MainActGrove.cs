@@ -26,6 +26,9 @@ public class MainActGrove : ButtonParents
         // 사용자의 턴인지, 나무가 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {
+
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[1] = true;
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")];
 

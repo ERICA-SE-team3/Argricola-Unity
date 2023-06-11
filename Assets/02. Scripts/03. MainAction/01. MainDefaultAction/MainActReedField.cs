@@ -15,6 +15,10 @@ public class MainActReedField : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[14] = true;
+
             //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 

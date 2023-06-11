@@ -25,6 +25,8 @@ public class GrainUtilizationRoundAct : ButtonParents
             playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[16] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
 
@@ -39,7 +41,16 @@ public class GrainUtilizationRoundAct : ButtonParents
             //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
             // }
             GameManager.instance.PopQueue(); 
+
+            //장작 채집자 카드
+            if (GameManager.instance.players[playerIndex].HasJobCard("woodPicker"))
+            {
+                GameManager.instance.players[playerIndex].ActCard("woodPicker");
+            }
+
         // }
+
+            
     }
 
     public void StartSowing() {

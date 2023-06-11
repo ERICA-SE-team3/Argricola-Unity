@@ -403,6 +403,7 @@ public class PlayerBoard : MonoBehaviour
             }
             selectedBlocks.Clear();
             strategy = new BoardEventStrategy();
+
         }
         else
         {

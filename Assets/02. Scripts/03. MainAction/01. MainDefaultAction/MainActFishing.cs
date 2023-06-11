@@ -29,6 +29,10 @@ public class MainActFishing : ButtonParents
         // 사용자의 턴인지, 음식이 있는지 확인
         // if (playerIndex == userPlayerId) 
         // {
+
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[15] = true;
+
             //stack 정보 가져오기
             stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")];
 
