@@ -7,8 +7,8 @@ public class ScoreBoard : MonoBehaviour
 {
     public static ScoreBoard instance;
     public List<GameObject> playerScoreBoards;
-    int highstPlayerScore = 0;
-    int highstPlayerIndex = 0;
+    public int highstPlayerScore = 0;
+    public int highstPlayerIndex = 0;
     public void Awake() {
         if(instance == null)
             instance = this;
@@ -188,8 +188,8 @@ public class ScoreBoard : MonoBehaviour
             playerScoreBoard.transform.Find("scoreboardRockhouse").Find("NumberBox1").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[10].ToString();
             playerScoreBoard.transform.Find("scoreboardFamily").Find("NumberBox1").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[11].ToString();
             playerScoreBoard.transform.Find("scoreboardBegging").Find("NumberBox1").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[12].ToString();
-            playerScoreBoard.transform.Find("scoreboardCard").Find("NumberBox1").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[13].ToString();
-            playerScoreBoard.transform.Find("scoreboardAdditional").Find("NumberBox1").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[14].ToString();
+            playerScoreBoard.transform.Find("scoreboardCard").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[13].ToString();
+            playerScoreBoard.transform.Find("scoreboardAdditional").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = scoreIndex[14].ToString();
             
             playerScoreBoard.transform.Find("scoreboardField").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[0]*scoreCoefficent[0]).ToString();
             playerScoreBoard.transform.Find("scoreboardHutch").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[1]*scoreCoefficent[1]).ToString();
@@ -204,8 +204,8 @@ public class ScoreBoard : MonoBehaviour
             playerScoreBoard.transform.Find("scoreboardRockhouse").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[10]*scoreCoefficent[10]).ToString();
             playerScoreBoard.transform.Find("scoreboardFamily").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[11]*scoreCoefficent[11]).ToString();
             playerScoreBoard.transform.Find("scoreboardBegging").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[12]*scoreCoefficent[12]).ToString();
-            playerScoreBoard.transform.Find("scoreboardCard").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[13]*scoreCoefficent[13]).ToString();
-            playerScoreBoard.transform.Find("scoreboardAdditional").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[14]*scoreCoefficent[14]).ToString();
+            //playerScoreBoard.transform.Find("scoreboardCard").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[13]*scoreCoefficent[13]).ToString();
+            //playerScoreBoard.transform.Find("scoreboardAdditional").Find("NumberBox2").Find("NumberCounter").GetComponent<Text>().text = (scoreIndex[14]*scoreCoefficent[14]).ToString();
             
             for(int i = 0; i < 15; i++){
                 if(scoreIndex[i] != 0){
@@ -229,6 +229,7 @@ public class ScoreBoard : MonoBehaviour
         int cardPoint = 0;
         int additionalPoint = 0;
         List<int> result = new List<int>();
+        Debug.Log(GameManager.instance.players[playerIndex].HasMainCard("joinery"));
         if( GameManager.instance.players[playerIndex].HasMainCard("joinery") ) {
             cardPoint += 2;
             if(GameManager.instance.players[playerIndex].wood >= 7) {

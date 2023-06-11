@@ -319,7 +319,7 @@ public class Player
                 break;
 
             case "joinery":
-                if (this.subcard_owns.Contains((int)Cards.joinery))
+                if (this.maincard_owns.Contains((int)Cards.joinery))
                 {
                     return true;
                 }
