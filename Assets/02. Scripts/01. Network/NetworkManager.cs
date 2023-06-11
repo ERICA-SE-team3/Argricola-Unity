@@ -125,17 +125,23 @@ public class NetworkManager : MonoBehaviour
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
                 if(playerId == -1) 
                 { 
-                    playerId = userCount; 
+                    playerId = userCount;
+                    GameManager.instance.localPlayerIndex = playerId;
                 }
                 lobby.playerCount = userCount;
                 lobby.GetReady();
                 break;
             case "cardDeck":
                 CardDeck cardDeck = JsonUtility.FromJson<CardDeck>(message.data);
-                Debug.Log(cardDeck.cards[0].user);
+                Debug.Log(cardDeck.cards[playerId - 1].user);
+                Debug.Log(cardDeck.cards[playerId - 1].jobCards[0]);
+                Debug.Log(cardDeck.cards[playerId - 1].jobCards[1]);
+                Debug.Log(cardDeck.cards[playerId - 1].facilityCards[0]);
+                Debug.Log(cardDeck.cards[playerId - 1].facilityCards[1]);
                 break;
             default:
                 Debug.Log("default");
+                // 게임매니저에 보내야함.
                 break;
         }
         Debug.Log(message.data);
@@ -154,7 +160,6 @@ public class NetworkManager : MonoBehaviour
         pub["destination"] = readyMsgDest;
         ws.Send(serializer.Serialize(pub));
     }
-
 
     public void SendMessage()
     {
