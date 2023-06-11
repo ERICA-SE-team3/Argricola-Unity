@@ -46,7 +46,6 @@ public class LobbySceneManager : MonoBehaviour
 
         if(loadingText != null)
         {
-            Debug.Log("Loading..." + playerCount + "/" + maxPlayer);
             loadingText.text = "Loading..." + playerCount + "/" + maxPlayer;
         }
 

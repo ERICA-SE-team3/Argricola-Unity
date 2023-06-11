@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 0
+  ReadyFlag: 0
 --- !u!1 &142320677
 GameObject:
   m_ObjectHideFlags: 0
