@@ -477,8 +477,8 @@ public class GameManager : MonoBehaviour
                     ResourceManager.instance.addResource(i, "family", 1);
                     playerBoards[i].AddFamily();
                 }
-                playerBoards[i].ResetFamily();
             }
+            MainboardUIController.instance.ResetBoard();
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
             {

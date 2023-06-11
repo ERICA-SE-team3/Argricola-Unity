@@ -97,6 +97,7 @@ public class MainboardUIController : MonoBehaviour
         {
             GameObject image = button.gameObject.transform.Find("Player").gameObject;
             image.GetComponent<Image>().sprite = null;
+            image.SetActive(false);
         }
         buttons.Clear();
         for(int i = 0; i < 4; i++)
