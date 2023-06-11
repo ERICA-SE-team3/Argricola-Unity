@@ -11,29 +11,29 @@ public class FarmDevelopRoundAct : ButtonParents
     4. 울타리치기
   */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
             //행동을 했음 표시
-          GameManager.instance.IsDoingAct[29] = true;
+            GameManager.instance.IsDoingAct[29] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
-            GameManager.instance.actionQueue.Enqueue("houseDevelop");
-
-            //그리고
-            
-            GameManager.instance.actionQueue.Enqueue("fencing");
+            GameManager.instance.actionQueue.Enqueue("fdHouseDevelop");
+            //그리고   
+            GameManager.instance.actionQueue.Enqueue("fdFencing");
             GameManager.instance.PopQueue(); 
-
-
-        // }
-
-        
+        }
+    }
+    public void StartHouseDeveloping() {
+      GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
+    }
+    public void StartFencing() {
+      GameManager.instance.playerBoards[playerIndex].StartInstallFence();
     }
 }

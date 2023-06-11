@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public bool endTurnFlag = false;
 
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
-    public GameObject grainUtilization, fencing, houseDevelop;
+    public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
     public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
 
     
@@ -87,6 +87,14 @@ public class GameManager : MonoBehaviour
         GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
         //울타리치기
         FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+        // 밭 농사
+        CultivationRoundAct cv = cultivation.GetComponent<CultivationRoundAct>();
+        // 농장 개조
+        FarmDevelopRoundAct fd = farmDevelop.GetComponent<FarmDevelopRoundAct>();
+        // 주요 설비
+        ImprovementsRoundAct im = improvements.GetComponent<ImprovementsRoundAct>();
+        // 주요 설비
+        UrgentWishChildrenRoundAct uwc = urgentWishChildren.GetComponent<UrgentWishChildrenRoundAct>();
 
 
         //집짓기
@@ -130,10 +138,13 @@ public class GameManager : MonoBehaviour
 
         popAction = actionQueue.Dequeue();
         
-        if(popAction == "sowing"){
+        if(popAction == "guSowing"){
             gu.StartSowing();
         }
-        else if(popAction == "baking"){
+        if(popAction == "cvSowing"){
+            cv.SowingStart();
+        }
+        else if(popAction == "guBaking"){
             gu.StartBaking();
         }
         else if(popAction == "sheepMarket"){
@@ -144,18 +155,30 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "improvements"){
             // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            im.ImprovementsStart();
+        }
+        else if(popAction == "hdImprovements"){
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            hd.ImprovementsStart();
         }
         else if(popAction == "subCard"){
             // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+            wc.StartSubCard();
         }
         else if(popAction == "wishChildren"){
             wc.WishChildrenStart();
         }
+        else if(popAction == "urgentWishChildren"){
+            uwc.UrgentWishChildrenStart();
+        }
         else if(popAction == "westernQuarry"){
             wq.WesternQuarryStart();
         }
-        else if(popAction == "houseDevelop"){
+        else if(popAction == "hdHouseDevelop"){
             hd.StartHouseDeveloping();
+        }
+        else if(popAction == "fdHouseDevelop"){
+            fd.StartHouseDeveloping();
         }
         else if(popAction == "vegetableSeed"){
             vs.VegetableSeedStart();
@@ -178,8 +201,14 @@ public class GameManager : MonoBehaviour
         else if(popAction == "farming"){
             fr.FarmingStart();
         }
+        else if(popAction == "cvFarming"){
+            cv.FarmingStart();
+        }
         else if(popAction == "fencing") {
             fc.StartFencing();
+        }
+        else if(popAction == "fdFencing") {
+            fd.StartFencing();
         }
         else if(popAction == "clayPit") {
             cp.ClayPitStart();
