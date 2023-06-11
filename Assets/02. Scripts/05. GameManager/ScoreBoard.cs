@@ -191,7 +191,7 @@ public class ScoreBoard : MonoBehaviour
             for(int i = 0; i < 15; i++){
                 sum += scoreIndex[i]*scoreCoefficent[i];
             }
-            playerScoreBoard.transform.Find("sum").Find("NumberBox").Find("NumberCounter").GetComponent<Text>().text = sum.ToString();
+            playerScoreBoard.transform.Find("sum").Find("NumberCounter").GetComponent<Text>().text = sum.ToString();
         }
     }
 }
