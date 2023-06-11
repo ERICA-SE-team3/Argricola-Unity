@@ -83,6 +83,7 @@ public class MainboardUIController : MonoBehaviour
         //     return;
         // }
         ButtonParents button = GetButtonObject(type).GetComponent<ButtonParents>();
+        GameManager.instance.IsDoingAct[ActionToActConverter.ActionTypeToActIndex(type)] = true;
         if(buttons.Contains(button)) { return; }
         buttons.Add(button);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;
