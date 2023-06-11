@@ -24,12 +24,13 @@ public class GameManager : MonoBehaviour
     //현재 차례인 player index
     public int currentPlayerId;
 
+    //현재 라운드 - 수확라운드인지 체크하기 위함
+    public int currentRound;
+
 
     //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
 
-    //현재 라운드 - 수확라운드인지 체크하기 위함
-    public int currentRound;
 
     public GameObject mainboardObj;
     
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
     public string popAction;
 
     public CardDeck deck;
+    public bool isGameScene = false;
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -87,19 +89,28 @@ public class GameManager : MonoBehaviour
             temp.id = i;
             this.players.Add(temp);
         }
-
         //=========================================
-
-        //playerboard start
-        for (int i = 0; i < 4; i++)
-        {
-            PlayerBoard tmpPlayerBoard = playerBoardsObj.transform.GetChild(i).GetComponent<PlayerBoard>();
-            tmpPlayerBoard.SetPlayer(this.players[i]);
-            this.playerBoards.Add(tmpPlayerBoard);
-        }
 
         //give first to player1 
         this.players[0].isFirstPlayer = true;
+
+        //==============================================
+        
+        SetPlayerHand();
+
+        //================================================
+
+        IsDoingAct = new bool[30];
+        this.InitializeIsDoingAct();
+
+        // food of firstplayer to 2
+        ResourceManager.instance.minusResource(0, "food", 1);
+
+        //현재 라운드 초기화
+        this.currentRound = 0;
+
+        //오류 수정
+        this.endTurnFlag = false;
     }
 
     public void SetPlayerHand()
@@ -113,122 +124,83 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Start()
+
+    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        Debug.Log("Let's Ready the Game!!!");
-
-        Init();
-        
-        //==============================================
-        
-        SetPlayerHand();
-
-        //================================================
-
-        IsDoingAct = new bool[30];
-        this.InitializeIsDoingAct();
+        if(isGameScene) { Round(); }
+    }
 
 
-        // food of firstplayer to 2
-        ResourceManager.instance.minusResource(0, "food", 1);
-
-
-
-        //라운드 카드 가져오기
-        for (int i=0; i<14; i++)
+    public void Round()
+    {
+        if ( this.RoundFlag )
         {
-            //라운드 카드 받아오기
-            GameObject tmp = this.roundList.transform.GetChild(i).gameObject;
-            this.roundcards.Add(tmp);
-            this.roundcards[i].SetActive(false);
+            //1-2. 턴을 진행 중이라면
+            if ( !this.endTurnFlag )
+            {
+                Debug.Log( "현재 라운드는 " + this.currentRound );
+                Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
+                Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+                "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+                "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+                "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+                "\n" + this.players[3].remainFamilyOfCurrentPlayer );
+                
+            }
+
+            else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
+            {
+                //1-4. 다음 턴을 부여받을 플레이어 찾기
+                //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
+                if ( this.findNextPlayer() )
+                {
+                    //... 그대로 진행
+                    Debug.Log("Move to Next Turn");
+                    this.endTurnFlag = false;
+                    SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
+                }
+
+                //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
+                else
+                {
+                    Debug.Log("Round is Over");
+                    this.endTurnFlag = false;
+                    this.RoundFlag = false;
+                }
+            }
         }
 
 
 
-        //현재 라운드 초기화
-        this.currentRound = 0;
-
-        //첫 라운드 준비
-        //stack 증가
-        //라운드 카드 활성화
-        this.preRound();
-
-        //오류 수정
-        this.endTurnFlag = false;
-    }
-
-
-    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
-    {
-        if ( this.RoundFlag )
+        //2. 라운드 전체가 끝남.
+        else
+        {
+            //2-1. 수확라운드인지 체크 후 수확 실행
+            if (this.checkHarvest())
             {
-                //1-2. 턴을 진행 중이라면
-                if ( !this.endTurnFlag )
-                {
-                    Debug.Log( "현재 라운드는 " + this.currentRound );
-                    Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
-                    Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
-                    "\n" + this.players[0].remainFamilyOfCurrentPlayer +
-                    "\n" + this.players[1].remainFamilyOfCurrentPlayer +
-                    "\n" + this.players[2].remainFamilyOfCurrentPlayer +
-                    "\n" + this.players[3].remainFamilyOfCurrentPlayer );
-                    
-                }
-
-                else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
-                {
-                    //1-4. 다음 턴을 부여받을 플레이어 찾기
-                    //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
-                    if ( this.findNextPlayer() )
-                    {
-                        //... 그대로 진행
-                        Debug.Log("Move to Next Turn");
-                        this.endTurnFlag = false;
-                        SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
-                    }
-
-                    //1-4-2. 턴을 부여받을 플레이어가 없음 -> Round 종료 시퀀스로 넘어감
-                    else
-                    {
-                        Debug.Log("Round is Over");
-                        this.endTurnFlag = false;
-                        this.RoundFlag = false;
-                    }
-                }
+                Debug.Log("수확 라운드 진행중...");
+                //수확라운드 진행
             }
 
-
-
-            //2. 라운드 전체가 끝남.
+            //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
+            if ( !this.checkFinalRound() )
+            {
+                //2-2-1. 다음 라운드 준비 및 진행
+                this.preRound();
+            }
             else
             {
-                //2-1. 수확라운드인지 체크 후 수확 실행
-                if (this.checkHarvest())
-                {
-                    Debug.Log("수확 라운드 진행중...");
-                    //수확라운드 진행
-                }
-
-                //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )
-                if ( !this.checkFinalRound() )
-                {
-                    //2-2-1. 다음 라운드 준비 및 진행
-                    this.preRound();
-                }
-                else
-                {
-                    //2-2-2. 게임 종료
-                    Debug.Log("Game is Over!");
-                    FinishAgriCola();
+                //2-2-2. 게임 종료
+                Debug.Log("Game is Over!");
+                FinishAgriCola();
 
 
-                } 
-            }
+            } 
+        }
 
-        
+    
 
     }
-
     //--------------------------------------------------------------------------------------------
 
     // //Update to NetworkManager
@@ -319,7 +291,7 @@ public class GameManager : MonoBehaviour
     }
 
     //라운드 준비
-    void preRound()
+    public void preRound()
     {
         RoundDescriptor.instance.RoundDescriptiorUpdate("준비단계");
         //행동 stack 증가

@@ -305,7 +305,6 @@ public class TestPlayerBoard
             gm.roundList = Object.Instantiate(Resources.Load<GameObject>("01. Prefabs/RoundList"));
 
             obj.GetComponent<ResourceManager>().Awake();
-            obj.GetComponent<GameManager>().Start();
 
             return obj;    
         }
@@ -474,7 +473,6 @@ public class TestPlayerBoard
             gm.roundList = Object.Instantiate(Resources.Load<GameObject>("01. Prefabs/RoundList"));
 
             obj.GetComponent<ResourceManager>().Awake();
-            obj.GetComponent<GameManager>().Start();
 
             rm.addResource(gm.players[0].id, "wood", 1000);
             rm.addResource(gm.players[0].id, "stone", 1000);

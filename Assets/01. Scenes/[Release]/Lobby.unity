@@ -2760,6 +2760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354253248}
   - component: {fileID: 1354253247}
+  - component: {fileID: 1354253249}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2779,14 +2780,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e8214b4a0feab4cb57cdab9f7df6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBoards: []
-  objPlayerboards: {fileID: 0}
   localPlayerIndex: 0
-  stackOfRoundCard: 
+  playerBoardsObj: {fileID: 0}
+  playerBoards: []
   currentPlayerId: 0
   currentRound: 0
+  stackOfRoundCard: 
+  mainboardObj: {fileID: 0}
   roundList: {fileID: 0}
   roundcards: []
+  IsDoingAct: 
   RoundFlag: 1
   endTurnFlag: 0
   sheepMarket: {fileID: 0}
@@ -2802,6 +2805,9 @@ MonoBehaviour:
   houseDevelop: {fileID: 0}
   expand: {fileID: 0}
   popAction: 
+  deck:
+    cards: []
+  isGameScene: 0
 --- !u!4 &1354253248
 Transform:
   m_ObjectHideFlags: 0
@@ -2817,6 +2823,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354253249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354253246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebaa40b70ab23e479dab3a8c6ae6da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1380721297
 GameObject:
   m_ObjectHideFlags: 0
