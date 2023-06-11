@@ -150,28 +150,28 @@ public class ResourceManager : MonoBehaviour
 
     public void PrintResourceOfPlayer()
     {
-        for(int i=0; i<4; i++)
-        {
-            Debug.Log("\nPlayer number: " + i +
-                "\npig: " + GameManager.instance.players[i].pig +
-                "\ncow: " + GameManager.instance.players[i].cow +
-                "\nsheep: " + GameManager.instance.players[i].sheep +
-                "\nwheat: " + GameManager.instance.players[i].wheat +
-                "\nvegetable: " + GameManager.instance.players[i].vegetable +
-                "\nwood: " + GameManager.instance.players[i].wood +
-                "\nrock: " + GameManager.instance.players[i].rock +
-                "\nreed: " + GameManager.instance.players[i].reed +
-                "\nclay: " + GameManager.instance.players[i].clay +
-                "\nfood: " + GameManager.instance.players[i].food +
-                "\nbegging: " + GameManager.instance.players[i].begging +
-                "\nfamily: " + GameManager.instance.players[i].family +
-                "\nfence: " + GameManager.instance.players[i].fence +
-                "\nshed: " + GameManager.instance.players[i].shed +
-               "\nroom: " + GameManager.instance.players[i].room +
-               "\njobcard_hand: " + GameManager.instance.players[i].jobcard_hands[0] + " , " + GameManager.instance.players[i].jobcard_hands[1] );
+    //     for(int i=0; i<4; i++)
+    //     {
+    //         Debug.Log("\nPlayer number: " + i +
+    //             "\npig: " + GameManager.instance.players[i].pig +
+    //             "\ncow: " + GameManager.instance.players[i].cow +
+    //             "\nsheep: " + GameManager.instance.players[i].sheep +
+    //             "\nwheat: " + GameManager.instance.players[i].wheat +
+    //             "\nvegetable: " + GameManager.instance.players[i].vegetable +
+    //             "\nwood: " + GameManager.instance.players[i].wood +
+    //             "\nrock: " + GameManager.instance.players[i].rock +
+    //             "\nreed: " + GameManager.instance.players[i].reed +
+    //             "\nclay: " + GameManager.instance.players[i].clay +
+    //             "\nfood: " + GameManager.instance.players[i].food +
+    //             "\nbegging: " + GameManager.instance.players[i].begging +
+    //             "\nfamily: " + GameManager.instance.players[i].family +
+    //             "\nfence: " + GameManager.instance.players[i].fence +
+    //             "\nshed: " + GameManager.instance.players[i].shed +
+    //            "\nroom: " + GameManager.instance.players[i].room +
+    //            "\njobcard_hand: " + GameManager.instance.players[i].jobcard_hands[0] + " , " + GameManager.instance.players[i].jobcard_hands[1] );
 
             
-        }
+    //     }
     }
 
     //자원들 get 함수
