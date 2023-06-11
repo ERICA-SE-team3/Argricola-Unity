@@ -350,10 +350,11 @@ public class PlayerBoard : MonoBehaviour
         {
             if(block.type == BlockType.HOUSE) {
                 block.ChangeHouse(); 
-                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 5);
-                ResourceManager.instance.minusResource(player.id, "reed", 2);
+                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 1);
             }
         }
+        ResourceManager.instance.minusResource(player.id, "reed", 1);
+        
         //돌 자르는 사람
         if( houseType == HouseType.STONE ) {
                     if( player.HasJobCard( "stoneCutter" ) ) {
