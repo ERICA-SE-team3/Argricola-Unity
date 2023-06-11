@@ -61,6 +61,27 @@ public class Player
         return msgdata;
     }
 
+    public void SetPlayerMessageData(PlayerMessageData data)
+    {
+        isFirstPlayer = data.isFirstPlayer;
+        pig = data.pig;
+        cow = data.cow;
+        sheep = data.sheep;
+        wheat = data.wheat;
+        vegetable = data.vegetable;
+        wood = data.wood;
+        rock = data.rock;
+        reed = data.reed;
+        clay = data.clay;
+        food = data.food;
+        begging = data.begging;
+        family = data.family;
+        fence = data.fence;
+        shed = data.shed;
+        room = data.room;
+        //card
+    }
+
     //---------------------------------------------------------------------------
 
     //private void Start()
