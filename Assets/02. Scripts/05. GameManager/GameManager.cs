@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //GameManager
     public static GameManager instance;
-
-    //player들을 담을 ArrayList, players
-    public List<Player> players = new List<Player>();
-
-    //player의 parent
-    public GameObject objPlayerboards;
-
-    //로컬 플레이어 객체 인덱스, 로비에서 번호 부여받을 예정
-
     public int localPlayerIndex = 0;
 
-    //player의 board
+    /// <summary>
+    /// Player들을 담을 ArrayList
+    /// </summary>
+    public List<Player> players = new List<Player>();
+
+
+    public GameObject playerBoardsObj;
+    /// <summary>
+    /// PlayerBoard 들을 담을 ArrayList
+    /// </summary>
     public List<PlayerBoard> playerBoards = new List<PlayerBoard>();
 
-    //stack이 있는 Roundcard
-    public int[] stackOfRoundCard;
+
 
     //현재 차례인 player index
     public int currentPlayerId;
 
+
+    //stack이 있는 Roundcard
+    public int[] stackOfRoundCard;
+
     //현재 라운드 - 수확라운드인지 체크하기 위함
     public int currentRound;
 
+    public GameObject mainboardObj;
+    
     //roundcard list
     public GameObject roundList;
 
@@ -36,23 +40,6 @@ public class GameManager : MonoBehaviour
 
     //소통할 message 형식
     MessageData message = new MessageData();
-    //스택이 쌓이는 라운드카드들
-    public enum stackBehavior
-    {
-        copse, // 덤불
-        grove, //수풀
-        clayPit, //점토채굴장
-        travelingTheater, //유랑극단
-        forest, //숲
-        dirtPit, //흙 채굴장
-        reedField, //갈대밭
-        fishing, //낚시
-        sheepMarket, //양 시장
-        westernQuarry, //서부 채굴장
-        pigMarket, //돼지 시장
-        easternQuarry, //동부 채굴장
-        cattleMarket //소 시장
-    }
 
     //게임 진행을 위한 flag들
     //1. 라운드 진행을 나타내는 flag
@@ -70,164 +57,66 @@ public class GameManager : MonoBehaviour
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
-    public void PopQueue() {
-        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
-        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
-        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
-        VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
-        EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
-        CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
+    public CardDeck deck;
 
-        //집 업그레이드
-        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+    // -----------------------------------------------------------------------------------------------------------------
 
-        //집짓기
-        MainActExpand ex = expand.GetComponent<MainActExpand>();
-
-        //농지
-        MainActFarming fr = farming.GetComponent<MainActFarming>();
-
-        //빵굽기, 씨뿌리기
-        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
-
-        //울타리치기
-        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
-
-        if(actionQueue.Count == 0){
-            this.endTurnFlag = true;
+    private void Awake() {
+        if (instance == null)
+        {
+            instance = this;
         }
-
-        popAction = actionQueue.Dequeue();
-        
-        if(popAction == "sowing"){
-            gu.StartSowing();
-        }
-        else if(popAction == "baking"){
-            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
-            gu.StartBaking();
-        }
-        else if(popAction == "sheepMarket"){
-            sm.SheepMarketStart();
-        }
-        else if(popAction == "pigMarket"){
-            pm.PigMarketStart();
-        }
-        else if(popAction == "improvements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(popAction == "subCard"){
-            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-        }
-        else if(popAction == "wishChildren"){
-            wc.WishChildrenStart();
-        }
-        else if(popAction == "westernQuarry"){
-            wq.WesternQuarryStart();
-        }
-        else if(popAction == "houseDevelop"){
-            hd.StartHouseDeveloping();
-        }
-        else if(popAction == "vegetableSeed"){
-            vs.VegetableSeedStart();
-        }
-        else if(popAction == "easternQuarry"){
-            eq.EasternQuarryStart();
-        }
-        else if(popAction == "cowMarket"){
-            cm.CowMarketStart();
-        }
-        else if(popAction == "cultivation"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "houseBuild"){
-            ex.StartHouseInstall();
-        }
-        else if(popAction == "shedBuild"){
-            ex.StartBuildShed();
-        }
-        else if(popAction == "farming"){
-            fr.FarmingStart();
-        }
-        else if(popAction == "fencing") {
-            fc.StartFencing();
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
 
-
-    public void Start()
+    public void Init()
     {
-        //GameManager Singleton
-        GameManager.instance = this;
-
-        Debug.Log("Let's Ready the Game!!!");  
-
         //라운드카드들의 스택 초기화
         this.stackOfRoundCard = new int[13];
 
-        Debug.Log( "This is stackOfRoundCard\n" + stackOfRoundCard[0] + "\n"
-        + stackOfRoundCard[1] + "\n" + stackOfRoundCard[2] + "\n" + stackOfRoundCard[3] + "\n" );
-
-
         //player start
-        for (int i=0; i<4; i++)
+        for (int i=1; i<5; i++) 
         {
             Player temp = new Player();
             temp.id = i;
             this.players.Add(temp);
         }
 
-
-        //=========================================
-
         //playerboard start
         for (int i = 0; i < 4; i++)
         {
-           GameObject temp1 = objPlayerboards.transform.GetChild(i).gameObject; // canvas_player
-           GameObject temp2 = temp1.transform.GetChild(0).gameObject; // Backgroundof
-           GameObject tempB = temp2.transform.GetChild(0).gameObject; // playerboard
-           PlayerBoard tempPB = tempB.GetComponent<PlayerBoard>(); 
-           this.playerBoards.Add(tempPB);
+            PlayerBoard tmpPlayerBoard = playerBoardsObj.transform.GetChild(i).GetComponent<PlayerBoard>();
+            tmpPlayerBoard.SetPlayer(this.players[i]);
+            this.playerBoards.Add(tmpPlayerBoard);
         }
-
-        //Setplayer to playerboard
-        for(int i=0; i<4; i++) {
-            this.playerBoards[i].SetPlayer( this.players[i] );
-        }
-
-        //=======================================
-        
 
         //give first to player1 
-        this.Init();
+        this.players[0].isFirstPlayer = true;
+    }
 
+    public void SetPlayerHand()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            this.players[i].jobcard_hands.Add(deck.cards[i].jobCards[0]);
+            this.players[i].jobcard_hands.Add(deck.cards[i].jobCards[1]);
+            this.players[i].subcard_hands.Add(deck.cards[i].facilityCards[0]);
+            this.players[i].subcard_hands.Add(deck.cards[i].facilityCards[1]);
+        }
+    }
+
+    public void Start()
+    {
+        Debug.Log("Let's Ready the Game!!!");
+
+        Init();
+        
         //==============================================
-
-        //플레이어들에게 직업 카드 분배
-        this.players[0].jobcard_hands.Add( (int)Cards.magician ); //마술사
-        this.players[0].jobcard_hands.Add((int)Cards.woodCutter); //나무꾼
-
-        this.players[1].jobcard_hands.Add((int)Cards.vegetableSeller); //채소 장수
-        this.players[1].jobcard_hands.Add((int)Cards.woodPicker); //장작 채집자
-
-        this.players[2].jobcard_hands.Add((int)Cards.wallMaster); //초벽질공
-        this.players[2].jobcard_hands.Add((int)Cards.stoneCutter); //돌 자르는 사람
-
-        this.players[3].jobcard_hands.Add((int)Cards.organicFarmer); // 유기 농부
-        this.players[3].jobcard_hands.Add((int)Cards.pigBreeder); // 돼지 사육사
-
-        //플레이어들에게 보조설비 카드 분배
-        this.players[0].subcard_hands.Add( (int)Cards.stoneClamp ); //돌집게
-        this.players[0].subcard_hands.Add( (int)Cards.clayMining ); //양토채굴장
-
-        this.players[1].subcard_hands.Add( (int)Cards.woodBoat ); //통나무배
-        this.players[1].subcard_hands.Add( (int)Cards.rake ); //쇠스랑
-
-        this.players[2].subcard_hands.Add( (int)Cards.watterBottle ); //물통
-        this.players[2].subcard_hands.Add( (int)Cards.woodYard ); //목재소
-
-        this.players[3].subcard_hands.Add( (int)Cards.butter ); //버터제조기
-        this.players[3].subcard_hands.Add( (int)Cards.bottle ); //병
+        
+        SetPlayerHand();
 
         //================================================
 
@@ -350,13 +239,6 @@ public class GameManager : MonoBehaviour
         return this.currentPlayerId;
     }
 
-
-    //Initialize
-    //for game
-    void Init()
-    {
-        this.players[0].isFirstPlayer = true;
-    }
 
     void incrementStack()
     {
@@ -481,55 +363,55 @@ public class GameManager : MonoBehaviour
         switch (action)
         {
             case "copse":
-                result =  (int)stackBehavior.copse;
+                result =  (int)StackBehavior.copse;
                 break;
 
             case "grove":
-                result =  (int)stackBehavior.grove;
+                result =  (int)StackBehavior.grove;
                 break;
 
             case "travelingTheater":
-                result =  (int)stackBehavior.travelingTheater;
+                result =  (int)StackBehavior.travelingTheater;
                 break;
 
             case "clayPit":
-                result =  (int)stackBehavior.clayPit;
+                result =  (int)StackBehavior.clayPit;
                 break;
 
             case "forest":
-                result =  (int)stackBehavior.forest;
+                result =  (int)StackBehavior.forest;
                 break;
 
             case "dirtPit":
-                result =  (int)stackBehavior.dirtPit;
+                result =  (int)StackBehavior.dirtPit;
                 break;
 
             case "reedField":
-                result =  (int)stackBehavior.reedField;
+                result =  (int)StackBehavior.reedField;
                 break;
 
             case "fishing":
-                result =  (int)stackBehavior.fishing;
+                result =  (int)StackBehavior.fishing;
                 break;
 
             case "sheepMarket":
-                result =  (int)stackBehavior.sheepMarket;
+                result =  (int)StackBehavior.sheepMarket;
                 break;
 
             case "westernQuarry":
-                result =  (int)stackBehavior.westernQuarry;
+                result =  (int)StackBehavior.westernQuarry;
                 break;
 
             case "pigMarket":
-                result =  (int)stackBehavior.pigMarket;
+                result =  (int)StackBehavior.pigMarket;
                 break;
 
             case "easternQuarry":
-                result =  (int)stackBehavior.easternQuarry;
+                result =  (int)StackBehavior.easternQuarry;
                 break;
 
             case "cattleMarket":
-                result =  (int)stackBehavior.cattleMarket;
+                result =  (int)StackBehavior.cattleMarket;
                 break;
 
         }
@@ -679,4 +561,105 @@ public class GameManager : MonoBehaviour
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
     }
 
+        public void PopQueue() {
+        SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
+        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
+        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+        WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
+        VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
+        EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
+        CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
+
+        //집 업그레이드
+        HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
+
+        //집짓기
+        MainActExpand ex = expand.GetComponent<MainActExpand>();
+
+        //농지
+        MainActFarming fr = farming.GetComponent<MainActFarming>();
+
+        //빵굽기, 씨뿌리기
+        GrainUtilizationRoundAct gu = grainUtilization.GetComponent<GrainUtilizationRoundAct>();
+
+        //울타리치기
+        FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+
+        if(actionQueue.Count == 0){
+            this.endTurnFlag = true;
+        }
+
+        popAction = actionQueue.Dequeue();
+        
+        if(popAction == "sowing"){
+            gu.StartSowing();
+        }
+        else if(popAction == "baking"){
+            // 빵 굽기 행동 시작 (ex. actionBaking() 호출하여 빵굽기 행동이 종료될 시점에 다시 PopQueue()호출 )
+            gu.StartBaking();
+        }
+        else if(popAction == "sheepMarket"){
+            sm.SheepMarketStart();
+        }
+        else if(popAction == "pigMarket"){
+            pm.PigMarketStart();
+        }
+        else if(popAction == "improvements"){
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        }
+        else if(popAction == "subCard"){
+            // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        }
+        else if(popAction == "wishChildren"){
+            wc.WishChildrenStart();
+        }
+        else if(popAction == "westernQuarry"){
+            wq.WesternQuarryStart();
+        }
+        else if(popAction == "houseDevelop"){
+            hd.StartHouseDeveloping();
+        }
+        else if(popAction == "vegetableSeed"){
+            vs.VegetableSeedStart();
+        }
+        else if(popAction == "easternQuarry"){
+            eq.EasternQuarryStart();
+        }
+        else if(popAction == "cowMarket"){
+            cm.CowMarketStart();
+        }
+        else if(popAction == "cultivation"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "houseBuild"){
+            ex.StartHouseInstall();
+        }
+        else if(popAction == "shedBuild"){
+            ex.StartBuildShed();
+        }
+        else if(popAction == "farming"){
+            fr.FarmingStart();
+        }
+        else if(popAction == "fencing") {
+            fc.StartFencing();
+        }
+    }
+}
+
+//스택이 쌓이는 라운드카드들
+public enum StackBehavior
+{
+    copse, // 덤불
+    grove, //수풀
+    clayPit, //점토채굴장
+    travelingTheater, //유랑극단
+    forest, //숲
+    dirtPit, //흙 채굴장
+    reedField, //갈대밭
+    fishing, //낚시
+    sheepMarket, //양 시장
+    westernQuarry, //서부 채굴장
+    pigMarket, //돼지 시장
+    easternQuarry, //동부 채굴장
+    cattleMarket //소 시장
 }

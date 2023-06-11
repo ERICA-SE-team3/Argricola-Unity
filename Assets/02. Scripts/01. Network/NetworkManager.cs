@@ -142,11 +142,7 @@ public class NetworkManager : MonoBehaviour
                 break;
             case "cardDeck":
                 CardDeck cardDeck = JsonUtility.FromJson<CardDeck>(message.data);
-                Debug.Log(cardDeck.cards[playerId - 1].user);
-                Debug.Log(cardDeck.cards[playerId - 1].jobCards[0]);
-                Debug.Log(cardDeck.cards[playerId - 1].jobCards[1]);
-                Debug.Log(cardDeck.cards[playerId - 1].facilityCards[0]);
-                Debug.Log(cardDeck.cards[playerId - 1].facilityCards[1]);
+                GameManager.instance.deck = cardDeck;
                 break;
             default:
                 Debug.Log("default");

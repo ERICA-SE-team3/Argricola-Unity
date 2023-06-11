@@ -2779,9 +2779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e8214b4a0feab4cb57cdab9f7df6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBoards: []
   objPlayerboards: {fileID: 0}
   localPlayerIndex: 0
-  playerBoards: []
   stackOfRoundCard: 
   currentPlayerId: 0
   currentRound: 0
