@@ -52,6 +52,15 @@ public class PlayerBoard : MonoBehaviour
         return boardMessageData;
     }
 
+    public void SetBoardMessageData(PlayerBoardMessageData data)
+    {
+        for(int i = 0; i < data.blockDatas.Length; i++)
+        {
+            BlockData blockData = data.blockDatas[i];
+            blocks[blockData.row, blockData.col].SetBlockMessageData(blockData);
+        }
+    }
+
     // -------------------------------------------------------------------------
 
     public void Start() {

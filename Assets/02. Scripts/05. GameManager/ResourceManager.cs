@@ -65,6 +65,10 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { familyIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
+            case "baby":
+                for (int i = 0; i < count; i++) { babyIncrement( playerId ); PrintResourceOfPlayer(); }
+                break;
+
             case "fence":
                 for (int i = 0; i < count; i++) { fenceIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
@@ -133,6 +137,10 @@ public class ResourceManager : MonoBehaviour
                 for (int i = 0; i < count; i++) { familyDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
+            case "baby":
+                for (int i = 0; i < count; i++) { babyDecrement( playerId ); PrintResourceOfPlayer(); }
+                break;
+
             case "fence":
                 for (int i = 0; i < count; i++) { fenceDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
@@ -150,28 +158,28 @@ public class ResourceManager : MonoBehaviour
 
     public void PrintResourceOfPlayer()
     {
-        for(int i=0; i<4; i++)
-        {
-            Debug.Log("\nPlayer number: " + i +
-                "\npig: " + GameManager.instance.players[i].pig +
-                "\ncow: " + GameManager.instance.players[i].cow +
-                "\nsheep: " + GameManager.instance.players[i].sheep +
-                "\nwheat: " + GameManager.instance.players[i].wheat +
-                "\nvegetable: " + GameManager.instance.players[i].vegetable +
-                "\nwood: " + GameManager.instance.players[i].wood +
-                "\nrock: " + GameManager.instance.players[i].rock +
-                "\nreed: " + GameManager.instance.players[i].reed +
-                "\nclay: " + GameManager.instance.players[i].clay +
-                "\nfood: " + GameManager.instance.players[i].food +
-                "\nbegging: " + GameManager.instance.players[i].begging +
-                "\nfamily: " + GameManager.instance.players[i].family +
-                "\nfence: " + GameManager.instance.players[i].fence +
-                "\nshed: " + GameManager.instance.players[i].shed +
-               "\nroom: " + GameManager.instance.players[i].room +
-               "\njobcard_hand: " + GameManager.instance.players[i].jobcard_hands[0] + " , " + GameManager.instance.players[i].jobcard_hands[1] );
+    //     for(int i=0; i<4; i++)
+    //     {
+    //         Debug.Log("\nPlayer number: " + i +
+    //             "\npig: " + GameManager.instance.players[i].pig +
+    //             "\ncow: " + GameManager.instance.players[i].cow +
+    //             "\nsheep: " + GameManager.instance.players[i].sheep +
+    //             "\nwheat: " + GameManager.instance.players[i].wheat +
+    //             "\nvegetable: " + GameManager.instance.players[i].vegetable +
+    //             "\nwood: " + GameManager.instance.players[i].wood +
+    //             "\nrock: " + GameManager.instance.players[i].rock +
+    //             "\nreed: " + GameManager.instance.players[i].reed +
+    //             "\nclay: " + GameManager.instance.players[i].clay +
+    //             "\nfood: " + GameManager.instance.players[i].food +
+    //             "\nbegging: " + GameManager.instance.players[i].begging +
+    //             "\nfamily: " + GameManager.instance.players[i].family +
+    //             "\nfence: " + GameManager.instance.players[i].fence +
+    //             "\nshed: " + GameManager.instance.players[i].shed +
+    //            "\nroom: " + GameManager.instance.players[i].room +
+    //            "\njobcard_hand: " + GameManager.instance.players[i].jobcard_hands[0] + " , " + GameManager.instance.players[i].jobcard_hands[1] );
 
             
-        }
+    //     }
     }
 
     //자원들 get 함수
@@ -226,6 +234,10 @@ public class ResourceManager : MonoBehaviour
 
             case "family":
                 result = GameManager.instance.players[playerId].family;
+                break;
+
+            case "baby":
+                result = GameManager.instance.players[playerId].baby;
                 break;
 
             case "fence":
@@ -307,6 +319,11 @@ public class ResourceManager : MonoBehaviour
         GameManager.instance.players[playerId].family = GameManager.instance.players[playerId].family + 1;
     }
 
+    void babyIncrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby + 1;
+    }
+
     void fenceIncrement( int playerId )
     {
         GameManager.instance.players[playerId].fence = GameManager.instance.players[playerId].fence + 1;
@@ -382,6 +399,11 @@ public class ResourceManager : MonoBehaviour
     void familyDecrement( int playerId )
     {
         GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer = GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer - 1;
+    }
+
+    void babyDecrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby - 1;
     }
 
     void fenceDecrement( int playerId )
