@@ -43,6 +43,14 @@ public class NetworkManager : MonoBehaviour
         // SetWebSocket(url);
         // Parse("{\"type\": \"userCountCheck\", \"sender\": \"server\", \"channelId\": \"1\", \"data\": \"{\"userCount\":1}\"}");
     }
+
+    public void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Backspace))
+        {
+            Application.Quit();
+        }
+    }
     
     public void SetWebSocket()
     {
@@ -123,19 +131,22 @@ public class NetworkManager : MonoBehaviour
         {
             case "userCountCheck":
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
+                Debug.Log("UserCount : " + userCount);
                 if(playerId == -1) 
                 { 
-                    playerId = userCount; 
+                    playerId = userCount;
+                    GameManager.instance.localPlayerIndex = playerId - 1;
                 }
                 lobby.playerCount = userCount;
                 lobby.GetReady();
                 break;
             case "cardDeck":
                 CardDeck cardDeck = JsonUtility.FromJson<CardDeck>(message.data);
-                Debug.Log(cardDeck.cards[0].user);
+                GameManager.instance.deck = cardDeck;
                 break;
             default:
                 Debug.Log("default");
+                // 게임매니저에 보내야함.
                 break;
         }
         Debug.Log(message.data);
@@ -154,7 +165,6 @@ public class NetworkManager : MonoBehaviour
         pub["destination"] = readyMsgDest;
         ws.Send(serializer.Serialize(pub));
     }
-
 
     public void SendMessage()
     {
