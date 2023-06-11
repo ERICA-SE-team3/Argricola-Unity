@@ -11,7 +11,7 @@ public class MainActLessonFood2 : ButtonParents
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
-        if(playerIndex == localPlayerIndex)
+        if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[4]==false)
         {
             GameManager.instance.queueActionType = ActionType.LESSON_TWO;
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);

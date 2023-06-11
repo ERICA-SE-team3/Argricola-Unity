@@ -10,13 +10,17 @@ public class MainActCopse : ButtonParents
 
     //stack 정보 가져오기
     int stack;
-    
+    // player 본인의 id 값
+    public int userPlayerId;
+
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        int userPlayerId = GameManager.instance.localPlayerIndex;
-        if(playerIndex == userPlayerId)
+
+        userPlayerId= GameManager.instance.localPlayerIndex;
+
+        if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[0]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.BUSH;
