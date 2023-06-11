@@ -43,6 +43,14 @@ public class NetworkManager : MonoBehaviour
         // SetWebSocket(url);
         // Parse("{\"type\": \"userCountCheck\", \"sender\": \"server\", \"channelId\": \"1\", \"data\": \"{\"userCount\":1}\"}");
     }
+
+    public void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Backspace))
+        {
+            Application.Quit();
+        }
+    }
     
     public void SetWebSocket()
     {
@@ -123,10 +131,11 @@ public class NetworkManager : MonoBehaviour
         {
             case "userCountCheck":
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
+                Debug.Log("UserCount : " + userCount);
                 if(playerId == -1) 
                 { 
                     playerId = userCount;
-                    GameManager.instance.localPlayerIndex = playerId;
+                    // GameManager.instance.localPlayerIndex = playerId;
                 }
                 lobby.playerCount = userCount;
                 lobby.GetReady();

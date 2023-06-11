@@ -9,17 +9,23 @@ public class LobbySceneManager : MonoBehaviour
     Text loadingText;
     int maxPlayer = 4;
     public int playerCount = 0;
+    
+    GameObject buffering, Blocker, LoadingComment;
 
-    public void GetReady()
-    {
-        GameObject buffering = transform.Find("Buffering").gameObject;
-        buffering.SetActive(true);
-        GameObject Blocker = transform.Find("Blocker").gameObject;
-        Blocker.SetActive(true);
+    public bool ReadyFlag = false;
 
-        GameObject LoadingComment = transform.Find("LoadingComment").gameObject;
+    private void Start() {
+        buffering = transform.Find("Buffering").gameObject;
+        Blocker = transform.Find("Blocker").gameObject;
+        LoadingComment = transform.Find("LoadingComment").gameObject;
+
         loadingText = LoadingComment.GetComponent<Text>();
     }
+    public void GetReady()
+    {
+        ReadyFlag = true;
+    }
+
 
     public void WrongButton()
     {
@@ -30,10 +36,20 @@ public class LobbySceneManager : MonoBehaviour
 
 
     private void Update() {
+        if(ReadyFlag)
+        {
+            buffering.SetActive(true);
+            Blocker.SetActive(true);
+            LoadingComment.SetActive(true);
+            ReadyFlag = false;
+        }
+
         if(loadingText != null)
         {
+            Debug.Log("Loading..." + playerCount + "/" + maxPlayer);
             loadingText.text = "Loading..." + playerCount + "/" + maxPlayer;
         }
+
         if(playerCount == maxPlayer)
         {
             maxPlayer += 1;
