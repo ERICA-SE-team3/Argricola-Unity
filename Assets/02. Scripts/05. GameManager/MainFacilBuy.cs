@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class MainFacilBuy : MonoBehaviour
 {
-    public int userPlayerId = GameManager.instance.localPlayerIndex;
+    public int userPlayerId;
+    
+    private void Start() {
+        userPlayerId = GameManager.instance.localPlayerIndex;
+    }
+    
     public void OnClick1() {
         if( !GameManager.instance.players[userPlayerId].HasMainCard( "fireplace1" ) ) {
             GameManager.instance.players[userPlayerId].GetMainCard( "fireplace1" ); 
