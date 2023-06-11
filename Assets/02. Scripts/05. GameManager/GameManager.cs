@@ -359,7 +359,6 @@ public class GameManager : MonoBehaviour
         if (data.actionPlayerId == localPlayerIndex) return;
 
         msgData = data;
-        Debug.Log("GetMessage" + JsonUtility.ToJson(data));
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
