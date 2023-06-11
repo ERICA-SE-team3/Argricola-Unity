@@ -25,6 +25,7 @@ public class MainActTrevelingTheater : ButtonParents
         if (playerIndex == userPlayerId) 
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.TROUPE;
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[5] = true;
             GameManager.instance.actionQueue.Enqueue("trevelingTheater");

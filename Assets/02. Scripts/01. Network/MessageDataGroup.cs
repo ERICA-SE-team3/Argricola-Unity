@@ -150,5 +150,6 @@ public enum ActionType
     FARM_REMODELING,
     FARM_REMODELING_END,
     CHANGE_RESOURCE, // 변환기 사용
-    MOVE_ANIMAL // 가축 옮기기
+    MOVE_ANIMAL, // 가축 옮기기
+    NONE
 }
