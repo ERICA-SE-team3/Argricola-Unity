@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ImprovementsRoundAct : ButtonParents
 {
@@ -19,8 +20,12 @@ public class ImprovementsRoundAct : ButtonParents
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
+    public GameObject cardMain;
+
     public override void OnClick()
     {
+
+
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
@@ -38,7 +43,6 @@ public class ImprovementsRoundAct : ButtonParents
       }
 
     public void ImprovementsStart() {
-      //메인카드 구매하는 창 on
-
+      
     }
 }

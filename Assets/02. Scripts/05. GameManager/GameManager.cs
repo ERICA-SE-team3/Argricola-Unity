@@ -67,13 +67,21 @@ public class GameManager : MonoBehaviour
     public GameObject farming, grainUtilization, fencing, houseDevelop, expand;
     // public GameObject whisChildren;
 
+    //====
+    public GameObject improve;
+    //===
+
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
+
+    public Queue<ActionType> messageQueue = new Queue<ActionType>();
+
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
     public void PopQueue() {
+        //default
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
         PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
         WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
@@ -81,6 +89,7 @@ public class GameManager : MonoBehaviour
         VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
+        
 
         //집 업그레이드
         HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
@@ -96,6 +105,7 @@ public class GameManager : MonoBehaviour
 
         //울타리치기
         FencingRoundAct fc = fencing.GetComponent<FencingRoundAct>();
+
 
         if(actionQueue.Count == 0){
             this.endTurnFlag = true;
@@ -119,7 +129,7 @@ public class GameManager : MonoBehaviour
             pm.PigMarketStart();
         }
         else if(popAction == "improvements"){
-            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+
         }
         else if(popAction == "subCard"){
             // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
@@ -281,7 +291,6 @@ public class GameManager : MonoBehaviour
                     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[2].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[3].remainFamilyOfCurrentPlayer );
-                    
                 }
 
                 else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.

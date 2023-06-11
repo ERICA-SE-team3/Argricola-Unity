@@ -149,3 +149,5 @@ public enum ActionType
     CHANGE_RESOURCE, // 변환기 사용
     CHANGE_BOARD // 가축 옮기기
 }
+
+
