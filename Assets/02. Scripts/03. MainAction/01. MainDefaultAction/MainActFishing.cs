@@ -28,6 +28,7 @@ public class MainActFishing : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         if (playerIndex == userPlayerId) 
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[15] = true;
             GameManager.instance.actionQueue.Enqueue("fishing");

@@ -86,7 +86,7 @@ public class NetworkManager : MonoBehaviour
         }
         else if (msg.Command == StompFrame.MESSAGE)
         {
-            Debug.Log(e.Data);
+            // Debug.Log(e.Data);
             Parse(msg.Body);
         }
     }
@@ -95,6 +95,7 @@ public class NetworkManager : MonoBehaviour
     {
         Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Message.ToString());
         Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.Message.ToString());
+        Debug.Log(DateTime.Now.ToString() + " ws_OnError says: " + e.Exception.StackTrace.ToString());
     }
 
     void ws_OnClose(object sender, CloseEventArgs e)
@@ -131,7 +132,6 @@ public class NetworkManager : MonoBehaviour
         {
             case "userCountCheck":
                 int userCount = JsonUtility.FromJson<UserCountCheck>(message.data).userCount;
-                Debug.Log("UserCount : " + userCount);
                 if(playerId == -1) 
                 { 
                     playerId = userCount;
@@ -150,7 +150,6 @@ public class NetworkManager : MonoBehaviour
                 // 게임매니저에 보내야함.
                 break;
         }
-        Debug.Log(message.data);
     }
 
     public void SendReadyMessage()
@@ -192,7 +191,6 @@ public class NetworkManager : MonoBehaviour
         body.sender = clientId;
         body.type = StompFrame.SEND;
         string body_json = JsonUtility.ToJson(body);
-        Debug.Log(body_json);
 
         // body_json = Regex.Unescape(body_json);
 

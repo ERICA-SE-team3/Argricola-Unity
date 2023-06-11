@@ -30,9 +30,6 @@ public class GameManager : MonoBehaviour
 
     //stack이 있는 Roundcard
     public int[] stackOfRoundCard;
-
-
-    public GameObject mainboardObj;
     
     //roundcard list
     public GameObject roundList;
@@ -63,17 +60,18 @@ public class GameManager : MonoBehaviour
     public void PopQueue() {
         List<ButtonParents> buttons = new List<ButtonParents>();
 
-
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
-        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
-        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
 
-        buttons.Add(sm);
-        buttons.Add(pm);
-        buttons.Add(wc);
+        PigMarketRoundAct pm = pigMarket.GetComponent<PigMarketRoundAct>();
+        
+        WishChildrenRoundAct wc = wishChildren.GetComponent<WishChildrenRoundAct>();
+        
         WesternQuarryRoundAct wq = westernQuarry.GetComponent<WesternQuarryRoundAct>();
+        
         VegetableSeedRoundAct vs = vegetableSeed.GetComponent<VegetableSeedRoundAct>();
+        
         EasternQuarryRoundAct eq = easternQuarry.GetComponent<EasternQuarryRoundAct>();
+        
         CowMarketRoundAct cm = cowMarket.GetComponent<CowMarketRoundAct>();
         //집 업그레이드
         HouseDevelopRoundAct hd = houseDevelop.GetComponent<HouseDevelopRoundAct>();
@@ -89,8 +87,6 @@ public class GameManager : MonoBehaviour
         ImprovementsRoundAct im = improvements.GetComponent<ImprovementsRoundAct>();
         // 주요 설비
         UrgentWishChildrenRoundAct uwc = urgentWishChildren.GetComponent<UrgentWishChildrenRoundAct>();
-
-
         //집짓기
         MainActExpand ex = expand.GetComponent<MainActExpand>();
         //농지
@@ -247,8 +243,11 @@ public class GameManager : MonoBehaviour
             tt.TrevelingTheaterStart();
         }
     }
+
     public CardDeck deck;
     public bool isGameScene = false, isDataUpdated = false;
+
+    MessageData msgData;
 
     public List<ActionType> NotEndTrunTypeList = new List<ActionType>();
     // -----------------------------------------------------------------------------------------------------------------
@@ -295,7 +294,7 @@ public class GameManager : MonoBehaviour
         this.stackOfRoundCard = new int[13];
 
         //player start
-        for (int i=1; i<5; i++) 
+        for (int i=0; i<4; i++) 
         {
             Player temp = new Player();
             temp.id = i;
@@ -339,7 +338,6 @@ public class GameManager : MonoBehaviour
 
     private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
     {
-        if(isGameScene) { Round(); }
         if(isDataUpdated) 
         {
             isDataUpdated = false;
@@ -347,13 +345,23 @@ public class GameManager : MonoBehaviour
             {
                 SidebarManager.instance.SidebarUpdate(i);
             }
-        }
-    }
+            Logger.Log(msgData);
 
+            if(msgData.actionType != ActionType.CHANGE_RESOURCE && msgData.actionType != ActionType.MOVE_ANIMAL)
+            {
+                MainboardUIController.instance.ActivatePlayerOnButton(msgData.actionType, msgData.actionPlayerId);
+            }   
+        }
+
+        if(isGameScene) { Round(); }
+
+    }
 
     public void GetMessage(MessageData data)
     {
         if (data.actionPlayerId == localPlayerIndex) return;
+
+        msgData = data;
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
@@ -382,6 +390,8 @@ public class GameManager : MonoBehaviour
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
 
         NetworkManager.instance.SendMessage(message);
+
+        Logger.Log(message);
     }
 
     /// <summary>
@@ -400,9 +410,11 @@ public class GameManager : MonoBehaviour
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
 
         NetworkManager.instance.SendMessage(message);
+
+        Logger.Log(message);
     }
 
-    bool isActionTypeEndTurn(ActionType actionType)
+    public bool isActionTypeEndTurn(ActionType actionType)
     {
         if(NotEndTrunTypeList.Contains(actionType))
             return false;
@@ -416,13 +428,7 @@ public class GameManager : MonoBehaviour
             //1-2. 턴을 진행 중이라면
             if ( !this.endTurnFlag )
             {
-                Debug.Log( "현재 라운드는 " + this.currentRound );
-            //     Debug.Log( "현재 플레이어는 Player " + this.currentPlayerId );
-            //     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
-            //     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[2].remainFamilyOfCurrentPlayer +
-            //     "\n" + this.players[3].remainFamilyOfCurrentPlayer );
+                // 대기
             }
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
@@ -435,6 +441,12 @@ public class GameManager : MonoBehaviour
                 {
                     //... 그대로 진행
                     Debug.Log("Move to Next Turn");
+                    Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
+                    "\n" + this.players[0].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[1].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[2].remainFamilyOfCurrentPlayer +
+                    "\n" + this.players[3].remainFamilyOfCurrentPlayer );
+
                     this.endTurnFlag = false;
                     SidebarManager.instance.HighlightCurrentPlayer(this.currentPlayerId);
                 }
@@ -456,14 +468,20 @@ public class GameManager : MonoBehaviour
             {
                 if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
                 {
-                    ResourceManager.instance.minusResource(i, "baby", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
-                    ResourceManager.instance.addResource(i, "family", ResourceManager.instance.getResourceOfPlayer(i, "baby"));
+                    ResourceManager.instance.minusResource(i, "baby", 1);
+                    ResourceManager.instance.addResource(i, "family", 1);
+                    playerBoards[i].AddFamily();
                 }
+                playerBoards[i].ResetFamily();
             }
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
             {
                 Debug.Log("수확 라운드 진행중...");
+                for(int i = 0; i < 4; i++)
+                {
+                    playerBoards[i].Cultivate();
+                }
                 //수확라운드 진행
             }
 
@@ -574,6 +592,7 @@ public class GameManager : MonoBehaviour
     public void preRound()
     {
         RoundDescriptor.instance.RoundDescriptiorUpdate("준비단계");
+
         //행동 stack 증가
         this.incrementStack();
 
@@ -677,9 +696,7 @@ public class GameManager : MonoBehaviour
             case "cattleMarket":
                 result =  (int)StackBehavior.cattleMarket;
                 break;
-
         }
-
         return result;
     }
 
@@ -906,6 +923,7 @@ public class GameManager : MonoBehaviour
         //2-2. 승자 발표!
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
     }
+}
 
 //스택이 쌓이는 라운드카드들
 public enum StackBehavior
@@ -923,5 +941,4 @@ public enum StackBehavior
     pigMarket, //돼지 시장
     easternQuarry, //동부 채굴장
     cattleMarket //소 시장
-}
 }

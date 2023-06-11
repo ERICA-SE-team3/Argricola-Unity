@@ -33,6 +33,7 @@ public class PlayerBoard : MonoBehaviour
     BoardEventStrategy strategy;
     BoardEventStrategy houseStrategy, farmStrategy, fenceStrategy, shedStrategy, sowingStrategy, moveAnimalStrategy;
 
+    public List<Block> familyBlocks;
 
     public PlayerBoardMessageData GetBoardMessageData()
     {
@@ -74,7 +75,8 @@ public class PlayerBoard : MonoBehaviour
         moveAnimalStrategy = new MoveAnimalEventStrategy();
 
         strategy = new BoardEventStrategy();
-
+        
+        familyBlocks = new List<Block>();
         // InitBoard(player);
         // SetFirstHouse();
     }
@@ -112,6 +114,8 @@ public class PlayerBoard : MonoBehaviour
     {
         blocks[house1x, house1y].ChangeHouse();
         blocks[house2x, house2y].ChangeHouse();
+        blocks[house1x, house1y].SetFamily();
+        blocks[house2x, house2y].SetFamily();
     }
 
     public GameObject GetInstallButton()
@@ -123,6 +127,44 @@ public class PlayerBoard : MonoBehaviour
     {
         transform.Find("MoveAnimalModal").gameObject.SetActive(true);
         transform.Find("MoveAnimalModal").GetComponent<AnimalModalManager>().SetModal(block);
+    }
+
+    public void UseFamily()
+    {
+        if(familyBlocks.Count > 0)
+        {
+            familyBlocks[0].UseFamily();
+            familyBlocks.RemoveAt(0);
+        }
+        else
+        {
+            Debug.LogWarning("가족이 없습니다.");
+        }
+    }
+
+    public void ResetFamily()
+    {
+        familyBlocks.Clear();
+        foreach(Block block in blocks)
+        {
+            if(block.hasFamily)
+            {
+                block.ResetFamily();
+                familyBlocks.Add(block);
+            }
+        }
+    }
+
+    public void AddFamily()
+    {
+        foreach(Block block in blocks)
+        {
+            if(block.type == BlockType.HOUSE && !block.hasFamily)
+            {
+                block.SetFamily();
+                familyBlocks.Add(block);
+            }
+        }
     }
 
     //-------------------------------------------------------------------------- 
@@ -350,10 +392,11 @@ public class PlayerBoard : MonoBehaviour
         {
             if(block.type == BlockType.HOUSE) {
                 block.ChangeHouse(); 
-                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 5);
-                ResourceManager.instance.minusResource(player.id, "reed", 2);
+                ResourceManager.instance.minusResource(player.id, houseType.ToString().ToLower(), 1);
             }
         }
+        ResourceManager.instance.minusResource(player.id, "reed", 1);
+        
         //돌 자르는 사람
         if( houseType == HouseType.STONE ) {
                     if( player.HasJobCard( "stoneCutter" ) ) {

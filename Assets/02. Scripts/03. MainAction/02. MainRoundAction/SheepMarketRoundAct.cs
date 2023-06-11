@@ -22,6 +22,7 @@ public class SheepMarketRoundAct : ButtonParents
         int userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[17] = true;
             GameManager.instance.actionQueue.Enqueue("sheepMarket");
@@ -29,6 +30,7 @@ public class SheepMarketRoundAct : ButtonParents
 
         }
     }
+
     public void SheepMarketStart()
     {
         //stack 정보 가져오기

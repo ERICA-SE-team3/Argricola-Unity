@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainActLessonFood1 : ButtonParents
 {
     public int playerIndex;
+    
     public override void OnClick()
     {
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1
@@ -12,6 +13,7 @@ public class MainActLessonFood1 : ButtonParents
         int localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[10] = true;
             GameManager.instance.actionQueue.Enqueue("lessonFood1");
