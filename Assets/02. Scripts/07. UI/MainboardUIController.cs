@@ -71,18 +71,21 @@ public class MainboardUIController : MonoBehaviour
         buttons.Add(button);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;
         image.GetComponent<Image>().sprite = playerSprites[playerIndex];
+        GameManager.instance.playerBoards[playerIndex].UseFamily();
     }
 
     public void ActivatePlayerOnButton(ActionType type, int playerIndex)
     {
-        if(GameManager.instance.isActionTypeEndTurn(type))
-        {
-            return;
-        }
+        // if(GameManager.instance.isActionTypeEndTurn(type))
+        // {
+        //     return;
+        // }
         ButtonParents button = GetButtonObject(type).GetComponent<ButtonParents>();
+        if(buttons.Contains(button)) { return; }
         buttons.Add(button);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;
         image.GetComponent<Image>().sprite = playerSprites[playerIndex];
+        GameManager.instance.playerBoards[playerIndex].UseFamily();
     }
 
     public void ResetBoard()
@@ -93,6 +96,10 @@ public class MainboardUIController : MonoBehaviour
             image.GetComponent<Image>().sprite = null;
         }
         buttons.Clear();
+        for(int i = 0; i < 4; i++)
+        {
+            GameManager.instance.playerBoards[i].ResetFamily();
+        }
     }
 
     public GameObject GetButtonObject(ActionType type)
