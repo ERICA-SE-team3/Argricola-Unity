@@ -5,7 +5,18 @@ using UnityEngine.UI;
 
 public class ScoreBoard : MonoBehaviour
 {
+    public static ScoreBoard instance;
     public List<GameObject> playerScoreBoards;
+    int highstPlayerScore = 0;
+    int highstPlayerIndex = 0;
+    public void Awake() {
+        if(instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
+
+
     public void UpdateScore()
     {
         GameObject playerScoreBoard;
@@ -13,9 +24,7 @@ public class ScoreBoard : MonoBehaviour
         int[] scoreIndex = new int[15] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int[] scoreCoefficent = new int[15] {0, 0, 0, 0, 0, 0, 0, -1, 1, 1, 2, 3, -3, 1, 1};
         int sum = 0;
-        List <int> cardandAdditionalPoint = new int[2] {0, 0};
-        int highstPlayerScore = 0;
-        int highstPlayerIndex = 0;
+        int[] cardandAdditionalPoint = new int[2] {0, 0};
         for(int playerIndex = 0; playerIndex < 4; playerIndex++){
             playerScoreBoard = playerScoreBoards[playerIndex];
             PlayerBoard playerBoard = GameManager.instance.playerBoards[playerIndex];
@@ -45,6 +54,7 @@ public class ScoreBoard : MonoBehaviour
                     scoreIndex[1] += 1;
                     if(b.hasShed){
                         scoreIndex[8] += 1;
+                    }
                     else if(scoreIndex[1] < 2){
                         scoreCoefficent[1] = 1;
                     }
@@ -56,7 +66,6 @@ public class ScoreBoard : MonoBehaviour
                     }
                     else{
                         scoreCoefficent[1] = 4;
-                    }
                     }
                 }
                 else if(b.type == BlockType.EMPTY){
@@ -206,15 +215,21 @@ public class ScoreBoard : MonoBehaviour
                     sum += scoreCoefficent[i];
                 }
             }
+
+            if(sum > highstPlayerScore){
+                highstPlayerScore = sum;
+                highstPlayerIndex = playerIndex;
+            }
+
             playerScoreBoard.transform.Find("sum").Find("NumberCounter").GetComponent<Text>().text = sum.ToString();
         }
     }
 
-    public List<int> CardandAdditionalPoint(int playerIndex){
+    public int[] CardandAdditionalPoint(int playerIndex){
         int cardPoint = 0;
         int additionalPoint = 0;
-
-        if( GameManager.instance.players[playerIndex].HasMainCard("joinery"); ) {
+        List<int> result = new List<int>();
+        if( GameManager.instance.players[playerIndex].HasMainCard("joinery") ) {
             cardPoint += 2;
             if(GameManager.instance.players[playerIndex].wood >= 7) {
                 additionalPoint += 3;
@@ -227,7 +242,7 @@ public class ScoreBoard : MonoBehaviour
             }
         }
 
-        if( GameManager.instance.players[playerIndex].HasMainCard("pottery"); ) {
+        if( GameManager.instance.players[playerIndex].HasMainCard("pottery") ) {
             cardPoint += 2;
             if(GameManager.instance.players[playerIndex].clay >= 7) {
                 additionalPoint += 3;
@@ -240,7 +255,7 @@ public class ScoreBoard : MonoBehaviour
             }
         }
 
-        if( GameManager.instance.players[playerIndex].HasMainCard("basket"); ) {
+        if( GameManager.instance.players[playerIndex].HasMainCard("basket") ) {
             cardPoint += 2;
             if(GameManager.instance.players[playerIndex].reed >= 7) {
                 additionalPoint += 3;
@@ -305,6 +320,9 @@ public class ScoreBoard : MonoBehaviour
         if( GameManager.instance.players[playerIndex].HasSubCard( "clayMining" )) {
             cardPoint += 1;
         }
-        return List<int> {cardPoint, additionalPoint};
+        result.Add(cardPoint);
+        result.Add(additionalPoint);
+
+        return result.ToArray();
     }
 }
