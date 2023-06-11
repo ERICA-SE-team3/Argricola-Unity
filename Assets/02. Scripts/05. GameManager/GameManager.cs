@@ -255,16 +255,18 @@ public class GameManager : MonoBehaviour
 
         else if(popAction == "lessonFood1") {
             messageQueue.Enqueue( ActionType.LESSON_ONE  );
+            SendMessage(messageQueue.Dequeue());
             lf1.LessonFoodStartOne();
-            SendMessage();
+            
 
             messageQueue.Enqueue( ActionType.LESSON_ONE_END  );
         }
 
         else if(popAction == "lessonFood2") {
             messageQueue.Enqueue( ActionType.LESSON_TWO  );
+            SendMessage(messageQueue.Dequeue());
             lf2.LessonFoodStartTwo();
-            SendMessage();
+            
 
             messageQueue.Enqueue( ActionType.LESSON_TWO_END  );
         }
