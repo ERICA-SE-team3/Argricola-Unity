@@ -21,12 +21,17 @@ public class WishChildrenRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        if(playerIndex == userPlayerId)
+        {
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[20] = true;
+        
         GameManager.instance.actionQueue.Enqueue("wishChildren");
         GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
         GameManager.instance.PopQueue();
-        // }
+        }
       }
     public void WishChildrenStart()
     {
@@ -36,9 +41,13 @@ public class WishChildrenRoundAct : ButtonParents
         {
           //행동을 한 후 가족 수 하나 줄이기
           ResourceManager.instance.minusResource(playerIndex, "family", 1);
-          ResourceManager.instance.addResource(playerIndex, "family", 1);
+          ResourceManager.instance.addResource(playerIndex, "baby", 1);
         }
         // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
         GameManager.instance.PopQueue();
+    }
+    public void StartSubCard()
+    {
+        // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
     }
 }

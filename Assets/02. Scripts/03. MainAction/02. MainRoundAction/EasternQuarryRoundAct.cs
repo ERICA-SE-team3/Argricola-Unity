@@ -9,7 +9,7 @@ public class EasternQuarryRoundAct : ButtonParents
       2. 누적된 돌의 개수만큼 플레이어 자원개수 증가
     */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     //stack 정보 가져오기
     int stack;
     // player 본인의 id 값
@@ -17,16 +17,19 @@ public class EasternQuarryRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+          GameManager.instance.IsDoingAct[25] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
             GameManager.instance.actionQueue.Enqueue("easternQuarry");
             GameManager.instance.PopQueue();
-        // }
+        }
     }
     public void EasternQuarryStart()
     {
+      playerIndex = GameManager.instance.getCurrentPlayerId();
       //stack 정보 가져오기
       stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")];
 

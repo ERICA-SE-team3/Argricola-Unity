@@ -11,70 +11,74 @@ public class ResourceManager : MonoBehaviour
         ResourceManager.instance = this;
     }
 
-    //�츮�� �� �Լ��� ����մϴ�,
+    //우리는 이 함수만 사용합니다,
     public void addResource( int playerId, string Resourcename, int count )
     {
         switch (Resourcename)
         {
 
             case "pig":
-                for(int i=0; i<count; i++) { pigIncrement( playerId ); PrintResourceOfPlayer(); }
+                for(int i=0; i<count; i++) { pigIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { cowIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { cowIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { sheepIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { sheepIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { wheatIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { wheatIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { vegetableIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { vegetableIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { woodIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { woodIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "stone":
-                for (int i = 0; i < count; i++) { rockIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { rockIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { reedIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { reedIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "clay":
-                for (int i = 0; i < count; i++) { clayIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { clayIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { foodIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { foodIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { beggingIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { beggingIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { familyIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { familyIncrement( playerId ); } PrintResourceOfPlayer(); 
+                break;
+
+            case "baby":
+                for (int i = 0; i < count; i++) { babyIncrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { fenceIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { fenceIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { shedIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { shedIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { roomIncrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { roomIncrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
         }
         SidebarManager.instance.SidebarUpdate(playerId);
@@ -86,63 +90,67 @@ public class ResourceManager : MonoBehaviour
         {
 
             case "pig":
-                for (int i = 0; i < count; i++) { pigDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { pigDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "cow":
-                for (int i = 0; i < count; i++) { cowDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { cowDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "sheep":
-                for (int i = 0; i < count; i++) { sheepDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { sheepDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "wheat":
-                for (int i = 0; i < count; i++) { wheatDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { wheatDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "vegetable":
-                for (int i = 0; i < count; i++) { vegetableDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { vegetableDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "wood":
-                for (int i = 0; i < count; i++) { woodDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { woodDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "rock":
-                for (int i = 0; i < count; i++) { rockDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { rockDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "reed":
-                for (int i = 0; i < count; i++) { reedDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { reedDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "clay":
-                for (int i = 0; i < count; i++) { clayDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { clayDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { foodDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { foodDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "begging":
-                for (int i = 0; i < count; i++) { beggingDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { beggingDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "family":
-                for (int i = 0; i < count; i++) { familyDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { familyDecrement( playerId ); } PrintResourceOfPlayer(); 
+                break;
+
+            case "baby":
+                for (int i = 0; i < count; i++) { babyDecrement( playerId ); PrintResourceOfPlayer(); }
                 break;
 
             case "fence":
-                for (int i = 0; i < count; i++) { fenceDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { fenceDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "shed":
-                for (int i = 0; i < count; i++) { shedDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { shedDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
 
             case "room":
-                for (int i = 0; i < count; i++) { roomDecrement( playerId ); PrintResourceOfPlayer(); }
+                for (int i = 0; i < count; i++) { roomDecrement( playerId ); } PrintResourceOfPlayer(); 
                 break;
         }
         SidebarManager.instance.SidebarUpdate(playerId);
@@ -150,30 +158,31 @@ public class ResourceManager : MonoBehaviour
 
     public void PrintResourceOfPlayer()
     {
-        for(int i=0; i<4; i++)
-        {
-            Debug.Log("\nPlayer number: " + i +
-                "\npig: " + GameManager.instance.players[i].pig +
-                "\ncow: " + GameManager.instance.players[i].cow +
-                "\nsheep: " + GameManager.instance.players[i].sheep +
-                "\nwheat: " + GameManager.instance.players[i].wheat +
-                "\nvegetable: " + GameManager.instance.players[i].vegetable +
-                "\nwood: " + GameManager.instance.players[i].wood +
-                "\nrock: " + GameManager.instance.players[i].rock +
-                "\nreed: " + GameManager.instance.players[i].reed +
-                "\nclay: " + GameManager.instance.players[i].clay +
-                "\nfood: " + GameManager.instance.players[i].food +
-                "\nbegging: " + GameManager.instance.players[i].begging +
-                "\nfamily: " + GameManager.instance.players[i].family +
-                "\nfence: " + GameManager.instance.players[i].fence +
-                "\nshed: " + GameManager.instance.players[i].shed +
-               "\nroom: " + GameManager.instance.players[i].room);
+    //     for(int i=0; i<4; i++)
+    //     {
+    //         Debug.Log("\nPlayer number: " + i +
+    //             "\npig: " + GameManager.instance.players[i].pig +
+    //             "\ncow: " + GameManager.instance.players[i].cow +
+    //             "\nsheep: " + GameManager.instance.players[i].sheep +
+    //             "\nwheat: " + GameManager.instance.players[i].wheat +
+    //             "\nvegetable: " + GameManager.instance.players[i].vegetable +
+    //             "\nwood: " + GameManager.instance.players[i].wood +
+    //             "\nrock: " + GameManager.instance.players[i].rock +
+    //             "\nreed: " + GameManager.instance.players[i].reed +
+    //             "\nclay: " + GameManager.instance.players[i].clay +
+    //             "\nfood: " + GameManager.instance.players[i].food +
+    //             "\nbegging: " + GameManager.instance.players[i].begging +
+    //             "\nfamily: " + GameManager.instance.players[i].family +
+    //             "\nfence: " + GameManager.instance.players[i].fence +
+    //             "\nshed: " + GameManager.instance.players[i].shed +
+    //            "\nroom: " + GameManager.instance.players[i].room +
+    //            "\njobcard_hand: " + GameManager.instance.players[i].jobcard_hands[0] + " , " + GameManager.instance.players[i].jobcard_hands[1] );
+
             
-            
-        }
+    //     }
     }
 
-    //�ڿ��� get �Լ�
+    //자원들 get 함수
     public int getResourceOfPlayer( int playerId, string Resourcename )
     {
         int result = 0;
@@ -225,6 +234,10 @@ public class ResourceManager : MonoBehaviour
 
             case "family":
                 result = GameManager.instance.players[playerId].family;
+                break;
+
+            case "baby":
+                result = GameManager.instance.players[playerId].baby;
                 break;
 
             case "fence":
@@ -306,6 +319,11 @@ public class ResourceManager : MonoBehaviour
         GameManager.instance.players[playerId].family = GameManager.instance.players[playerId].family + 1;
     }
 
+    void babyIncrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby + 1;
+    }
+
     void fenceIncrement( int playerId )
     {
         GameManager.instance.players[playerId].fence = GameManager.instance.players[playerId].fence + 1;
@@ -381,6 +399,11 @@ public class ResourceManager : MonoBehaviour
     void familyDecrement( int playerId )
     {
         GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer = GameManager.instance.players[playerId].remainFamilyOfCurrentPlayer - 1;
+    }
+
+    void babyDecrement( int playerId )
+    {
+        GameManager.instance.players[playerId].baby = GameManager.instance.players[playerId].baby - 1;
     }
 
     void fenceDecrement( int playerId )

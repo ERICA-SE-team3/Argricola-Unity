@@ -11,8 +11,7 @@ public class SheepMarketRoundAct : ButtonParents
     4. 개인판에서 양을 배치시키는 함수 실행
     */
     
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
-    //public int sheep = 3;   //누적된 양의 마리수가 3마리라고 가정
+    public int playerIndex;
 
     //stack 정보 가져오기
     int stack;
@@ -21,11 +20,15 @@ public class SheepMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[17] = true;
             GameManager.instance.actionQueue.Enqueue("sheepMarket");
             GameManager.instance.PopQueue();
-        // }
+
+        }
     }
     public void SheepMarketStart()
     {
@@ -48,4 +51,6 @@ public class SheepMarketRoundAct : ButtonParents
         // StartSheep();   // player보드에 양을 배치하는 함수 호출 (함수명은 아직 정해지지 않음)
         GameManager.instance.PopQueue();
     }
+
 }
+

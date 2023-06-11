@@ -16,7 +16,7 @@ public class MainActForest : ButtonParents
     //stack 정보 가져오기
     int stack;
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
     
     public GameObject forest;
     // player 본인의 id 값
@@ -25,12 +25,16 @@ public class MainActForest : ButtonParents
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
-        // 사용자의 턴인지, 나무가 있는지 확인
-        // if (playerIndex == userPlayerId) 
-        // {
-            //stack 정보 가져오기
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("forest")];
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        if (playerIndex == userPlayerId) 
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[12] = true;
+            GameManager.instance.actionQueue.Enqueue("forest");
+            GameManager.instance.PopQueue();
+        }
 
+<<<<<<< HEAD
             // 있다면 니무 얻기 함수 호출
             ResourceManager.instance.addResource(playerIndex, "wood", stack * 3);
 
@@ -50,7 +54,34 @@ public class MainActForest : ButtonParents
             GameManager.instance.endTurnFlag = true;
 
         // }
+=======
+>>>>>>> develop
 
         
+    }
+    public void ForestStart()
+    {
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("forest")];
+
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(playerIndex, "wood", stack * 3);
+
+        //나무꾼 카드를 보유중이라면 나무 1개 추가
+        if (GameManager.instance.players[playerIndex].HasJobCard("woodCutter"))
+        {
+            GameManager.instance.players[playerIndex].ActCard("woodCutter");
+        }
+
+        //확인 message
+        Debug.Log("Player " + playerIndex + " get " + stack * 3 + " wood!");
+
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("forest")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+
+        GameManager.instance.PopQueue();
     }
 }

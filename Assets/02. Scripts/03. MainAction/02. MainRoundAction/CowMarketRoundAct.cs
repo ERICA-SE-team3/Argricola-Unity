@@ -11,7 +11,7 @@ public class CowMarketRoundAct : ButtonParents
     4. 개인판에서 소를 배치시키는 함수 실행
     */
     
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     //stack 정보 가져오기
     int stack;
@@ -21,14 +21,17 @@ public class CowMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[26] = true;
             GameManager.instance.actionQueue.Enqueue("cowMarket");
             GameManager.instance.PopQueue();
-        // }
+        }
     }
     public void CowMarketStart()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cowMarket")];
 

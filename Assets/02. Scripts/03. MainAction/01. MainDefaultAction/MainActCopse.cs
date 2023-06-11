@@ -6,7 +6,7 @@ using UnityEngine;
 // 덤불
 public class MainActCopse : ButtonParents
 {
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     public GameObject copse;
     //stack 정보 가져오기
@@ -17,23 +17,41 @@ public class MainActCopse : ButtonParents
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[0] = true;
+            GameManager.instance.actionQueue.Enqueue("copse");
+            GameManager.instance.PopQueue();
+        }
+
+    }
+    public void CopseStart()
+    {
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("copse")];
 
         // 있다면 니무 얻기 함수 호출
-        ResourceManager.instance.addResource( playerIndex, "wood", stack * 1);
+        ResourceManager.instance.addResource( this.playerIndex, "wood", stack * 1);
 
-        //확인 message
-        Debug.Log("Player " + playerIndex + " get " + stack +" wood!");
+        //나무꾼 카드를 보유중이라면 나무 1개 추가
+        if (GameManager.instance.players[this.playerIndex].HasJobCard("woodCutter"))
+        {
+            GameManager.instance.players[this.playerIndex].ActCard("woodCutter");
+        }
+
+            //확인 message
+        Debug.Log("Player " + this.playerIndex + " get " + stack +" wood!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("copse")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(this.playerIndex, "family", 1);
 
+<<<<<<< HEAD
         //덤불 비활성화
         copse.GetComponent<Button>().enabled = false;
         //turn이 끝났다는 flag 
@@ -42,4 +60,10 @@ public class MainActCopse : ButtonParents
 
         // }
     }
+=======
+        GameManager.instance.PopQueue();
+    }        
+>>>>>>> develop
 }
+
+

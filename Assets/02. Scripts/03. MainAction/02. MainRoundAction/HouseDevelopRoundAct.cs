@@ -11,22 +11,32 @@ public class HouseDevelopRoundAct : ButtonParents
     4. 주요설비 또는 보조설비 하나 고르기
   */
 
-    public int playerIndex = GameManager.instance.getCurrentPlayerId();
+    public int playerIndex;
 
     // player 본인의 id 값
     public int userPlayerId = GameManager.instance.localPlayerIndex;
 
     public override void OnClick()
     {
-        // if(playerIndex == userPlayerId)
-        // {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
+        if(playerIndex == userPlayerId)
+        {
+            //행동을 했음 표시
+          GameManager.instance.IsDoingAct[22] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
-            GameManager.instance.actionQueue.Enqueue("improvements");
-            GameManager.instance.actionQueue.Enqueue("houseDevelop");
+            GameManager.instance.actionQueue.Enqueue("hdHouseDevelop");
+            //한 후에, 주요설비 및 보조설비 구매 <-- 미구현
+            GameManager.instance.actionQueue.Enqueue("hdImprovements");
             GameManager.instance.PopQueue();
             // 집개조 이후, 주요설비 및 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
-            // ActCardSub(playerIndex, "쇠스랑"); // 임의로 함수명 만듦
-        // }
         }
+    }
+
+    public void StartHouseDeveloping() {
+      GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
+    }
+    public void ImprovementsStart() {
+            // 주요설비 및 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+    }
 }
