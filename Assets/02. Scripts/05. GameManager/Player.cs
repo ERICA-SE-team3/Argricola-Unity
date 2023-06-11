@@ -864,6 +864,117 @@ public class Player
         }
     }
 
+    public string GetCarNameString( int cardNum ) {
+        string result = "";
+        switch (cardNum) 
+        {
+            case 0:
+                result =  "magician";
+                break;
+                
+            case 1:
+                result =  "woodCutter";
+                break;
+
+            case 2:
+                result =  "vegetableSeller";
+                break;
+
+            case 5:
+                result =  "woodPicker";
+                break;
+
+            case 4:
+                result =  "wallMaster";
+                break;
+
+            case 3:
+                result =  "stoneCutter";
+                break;
+
+            case 6:
+                result =  "organicFarmer";
+                break;
+
+            case 7:
+                result =  "pigBreeder";
+                break;
+
+            case 8:
+            result =  "stoneClamp";
+            break;
+                
+            case 9:
+                result =  "clayMining";
+                break;
+
+            case 10:
+                result =  "woodBoat";
+                break;
+
+            case 11:
+                result =  "rake";
+                break;
+
+            case 12:
+                result =  "watterBottle";
+                break;
+
+            case 13:
+                result =  "woodYard";
+                break;
+
+            case 14:
+                result =  "butter";
+                break;
+
+            case 15:
+                result =  "bottle";
+                break;
+
+            case 16:
+                result =  "fireplace1";
+                break;
+                
+            case 17:
+                result =  "fireplace2";
+                break;
+
+            case 18:
+                result =  "cookingHearth1";
+                break;
+
+            case 19:
+                result =  "cookingHearth2";
+                break;
+
+            case 20:
+                result =  "clayOven";
+                break;
+
+            case 21:
+                result =  "stoneOven";
+                break;
+
+            case 22:
+                result =  "joinery";
+                break;
+
+            case 23:
+                result =  "pottery";
+                break;
+            
+            case 24:
+                result =  "basket";
+                break;
+
+            case 25:
+                result =  "well";
+                break;
+        }
+
+        return result;
+    }
 
 }
 

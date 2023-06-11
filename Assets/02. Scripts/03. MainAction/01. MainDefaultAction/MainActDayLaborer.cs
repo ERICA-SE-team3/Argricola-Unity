@@ -22,13 +22,16 @@ public class MainActDayLaborer : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[11] = true;
+
         ResourceManager.instance.addResource(playerIndex, "food", 2);
 
         //돌집게 카드를 보유중이라면 나무 1개 추가
         if (GameManager.instance.players[playerIndex].HasSubCard("clayMining"))
         {
-            ResourceManager.instance.addResource(playerIndex, "clay", 3);
-            Debug.Log("Player " + playerIndex + " get 1 clay additionaly because of CLAYMINING");
+            GameManager.instance.players[playerIndex].ActCard("clayMining");
         }
 
             //확인 message

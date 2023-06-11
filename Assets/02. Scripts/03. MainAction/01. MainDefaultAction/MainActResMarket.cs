@@ -15,6 +15,10 @@ public class MainActResMarket : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[2] = true;
+
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "stone", 1);
         ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", 1);
