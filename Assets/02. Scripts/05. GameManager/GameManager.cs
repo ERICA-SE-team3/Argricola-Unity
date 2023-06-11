@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
+
     // queue에서 하나 꺼낸 행동
     public string popAction;
 
@@ -130,6 +131,17 @@ public class GameManager : MonoBehaviour
         if(isGameScene) { Round(); }
     }
 
+    public void GetPlayerNetworkMessage(MessageData data)
+    {
+        if (data.actionPlayerId == localPlayerIndex) return;
+        players[data.actionPlayerId].SetPlayerMessageData(data.player);
+        playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
+        if(data.actionType != ActionType.CHANGE_RESOURCE && data.actionType != ActionType.MOVE_ANIMAL)
+        {
+            endTurnFlag = true;
+        }
+    }
+
 
     public void Round()
     {
@@ -150,6 +162,11 @@ public class GameManager : MonoBehaviour
 
             else //endTurnFlag is true --> 1-3. 플레이어의 턴이 끝남.
             {
+                if(currentPlayerId == localPlayerIndex)
+                {
+                    
+                }
+
                 //1-4. 다음 턴을 부여받을 플레이어 찾기
                 //1-4-1. 턴을 부여받을 플레이어가 존재 -> Round 그대로 진행
                 if ( this.findNextPlayer() )

@@ -22,6 +22,20 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     int[] dx = {-1,1,0,0};
     int[] dy = {0,0,-1,1};
     int[] dfence = {1,0,3,2};
+
+    public void SetBlockMessageData(BlockData data)
+    {
+        this.type = data.type;
+        this.hasShed = data.hasShed;
+        this.fence = data.fence;
+        this.cow = data.cow;
+        this.pig = data.pig;
+        this.sheep = data.sheep;
+        this.family = data.family;
+        this.seedType = data.seedType;
+        this.seedCount = data.seedCount;
+    }
+
     
     public void Init(PlayerBoard board, int row, int col, BlockType type)
     {
