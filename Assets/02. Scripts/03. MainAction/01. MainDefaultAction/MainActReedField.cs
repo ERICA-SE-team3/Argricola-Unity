@@ -12,19 +12,31 @@ public class MainActReedField : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
-            ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
+        //행동을 했음 표시
+        GameManager.instance.IsDoingAct[14] = true;
 
-            Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " reed!");
+            //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
 
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")] = 0;
+        // 있다면 니무 얻기 함수 호출
+        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "reed", stack);
 
-            ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        //확인 message
+        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " reed!");
 
-            GameManager.instance.endTurnFlag = true;
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+
+        //turn이 끝났다는 flag 
+        GameManager.instance.endTurnFlag = true;
         // }
     }
+
 }

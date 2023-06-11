@@ -23,12 +23,15 @@ public class CowMarketRoundAct : ButtonParents
     {
         // if(playerIndex == userPlayerId)
         // {
+            //행동을 했음 표시
+          GameManager.instance.IsDoingAct[26] = true;
             GameManager.instance.actionQueue.Enqueue("cowMarket");
             GameManager.instance.PopQueue();
         // }
     }
     public void CowMarketStart()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cowMarket")];
 

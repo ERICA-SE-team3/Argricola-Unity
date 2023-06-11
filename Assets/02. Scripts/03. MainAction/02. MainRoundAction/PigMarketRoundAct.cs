@@ -20,10 +20,15 @@ public class PigMarketRoundAct : ButtonParents
 
     public override void OnClick()
     {
+            playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+            //행동을 했음 표시
+          GameManager.instance.IsDoingAct[23] = true;
             GameManager.instance.actionQueue.Enqueue("pigMarket");
             GameManager.instance.PopQueue();
+
         // }
     }
     public void PigMarketStart()

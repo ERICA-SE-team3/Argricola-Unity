@@ -16,3 +16,4 @@ public class Hand : MonoBehaviour
         handplayer1.SetActive(true);
     }
 }
+

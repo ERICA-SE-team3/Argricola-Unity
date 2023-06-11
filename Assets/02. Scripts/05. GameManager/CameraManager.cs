@@ -17,6 +17,7 @@ public class CameraManager: MonoBehaviour
     Vector3 position_camera_player3 = new Vector3(0, -4000, -1);
     Vector3 position_camera_player4 = new Vector3(-4000, 0, -1);
     Vector3 position_Lobby_player = new Vector3(0, 1588, -1);
+    Vector3 position_mainCard = new Vector3( 10000, 5000, -1 );
     public GameObject MainCamera;
 
     private void Start() {
@@ -69,6 +70,23 @@ public class CameraManager: MonoBehaviour
         Debug.Log(MainCamera.transform.position);
     }
 
-
+    public void Show_Player()
+    {
+        int localPlayerIndex = GameManager.instance.localPlayerIndex;
+        switch(localPlayerIndex){
+            case 0:
+                Show_Player1();
+                break;
+            case 1:
+                Show_Player2();
+                break;
+            case 2:
+                Show_Player3();
+                break;
+            case 3:
+                Show_Player4();
+                break;
+        }
+    }
 }
 

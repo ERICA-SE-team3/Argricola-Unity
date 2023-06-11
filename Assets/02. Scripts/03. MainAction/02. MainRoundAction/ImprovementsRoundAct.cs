@@ -21,13 +21,24 @@ public class ImprovementsRoundAct : ButtonParents
 
     public override void OnClick()
     {
+        playerIndex = GameManager.instance.getCurrentPlayerId();
         // if(playerIndex == userPlayerId)
         // {
+
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[19] = true;
             // 해당 행동을 클릭한 순간 가족 자원수가 하나 줄어야 하므로 
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
             GameManager.instance.actionQueue.Enqueue("improvements");
             GameManager.instance.PopQueue();
             //핸드열기 동작을 통해 주요설비 / 보조설비 카드가 펴져야 함 (이 둘은 전환 버튼을 통해 고를 수 있게끔)
+
+
         // } 
       }
+
+    public void ImprovementsStart() {
+      //메인카드 구매하는 창 on
+
+    }
 }

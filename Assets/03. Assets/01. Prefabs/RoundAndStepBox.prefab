@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 9114041365540994385}
   - component: {fileID: 1723506256207171033}
   - component: {fileID: 6602197463637621323}
+  - component: {fileID: 1108014682026932717}
   m_Layer: 5
   m_Name: RoundAndStepBox
   m_TagString: Untagged
@@ -393,6 +394,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1108014682026932717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855815095972260315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c1f581ee7eb7944aba2f65470f369a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roundDescriptior: {fileID: 6855815095972260315}
 --- !u!1 &9010474313269190868
 GameObject:
   m_ObjectHideFlags: 0
