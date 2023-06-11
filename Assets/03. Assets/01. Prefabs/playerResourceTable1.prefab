@@ -6646,7 +6646,7 @@ GameObject:
   - component: {fileID: 8408301047562444773}
   - component: {fileID: 2807338326429887210}
   m_Layer: 5
-  m_Name: scoreboardFiled
+  m_Name: scoreboardField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
