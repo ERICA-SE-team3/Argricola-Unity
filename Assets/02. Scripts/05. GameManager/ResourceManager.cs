@@ -21,21 +21,21 @@ public class ResourceManager : MonoBehaviour
                 for(int i=0; i<count; i++) { pigIncrement( playerId ); } PrintResourceOfPlayer();
                 Camera.main.GetComponent<CameraManager>().ShowPlayer(playerId);
                 AnimalModalManager.leftPig += count;
-                GameManager.instance.playerBoards[playerId].StartMoveAnimal();
+                GameManager.instance.playerBoards[playerId].StartMoveAnimalButton();
                 break;
 
             case "cow":
                 for (int i = 0; i < count; i++) { cowIncrement( playerId ); } PrintResourceOfPlayer();
                 Camera.main.GetComponent<CameraManager>().ShowPlayer(playerId);
                 AnimalModalManager.leftCow += count;
-                GameManager.instance.playerBoards[playerId].StartMoveAnimal();
+                GameManager.instance.playerBoards[playerId].StartMoveAnimalButton();
                 break;
 
             case "sheep":
                 for (int i = 0; i < count; i++) { sheepIncrement( playerId ); } PrintResourceOfPlayer();
                 Camera.main.GetComponent<CameraManager>().ShowPlayer(playerId);
                 AnimalModalManager.leftSheep += count;
-                GameManager.instance.playerBoards[playerId].StartMoveAnimal();
+                GameManager.instance.playerBoards[playerId].StartMoveAnimalButton();
                 break;
 
             case "wheat":

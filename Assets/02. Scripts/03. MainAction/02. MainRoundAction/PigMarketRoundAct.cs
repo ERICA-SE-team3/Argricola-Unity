@@ -26,9 +26,16 @@ public class PigMarketRoundAct : ButtonParents
     }
     private void OnEnable() {
         if(GameManager.instance.stackOfRoundCard.Length != 0)
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 1; 
+        {
+            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 1;
+            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+            text.text = stack.ToString();
+        }
         else
+        {
             stack = 0;
+            text.text = stack.ToString();
+        }
     }
 
     

@@ -284,6 +284,14 @@ public class PlayerBoard : MonoBehaviour
         return result;
     }
 
+    public void StartMoveAnimalButton()
+    {
+        if(this.player.id == GameManager.instance.localPlayerIndex)
+        {
+            StartMoveAnimal();
+        }
+    }
+
     public void Breeding()
     {
         int cow = player.cow;

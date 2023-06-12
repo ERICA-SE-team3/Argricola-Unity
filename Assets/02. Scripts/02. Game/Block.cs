@@ -63,7 +63,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
             {
                 ChangeEmpty();
             }
-            SetAnimal(cow, pig, sheep);
+            SetAnimal(sheep, pig, cow);
         }
     }
 
