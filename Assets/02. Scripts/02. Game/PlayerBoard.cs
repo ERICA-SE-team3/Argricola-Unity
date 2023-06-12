@@ -166,6 +166,11 @@ public class PlayerBoard : MonoBehaviour
                 familyBlocks.Add(block);
             }
         }
+        if(familyBlocks.Count < player.family)
+        {
+            // 급한 가족 늘리기 함수.
+            Debug.LogWarning("급한 가족 늘리기 - 미구현");
+        }
     }
 
     //-------------------------------------------------------------------------- 

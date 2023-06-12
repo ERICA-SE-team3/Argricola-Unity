@@ -50,5 +50,6 @@ public class WishChildrenRoundAct : ButtonParents
     public void StartSubCard()
     {
         // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
+        GameManager.instance.PopQueue();
     }
 }

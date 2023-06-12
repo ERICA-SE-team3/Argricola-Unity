@@ -127,6 +127,8 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public bool ChangeHouse()
     {
+        ResourceManager.instance.addResource(board.player.id, "room", 1);
+
         currentBackground?.SetActive(false);
         string houseName = GetHouseBackgroundName(board.houseType);
         currentBackground = backgroundParent.transform.Find(houseName).gameObject;

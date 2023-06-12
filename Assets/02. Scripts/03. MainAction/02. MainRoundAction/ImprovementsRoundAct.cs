@@ -19,11 +19,12 @@ public class ImprovementsRoundAct : ButtonParents
 
 
     public int playerIndex;
+    public int userPlayerId;
 
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        int userPlayerId = GameManager.instance.localPlayerIndex;
+        userPlayerId = GameManager.instance.localPlayerIndex;
         if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[19]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
