@@ -43,8 +43,10 @@ public class HouseDevelopRoundAct : ButtonParents
     }
 
     public void StartHouseDeveloping() {
-        GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
+        int id = GameManager.instance.localPlayerIndex;
+        GameManager.instance.playerBoards[id].StartUpgradeHouse();
     }
+
     public void ImprovementsStart() {
         //메인카드 구매하는 창 on
 

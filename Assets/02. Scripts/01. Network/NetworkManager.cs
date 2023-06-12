@@ -40,6 +40,7 @@ public class NetworkManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         lobbyObj = GameObject.Find("LobbySceneManager");
         lobby = lobbyObj.GetComponent<LobbySceneManager>();
+
         // SetWebSocket(url);
         // Parse("{\"type\": \"userCountCheck\", \"sender\": \"server\", \"channelId\": \"1\", \"data\": \"{\"userCount\":1}\"}");
     }

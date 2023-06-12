@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ActionBakingBread : MonoBehaviour
 {
-     public void MoveMe(GameObject dest)
+    public void MoveMe(GameObject dest)
     {
         this.transform.SetParent(dest.transform);
         this.transform.localPosition = Vector3.zero;

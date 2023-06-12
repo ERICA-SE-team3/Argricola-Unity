@@ -58,6 +58,8 @@ public class Player
         msgdata.shed = this.shed;
         msgdata.room = this.room;
 
+        msgdata.isFirstPlayer = this.isFirstPlayer;
+
         msgdata.jobcard_owns = this.jobcard_owns.ToList();
         msgdata.jobcard_hands = this.jobcard_hands.ToList();
         msgdata.remainFamilyOfCurrentPlayer = this.remainFamilyOfCurrentPlayer;
@@ -89,6 +91,7 @@ public class Player
         this.fence = data.fence;
         this.shed = data.shed;
         this.room = data.room;
+        this.isFirstPlayer = data.isFirstPlayer;
 
         this.remainFamilyOfCurrentPlayer = data.remainFamilyOfCurrentPlayer;
 

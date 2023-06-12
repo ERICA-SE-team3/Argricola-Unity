@@ -45,11 +45,21 @@ public class FenceAction : PlayerBoardAction
 
     public override bool IsStartInstall()
     {
-        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
-        // 나무 개수 확인
-        // 울타리 지을 수 있는 영역 확인
-        // 등등..
-        return true;
+        int id = board.player.id;
+        
+        int wood = ResourceManager.instance.getResourceOfPlayer(id, "wood");
+        if (wood == 0) return false;
+
+        foreach (Block b in board.blocks)
+        {
+            if (b.type == BlockType.EMPTY)
+            {
+                return true;
+            }
+        }
+        
+        Debug.Log("설치 가능한 블록이 없습니다.");
+        return false;
     }
 
     public override bool IsEndInstall()

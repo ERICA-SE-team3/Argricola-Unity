@@ -13,9 +13,9 @@ public class MainActMeeting : ButtonParents
         localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[7]==false)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.MEETING_PLACE_END;
             GameManager.instance.SendMessage(ActionType.MEETING_PLACE);
-            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시    
             GameManager.instance.IsDoingAct[7] = true;
             GameManager.instance.actionQueue.Enqueue("meeting");
@@ -61,6 +61,14 @@ public class MainActMeeting : ButtonParents
         ResourceManager.instance.minusResource(playerIndex, "family", 1);
         
         GameManager.instance.PopQueue();
+    }
+
+    public void SubCard()
+    {
+        localPlayerIndex = GameManager.instance.localPlayerIndex;
+        ResourceManager.instance.minusResource(localPlayerIndex, "family", 1);
+        Warner.instance.LogAction("보조 카드를 습득합니다");
+        // GameManager.instance.PopQueue();
     }
 
     

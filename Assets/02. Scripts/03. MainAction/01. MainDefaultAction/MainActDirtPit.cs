@@ -27,16 +27,18 @@ public class MainActDirtPit : ButtonParents
 
     public void DirtPitStart()
     {
+        int id = GameManager.instance.localPlayerIndex;
+        
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
 
-        ResourceManager.instance.addResource(playerIndex, "clay", stack * 1);
+        ResourceManager.instance.addResource(id, "clay", stack * 1);
 
-        Debug.Log("Player " + playerIndex + " get " + stack * 1 + " clay!");
+        Debug.Log("Player " + id + " get " + stack * 1 + " clay!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")] = 0;
 
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
         GameManager.instance.PopQueue();
     }
 }

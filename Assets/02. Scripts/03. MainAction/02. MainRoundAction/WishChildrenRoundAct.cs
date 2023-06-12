@@ -21,32 +21,37 @@ public class WishChildrenRoundAct : ButtonParents
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
+
         if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[20]==false)
         {
-          MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
-          GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE_END;
-          GameManager.instance.SendMessage(ActionType.BASIC_FAMILY_INCREASE);
-          //행동을 했음 표시
-          GameManager.instance.IsDoingAct[20] = true;
-          
-          GameManager.instance.actionQueue.Enqueue("wishChildren");
-          GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
-          GameManager.instance.PopQueue();
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE_END;
+            GameManager.instance.SendMessage(ActionType.BASIC_FAMILY_INCREASE);
+            //행동을 했음 표시
+            GameManager.instance.IsDoingAct[20] = true;
+            
+            GameManager.instance.actionQueue.Enqueue("wishChildren");
+            GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
+            GameManager.instance.PopQueue();
         }
-      }
+    }
+
     public void WishChildrenStart()
     {
-        countFamily = ResourceManager.instance.getResourceOfPlayer(playerIndex, "family");
-        countRoom = ResourceManager.instance.getResourceOfPlayer(playerIndex, "room");
+        int id = GameManager.instance.localPlayerIndex;
+
+        countFamily = ResourceManager.instance.getResourceOfPlayer(id, "family");
+        countRoom = ResourceManager.instance.getResourceOfPlayer(id, "room");
         if (countFamily < countRoom)
         {
           //행동을 한 후 가족 수 하나 줄이기
-          ResourceManager.instance.minusResource(playerIndex, "family", 1);
-          ResourceManager.instance.addResource(playerIndex, "baby", 1);
+          ResourceManager.instance.minusResource(id, "family", 1);
+          ResourceManager.instance.addResource(id, "baby", 1);
         }
         // 보조설비 카드펴짐 -> 카드 하나 고르기 함수 호출
         GameManager.instance.PopQueue();
     }
+    
     public void StartSubCard()
     {
         // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음

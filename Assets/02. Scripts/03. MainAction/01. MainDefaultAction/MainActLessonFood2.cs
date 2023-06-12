@@ -11,18 +11,23 @@ public class MainActLessonFood2 : ButtonParents
     {
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        int localPlayerIndex = GameManager.instance.localPlayerIndex;
+        localPlayerIndex = GameManager.instance.localPlayerIndex;
+        Debug.Log("playerIndex : " + playerIndex);
+        Debug.Log("isDoingAct[4] : " + GameManager.instance.IsDoingAct[4]);
         if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[4]==false)
         {
+            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.LESSON_TWO_END;
             GameManager.instance.SendMessage(ActionType.LESSON_TWO);
-            MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[4] = true;
-            GameManager.instance.actionQueue.Enqueue("lessonFood2");
+            // GameManager.instance.actionQueue.Enqueue("lessonFood2");
+            GameManager.instance.actionQueue.Enqueue("lesson");
             GameManager.instance.PopQueue();
         }
     }
+
+
     public void LessonFoodStartTwo()
     {
         //플레이어의 현재 카드가 0개

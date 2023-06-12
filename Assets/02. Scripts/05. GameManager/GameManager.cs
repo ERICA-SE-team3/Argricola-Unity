@@ -154,7 +154,8 @@ public class GameManager : MonoBehaviour
         }
         else if(popAction == "subCard"){
             // 보조설비 카드를 고를 수 있는 함수 호출 - 아직 구현되지 않음
-            wc.StartSubCard();
+            meet.SubCard();
+            // wc.StartSubCard();
         }
         else if(popAction == "wishChildren"){
             wc.WishChildrenStart();
@@ -243,6 +244,11 @@ public class GameManager : MonoBehaviour
         else if(popAction == "trevelingTheater") {
             tt.TrevelingTheaterStart();
         }
+        // 임시
+        else if(popAction == "lesson")
+        {
+            lf1.Lesson();
+        }
     }
 
     public CardDeck deck;
@@ -250,7 +256,8 @@ public class GameManager : MonoBehaviour
 
     MessageData msgData;
 
-    public List<ActionType> NotEndTrunTypeList = new List<ActionType>();
+    public List<ActionType> NotEndTurnTypeList = new List<ActionType>();
+    public List<ActionType> StartTurnTypeList = new List<ActionType>();
     // -----------------------------------------------------------------------------------------------------------------
 
     private void Awake() {
@@ -267,27 +274,21 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        ActionType[] notEndTurnList = {
-            ActionType.LESSON_ONE,
-            ActionType.LESSON_TWO,
-            ActionType.FENCE,
-            ActionType.FARM_EXPANSION,
-            ActionType.MEETING_PLACE,
-            ActionType.FARMLAND,
-            ActionType.MAJOR_FACILITIES,
-            ActionType.GRAIN_UTILIZATION,
-            ActionType.BASIC_FAMILY_INCREASE,
-            ActionType.HOUSE_RENOVATION,
-            ActionType.FIELD_FARMING,
-            ActionType.URGENT_FAMILY_INCREASE,
-            ActionType.FARM_REMODELING,
-        };
-
-        for(int i = 0; i < notEndTurnList.Length; i++)
-        {
-            NotEndTrunTypeList.Add(notEndTurnList[i]);
-        }
+        SetTurnList();
     }
+
+    
+    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
+    {
+        if(isDataUpdated) 
+        {
+            UpdateData();
+        }
+
+        if(isGameScene) { Round(); }
+
+    }
+
 
     public void Init()
     {
@@ -338,38 +339,22 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void Update() // 1프레임마다 실행되고 있음을 잊지 말자.
-    {
-        if(isDataUpdated) 
-        {
-            isDataUpdated = false;
-            if(msgData.actionType == ActionType.MEETING_PLACE_END)
-            {
-                SidebarManager.instance.FirstPlayerIcon(msgData.actionPlayerId);
-            }
-
-            for(int i = 0; i < 4; i++)
-            {
-                SidebarManager.instance.SidebarUpdate(i);
-            }
-            Logger.Log(msgData);
-
-            if(msgData.actionType != ActionType.CHANGE_RESOURCE && msgData.actionType != ActionType.MOVE_ANIMAL)
-            {
-                MainboardUIController.instance.ActivatePlayerOnButton(msgData.actionType, msgData.actionPlayerId);
-            }   
-        }
-
-        if(isGameScene) { Round(); }
-
-    }
-
+    
     public void GetMessage(MessageData data)
     {
         if (data.actionPlayerId == localPlayerIndex) return;
 
         msgData = data;
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
+        if(data.actionType == ActionType.MEETING_PLACE || data.actionType == ActionType.MEETING_PLACE)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                players[i].isFirstPlayer = false;
+            }
+        }
+
+
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
         if(data.actionType != ActionType.CHANGE_RESOURCE && data.actionType != ActionType.MOVE_ANIMAL)
@@ -421,11 +406,19 @@ public class GameManager : MonoBehaviour
         Logger.Log(message);
     }
 
+
     public bool isActionTypeEndTurn(ActionType actionType)
     {
-        if(NotEndTrunTypeList.Contains(actionType))
+        if(NotEndTurnTypeList.Contains(actionType))
             return false;
         return true;
+    }
+
+    public bool isActionTypeStartTurn(ActionType actionType)
+    {
+        if(StartTurnTypeList.Contains(actionType))
+            return true;
+        return false;
     }
 
     public void Round()
@@ -508,10 +501,35 @@ public class GameManager : MonoBehaviour
             {
                 //2-2-2. 게임 종료
                 Debug.Log("Game is Over!");
+                RoundFlag = false;
                 //FinishAgriCola();
+                this.currentRound = 0;
                 EndPhase.instance.EndGame();
             } 
         }
+    }
+
+    void UpdateData()
+    {
+        isDataUpdated = false;
+        if(msgData.actionType == ActionType.MEETING_PLACE_END || msgData.actionType == ActionType.MEETING_PLACE)
+        {
+            SidebarManager.instance.FirstPlayerIcon(msgData.actionPlayerId);
+        }
+
+        for(int i = 0; i < 4; i++)
+        {
+            SidebarManager.instance.SidebarUpdate(i);
+        }
+
+        Logger.Log(msgData);
+
+        if(msgData.actionType != ActionType.CHANGE_RESOURCE && msgData.actionType != ActionType.MOVE_ANIMAL)
+        {
+            Debug.Log("actionType : " + msgData.actionType);
+            if(isActionTypeStartTurn(msgData.actionType))
+                MainboardUIController.instance.ActivatePlayerOnButton(msgData.actionType, msgData.actionPlayerId);
+        }   
     }
     //--------------------------------------------------------------------------------------------
 
@@ -936,6 +954,69 @@ public class GameManager : MonoBehaviour
 
         //2-2. 승자 발표!
         Debug.Log( "WInner is Player " + max_players + "!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    public void SetTurnList()
+    {
+        ActionType[] notEndTurnList = {
+            ActionType.LESSON_ONE,
+            ActionType.LESSON_TWO,
+            ActionType.FENCE,
+            ActionType.FARM_EXPANSION,
+            ActionType.MEETING_PLACE,
+            ActionType.FARMLAND,
+            ActionType.MAJOR_FACILITIES,
+            ActionType.GRAIN_UTILIZATION,
+            ActionType.BASIC_FAMILY_INCREASE,
+            ActionType.HOUSE_RENOVATION,
+            ActionType.FIELD_FARMING,
+            ActionType.URGENT_FAMILY_INCREASE,
+            ActionType.FARM_REMODELING,
+        };
+
+        ActionType[] startTurnTypeList = {
+            ActionType.BUSH,
+            ActionType.DOBULE_BUSH,
+            ActionType.RESOURCE_MARKET,
+            ActionType.CLAY_PIT,
+            ActionType.LESSON_ONE,
+            ActionType.LESSON_TWO,
+            ActionType.TROUPE,
+            ActionType.FARM_EXPANSION,
+            ActionType.MEETING_PLACE,
+            ActionType.SEED,
+            ActionType.FARMLAND,
+            ActionType.DATALLER,
+            ActionType.FOREST,
+            ActionType.DIRT_PIT,
+            ActionType.REED_FIELD,
+            ActionType.FISHING,
+            ActionType.MAJOR_FACILITIES,
+            ActionType.FENCE,
+            ActionType.FENCE_END,
+            ActionType.GRAIN_UTILIZATION,
+            ActionType.SHEEP_MARKET,
+            ActionType.BASIC_FAMILY_INCREASE,
+            ActionType.WESTREN_QUARRY,
+            ActionType.HOUSE_RENOVATION,
+            ActionType.PIG_MARKET,
+            ActionType.VEGETABLE_SEEDS,
+            ActionType.COW_MARKET,
+            ActionType.EASTERN_QUARRY,
+            ActionType.FIELD_FARMING,
+            ActionType.URGENT_FAMILY_INCREASE,
+            ActionType.FARM_REMODELING,
+        };
+
+        for(int i = 0; i < notEndTurnList.Length; i++)
+        {
+            NotEndTurnTypeList.Add(notEndTurnList[i]);
+        }
+
+        for(int i = 0; i < startTurnTypeList.Length; i++)
+        {
+            StartTurnTypeList.Add(startTurnTypeList[i]);
+        }
     }
 }
 

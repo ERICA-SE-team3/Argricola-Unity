@@ -126,7 +126,10 @@ public class ResourceManager : MonoBehaviour
                 break;
 
             case "food":
-                for (int i = 0; i < count; i++) { foodDecrement( playerId ); } PrintResourceOfPlayer(); 
+                for (int i = 0; i < count; i++) {
+                    if (GameManager.instance.players[playerId].food > 0) foodDecrement( playerId );
+                    else beggingIncrement( playerId ); 
+                } PrintResourceOfPlayer(); 
                 break;
 
             case "begging":

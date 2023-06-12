@@ -23,11 +23,13 @@ public class VegetableSeedRoundAct : ButtonParents
     }
     public void VegetableSeedStart()
     {   
-        ResourceManager.instance.addResource(playerIndex, "vegetable", 1);
+        int id = GameManager.instance.localPlayerIndex;
 
-        Debug.Log("Player " + playerIndex + " get " + 1 + " vegetable!");
+        ResourceManager.instance.addResource(id, "vegetable", 1);
 
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        Debug.Log("Player " + id + " get " + 1 + " vegetable!");
+
+        ResourceManager.instance.minusResource(id, "family", 1);
         GameManager.instance.PopQueue();
     }
 }

@@ -28,25 +28,26 @@ public class EasternQuarryRoundAct : ButtonParents
             GameManager.instance.PopQueue();
         }
     }
+
     public void EasternQuarryStart()
     {
-      playerIndex = GameManager.instance.getCurrentPlayerId();
-      //stack 정보 가져오기
-      stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")];
+        int id = GameManager.instance.localPlayerIndex;
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")];
 
-      // 있다면 돌 얻기 함수 호출
-      ResourceManager.instance.addResource(playerIndex, "stone", stack);
+        // 있다면 돌 얻기 함수 호출
+        ResourceManager.instance.addResource(id, "stone", stack);
 
-      //확인 message
-      Debug.Log("Player " + playerIndex + " get " + stack + " stone(rock)!");
+        //확인 message
+        Debug.Log("Player " + id + " get " + stack + " stone(rock)!");
 
-      //stack 초기화
-      GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")] = 0;
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("easternQuarry")] = 0;
 
-      //행동을 한 후 가족 수 하나 줄이기
-      ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(id, "family", 1);
 
-      // 큐가 빈 상태로 popQueue()를 다시 호출하여 turn이 끝났다는 flag 를 얻음
-      GameManager.instance.PopQueue();
+        // 큐가 빈 상태로 popQueue()를 다시 호출하여 turn이 끝났다는 flag 를 얻음
+        GameManager.instance.PopQueue();
     }
 }

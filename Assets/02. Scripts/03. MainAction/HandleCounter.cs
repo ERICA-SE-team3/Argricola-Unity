@@ -9,7 +9,7 @@ public class HandleCounter : MonoBehaviour
     private int count = 0;
 
     // Start is called before the first frame update
-void Start()
+    void Start()
     {
         textObject = GetComponent<Text>();
         textObject.text = count.ToString();
