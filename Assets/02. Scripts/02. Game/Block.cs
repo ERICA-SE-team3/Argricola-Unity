@@ -381,8 +381,10 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void SetShedUpdate()
     {
-        this.hasShed = true;
-        this.transform.Find("Shed").gameObject.SetActive(true);
+        if(this.hasShed)
+        {
+           this.transform.Find("Shed").gameObject.SetActive(true);
+        }
     }
 
     public void SetFamily()

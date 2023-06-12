@@ -14,8 +14,7 @@ public class SowingAction : PlayerBoardAction
     {
         if(!IsStartInstall())
         {
-            Debug.LogError("씨 뿌리기 행동을 시작할 수 없습니다.");
-            GameManager.instance.PopQueue();
+            Warner.instance.LogAction("씨 뿌리기 행동을 시작할 수 없습니다.");
             return false;
         }
 
@@ -33,8 +32,7 @@ public class SowingAction : PlayerBoardAction
     {
         if(!IsEndInstall())
         {
-            Warner.instance.LogAction("씨 뿌리기 행동을 종료할 수 없습니다.");
-            Debug.LogError("씨 뿌리기 행동을 종료할 수 없습니다.");
+            Debug.LogWarning("씨 뿌리기 행동을 종료할 수 없습니다.");
             return;
         }
 

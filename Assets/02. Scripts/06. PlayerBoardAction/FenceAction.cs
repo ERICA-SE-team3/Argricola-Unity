@@ -46,6 +46,7 @@ public class FenceAction : PlayerBoardAction
     public override bool IsStartInstall()
     {
         int id = board.player.id;
+        blocks = board.blocks;
         
         int wood = ResourceManager.instance.getResourceOfPlayer(id, "wood");
         if (wood == 0) return false;
