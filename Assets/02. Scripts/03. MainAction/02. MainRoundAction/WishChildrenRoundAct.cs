@@ -22,8 +22,20 @@ public class WishChildrenRoundAct : ButtonParents
         playerIndex = GameManager.instance.getCurrentPlayerId();
         int userPlayerId = GameManager.instance.localPlayerIndex;
 
+        int id = GameManager.instance.localPlayerIndex;
+
+        countFamily = ResourceManager.instance.getResourceOfPlayer(id, "family");
+        countRoom = ResourceManager.instance.getResourceOfPlayer(id, "room");
+
+        if(countFamily >= countRoom)
+        {
+            Warner.instance.LogWarning("가족 수가 방의 개수보다 많거나 같습니다.\n 행동을 실행할 수 없습니다.");
+            return;
+        }
+
         if(playerIndex == userPlayerId && GameManager.instance.IsDoingAct[20]==false)
         {
+
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
             GameManager.instance.queueActionType = ActionType.BASIC_FAMILY_INCREASE_END;
             GameManager.instance.SendMessage(ActionType.BASIC_FAMILY_INCREASE);
@@ -43,6 +55,8 @@ public class WishChildrenRoundAct : ButtonParents
 
         countFamily = ResourceManager.instance.getResourceOfPlayer(id, "family");
         countRoom = ResourceManager.instance.getResourceOfPlayer(id, "room");
+
+
         if (countFamily < countRoom)
         {
           //행동을 한 후 가족 수 하나 줄이기
