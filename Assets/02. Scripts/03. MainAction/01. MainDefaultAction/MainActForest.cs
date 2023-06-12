@@ -33,9 +33,6 @@ public class MainActForest : ButtonParents
             GameManager.instance.actionQueue.Enqueue("forest");
             GameManager.instance.PopQueue();
         }
-
-
-        
     }
     public void ForestStart()
     {

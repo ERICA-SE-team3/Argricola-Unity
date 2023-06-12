@@ -45,6 +45,8 @@ public class PigMarketRoundAct : ButtonParents
         //확인 message
         Debug.Log("Player " + id + " get " + stack + " pig!");
 
+        //개인판에 소 배치
+
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
 

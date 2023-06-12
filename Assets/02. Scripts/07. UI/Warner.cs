@@ -20,6 +20,7 @@ public class Warner : MonoBehaviour
     {
         text.text = msg;
         this.gameObject.SetActive(true);
+        ResetListener();
     }
 
     public void LogAction(string msg)
