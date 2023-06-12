@@ -346,6 +346,15 @@ public class GameManager : MonoBehaviour
 
         msgData = data;
         players[data.actionPlayerId].SetPlayerMessageData(data.player);
+        if(data.actionType == ActionType.MEETING_PLACE || data.actionType == ActionType.MEETING_PLACE)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                players[i].isFirstPlayer = false;
+            }
+        }
+
+
         playerBoards[data.actionPlayerId].SetBoardMessageData(data.playerBoard);
         isDataUpdated = true;
         if(data.actionType != ActionType.CHANGE_RESOURCE && data.actionType != ActionType.MOVE_ANIMAL)
@@ -502,7 +511,7 @@ public class GameManager : MonoBehaviour
     void UpdateData()
     {
         isDataUpdated = false;
-        if(msgData.actionType == ActionType.MEETING_PLACE_END)
+        if(msgData.actionType == ActionType.MEETING_PLACE_END || msgData.actionType == ActionType.MEETING_PLACE)
         {
             SidebarManager.instance.FirstPlayerIcon(msgData.actionPlayerId);
         }
@@ -511,6 +520,7 @@ public class GameManager : MonoBehaviour
         {
             SidebarManager.instance.SidebarUpdate(i);
         }
+
         Logger.Log(msgData);
 
         if(msgData.actionType != ActionType.CHANGE_RESOURCE && msgData.actionType != ActionType.MOVE_ANIMAL)

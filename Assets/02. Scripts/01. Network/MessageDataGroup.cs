@@ -13,6 +13,8 @@ public class PlayerMessageData
     public int family,fence,shed,room, baby;
     public int houseGrade;
 
+    public bool isFirstPlayer;
+
     public int remainFamilyOfCurrentPlayer;
     //직업 카드
     public List<int> jobcard_owns;

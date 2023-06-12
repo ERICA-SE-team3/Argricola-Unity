@@ -31,27 +31,26 @@ public class WesternQuarryRoundAct : ButtonParents
     {
         int id = GameManager.instance.localPlayerIndex;
         
-        playerIndex = GameManager.instance.getCurrentPlayerId();
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")];
 
         // 있다면 돌 얻기 함수 호출
-        ResourceManager.instance.addResource(playerIndex, "stone", stack);
+        ResourceManager.instance.addResource(id, "stone", stack);
 
         //돌집게 카드를 보유중이라면 나무 1개 추가
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("stoneClamp"))
+        if (GameManager.instance.players[id].HasJobCard("stoneClamp"))
         {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("stoneClamp");
+            GameManager.instance.players[id].ActCard("stoneClamp");
         }
             
             //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " stone(rock)!");
+        Debug.Log("Player " + id + " get " + stack + " stone(rock)!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
 
         // 큐가 빈 상태로 popQueue()를 다시 호출하여 turn이 끝났다는 flag 를 얻음
         GameManager.instance.PopQueue();

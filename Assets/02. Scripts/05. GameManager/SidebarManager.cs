@@ -56,6 +56,8 @@ public class SidebarManager : MonoBehaviour
     }
 
     public void FirstPlayerIcon(int playerIndex){
+        Debug.Log("FirstPlayerIcon : " + playerIndex, this);
+        
         GameObject sidebarPlayerObject;
         for(int i = 0; i < 4; i++){
             sidebarPlayerObject = players[i];
