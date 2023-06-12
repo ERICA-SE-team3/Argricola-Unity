@@ -1073,6 +1073,8 @@ MonoBehaviour:
   - {fileID: 2582608615460925351}
   - {fileID: 3171627901043401711}
   - {fileID: 3914602500529560971}
+  highstPlayerScore: 0
+  highstPlayerIndex: 0
 --- !u!1 &4919092648995946870
 GameObject:
   m_ObjectHideFlags: 0

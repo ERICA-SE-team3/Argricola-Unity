@@ -500,7 +500,8 @@ public class GameManager : MonoBehaviour
             {
                 //2-2-2. 게임 종료
                 Debug.Log("Game is Over!");
-                FinishAgriCola();
+                //FinishAgriCola();
+                EndPhase.instance.EndGame();
             } 
         }
     }
