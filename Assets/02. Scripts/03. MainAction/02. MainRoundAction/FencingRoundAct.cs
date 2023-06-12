@@ -35,6 +35,7 @@ public class FencingRoundAct : ButtonParents
 
     public void StartFencing() {
         int id = GameManager.instance.localPlayerIndex;
+        Camera.main.GetComponent<CameraManager>().ShowPlayer(id);
         GameManager.instance.playerBoards[id].StartInstallFence();
     }
 }
