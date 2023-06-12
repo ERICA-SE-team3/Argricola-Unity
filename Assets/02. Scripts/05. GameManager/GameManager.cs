@@ -474,15 +474,6 @@ public class GameManager : MonoBehaviour
         //2. 라운드 전체가 끝남.
         else
         {
-            for(int i=0; i<4; i++)
-            {
-                if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
-                {
-                    ResourceManager.instance.minusResource(i, "baby", 1);
-                    ResourceManager.instance.addResource(i, "family", 1);
-                    playerBoards[i].AddFamily();
-                }
-            }
             MainboardUIController.instance.ResetBoard();
             //2-1. 수확라운드인지 체크 후 수확 실행
             if (this.checkHarvest())
@@ -491,8 +482,19 @@ public class GameManager : MonoBehaviour
                 for(int i = 0; i < 4; i++)
                 {
                     playerBoards[i].Cultivate();
+                    playerBoards[i].Feeding();
+                    playerBoards[i].Breeding();
                 }
-                //수확라운드 진행
+            }
+
+            for(int i=0; i<4; i++)
+            {
+                if(ResourceManager.instance.getResourceOfPlayer(i, "baby") != 0)
+                {
+                    ResourceManager.instance.minusResource(i, "baby", 1);
+                    ResourceManager.instance.addResource(i, "family", 1);
+                    playerBoards[i].AddFamily();
+                }
             }
 
             //2-2. 다음 라운드 진행이 가능한지 ( 마지막 라운드 인지 체크 )

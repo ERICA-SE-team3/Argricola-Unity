@@ -10,8 +10,6 @@ public class SceneInitializer : MonoBehaviour
     public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
     public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
 
-
-
     private void Start() 
     {
         InitGameManager();
