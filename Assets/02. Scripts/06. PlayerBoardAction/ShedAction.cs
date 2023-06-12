@@ -8,11 +8,12 @@ using System;
 
 public class ShedAction : PlayerBoardAction
 {
+    Player player;
     int playerID;
 
     public ShedAction(PlayerBoard board) : base(board)
     {
-        playerID = board.player.id;
+        player = board.player;
     }
 
     public override bool StartInstall()
@@ -28,6 +29,7 @@ public class ShedAction : PlayerBoardAction
         else
         {
             Debug.LogError("외양간 설치 행동을 시작할 수 없습니다.");
+            GameManager.instance.PopQueue();
         }
         return false;
     }
@@ -52,6 +54,8 @@ public class ShedAction : PlayerBoardAction
 
     public override bool IsStartInstall()
     {
+        player = board.player;
+        playerID = player.id;
         int wood = ResourceManager.instance.getResourceOfPlayer(playerID, "wood");
         if(wood >= 2) return true;
 

@@ -33,6 +33,7 @@ public class SceneInitializer : MonoBehaviour
         {
             PlayerBoard tmpPlayerBoard = playerBoardsParent.transform.GetChild(i).GetComponent<PlayerBoard>();
             tmpPlayerBoard.SetPlayer(GameManager.instance.players[i]);
+            Debug.Log(tmpPlayerBoard.player.id);
             GameManager.instance.playerBoards.Add(tmpPlayerBoard);
         }
 

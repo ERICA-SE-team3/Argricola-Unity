@@ -299,6 +299,7 @@ public class GameManager : MonoBehaviour
         {
             Player temp = new Player();
             temp.id = i;
+            temp.Init();
             this.players.Add(temp);
         }
         //=========================================
@@ -450,7 +451,7 @@ public class GameManager : MonoBehaviour
                 if ( this.findNextPlayer() )
                 {
                     //... 그대로 진행
-                    Debug.Log("Move to Next Turn");
+                    // Debug.Log("Move to Next Turn");
                     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
                     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
