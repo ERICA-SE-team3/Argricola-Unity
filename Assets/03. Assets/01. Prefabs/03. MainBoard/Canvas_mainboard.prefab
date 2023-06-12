@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &921328387919099066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &921328388486522734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  userPlayerId: 0
 --- !u!1 &921328388683613999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,7 +2311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de4e0e0c2c7c467381340f7e2961777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMain: {fileID: 0}
   playerIndex: 0
+  userPlayerId: 0
 --- !u!1 &921328388791725653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,6 +2461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &921328388873156582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2691,7 +2697,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &921328388895035855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3489,6 +3495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7c81f096b814fa48c3432e03bb9459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardMain: {fileID: 0}
   playerIndex: 0
 --- !u!1 &921328389295892618
 GameObject:
@@ -3637,6 +3644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &921328389321251173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,6 +3792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  userPlayerId: 0
 --- !u!1 &921328389325509614
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,6 +4087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  userPlayerId: 0
 --- !u!1 &921328389519830404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,6 +4676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  localPlayerIndex: 0
 --- !u!1 &921328389684260724
 GameObject:
   m_ObjectHideFlags: 0
