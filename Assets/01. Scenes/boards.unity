@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1681,7 +1681,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &269207027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &429521404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,7 +2462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!224 &433254024 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7704917561937125421, guid: ee7bd8ec7950ded48a2cf28fe7337384, type: 3}
@@ -2889,7 +2886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9490196}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3227,7 +3224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3469,7 +3466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.87058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3818,7 +3815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.90588236}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4209,7 +4206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4647,7 +4644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &897166216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,7 +4791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &929888569
 GameObject:
   m_ObjectHideFlags: 0
@@ -12762,7 +12757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.87058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13069,7 +13064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.8784314}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13285,7 +13280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
+  localPlayerIndex: 0
 --- !u!1 &1384011544
 GameObject:
   m_ObjectHideFlags: 0
@@ -13433,7 +13428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &1394625947
 GameObject:
   m_ObjectHideFlags: 0
@@ -13657,7 +13651,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &1422285767
 GameObject:
   m_ObjectHideFlags: 0
@@ -13805,7 +13798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &1439863180
 GameObject:
   m_ObjectHideFlags: 0
@@ -13882,7 +13874,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -14508,7 +14500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15323,7 +15315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!1 &1714939483
 GameObject:
   m_ObjectHideFlags: 0
@@ -15514,15 +15505,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPlayerIndex: 0
+  playerBoardsObj: {fileID: 0}
   playerBoards: []
-  stackOfRoundCard: 
   currentPlayerId: 0
   currentRound: 0
+  stackOfRoundCard: 
   roundList: {fileID: 1200046603}
   roundcards: []
+  IsDoingAct: 
   RoundFlag: 1
   endTurnFlag: 1
-  playerBoard: {fileID: 0}
   sheepMarket: {fileID: 0}
   wishChildren: {fileID: 0}
   westernQuarry: {fileID: 0}
@@ -15530,7 +15522,37 @@ MonoBehaviour:
   vegetableSeed: {fileID: 0}
   easternQuarry: {fileID: 0}
   cowMarket: {fileID: 0}
+  grainUtilization: {fileID: 0}
+  fencing: {fileID: 0}
+  houseDevelop: {fileID: 0}
+  cultivation: {fileID: 0}
+  farmDevelop: {fileID: 0}
+  improvements: {fileID: 0}
+  urgentWishChildren: {fileID: 0}
+  clayPit: {fileID: 0}
+  copse: {fileID: 0}
+  dayLaborer: {fileID: 0}
+  dirtPit: {fileID: 0}
+  expand: {fileID: 0}
+  farming: {fileID: 0}
+  fishing: {fileID: 0}
+  forest: {fileID: 0}
+  grainSeed: {fileID: 0}
+  grove: {fileID: 0}
+  lessonFood1: {fileID: 0}
+  lessonFood2: {fileID: 0}
+  meeting: {fileID: 0}
+  reedFeild: {fileID: 0}
+  resMarket: {fileID: 0}
+  trevelingTheater: {fileID: 0}
+  scoreBoard: {fileID: 0}
   popAction: 
+  queueActionType: 45
+  deck:
+    cards: []
+  isGameScene: 0
+  isDataUpdated: 0
+  NotEndTrunTypeList: 
 --- !u!1 &1813307286
 GameObject:
   m_ObjectHideFlags: 0
@@ -15583,7 +15605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.85882354}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -16240,7 +16262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  userPlayerId: 0
 --- !u!224 &2000029248 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7800783682230843331, guid: 5a5390e37a7384203abfc1deeb84124e, type: 3}
@@ -16554,7 +16575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
