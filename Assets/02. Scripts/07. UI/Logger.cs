@@ -15,6 +15,8 @@ public class Logger : MonoBehaviour
 
     public static void Log(MessageData messageData)
     {
-        textBox.text += "- 플레이어 " + messageData.actionPlayerId + "가 " + messageData.actionType + " 행동을 했습니다.\n";
+        string currentTime = System.DateTime.Now.ToString("HH:mm:ss");
+        textBox.text = "[" + currentTime + "]" + 
+            "플레이어 " + messageData.actionPlayerId + "가 " + messageData.actionType + " 행동을 했습니다.\n" + textBox.text;
     }
 }

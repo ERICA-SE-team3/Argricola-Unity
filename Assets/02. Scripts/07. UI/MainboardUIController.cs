@@ -82,8 +82,11 @@ public class MainboardUIController : MonoBehaviour
         // {
         //     return;
         // }
+        
         ButtonParents button = GetButtonObject(type).GetComponent<ButtonParents>();
+        Debug.Log("ActivatePlayerOnButton: " + ActionToActConverter.ActionTypeToActIndex(type));
         GameManager.instance.IsDoingAct[ActionToActConverter.ActionTypeToActIndex(type)] = true;
+        Debug.Log("ActivatePlayerOnButton: " + type.ToString());
         if(buttons.Contains(button)) { return; }
         buttons.Add(button);
         GameObject image = button.gameObject.transform.Find("Player").gameObject;

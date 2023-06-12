@@ -32,10 +32,10 @@ public class AnimalModalManager : MonoBehaviour
     public int maxAnimal = 0;
     AnimalType animalType = AnimalType.NONE;
 
-    int[] dx = {-1, 1, 0, 0};
-    int[] dy = {0, 0, -1, 1};
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
 
-    int[] dfence = {1,0,3,2};
+    static int[] dfence = {1,0,3,2};
 
 
     // Start is called before the first frame update
@@ -117,7 +117,7 @@ public class AnimalModalManager : MonoBehaviour
         return AnimalType.NONE;
     }
 
-    int CalculateMaxAnimal()
+    public int CalculateMaxAnimal()
     {
         int max = 0;
         if(block.type == BlockType.FARM) return 0;
@@ -153,7 +153,45 @@ public class AnimalModalManager : MonoBehaviour
         return max;
     }
 
-    List<Block> GetNearFences(Block fenceBlock)
+    public static int CalculateMaxAnimal(Block block)
+    {
+        List<Block> nearBlocks = GetNearFences(block);
+
+        int max = 0;
+        if(block.type == BlockType.FARM) return 0;
+
+        if(block.type == BlockType.HOUSE)
+        {
+            max = 1;
+            return max;
+        }
+
+        if(block.type == BlockType.FENCE)
+        {
+            foreach(Block b in nearBlocks)
+            {
+                int totalShed = 0;
+                int totalAnimal = 0;
+                foreach(Block nb in nearBlocks)
+                {
+                    if(nb.hasShed) totalShed++;
+                    totalAnimal += nb.sheep + nb.pig + nb.cow;
+                }
+                max = nearBlocks.Count * 2 * ((int)Mathf.Pow(2, totalShed));
+                max -= totalAnimal;
+                max += block.sheep + block.pig + block.cow;
+            }
+        }
+
+        if(block.type == BlockType.EMPTY)
+        {
+            if(block.hasShed) max = 1;
+            else max = 0;
+        }
+        return max;
+    }
+
+    static List<Block> GetNearFences(Block block)
     {
         List<Block> NearBlocks = new List<Block>();
         Queue<Block> q = new Queue<Block>();

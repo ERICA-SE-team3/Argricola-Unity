@@ -36,12 +36,15 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         this.hasFamily = data.hasFamily;
         this.seedType = data.seedType;
         this.seedCount = data.seedCount;
+
+        isUpdated = true;
     }
 
     private void Update() {
-        if(!isUpdated)
+        if(isUpdated)
         {
-            isUpdated = true;
+            isUpdated = false;
+            SetShedUpdate();
             if(type == BlockType.FARM)
             {
                 SetSeed(seedType, seedCount);
@@ -127,6 +130,8 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public bool ChangeHouse()
     {
+        ResourceManager.instance.addResource(board.player.id, "room", 1);
+
         currentBackground?.SetActive(false);
         string houseName = GetHouseBackgroundName(board.houseType);
         currentBackground = backgroundParent.transform.Find(houseName).gameObject;
@@ -370,6 +375,12 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public void SetShed() 
     {
         ResourceManager.instance.minusResource(board.player.id, "wood", 2);
+        this.hasShed = true;
+        this.transform.Find("Shed").gameObject.SetActive(true);
+    }
+
+    public void SetShedUpdate()
+    {
         this.hasShed = true;
         this.transform.Find("Shed").gameObject.SetActive(true);
     }

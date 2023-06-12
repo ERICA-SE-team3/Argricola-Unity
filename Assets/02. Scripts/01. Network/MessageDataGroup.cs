@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerMessageData
 {
-    public bool isFirstPlayer = false;
+    // public bool isFirstPlayer = false;
     public int pig,cow,sheep;
     public int wheat,vegetable;
     public int wood,rock,reed,clay;
@@ -37,7 +37,7 @@ public class PlayerMessageData
 
     public void Init()
     {
-        this.isFirstPlayer = false;
+        // this.isFirstPlayer = false;
         this.pig = 0; this.cow = 0; this.sheep = 0;
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;

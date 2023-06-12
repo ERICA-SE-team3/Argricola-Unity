@@ -166,6 +166,11 @@ public class PlayerBoard : MonoBehaviour
                 familyBlocks.Add(block);
             }
         }
+        if(familyBlocks.Count < player.family)
+        {
+            // 급한 가족 늘리기 함수.
+            Debug.LogWarning("급한 가족 늘리기 - 미구현");
+        }
     }
 
     //-------------------------------------------------------------------------- 
@@ -275,6 +280,59 @@ public class PlayerBoard : MonoBehaviour
 
         return result;
     }
+
+    public void Breeding()
+    {
+        int cow = player.cow;
+        int sheep = player.sheep;
+        int pig = player.pig;
+
+        if(sheep > 2)
+        {
+            ResourceManager.instance.addResource(player.id, "sheep", 1);
+            foreach(Block b in blocks)
+            {
+                if(b.sheep > 0 && AnimalModalManager.CalculateMaxAnimal(b) >= b.sheep + 1)
+                {
+                    b.SetAnimal(b.sheep + 1, b.pig, b.cow);
+                    break;
+                }
+            }
+        }
+
+        if(pig > 2)
+        {
+            ResourceManager.instance.addResource(player.id, "pig", 1);
+            foreach(Block b in blocks)
+            {
+                if(b.pig > 0 && AnimalModalManager.CalculateMaxAnimal(b) >= b.pig + 1)
+                {
+                    b.SetAnimal(b.sheep, b.pig + 1, b.cow);
+                    break;
+                }
+            }
+        }
+
+        if(cow > 2)
+        {
+            ResourceManager.instance.addResource(player.id, "cow", 1);
+            foreach(Block b in blocks)
+            {
+                if(b.cow > 0 && AnimalModalManager.CalculateMaxAnimal(b) >= b.cow + 1)
+                {
+                    b.SetAnimal(b.sheep, b.pig, b.cow + 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Feeding()
+    {
+        ResourceManager.instance.minusResource(player.id, "food", player.family * 2 + player.baby);
+    }
+
+
     // -------------------------------------------------------------------------
     public void _TestSetFence() { blocks[2,4]._TestSetFence(); }
 
