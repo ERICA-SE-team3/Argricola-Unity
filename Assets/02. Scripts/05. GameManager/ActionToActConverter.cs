@@ -17,7 +17,7 @@ public static class ActionToActConverter
             case ActionType.CLAY_PIT:
                 return 3;
             case ActionType.LESSON_ONE:
-                return 4;
+                return 10;
             case ActionType.TROUPE:
                 return 5;
             case ActionType.FARM_EXPANSION:
@@ -29,7 +29,7 @@ public static class ActionToActConverter
             case ActionType.FARMLAND:
                 return 9;
             case ActionType.LESSON_TWO:
-                return 10;
+                return 4;
             case ActionType.DATALLER:
                 return 11;
             case ActionType.FOREST:
@@ -70,6 +70,8 @@ public static class ActionToActConverter
                 return 29;
         }
         
+        Debug.LogError("ActionTypeToActIndex: ActionType is not valid");
+        Debug.LogError("ActionTypeToActIndex: " + type);
         throw new Exception("ActionTypeToActIndex: ActionType is not valid");
     }  
 }

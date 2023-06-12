@@ -19,6 +19,14 @@ public class Warner : MonoBehaviour
     public void LogWarning(string msg)
     {
         text.text = msg;
-        this.gameObject.SetActive(true);    
+        this.gameObject.SetActive(true);
+        this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() => GameManager.instance.PopQueue());
+        this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() => ResetListener());
+    }
+    
+    public void ResetListener()
+    {
+        this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.RemoveAllListeners();
+        this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() => this.gameObject.SetActive(false));
     }
 }

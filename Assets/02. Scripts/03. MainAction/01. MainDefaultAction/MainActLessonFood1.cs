@@ -20,9 +20,17 @@ public class MainActLessonFood1 : ButtonParents
 
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[10] = true;
-            GameManager.instance.actionQueue.Enqueue("lessonFood1");
+            // GameManager.instance.actionQueue.Enqueue("lessonFood1");
+            GameManager.instance.actionQueue.Enqueue("lesson");
             GameManager.instance.PopQueue();
         }
+    }
+
+    public void Lesson()
+    {
+        localPlayerIndex = GameManager.instance.localPlayerIndex;
+        ResourceManager.instance.minusResource(localPlayerIndex, "family", 1);
+        Warner.instance.LogWarning("음식을 소모하고 직업을 얻습니다.");
     }
 
     public void LessonFoodStartOne()
@@ -48,7 +56,7 @@ public class MainActLessonFood1 : ButtonParents
             //음식 감소 - 현재 최대 카드는 2개 이므로 여기서 음식을 하나씩만 뺀다.
             ResourceManager.instance.minusResource(localPlayerIndex, "food", 1);
                     
-            }
+        }
         //행동을 한 후 가족 수 하나 줄이기
         ResourceManager.instance.minusResource(localPlayerIndex, "family", 1);
 
