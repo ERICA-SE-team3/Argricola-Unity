@@ -34,10 +34,12 @@ public class FarmDevelopRoundAct : ButtonParents
     }
 
     public void StartHouseDeveloping() {
-      GameManager.instance.playerBoards[playerIndex].StartUpgradeHouse();
+      int id = GameManager.instance.localPlayerIndex;
+      GameManager.instance.playerBoards[id].StartUpgradeHouse();
     }
     
     public void StartFencing() {
-      GameManager.instance.playerBoards[playerIndex].StartInstallFence();
+      int id = GameManager.instance.localPlayerIndex;
+      GameManager.instance.playerBoards[id].StartInstallFence();
     }
 }

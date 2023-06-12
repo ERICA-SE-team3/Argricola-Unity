@@ -34,26 +34,28 @@ public class MainActGrove : ButtonParents
     }
     public void GroveStart()
     {
+        int id = GameManager.instance.localPlayerIndex;
+
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")];
 
         // 있다면 니무 얻기 함수 호출
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "wood", stack * 2);
+        ResourceManager.instance.addResource(id, "wood", stack * 2);
 
         //나무꾼 카드를 보유중이라면 나무 1개 추가
-        if (GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard("woodCutter"))
+        if (GameManager.instance.players[id].HasJobCard("woodCutter"))
         {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("woodCutter");
+            GameManager.instance.players[id].ActCard("woodCutter");
         }
 
         //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack*2 + " wood!");
+        Debug.Log("Player " + id + " get " + stack*2 + " wood!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
 
         GameManager.instance.PopQueue();
     }

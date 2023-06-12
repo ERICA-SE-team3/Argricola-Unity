@@ -39,26 +39,28 @@ public class MainActFishing : ButtonParents
     }
     public void FishingStart()
     {
-            //stack 정보 가져오기
-            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")];
+        int id = GameManager.instance.localPlayerIndex;
 
-            ResourceManager.instance.addResource(playerIndex, "food", stack);
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")];
 
-            //돌집게 카드를 보유중이라면 나무 1개 추가
-            if (GameManager.instance.players[playerIndex].HasSubCard("woodBoat"))
-            {
-                GameManager.instance.players[playerIndex].ActCard("woodBoat");
-            }
+        ResourceManager.instance.addResource(id, "food", stack);
 
-            //확인 message
-            Debug.Log("Player " + playerIndex + " get " + stack + " food!");
+        //돌집게 카드를 보유중이라면 나무 1개 추가
+        if (GameManager.instance.players[id].HasSubCard("woodBoat"))
+        {
+            GameManager.instance.players[id].ActCard("woodBoat");
+        }
 
-            //stack 초기화
-            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")] = 0;
+        //확인 message
+        Debug.Log("Player " + id + " get " + stack + " food!");
 
-            //행동을 한 후 가족 수 하나 줄이기
-            ResourceManager.instance.minusResource(playerIndex, "family", 1);
-            
-            GameManager.instance.PopQueue();
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("fishing")] = 0;
+
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(id, "family", 1);
+        
+        GameManager.instance.PopQueue();
     }
 }

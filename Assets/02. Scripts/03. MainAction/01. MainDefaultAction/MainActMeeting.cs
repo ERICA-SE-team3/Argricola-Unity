@@ -13,8 +13,8 @@ public class MainActMeeting : ButtonParents
         localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[7]==false)
         {
-            GameManager.instance.queueActionType = ActionType.MEETING_PLACE_END;
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.MEETING_PLACE_END;
             GameManager.instance.SendMessage(ActionType.MEETING_PLACE);
             //행동을 했음 표시    
             GameManager.instance.IsDoingAct[7] = true;

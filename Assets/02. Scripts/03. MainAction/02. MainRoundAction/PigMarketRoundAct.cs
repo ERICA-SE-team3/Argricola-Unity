@@ -30,23 +30,27 @@ public class PigMarketRoundAct : ButtonParents
             GameManager.instance.PopQueue();
         }
     }
+
+
     public void PigMarketStart()
     {
-    //stack 정보 가져오기
-    stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+        int id = GameManager.instance.localPlayerIndex;
 
-    // 있다면 pig 얻기 
-    ResourceManager.instance.addResource(playerIndex, "pig", stack );
+        //stack 정보 가져오기
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
 
-    //확인 message
-    Debug.Log("Player " + playerIndex + " get " + stack + " pig!");
+        // 있다면 pig 얻기 
+        ResourceManager.instance.addResource(id, "pig", stack );
 
-    //stack 초기화
-    GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
+        //확인 message
+        Debug.Log("Player " + id + " get " + stack + " pig!");
 
-    //행동을 한 후 가족 수 하나 줄이기
-    ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        //stack 초기화
+        GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 0;
 
-    GameManager.instance.PopQueue();
+        //행동을 한 후 가족 수 하나 줄이기
+        ResourceManager.instance.minusResource(id, "family", 1);
+
+        GameManager.instance.PopQueue();
     }
 }

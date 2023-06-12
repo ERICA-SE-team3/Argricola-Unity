@@ -34,6 +34,7 @@ public class FencingRoundAct : ButtonParents
     }
 
     public void StartFencing() {
-      GameManager.instance.playerBoards[userPlayerId].StartInstallFence();
+        int id = GameManager.instance.localPlayerIndex;
+        GameManager.instance.playerBoards[id].StartInstallFence();
     }
 }
