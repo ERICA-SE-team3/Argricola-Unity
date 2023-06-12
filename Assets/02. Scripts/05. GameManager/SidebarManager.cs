@@ -19,7 +19,13 @@ public class SidebarManager : MonoBehaviour
     void Start()
     {
         GameObject sidebarPlayerObject = players[GameManager.instance.localPlayerIndex];
-        sidebarPlayerObject.transform.Find("selfObject").GetComponent<Image>().enabled = true;
+        for(int i = 0; i < 4; i++){
+            if(i != GameManager.instance.localPlayerIndex){
+                players[i].transform.Find("selfObject").GetComponent<Image>().enabled = false;
+            }
+            else
+                players[i].transform.Find("selfObject").GetComponent<Image>().enabled = true;
+        }
     }
 
     // Update is called once per frame
