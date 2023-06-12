@@ -16,6 +16,15 @@ public class MainActGrove : ButtonParents
     public int playerIndex;
     int stack;
 
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("grove")];
+        text.text = stack.ToString();
+    }
+
 
     // 사용자가 '수풀'행동을 클릭했을 때
     public override void OnClick()

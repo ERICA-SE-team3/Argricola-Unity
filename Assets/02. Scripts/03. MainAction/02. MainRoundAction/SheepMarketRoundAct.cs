@@ -16,6 +16,27 @@ public class SheepMarketRoundAct : ButtonParents
     //stack 정보 가져오기
     int stack;
 
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("sheepMarket")];
+        text.text = stack.ToString();
+    }
+
+    private void OnEnable() {
+        Debug.Log(GameManager.instance.stackOfRoundCard.Length);
+        Debug.Log("sheepMarket" + GameManager.instance.getStackBehavior("sheepMarket"));
+        if(GameManager.instance.stackOfRoundCard.Length != 0)
+        {
+            Debug.Log(GameManager.instance.stackOfRoundCard.Length);
+            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("sheepMarket")] = 1; 
+        }
+        else
+            stack = 0;
+    }
+
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();

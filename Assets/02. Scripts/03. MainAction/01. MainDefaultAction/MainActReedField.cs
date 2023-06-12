@@ -8,6 +8,15 @@ public class MainActReedField : ButtonParents
     int stack;
 
 
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("reedField")];
+        text.text = stack.ToString();
+    }
+
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();

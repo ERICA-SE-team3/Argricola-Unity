@@ -177,6 +177,7 @@ public class NetworkManager : MonoBehaviour
         message.actionType = ActionType.BUSH;
         message.player = new PlayerMessageData();
         message.playerBoard = new PlayerBoardMessageData();
+        message.stacks = GameManager.instance.stackOfRoundCard;
 
        _SendMessage(message);
     }
@@ -213,6 +214,8 @@ public class MessageData
     
     public PlayerMessageData player; 
     public PlayerBoardMessageData playerBoard; 
+
+    public int[] stacks;
 }
 
 

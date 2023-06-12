@@ -345,6 +345,7 @@ public class GameManager : MonoBehaviour
     
     public void GetMessage(MessageData data)
     {
+        stackOfRoundCard = data.stacks;
         if (data.actionPlayerId == localPlayerIndex) return;
 
         msgData = data;
@@ -374,6 +375,8 @@ public class GameManager : MonoBehaviour
     {
         //소통할 message 형식
         MessageData message = new MessageData();
+
+        message.stacks = stackOfRoundCard;
         
         // 액션 디큐하는 공간
         // ActionType didActiontype = Dequeue();
@@ -403,6 +406,7 @@ public class GameManager : MonoBehaviour
         message.actionType = actionType;
         message.player = players[localPlayerIndex].GetPlayerMessageData();
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
+        message.stacks = GameManager.instance.stackOfRoundCard;
 
         NetworkManager.instance.SendMessage(message);
 

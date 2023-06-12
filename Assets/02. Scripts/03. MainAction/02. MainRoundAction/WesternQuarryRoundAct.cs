@@ -13,6 +13,22 @@ public class WesternQuarryRoundAct : ButtonParents
     int stack;
     public int playerIndex;
 
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")];
+        text.text = stack.ToString();
+    }
+
+    private void OnEnable() {
+        if(GameManager.instance.stackOfRoundCard.Length != 0)
+            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("westernQuarry")] = 1; 
+        else
+            stack = 0;
+    }
+
     public override void OnClick()
     {
         playerIndex = GameManager.instance.getCurrentPlayerId();
