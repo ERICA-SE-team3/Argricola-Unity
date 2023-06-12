@@ -35,10 +35,12 @@ public class Player
     //현재 플레이어의 남은 가족 수 
     public int remainFamilyOfCurrentPlayer;
 
+    bool isFirstPlayerChaned;
+
     public PlayerMessageData GetPlayerMessageData()
     {
         PlayerMessageData msgdata = new PlayerMessageData();
-        msgdata.isFirstPlayer = this.isFirstPlayer;
+        // msgdata.isFirstPlayer = this.isFirstPlayer;
         msgdata.pig = this.pig;
         msgdata.cow = this.cow;
         msgdata.sheep = this.sheep;
@@ -71,7 +73,7 @@ public class Player
 
     public void SetPlayerMessageData(PlayerMessageData data)
     {
-        this.isFirstPlayer = data.isFirstPlayer;
+        // this.isFirstPlayer = data.isFirstPlayer;
         this.pig = data.pig;
         this.cow = data.cow;
         this.sheep = data.sheep;
@@ -119,7 +121,7 @@ public class Player
         this.wheat = 0; this.vegetable = 0;
         this.wood = 0; this.rock = 0; this.reed = 0; this.clay = 0;
         this.food = 3; this.begging = 0;
-        this.family = 2; this.fence = 0; this.shed = 0; this.room = 2; this.baby = 0;
+        this.family = 2; this.fence = 0; this.shed = 0; this.room = 0; this.baby = 0;
         this.jobcard_owns = new List<int>();
         this.jobcard_hands = new List<int>();
         this.subcard_owns = new List<int>();
@@ -755,7 +757,7 @@ public class Player
                 }
                 break;
         }
-
+        
     }
 
     public void ActCard( string cardName ) {

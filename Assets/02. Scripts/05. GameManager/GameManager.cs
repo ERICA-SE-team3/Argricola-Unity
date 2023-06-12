@@ -342,6 +342,11 @@ public class GameManager : MonoBehaviour
         if(isDataUpdated) 
         {
             isDataUpdated = false;
+            if(msgData.actionType == ActionType.MEETING_PLACE_END)
+            {
+                SidebarManager.instance.FirstPlayerIcon(msgData.actionPlayerId);
+            }
+
             for(int i = 0; i < 4; i++)
             {
                 SidebarManager.instance.SidebarUpdate(i);

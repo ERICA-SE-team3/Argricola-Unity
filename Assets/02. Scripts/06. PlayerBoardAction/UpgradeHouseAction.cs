@@ -49,37 +49,31 @@ public class UpgradeHouseAction : PlayerBoardAction
         }
 
         int playerReed, playerWood, playerClay, playerStone;
+        playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
+        playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
+        playerClay = ResourceManager.instance.getResourceOfPlayer(player.id, "clay");
+        playerStone = ResourceManager.instance.getResourceOfPlayer(player.id, "stone");
+
         switch(houseType)
         {
             case HouseType.WOOD:
-                playerWood = ResourceManager.instance.getResourceOfPlayer(player.id, "wood");
-                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
 
-                if(playerWood < 1 * houseNumber || playerReed < 1) {
+                if(playerClay < 1 * houseNumber || playerReed < 1) {
                     Debug.LogWarning("자원이 부족합니다.");
                     return false; 
                 }
                 break;
 
             case HouseType.CLAY:
-                playerClay = ResourceManager.instance.getResourceOfPlayer(player.id, "clay");
-                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
-
-                if(playerClay < 5 * houseNumber || playerReed < 2 * houseNumber) {
+                if(playerStone < 1 * houseNumber || playerReed < 1) {
                     Debug.LogWarning("자원이 부족합니다.");
                     return false; 
                 }
                 break;
 
             case HouseType.STONE:
-                playerStone = ResourceManager.instance.getResourceOfPlayer(player.id, "stone");
-                playerReed = ResourceManager.instance.getResourceOfPlayer(player.id, "reed");
-
-                if(playerStone < 5 * houseNumber || playerReed < 2 * houseNumber) {
-                    Debug.LogWarning("자원이 부족합니다.");
-                    return false; 
-                }
-                break;
+                Debug.Log("돌집을 업그레이드 할 수 없습니다.");
+                return false;
         }
         return true;
     }

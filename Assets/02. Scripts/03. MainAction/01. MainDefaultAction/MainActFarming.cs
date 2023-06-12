@@ -5,10 +5,11 @@ using UnityEngine;
 public class MainActFarming : ButtonParents
 {
     public int playerIndex;
+    public int localPlayerIndex;
 
     public override void OnClick(){
         playerIndex = GameManager.instance.getCurrentPlayerId();
-        int localPlayerIndex = GameManager.instance.localPlayerIndex;
+        localPlayerIndex = GameManager.instance.localPlayerIndex;
         if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[9]==false)
         {
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
@@ -34,7 +35,9 @@ public class MainActFarming : ButtonParents
     
     public void FarmingStart()
     {   
-        GameManager.instance.playerBoards[ playerIndex ].StartInstallFarm();
+        Camera mainCamera = Camera.main;
+        mainCamera.GetComponent<CameraManager>().ShowPlayer(localPlayerIndex);
+        GameManager.instance.playerBoards[ localPlayerIndex ].StartInstallFarm();
     }
 
 }
