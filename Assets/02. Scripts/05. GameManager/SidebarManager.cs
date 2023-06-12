@@ -32,6 +32,7 @@ public class SidebarManager : MonoBehaviour
         sidebarPlayerObject.transform.Find("wheatObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].wheat.ToString();
         sidebarPlayerObject.transform.Find("vegetableObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].vegetable.ToString();
         sidebarPlayerObject.transform.Find("foodObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].food.ToString();
+        sidebarPlayerObject.transform.Find("beggingObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].begging.ToString();
         sidebarPlayerObject.transform.Find("cowObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].cow.ToString();
         sidebarPlayerObject.transform.Find("pigObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].pig.ToString();
         sidebarPlayerObject.transform.Find("sheepObject").Find("NumberBox").Find("NumberCounter").GetComponent<TMPro.TMP_Text>().text = GameManager.instance.players[playerIndex].sheep.ToString();
