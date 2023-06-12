@@ -32,20 +32,21 @@ public class CowMarketRoundAct : ButtonParents
     }
     public void CowMarketStart()
     {
-        playerIndex = GameManager.instance.getCurrentPlayerId();
+        int id = GameManager.instance.localPlayerIndex;
+
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cowMarket")];
 
-        ResourceManager.instance.addResource(playerIndex, "cow", stack );
+        ResourceManager.instance.addResource(id, "cow", stack );
 
         //확인 message
-        Debug.Log("Player " + playerIndex + " get " + stack + " cow!");
+        Debug.Log("Player " + id + " get " + stack + " cow!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("cowMarket")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
 
         GameManager.instance.PopQueue();
     }

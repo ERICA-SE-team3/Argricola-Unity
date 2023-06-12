@@ -16,8 +16,8 @@ public class MainActLessonFood2 : ButtonParents
         Debug.Log("isDoingAct[4] : " + GameManager.instance.IsDoingAct[4]);
         if(playerIndex == localPlayerIndex && GameManager.instance.IsDoingAct[4]==false)
         {
-            GameManager.instance.queueActionType = ActionType.LESSON_TWO_END;
             MainboardUIController.instance.ActivatePlayerOnButton(this, playerIndex);
+            GameManager.instance.queueActionType = ActionType.LESSON_TWO_END;
             GameManager.instance.SendMessage(ActionType.LESSON_TWO);
             //행동을 했음 표시
             GameManager.instance.IsDoingAct[4] = true;

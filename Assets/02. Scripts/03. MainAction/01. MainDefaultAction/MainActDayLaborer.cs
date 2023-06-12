@@ -31,19 +31,20 @@ public class MainActDayLaborer : ButtonParents
     }
     public void DayLaborerStart()
     {
-        ResourceManager.instance.addResource(playerIndex, "food", 2);
+        int id = GameManager.instance.localPlayerIndex;
+        ResourceManager.instance.addResource(id, "food", 2);
 
         //돌집게 카드를 보유중이라면 나무 1개 추가
-        if (GameManager.instance.players[playerIndex].HasSubCard("clayMining"))
+        if (GameManager.instance.players[id].HasSubCard("clayMining"))
         {
-            GameManager.instance.players[playerIndex].ActCard("clayMining");
+            GameManager.instance.players[id].ActCard("clayMining");
         }
 
             //확인 message
-            Debug.Log("Player " + playerIndex + " get " + 2 + " food!");
+            Debug.Log("Player " + id + " get " + 2 + " food!");
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(playerIndex, "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
 
         GameManager.instance.PopQueue();
     }

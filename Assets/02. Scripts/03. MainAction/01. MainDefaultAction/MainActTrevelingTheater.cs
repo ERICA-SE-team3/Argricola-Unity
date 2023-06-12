@@ -34,26 +34,28 @@ public class MainActTrevelingTheater : ButtonParents
     }
     public void TrevelingTheaterStart()
     {
+        int id = GameManager.instance.localPlayerIndex;
+
         //stack 정보 가져오기
         stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
 
         //자원 획득
-        ResourceManager.instance.addResource(GameManager.instance.getCurrentPlayerId(), "food", stack);
+        ResourceManager.instance.addResource(id, "food", stack);
 
         //마술사 카드를 보유중이라면 나무 1개, 곡식 1개 추가
-        if ( GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].HasJobCard( "magician" ) )
+        if ( GameManager.instance.players[id].HasJobCard( "magician" ) )
         {
-            GameManager.instance.players[GameManager.instance.getCurrentPlayerId()].ActCard("magician");
+            GameManager.instance.players[id].ActCard("magician");
         }
 
         //확인 message
-        Debug.Log("Player " + GameManager.instance.getCurrentPlayerId() + " get " + stack + " food!");
+        Debug.Log("Player " + id + " get " + stack + " food!");
 
         //stack 초기화
         GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")] = 0;
 
         //행동을 한 후 가족 수 하나 줄이기
-        ResourceManager.instance.minusResource(GameManager.instance.getCurrentPlayerId(), "family", 1);
+        ResourceManager.instance.minusResource(id, "family", 1);
 
         GameManager.instance.PopQueue();
     }

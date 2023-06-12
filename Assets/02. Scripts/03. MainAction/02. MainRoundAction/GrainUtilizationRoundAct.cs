@@ -56,11 +56,12 @@ public class GrainUtilizationRoundAct : ButtonParents
     }
 
     public void StartSowing() {
-        GameManager.instance.playerBoards[playerIndex].StartSowing();
+        int id = GameManager.instance.localPlayerIndex;
+
+        GameManager.instance.playerBoards[id].StartSowing();
     }
 
     public void StartBaking() {
-        Debug.Log( "빵굽기 - 아직 미구현" );
-        GameManager.instance.PopQueue();
+        Warner.instance.LogAction("빵굽기 행동을 수행합니다.");
     }
 }

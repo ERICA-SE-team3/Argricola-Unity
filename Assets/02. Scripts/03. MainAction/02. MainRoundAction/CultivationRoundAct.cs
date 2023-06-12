@@ -37,16 +37,19 @@ public class CultivationRoundAct : ButtonParents
     }
     public void FarmingStart()
     {   
+        int id = GameManager.instance.localPlayerIndex;
+
         //장작 채집자 카드
-        if (GameManager.instance.players[userPlayerId].HasJobCard("woodPicker"))
+        if (GameManager.instance.players[id].HasJobCard("woodPicker"))
         {
-            GameManager.instance.players[userPlayerId].ActCard("woodPicker");
+            GameManager.instance.players[id].ActCard("woodPicker");
         }
-        GameManager.instance.playerBoards[ userPlayerId ].StartInstallFarm();
+        GameManager.instance.playerBoards[ id ].StartInstallFarm();
     }
 
     public void SowingStart()
     {
-        GameManager.instance.playerBoards[ userPlayerId ].StartSowing();
+        int id = GameManager.instance.localPlayerIndex;
+        GameManager.instance.playerBoards[id].StartSowing();
     }
 }

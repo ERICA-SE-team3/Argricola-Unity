@@ -36,6 +36,6 @@ public class MainActExpand : ButtonParents
     public void StartBuildShed() {
         Camera mainCamera = Camera.main;
         mainCamera.GetComponent<CameraManager>().ShowPlayer(localPlayerIndex);
-        GameManager.instance.playerBoards[playerIndex].StartInstallShed();
+        GameManager.instance.playerBoards[localPlayerIndex].StartInstallShed();
     }
 }
