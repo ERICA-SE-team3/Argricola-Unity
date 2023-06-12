@@ -8,11 +8,12 @@ using System;
 
 public class ShedAction : PlayerBoardAction
 {
+    Player player;
     int playerID;
 
     public ShedAction(PlayerBoard board) : base(board)
     {
-        playerID = board.player.id;
+        player = board.player;
     }
 
     public override bool StartInstall()
@@ -52,6 +53,7 @@ public class ShedAction : PlayerBoardAction
 
     public override bool IsStartInstall()
     {
+        playerID = player.id;
         int wood = ResourceManager.instance.getResourceOfPlayer(playerID, "wood");
         if(wood >= 2) return true;
 
