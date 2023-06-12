@@ -22,6 +22,8 @@ public class PlayerBoardAction
 
     public void ResetBoard()
     {
+        Camera.main.GetComponent<CameraManager>().ShowMainboard();
+        board.confirmButton.GetComponent<Button>().onClick.RemoveAllListeners();
         board.selectedBlocks.Clear();
         board.strategy = new BoardEventStrategy();
     }

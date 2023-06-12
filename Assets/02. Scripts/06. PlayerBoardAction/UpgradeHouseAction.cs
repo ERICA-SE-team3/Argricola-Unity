@@ -37,6 +37,11 @@ public class UpgradeHouseAction : PlayerBoardAction
 
     public override bool IsStartInstall()
     {
+        player = board.player;
+        houseType = board.houseType;
+        playerID = board.player.id;
+        blocks = board.blocks;
+
         if(houseType == HouseType.STONE) { 
             Debug.LogWarning("더이상 집을 업그레이드 할 수 없습니다.");
             return false; 

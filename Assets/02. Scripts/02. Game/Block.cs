@@ -36,12 +36,14 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         this.hasFamily = data.hasFamily;
         this.seedType = data.seedType;
         this.seedCount = data.seedCount;
+
+        isUpdated = true;
     }
 
     private void Update() {
-        if(!isUpdated)
+        if(isUpdated)
         {
-            isUpdated = true;
+            isUpdated = false;
             if(type == BlockType.FARM)
             {
                 SetSeed(seedType, seedCount);

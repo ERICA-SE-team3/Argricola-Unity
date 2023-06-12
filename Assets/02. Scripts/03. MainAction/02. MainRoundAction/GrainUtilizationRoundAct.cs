@@ -32,16 +32,16 @@ public class GrainUtilizationRoundAct : ButtonParents
             ResourceManager.instance.minusResource(playerIndex, "family", 1);  
 
             // //씨뿌리기
-            // GameManager.instance.actionQueue.Enqueue("guSowing");
+            GameManager.instance.actionQueue.Enqueue("guSowing");
 
             // //그리고/또는
 
             // //빵굽기
-            // GameManager.instance.actionQueue.Enqueue("guBaking");
+            GameManager.instance.actionQueue.Enqueue("guBaking");
             // foreach (string item in GameManager.instance.actionQueue) {
             //     Debug.Log("actionQueue 에 들어있는 것들 : " + item);
             // }
-            GameManager.instance.actionQueue.Enqueue("grainUtilization");
+            // GameManager.instance.actionQueue.Enqueue("guso");
             GameManager.instance.PopQueue(); 
 
             //장작 채집자 카드
@@ -61,5 +61,6 @@ public class GrainUtilizationRoundAct : ButtonParents
 
     public void StartBaking() {
         Debug.Log( "빵굽기 - 아직 미구현" );
+        GameManager.instance.PopQueue();
     }
 }
