@@ -6,14 +6,15 @@ public class EndPhase : MonoBehaviour
 {
     public static EndPhase instance;
 
+    public GameObject scoreBoard;
+
     public void Awake()
     {
         EndPhase.instance = this;
     }
-
+    
     public void EndGame(){
-        public GameObject ScoreBoard;
-        ScoreBoard.SetActive(true);
-        ScoreBoard.instance.ScoreBoardUpdate();
+        scoreBoard.SetActive(true);
+        ScoreBoard.instance.UpdateScore();
     }
 }
