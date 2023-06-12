@@ -20,6 +20,12 @@ public class Warner : MonoBehaviour
     {
         text.text = msg;
         this.gameObject.SetActive(true);
+    }
+
+    public void LogAction(string msg)
+    {
+        text.text = msg;
+        this.gameObject.SetActive(true);
         this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() => GameManager.instance.PopQueue());
         this.gameObject.transform.Find("Button").GetComponent<Button>().onClick.AddListener(() => ResetListener());
     }

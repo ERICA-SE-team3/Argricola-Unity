@@ -30,7 +30,7 @@ public class MainActLessonFood1 : ButtonParents
     {
         localPlayerIndex = GameManager.instance.localPlayerIndex;
         ResourceManager.instance.minusResource(localPlayerIndex, "family", 1);
-        Warner.instance.LogWarning("음식을 소모하고 직업을 얻습니다.");
+        Warner.instance.LogAction("음식을 소모하고 직업을 얻습니다.");
     }
 
     public void LessonFoodStartOne()

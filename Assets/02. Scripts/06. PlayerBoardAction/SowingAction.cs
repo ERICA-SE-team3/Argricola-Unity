@@ -33,7 +33,7 @@ public class SowingAction : PlayerBoardAction
     {
         if(!IsEndInstall())
         {
-            Warner.instance.LogWarning("씨 뿌리기 행동을 종료할 수 없습니다.");
+            Warner.instance.LogAction("씨 뿌리기 행동을 종료할 수 없습니다.");
             Debug.LogError("씨 뿌리기 행동을 종료할 수 없습니다.");
             return;
         }

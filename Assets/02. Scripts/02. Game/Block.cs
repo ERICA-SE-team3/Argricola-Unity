@@ -44,6 +44,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         if(isUpdated)
         {
             isUpdated = false;
+            SetShedUpdate();
             if(type == BlockType.FARM)
             {
                 SetSeed(seedType, seedCount);
@@ -374,6 +375,12 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     public void SetShed() 
     {
         ResourceManager.instance.minusResource(board.player.id, "wood", 2);
+        this.hasShed = true;
+        this.transform.Find("Shed").gameObject.SetActive(true);
+    }
+
+    public void SetShedUpdate()
+    {
         this.hasShed = true;
         this.transform.Find("Shed").gameObject.SetActive(true);
     }
