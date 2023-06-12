@@ -9,7 +9,7 @@ public class SceneInitializer : MonoBehaviour
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
     public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
     public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
-
+    public GameObject scoreBoard;
 
 
     private void Start() 
@@ -75,6 +75,7 @@ public class SceneInitializer : MonoBehaviour
         GameManager.instance.reedFeild = reedFeild;
         GameManager.instance.resMarket = resMarket;
         GameManager.instance.trevelingTheater = trevelingTheater;
+        GameManager.instance.scoreBoard = scoreBoard;
     }
 
 }
