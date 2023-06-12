@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
     public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
     public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
-
+    public GameObject scoreBoard;
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
