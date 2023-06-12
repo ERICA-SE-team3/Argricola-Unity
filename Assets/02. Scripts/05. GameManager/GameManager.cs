@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public GameObject sheepMarket, wishChildren, westernQuarry, pigMarket, vegetableSeed, easternQuarry, cowMarket;
     public GameObject grainUtilization, fencing, houseDevelop, cultivation, farmDevelop, improvements, urgentWishChildren;
     public GameObject clayPit, copse, dayLaborer, dirtPit, expand, farming, fishing, forest, grainSeed, grove, lessonFood1, lessonFood2, meeting, reedFeild, resMarket, trevelingTheater;
-
+    public GameObject scoreBoard;
     
     // 행동 관리하는 Queue 생성
     public Queue<string> actionQueue = new Queue<string>();
@@ -299,6 +299,7 @@ public class GameManager : MonoBehaviour
         {
             Player temp = new Player();
             temp.id = i;
+            temp.Init();
             this.players.Add(temp);
         }
         //=========================================
@@ -450,7 +451,7 @@ public class GameManager : MonoBehaviour
                 if ( this.findNextPlayer() )
                 {
                     //... 그대로 진행
-                    Debug.Log("Move to Next Turn");
+                    // Debug.Log("Move to Next Turn");
                     Debug.Log( "현재 플레이어들의 남은 가족수는 " + 
                     "\n" + this.players[0].remainFamilyOfCurrentPlayer +
                     "\n" + this.players[1].remainFamilyOfCurrentPlayer +
@@ -507,7 +508,8 @@ public class GameManager : MonoBehaviour
             {
                 //2-2-2. 게임 종료
                 Debug.Log("Game is Over!");
-                FinishAgriCola();
+                //FinishAgriCola();
+                EndPhase.instance.EndGame();
             } 
         }
     }

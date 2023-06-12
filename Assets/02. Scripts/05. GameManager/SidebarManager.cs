@@ -18,9 +18,8 @@ public class SidebarManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // for(int i = 0; i < 4; i++){
-        //     SidebarUpdate(i);
-        // }
+        GameObject sidebarPlayerObject = players[GameManager.instance.localPlayerIndex];
+        sidebarPlayerObject.transform.Find("selfObject").GetComponent<Text>().enabled = true;
     }
 
     // Update is called once per frame

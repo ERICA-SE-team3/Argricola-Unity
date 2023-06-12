@@ -35,7 +35,7 @@ public class FenceAction : PlayerBoardAction
     {
         if (!IsEndInstall())
         {
-            Debug.LogError("울타리 설치 행동을 종료할 수 없습니다.");
+            Debug.LogWarning("울타리 설치 행동을 종료할 수 없습니다.");
             return;
         }
 
@@ -45,7 +45,7 @@ public class FenceAction : PlayerBoardAction
 
     public override bool IsStartInstall()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
+        Debug.LogWarning("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
         // 나무 개수 확인
         // 울타리 지을 수 있는 영역 확인
         // 등등..

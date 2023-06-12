@@ -1022,6 +1022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4919092648971961759}
   - component: {fileID: 1582420591931819433}
+  - component: {fileID: -9127777949350891592}
   m_Layer: 5
   m_Name: scoreBoard
   m_TagString: Untagged
@@ -1073,6 +1074,21 @@ MonoBehaviour:
   - {fileID: 2582608615460925351}
   - {fileID: 3171627901043401711}
   - {fileID: 3914602500529560971}
+  highstPlayerScore: 0
+  highstPlayerIndex: 0
+--- !u!114 &-9127777949350891592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919092648971961756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16996cbde919f4c9d962f8a9813163e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreBoard: {fileID: 4919092648971961756}
 --- !u!1 &4919092648995946870
 GameObject:
   m_ObjectHideFlags: 0
