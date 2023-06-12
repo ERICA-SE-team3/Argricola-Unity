@@ -8,50 +8,63 @@ using System;
 
 public class ShedAction : PlayerBoardAction
 {
-    public override BoardEventStrategy StartInstall(PlayerBoard playerBoard)
+    int playerID;
+
+    public ShedAction(PlayerBoard board) : base(board)
+    {
+        playerID = board.player.id;
+    }
+
+    public override bool StartInstall()
     {
         if (IsStartInstall())
         {
-            BoardEventStrategy shedStrategy = new ShedEventStrategy();
+            board.strategy = new ShedEventStrategy();
 
-            Button button = playerBoard.confirmButton.GetComponent<Button>();
+            Button button = board.confirmButton.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => EndInstall(playerBoard));
-            return shedStrategy;
+            button.onClick.AddListener(() => EndInstall());
         }
         else
         {
             Debug.LogError("외양간 설치 행동을 시작할 수 없습니다.");
-            return null;
         }
+        return false;
     }
 
-    public override void EndInstall(PlayerBoard playerBoard)
+    public override void EndInstall()
     {
-        if (IsEndInstall())
+        if (!IsEndInstall())
         {
-            foreach (Block block in playerBoard.selectedBlocks)
-            {
-                block.SetShed();
-                block.ShowTransparent();
-            }
-            playerBoard.selectedBlocks.Clear();
+            Debug.LogError("외양간 설치 행동을 끝낼 수 없습니다.");
+            return;
         }
-        else
+
+        foreach (Block block in board.selectedBlocks)
         {
-            Debug.LogWarning("설치할 수 없습니다. 다시 선택해주세요.");
+            block.SetShed();
+            block.ShowTransparent();
         }
+
+        ResetBoard();
+        GameManager.instance.PopQueue();
     }
 
     public override bool IsStartInstall()
     {
-        Debug.LogError("설치 시작 전 가능한지 검사하는 함수 - 아직 구현 안됨");
-        return true;
+        int wood = ResourceManager.instance.getResourceOfPlayer(playerID, "wood");
+        if(wood >= 2) return true;
+
+        return false;
     }
 
     public override bool IsEndInstall()
     {
-        Debug.LogError("설치 가능한지 검사하는 함수 - 아직 구현 안됨");
+        int needWood = 2 * board.selectedBlocks.Count;
+        int wood = ResourceManager.instance.getResourceOfPlayer(playerID, "wood");
+
+        if (wood < needWood) return false;
+        
         return true;
     }
 }

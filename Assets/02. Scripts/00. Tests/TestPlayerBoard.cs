@@ -25,7 +25,7 @@ public class TestPlayerBoard
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FENCE);
         }
@@ -44,12 +44,12 @@ public class TestPlayerBoard
 
             playerBoard.StartInstallShed();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
-            playerBoard.EndInstallShed();
+            // playerBoard.EndInstallShed();
 
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].hasShed, true);
             Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FENCE);
@@ -69,14 +69,14 @@ public class TestPlayerBoard
 
             playerBoard.StartInstallFarm();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
-            playerBoard.EndInstallFarm();
+            // playerBoard.EndInstallFarm();
 
             // LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
 
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].type, BlockType.FARM);
         }
@@ -95,14 +95,14 @@ public class TestPlayerBoard
 
             playerBoard.StartInstallHouse();
             playerBoard.OnClick(playerBoard.blocks[0,0]);
-            playerBoard.EndInstallHouse();
+            // playerBoard.EndInstallHouse();
 
             // LogAssert.Expect(LogType.Error, "설치할 수 없습니다. 다시 선택해주세요.");
 
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[0,0]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[0,0].type, BlockType.HOUSE);
         }
@@ -123,7 +123,7 @@ public class TestPlayerBoard
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
             
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], true);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], true);
@@ -146,12 +146,12 @@ public class TestPlayerBoard
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[2,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[2,3].fence[0], false);
             Assert.AreEqual(playerBoard.blocks[2,3].fence[1], true);
@@ -177,14 +177,14 @@ public class TestPlayerBoard
             playerBoard.OnClick(playerBoard.blocks[0,4]);
             playerBoard.OnClick(playerBoard.blocks[1,4]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], true);
@@ -212,13 +212,13 @@ public class TestPlayerBoard
             playerBoard.OnClick(playerBoard.blocks[2,4]);
             playerBoard.OnClick(playerBoard.blocks[2,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], false);
@@ -250,7 +250,7 @@ public class TestPlayerBoard
             playerBoard.OnClick(playerBoard.blocks[1,2]);
             playerBoard.OnClick(playerBoard.blocks[0,2]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             // 테스팅 블럭 - 자동으로 울타리 처리가 되어있어야 함.
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], false);
@@ -278,13 +278,13 @@ public class TestPlayerBoard
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.OnClick(playerBoard.blocks[2,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             // 테스팅 블럭
             playerBoard.StartInstallFence();
             playerBoard.OnClick(playerBoard.blocks[1,3]);
             playerBoard.GetInstallButton().GetComponent<Button>().onClick.Invoke();
-            playerBoard.EndInstallFence();
+            // playerBoard.EndInstallFence();
 
             Assert.AreEqual(playerBoard.blocks[1,3].fence[0], true);
             Assert.AreEqual(playerBoard.blocks[1,3].fence[1], true);
@@ -341,7 +341,7 @@ public class TestPlayerBoard
 
             playerBoard.StartInstallHouse();
             playerBoard.OnClick(playerBoard.blocks[0,0]);
-            playerBoard.EndInstallHouse();
+            // playerBoard.EndInstallHouse();
 
             Assert.AreEqual(playerBoard.blocks[0,0].type, BlockType.HOUSE);
         }
@@ -359,7 +359,7 @@ public class TestPlayerBoard
             playerBoard.StartInstallHouse();
             playerBoard.OnClick(playerBoard.blocks[0,0]);
             playerBoard.OnClick(playerBoard.blocks[1,1]);
-            playerBoard.EndInstallHouse();
+            // playerBoard.EndInstallHouse();
 
             Assert.AreEqual(playerBoard.blocks[0,0].type, BlockType.HOUSE);
             Assert.AreEqual(playerBoard.blocks[1,1].type, BlockType.HOUSE);
@@ -377,14 +377,14 @@ public class TestPlayerBoard
 
             playerBoard.StartInstallFarm();
             playerBoard.OnClick(playerBoard.blocks[2,4]);
-            playerBoard.EndInstallFarm();
+            // playerBoard.EndInstallFarm();
 
             playerBoard.StartInstallHouse();
             playerBoard.OnClick(playerBoard.blocks[1,0]); // 집 위에 추가 집 짓기 불가
             playerBoard.OnClick(playerBoard.blocks[2,4]); // 밭 위에 추가 집 짓기 불가
             playerBoard.OnClick(playerBoard.blocks[2,3]); // 집과 연결되지 않은 영역에 집 짓기 불가
             playerBoard.OnClick(playerBoard.blocks[0,0]); // 정상
-            playerBoard.EndInstallHouse();
+            // playerBoard.EndInstallHouse();
 
             Assert.AreEqual(playerBoard.blocks[1,0].type, BlockType.HOUSE);
             Assert.AreEqual(playerBoard.blocks[2,4].type, BlockType.FARM);
@@ -418,7 +418,7 @@ public class TestPlayerBoard
             gm.players[0].reed = 2;
             playerBoard.StartInstallHouse();
             playerBoard.OnClick(playerBoard.blocks[0,0]);
-            playerBoard.EndInstallHouse();
+            // playerBoard.EndInstallHouse();
 
             Assert.AreEqual(playerBoard.blocks[0,0].type, BlockType.HOUSE);
         }

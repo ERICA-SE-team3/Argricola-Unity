@@ -285,11 +285,13 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         {
             seedType = type;
             seedCount = 3;
+            ResourceManager.instance.minusResource(board.player.id, "wheat", 1);
         }
         if(type == SeedType.VEGETABLE)
         {
             seedType = type;
             seedCount = 2;
+            ResourceManager.instance.minusResource(board.player.id, "vegetable", 1);
         }
         RenewSeedUI();
     }
@@ -367,6 +369,7 @@ public class Block : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     public void SetShed() 
     {
+        ResourceManager.instance.minusResource(board.player.id, "wood", 2);
         this.hasShed = true;
         this.transform.Find("Shed").gameObject.SetActive(true);
     }
