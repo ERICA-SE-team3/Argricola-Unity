@@ -3701,7 +3701,8 @@ MonoBehaviour:
     cards: []
   isGameScene: 0
   isDataUpdated: 0
-  NotEndTrunTypeList: 
+  NotEndTurnTypeList: 
+  StartTurnTypeList: 
 --- !u!4 &1354253248
 Transform:
   m_ObjectHideFlags: 0

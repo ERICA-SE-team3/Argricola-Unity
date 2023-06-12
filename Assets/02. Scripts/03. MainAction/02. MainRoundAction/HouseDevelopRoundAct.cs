@@ -34,7 +34,7 @@ public class HouseDevelopRoundAct : ButtonParents
             GameManager.instance.actionQueue.Enqueue("hdHouseDevelop");
             
             // //한 후에, 주요설비 및 보조설비 구매 <-- 미구현
-            GameManager.instance.actionQueue.Enqueue( "hdImprovements" );
+            GameManager.instance.actionQueue.Enqueue( "card" );
 
 
             GameManager.instance.PopQueue();

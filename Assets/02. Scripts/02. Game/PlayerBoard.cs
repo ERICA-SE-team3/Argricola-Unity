@@ -37,6 +37,7 @@ public class PlayerBoard : MonoBehaviour
     public PlayerBoardMessageData GetBoardMessageData()
     {
         PlayerBoardMessageData boardMessageData = new PlayerBoardMessageData();
+        boardMessageData.houseType = houseType;
 
         boardMessageData.blockDatas = new BlockData[blocks.GetLength(0) 
                                                     * blocks.GetLength(1)];
@@ -54,6 +55,7 @@ public class PlayerBoard : MonoBehaviour
 
     public void SetBoardMessageData(PlayerBoardMessageData data)
     {
+        houseType = data.houseType;
         for(int i = 0; i < data.blockDatas.Length; i++)
         {
             BlockData blockData = data.blockDatas[i];
@@ -186,6 +188,7 @@ public class PlayerBoard : MonoBehaviour
     {
         action = new UpgradeHouseAction(this);
         action.StartInstall();
+        Camera.main.GetComponent<CameraManager>().ShowMainboard();
         GameManager.instance.PopQueue();
     }
     // -------------------------------------------------------------------------

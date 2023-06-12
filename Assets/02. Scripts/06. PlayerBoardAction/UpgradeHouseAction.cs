@@ -24,7 +24,7 @@ public class UpgradeHouseAction : PlayerBoardAction
     {
         if(!IsStartInstall())
         {
-            Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            Debug.LogError("집 업그레이드 행동을 시작할 수 없습니다.");
             return false;
         }
 

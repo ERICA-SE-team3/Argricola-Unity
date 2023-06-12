@@ -31,7 +31,8 @@ public class WishChildrenRoundAct : ButtonParents
             GameManager.instance.IsDoingAct[20] = true;
             
             GameManager.instance.actionQueue.Enqueue("wishChildren");
-            GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
+            GameManager.instance.actionQueue.Enqueue("card");
+            // GameManager.instance.actionQueue.Enqueue("subCard"); // 보조설비 카드 뽑아야 함
             GameManager.instance.PopQueue();
         }
     }

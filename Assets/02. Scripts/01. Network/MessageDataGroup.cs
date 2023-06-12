@@ -60,6 +60,7 @@ public class PlayerMessageData
 [System.Serializable]
 public class PlayerBoardMessageData
 {
+    public HouseType houseType;
     public BlockData[] blockDatas;
 }
 

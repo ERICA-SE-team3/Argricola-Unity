@@ -29,8 +29,9 @@ public class HouseAction : PlayerBoardAction
         }
         else
         {
-            Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
-            GameManager.instance.PopQueue();
+            Warner.instance.LogAction("집 설치 행동을 시작할 수 없습니다.");
+            // Debug.LogError("집 설치 행동을 시작할 수 없습니다.");
+            // GameManager.instance.PopQueue();
         }
         return false;
     }

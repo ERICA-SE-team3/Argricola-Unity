@@ -59,12 +59,6 @@ public class GameManager : MonoBehaviour
     public ActionType queueActionType = ActionType.NONE;
 
     public void PopQueue() {
-        Debug.Log("Left Queue Count : " + actionQueue.Count);
-        Debug.Log("Left Queue:" + actionQueue);
-        for (int i = 0; i < actionQueue.Count; i++)
-        {
-            Debug.Log("Queue[" + i + "] : " + actionQueue.ToArray()[i]);
-        }
 
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
 
@@ -253,6 +247,10 @@ public class GameManager : MonoBehaviour
         else if(popAction == "lesson")
         {
             lf1.Lesson();
+        }
+        else if(popAction == "card")
+        {
+            im.GetCard(true,true,true);
         }
     }
 
