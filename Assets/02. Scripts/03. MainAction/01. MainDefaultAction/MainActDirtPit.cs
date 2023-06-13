@@ -14,7 +14,7 @@ public class MainActDirtPit : ButtonParents
         text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
     }
     private void Update() {
-        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("dirtPit")];
         text.text = stack.ToString();
     }
 
