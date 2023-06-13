@@ -33,6 +33,7 @@ public class PigMarketRoundAct : ButtonParents
         }
         else
         {
+            text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
             stack = 0;
             text.text = stack.ToString();
         }

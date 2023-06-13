@@ -46,6 +46,8 @@ public class SceneInitializer : MonoBehaviour
             GameManager.instance.roundcards[i].SetActive(false);
         }
 
+        HandUIManager.instance.Init();
+
         GameManager.instance.sheepMarket = sheepMarket;
         GameManager.instance.wishChildren = wishChildren;
         GameManager.instance.westernQuarry = westernQuarry;

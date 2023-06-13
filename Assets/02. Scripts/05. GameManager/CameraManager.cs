@@ -12,8 +12,7 @@ public class CameraManager: MonoBehaviour
     public Vector3 mainBoardPosition, mainCardPosition;
 
     Vector3 position_camera_mainboard = new Vector3(0,0,-10);
-    Vector3 position_Lobby_player = new Vector3(0, 1588, -1);
-    Vector3 position_mainCard = new Vector3( 10000, 5000, -1 );
+
     public GameObject MainCamera;
 
     private void Start() {
@@ -35,9 +34,9 @@ public class CameraManager: MonoBehaviour
         MainCamera.transform.position = position_camera_mainboard;
     }
 
-    public void ShowLobby()
+    public void ShowMainCard()
     {
-        MainCamera.transform.position = position_Lobby_player;
+        MainCamera.transform.position = mainCardPosition;
     }
 
     //--------------------아래로 삭제 예정 -----------------------------
