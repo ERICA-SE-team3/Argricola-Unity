@@ -43,7 +43,7 @@ public class ImprovementsRoundAct : ButtonParents
 
     public void GetCard(bool isMain, bool isSub, bool isJob)
     {
-        Warner.instance.LogAction("GetCard" + isMain + isSub + isJob);
+        Warner.instance.LogAction("카드를 습득합니다.");
     }
 
     public void ImprovementsStart() {
