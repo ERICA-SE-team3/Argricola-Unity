@@ -15,6 +15,29 @@ public class PigMarketRoundAct : ButtonParents
 
     //stack 정보 가져오기
     int stack;
+
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+        text.text = stack.ToString();
+    }
+    private void OnEnable() {
+        if(GameManager.instance.stackOfRoundCard.Length != 0)
+        {
+            GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")] = 1;
+            stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("pigMarket")];
+            text.text = stack.ToString();
+        }
+        else
+        {
+            stack = 0;
+            text.text = stack.ToString();
+        }
+    }
+
     
     public override void OnClick()
     {

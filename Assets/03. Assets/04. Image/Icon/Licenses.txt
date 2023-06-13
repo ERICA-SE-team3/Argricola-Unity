@@ -3,3 +3,10 @@
 <a href="https://www.flaticon.com/kr/free-icons/" title="계약 아이콘">계약 아이콘  제작자: Ayub Irawan - Flaticon</a>
 
 <a href="https://www.flaticon.com/kr/free-icons/" title="팀 아이콘">팀 아이콘  제작자: Tanah Basah - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/speaker" title="speaker icons">Speaker icons created by Dave Gandy - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/volume-down" title="volume down icons">Volume down icons created by twentyfour - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/mute" title="mute icons">Mute icons created by Pixel perfect - Flaticon</a>
+

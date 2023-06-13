@@ -16,6 +16,14 @@ public class MainActTrevelingTheater : ButtonParents
     public int playerIndex;
     int stack;
 
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("travelingTheater")];
+        text.text = stack.ToString();
+    }
 
     // 사용자가 행동을 클릭했을 때
     public override void OnClick()

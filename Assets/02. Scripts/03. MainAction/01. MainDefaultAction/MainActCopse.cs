@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 // 덤불
 public class MainActCopse : ButtonParents
@@ -12,6 +13,16 @@ public class MainActCopse : ButtonParents
     int stack;
     // player 본인의 id 값
     public int userPlayerId;
+
+
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("copse")];
+        text.text = stack.ToString();
+    }
 
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()

@@ -8,7 +8,7 @@ public class MoveAnimalEventStrategy : BoardEventStrategy
     public override void OnHoverEnter(Block block) 
     {
         PlayerBoard board = block.board;
-        if(isAnimalSettingAvailable(block)) { block.ShowGreen(); }
+        if(isAnimalSettingAvailable(block))  { block.ShowGreen(); }
         else { block.ShowRed(); }
     }
 

@@ -35,11 +35,13 @@ public class FarmDevelopRoundAct : ButtonParents
 
     public void StartHouseDeveloping() {
       int id = GameManager.instance.localPlayerIndex;
+      Camera.main.GetComponent<CameraManager>().ShowPlayer(id);
       GameManager.instance.playerBoards[id].StartUpgradeHouse();
     }
     
     public void StartFencing() {
       int id = GameManager.instance.localPlayerIndex;
+      Camera.main.GetComponent<CameraManager>().ShowPlayer(id);
       GameManager.instance.playerBoards[id].StartInstallFence();
     }
 }

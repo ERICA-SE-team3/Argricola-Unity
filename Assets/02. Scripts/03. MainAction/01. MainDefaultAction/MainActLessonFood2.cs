@@ -7,6 +7,8 @@ public class MainActLessonFood2 : ButtonParents
     public int playerIndex;
     public int localPlayerIndex;
 
+    
+
     public override void OnClick()
     {
         //플레이어의 내려놓은 직업 카드가 0개 거나 1개일 때 -> 직업당 음식 1

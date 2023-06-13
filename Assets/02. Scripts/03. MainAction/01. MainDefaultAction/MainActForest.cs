@@ -17,7 +17,15 @@ public class MainActForest : ButtonParents
     int stack;
 
     public int playerIndex;
-    
+
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("forest")];
+        text.text = stack.ToString();
+    }   
 
     // 사용자가 '덤불'행동을 클릭했을 때
     public override void OnClick()
@@ -33,9 +41,6 @@ public class MainActForest : ButtonParents
             GameManager.instance.actionQueue.Enqueue("forest");
             GameManager.instance.PopQueue();
         }
-
-
-        
     }
     public void ForestStart()
     {

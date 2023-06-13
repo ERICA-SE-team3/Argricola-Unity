@@ -153,6 +153,7 @@ public class AnimalModalManager : MonoBehaviour
         return max;
     }
 
+
     public static int CalculateMaxAnimal(Block block)
     {
         List<Block> nearBlocks = GetNearFences(block);

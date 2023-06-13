@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
     public ActionType queueActionType = ActionType.NONE;
 
     public void PopQueue() {
-        List<ButtonParents> buttons = new List<ButtonParents>();
 
         SheepMarketRoundAct sm = sheepMarket.GetComponent<SheepMarketRoundAct>();
 
@@ -161,7 +160,8 @@ public class GameManager : MonoBehaviour
             wc.WishChildrenStart();
         }
         else if(popAction == "urgentWishChildren"){
-            uwc.UrgentWishChildrenStart();
+            // uwc.UrgentWishChildrenStart();
+            wc.WishChildrenStart();
         }
         else if(popAction == "westernQuarry"){
             wq.WesternQuarryStart();
@@ -248,6 +248,10 @@ public class GameManager : MonoBehaviour
         else if(popAction == "lesson")
         {
             lf1.Lesson();
+        }
+        else if(popAction == "card")
+        {
+            im.GetCard(true,true,true);
         }
     }
 
@@ -342,6 +346,7 @@ public class GameManager : MonoBehaviour
     
     public void GetMessage(MessageData data)
     {
+        stackOfRoundCard = data.stacks;
         if (data.actionPlayerId == localPlayerIndex) return;
 
         msgData = data;
@@ -371,6 +376,8 @@ public class GameManager : MonoBehaviour
     {
         //소통할 message 형식
         MessageData message = new MessageData();
+
+        message.stacks = stackOfRoundCard;
         
         // 액션 디큐하는 공간
         // ActionType didActiontype = Dequeue();
@@ -400,6 +407,7 @@ public class GameManager : MonoBehaviour
         message.actionType = actionType;
         message.player = players[localPlayerIndex].GetPlayerMessageData();
         message.playerBoard = playerBoards[localPlayerIndex].GetBoardMessageData();
+        message.stacks = GameManager.instance.stackOfRoundCard;
 
         NetworkManager.instance.SendMessage(message);
 
@@ -603,9 +611,9 @@ public class GameManager : MonoBehaviour
 
         //for문을 빠져나옴 -> 방금 턴을 했던 플레이어로 돌아옴.
         //1. 이 때 그 플레이어의 가족 수가 0이 아니라면 - 라운드 진행
-        if ( this.players[ currentPlayerId ].remainFamilyOfCurrentPlayer != 0 )
+        if ( this.players[ index ].remainFamilyOfCurrentPlayer != 0 )
         {
-            Debug.Log("Next turn is player " + this.currentPlayerId);
+            Debug.Log("Next turn is player " + index);
             return true;
         }
 

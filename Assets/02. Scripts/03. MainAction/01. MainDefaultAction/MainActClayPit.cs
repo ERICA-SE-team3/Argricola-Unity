@@ -10,6 +10,16 @@ public class MainActClayPit : ButtonParents
     //stack 정보 가져오기
     int stack;
 
+    
+    TMPro.TMP_Text text;
+    private void Start() {
+        text = this.transform.Find("Icon").Find("Number").GetComponent<TMPro.TMP_Text>();
+    }
+    private void Update() {
+        stack = GameManager.instance.stackOfRoundCard[GameManager.instance.getStackBehavior("clayPit")];
+        text.text = stack.ToString();
+    }
+
     public override void OnClick()
     {
         int userPlayerId = GameManager.instance.localPlayerIndex;
