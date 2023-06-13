@@ -25,11 +25,23 @@ public class WishChildrenRoundAct : ButtonParents
         int id = GameManager.instance.localPlayerIndex;
 
         countFamily = ResourceManager.instance.getResourceOfPlayer(id, "family");
-        countRoom = ResourceManager.instance.getResourceOfPlayer(id, "room");
+        countRoom = 0;
+        foreach (Block b in GameManager.instance.playerBoards[userPlayerId].blocks)
+        {
+            if (b.type == BlockType.HOUSE)
+            {
+                countRoom++;
+            }
+        }
+        GameManager.instance.players[userPlayerId].room = countRoom;
 
         if(countFamily >= countRoom)
         {
-            Warner.instance.LogWarning("가족 수가 방의 개수보다 많거나 같습니다.\n 행동을 실행할 수 없습니다.");
+            Warner.instance.LogWarning(
+              "가족 수가 방의 개수보다 많거나 같습니다.\n"+
+              "행동을 실행할 수 없습니다.\n" +
+              "가족 수 : " + countFamily + "\n" +
+              "방의 개수 : " + countRoom);
             return;
         }
 
@@ -60,6 +72,7 @@ public class WishChildrenRoundAct : ButtonParents
         if (countFamily < countRoom)
         {
           //행동을 한 후 가족 수 하나 줄이기
+          Debug.Log("가족 수 하나 늘리기");
           ResourceManager.instance.minusResource(id, "family", 1);
           ResourceManager.instance.addResource(id, "baby", 1);
         }
